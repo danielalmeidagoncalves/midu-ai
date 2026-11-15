@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:f4c672d94901f6b5c7f521b9f7352d03c00be5a5de1c32a260ef8d791ffc00cc",
+  "claims": [
+    {
+      "id": "claim_1a174aacc0954a6a88e4d198d09c9fc9",
+      "statement": "The horizon-core suite contains 50 tests distributed across dates, model, inference, composer, markdown, export, store and seed behavior rather than a single monolithic test file.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/composer.rs#L296-L416",
+          "version": "repo-lines-v1:sha256:38218a2e9220d308c010ebbda1d122c68041141e369b33609292ae328d9464e9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIxLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyNWNmNWZjMjNmMmE2ZDIzYzNlYTUxZTcyZjVlODk2Yzc1NTVmYmFhMDVjZDViMWVhMTgyYmY5NjE4YThlODFiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIxOWU3NjM1NWNmMTE5OTQ4MGMzZjk5ODM2YjE0ODZjODQxZDg5MWZhYWQ5MDRjNjA4ZTA5MzAyMmQzNzU3YWVlIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        },
+        {
+          "resource": "repo://horizon-core/src/dates.rs#L201-L268",
+          "version": "repo-lines-v1:sha256:a90db94129f8b3badf4bc55fafb1094ed7f9f8258473be97134242701e143d59:eyJzZWxlY3RlZExpbmVDb3VudCI6NjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1Y2Y1ZmMyM2YyYTZkMjNjM2VhNTFlNzJmNWU4OTZjNzU1NWZiYWEwNWNkNWIxZWExODJiZjk2MThhOGU4MWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAzMmIwMjFkZTFjZjRlYzRhNzdiMjg0MGIwMWQxMjk0NDE3NmIzYWM5MGM1ODM1M2Q3YjYyYzUzMmUwZDVjMWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/export.rs#L303-L402",
+          "version": "repo-lines-v1:sha256:da812addbdab5711bdb69f865dd7656896e01f7103d7808416dbc622bc4075f6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyNWNmNWZjMjNmMmE2ZDIzYzNlYTUxZTcyZjVlODk2Yzc1NTVmYmFhMDVjZDViMWVhMTgyYmY5NjE4YThlODFiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIxYzlkZTc0ZjI1OTU1ZDVhOWI0NWJhNjhhNWFkZGRlOGNhOTgyMmI1NmZmYmY0YTdlNmU4YWZhMWYzNTc3NGRjIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        },
+        {
+          "resource": "repo://horizon-core/src/inference.rs#L899-L966",
+          "version": "repo-lines-v1:sha256:05119f1b2d687456056af903fa9c547b315ed388f546aa65e0a9f9107e949510:eyJzZWxlY3RlZExpbmVDb3VudCI6NjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1Y2Y1ZmMyM2YyYTZkMjNjM2VhNTFlNzJmNWU4OTZjNzU1NWZiYWEwNWNkNWIxZWExODJiZjk2MThhOGU4MWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5YWU2MGNlMDQwNDg4Mjk5MTlhMWE5MDkwMjE0M2FjMjBiYTExMTJhNTgyNTkzMjhiYjNmY2IxYjgwNTAwNTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/markdown.rs#L537-L665",
+          "version": "repo-lines-v1:sha256:db3aecaf9cafc2721bd14bc307bad2d3a4073adb4ef2d5f8844937acd8cac2c7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTI5LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyNWNmNWZjMjNmMmE2ZDIzYzNlYTUxZTcyZjVlODk2Yzc1NTVmYmFhMDVjZDViMWVhMTgyYmY5NjE4YThlODFiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlY2ZiMjhjYWRiNDBjY2VmNTcxYjQwNzg1ZWUxN2MyMjM0OWM0ODNlYmExM2RiNjJlYzRhZjJjNzMxYTc3MDlmIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L620-L756",
+          "version": "repo-lines-v1:sha256:f5f6aa102b847a6af72f2527922fc77dc5ad73b3812a225282a7ac90e59ba348:eyJzZWxlY3RlZExpbmVDb3VudCI6MTM3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyNWNmNWZjMjNmMmE2ZDIzYzNlYTUxZTcyZjVlODk2Yzc1NTVmYmFhMDVjZDViMWVhMTgyYmY5NjE4YThlODFiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI5OWIwYjEzOWE2ZmY3MjE5MjFiMTE5N2E1YzFlMjE3NDE5OTA0ZjA4MmY2YjFjMmRjOTE1NjU5N2E2ZDg3ZjMxIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        },
+        {
+          "resource": "repo://horizon-core/src/seed.rs#L129-L145",
+          "version": "repo-lines-v1:sha256:ed764b48552d4f10dad84870cae11c51882b7f64f1c2e17389b11edc688294b8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1Y2Y1ZmMyM2YyYTZkMjNjM2VhNTFlNzJmNWU4OTZjNzU1NWZiYWEwNWNkNWIxZWExODJiZjk2MThhOGU4MWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg0MGZhYWYxNjcyOWFiNzg5ZDZhNTc4ZWE2ZmUxMjU3NjgzMWExM2QzYzJkMWI2ZTlmOTU3ZTNhNDRkNTI5MzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/store.rs#L470-L547",
+          "version": "repo-lines-v1:sha256:5177b1da7a2e78402b886edfaeeb351484c04835792d789442ae512f238822f2:eyJzZWxlY3RlZExpbmVDb3VudCI6NzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkwMzQwNTk2ODA3MDQyMTZjMjAxZTBjNDU2YjUwYmZmYjA1MTBmYTY0YzRmYjRlZmIzNGJjMmQ3Mzc4ZGQ1YmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhiODJhZmM4ZTZjNWZjNTMwODZjNDQ5ZjU1OGMwYjIzZTcyNTY0MDY3MDEwMWFmZDNhZjNiNTJjOGE3ODg0ODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2fa602c5bbc0420e9fbeded549da21e4",
+      "statement": "The dates tests pin a 90-day window starting today and Monday-first padding that yields 13 week rows on Monday or Tuesday and 14 rows on other weekdays, keeping every day.",
+      "evidence": [
+        {
+          "resource": "repo://HANDOFF.md#L126-L129",
+          "version": "repo-lines-v1:sha256:a20e342026bbdc068a7f28ab286983c30feab8f02c646813703d5bcb21a95efa:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWIxNzFmZjgwYzY2MzM4MDhlMDUwMzBjYjYxMzViYzJhYTg5YjRjMzQwYTU4Y2IyY2ZiMmQyNGU2ODNhNmFiNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGQ5ODM5NzM3ZTI1YzVlYzA5ZTNiMWFlNDNmOGY0NzZhNmM5NWMwMzgyZmNjMmY5ZjEzMjk4M2E5ZjE1N2M1NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTRlNGMzM2M3MjliOGU1Mzc1ZGRhNDIyZGMzZjM3MzcxNjAxOGFiZDI1NGJiMDA3YjMxMzJmZjcxNzljODYxNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmEzYzUwYWEwNGVlNTJhZjJlMmIzNWUyMWViZDU2ZTAzY2EzYTcxNDJhYzcyYWE2MjkyMjZmZDMyNmEwNzYzZSJ9"
+        },
+        {
+          "resource": "repo://horizon-core/src/dates.rs#L209-L241",
+          "version": "repo-lines-v1:sha256:fd8436ad6cc7385af0213d46ececaa123cc606a1be3faea24288f13916a1b2e3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYjVlZGY1OTQ5Y2ZlYTY3ODIyY2Y2OTExMzIzNjNkNjhkNmYxZTE2OWY1ZTBkNGY3YzE0ZTVmYTFlNmQ0ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEwZGQ3NGE4ZGMyZmU4ODY4OGIzZDI5ZTY2YjY4NjM0NjNlMjAzMzg0ZGM1NDk2NzYwYmNhNTQ5ZjBiMTU1MTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU3YjNkYjZhM2FiMTc0ZGE2YTNjNWUzOGRmNjI2N2YzMTdhYmMyMjVjNjNkYmU3ZmEwMWU4ODljYTczZTUxOWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0740ed00aa3c4a6c86a675b60fdcf0d0",
+      "statement": "Model tests protect the lens/page split, recurrence projections without weight, page first-write markers, note read/write defaults and markdown task toggling.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/model.rs#L650-L756",
+          "version": "repo-lines-v1:sha256:0d78d902d2ed272dc0133688d6646431a1b05a4379f8f9bbcef1f738889a9d54:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI5MmI1ZWRmNTk0OWNmZWE2NzgyMmNmNjkxMTMyMzYzZDY4ZDZmMWUxNjlmNWUwZDRmN2MxNGU1ZmExZTZkNGU1IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJiMzYxODI5NzVhYTE3NTA4NzgzZDdkMjdlNjdiNzBhMDExYjYxNzI4N2FhZDE1MWYyNzJjM2E0Mzc1YzNkMGRhIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_9d48efc9bee54657aaf7bce26078c356",
+      "statement": "Composer tests cover the three date forms, relative dates, open-day fallback, out-of-window refusal, subject override and unknown-subject refusal.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/composer.rs#L313-L416",
+          "version": "repo-lines-v1:sha256:3a999b6383fcdd7297db49e0826d3c8277d0535b363b609d8cc7f110c8611dce:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI5MmI1ZWRmNTk0OWNmZWE2NzgyMmNmNjkxMTMyMzYzZDY4ZDZmMWUxNjlmNWUwZDRmN2MxNGU1ZmExZTZkNGU1IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJmZDEwYmVhZmUyNTBhMWRkY2NkM2MyMTllNTU3YThjM2ZmYzVmNTlmYWJjYmRiYmMxMWQ5Zjk5ZjczZjAyNTJiIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_642c93dd94a64f5e803d20ad938b09ae",
+      "statement": "Markdown tests assert that raw HTML stays text, unsafe links lose their href, and task toggling rewrites only the selected marker line.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/markdown.rs#L541-L665",
+          "version": "repo-lines-v1:sha256:4a71ed8169fef9e639ca67e7efb1dd9fa0164b4832f88cbcf5e0e0504a32ded4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTI1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI5MmI1ZWRmNTk0OWNmZWE2NzgyMmNmNjkxMTMyMzYzZDY4ZDZmMWUxNjlmNWUwZDRmN2MxNGU1ZmExZTZkNGU1IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI0OWVjM2IzZmM5Y2VkZjA4MjA0YmNjNGFlMGE1ZjEzMGM4ZDgxM2I4MTU0NGVkNDRlYWFiY2EwODgxMzk4NjM2IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_4c3c192ee13541b4a61424012bbbe8c9",
+      "statement": "Export tests cover JSON round-trip, future-version refusal, unversioned migration, unknown mark/subject fallback, complete markdown folder output and the single-bundle marker format.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/export.rs#L328-L402",
+          "version": "repo-lines-v1:sha256:9316235f366f7859c4dcf0f20edb95da696bfaa5468647e6f6c03362928abb00:eyJzZWxlY3RlZExpbmVDb3VudCI6NzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYjVlZGY1OTQ5Y2ZlYTY3ODIyY2Y2OTExMzIzNjNkNjhkNmYxZTE2OWY1ZTBkNGY3YzE0ZTVmYTFlNmQ0ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhY2M2YWQ5OWRlYmJkMWUyNTFjMmI3NjQ4ZTIzYmRjYTRkYjUxYjhlNTk0MzRhNTcxYmE1NDM4ODNjNmZmYTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9698fe6a4cfe4c16935b580a986b41cd",
+      "statement": "The contrast script checks every paired OKLch foreground/background token at 4.5:1, including hover and tooltip pairs, and fails the process on any failure.",
+      "evidence": [
+        {
+          "resource": "repo://HANDOFF.md#L97-L99",
+          "version": "repo-lines-v1:sha256:7430240d7acce7d43def14e6c1fcf1e338b56179a6db696e123057cdf0ff3a90:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDgyN2U3YTMyMWZjMzk2MzU0YzJjMjYwYzAzMDYwZDA2NjQ1ZWE0NTA3Y2FlOGMxYjhmMzI5OWRlODZmNDllYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDU0NTAxNmRkMzc4NTg4YmUwZGIzYmMzYzhlYWVmYTcwNjRmZTkwZmY2YmI2ODZlYmZlNTExMzU2MTFjYjRjNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjQ1ODc2YzIwMWRjZTg5OGI2MDZkOWUxYmU1OGYyOTFkZDRhMzEwNDNmMmE2MTg5ZjZhYWMzNmE3NjcxZjE2OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzQyZGM5MjZjZGQxZGI0MTIyZDU4ZDdhMGQ5YmU2YTFlYzcyZDM4NzM5OWZmYWI2YmRhNDYxZWFkM2RiMTFhMCJ9"
+        },
+        {
+          "resource": "repo://tools/contrast.py#L56-L97",
+          "version": "repo-lines-v1:sha256:d3bc3e48b4de9dcfc065914a2827259a21a5e97aa7b1a061ea9c11685dd4b3a7:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzMmRhYTE2YjBhN2I1ZTA5ODRiYjNkNDRlODJhOTI5ZjhhYTlmNDBjYWJhMWFhNmMzNzkzMmFlNzFmYmVlMDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2MDE4ZjMyYzQ2NGU2YjM2ODRmMzQ5OWFiYmU5MzQ0NmI2MDUwMTY3OTUxOTBhZmU5MTEwYjMwODYyOTY3MjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM2ZmE0NDc2MTY3NjQ3MTE4ODhiYTc4N2E3NWY5NTQ2ZWFkOTEyZWM1MWY5NzE2MjhkZDQ4NmYxMGJiN2NhNDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_51c001aebd6a476cb848136c92601542",
+      "statement": "The four OPEN defaults are explicit constants in the core and documented as deliberate defaults: recurrence on, closed subjects off, plan markers on, look-back off.",
+      "evidence": [
+        {
+          "resource": "repo://HANDOFF.md#L104-L116",
+          "version": "repo-lines-v1:sha256:9b34e23dd9ce4a81283dfb3f94f849349a20383e9bb203f2f69213fdd89de954:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkMDMyM2M5NWQwZjI5NmIzNDI1NWQxZTY4Y2FkZGE3YmU3MjRkZTc0MjYwYmVjZmFmYWJjZTFmMDk3NGQ5N2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2Nzc3ZWRhNjY5MWMyZTNlYTFlYzkyZTdmYTdhMGZjNTg1NWQ2NjVhZTRmZDAzMzBmOWQ5ZmU2YWUxM2MxYTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImExOGFkZDg2NjhmZWE2M2I3OTE5ZmJlNzBjM2VjMWQ4NGI5MzcwYjZlZDExYjc2M2I2NmIxYzY3MzIwYzg2ZGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZjNzA0OTU4ZWUwMTllM2VmYzlkZWRlZWY4ZjRhNzBjOTQ2ZmVkOWE4NGYxZWNlZWRiNzQ4MDIwMzRkYTkxZmIifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L13-L20",
+          "version": "repo-lines-v1:sha256:563218f7fa02a1433d4368b4bb3d06d3694b6cce6f9d94405178f83889ac6e8a:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmIxYTlkNzYzZjYxMzhmYzY0MjZkY2E4ZDM0MDEwZDQ2OWQyYjViZWI3MGY3NTY1YWRmMTcxYThhOGFlYjNjNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzY0YzJkYzFiOThiYjQ3NjFjOWFmZWNlZDNmZjA2NjBiNDEwNjAzMjk3ZTJkZmYwNGFkZGJmMDQ3NjVlNDU0NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTJhNWY2NTQ1ZTk5ZjRhODllNmI4OWJmMzk1OWM5M2MwYjI4YjgwYzI5OTY0NDZiY2JlMTBjZTIxMzA5ODJhYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDQxNjNhMjI0YmY3YzE2ZTUxM2QxYmY0ODJkODlmMDI3NGFjN2VlMTQxMWYyYmM1MDA0Y2JiZjIyOTU4ZWU5YSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e97b76ed8bec4a6197cbc01e61c531c2",
+      "statement": "The repository treats tags, folders, priorities, colours, streaks, reviews, overdue states, notifications, charts and accounts as deliberate omissions, not unfinished features.",
+      "evidence": [
+        {
+          "resource": "repo://HANDOFF.md#L137-L138",
+          "version": "repo-lines-v1:sha256:7982d75da8ff87288642651750856760a4d030c8bf1121679a7fd8f6c3fdf332:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlZGQ3YjlhYWRlZjA2YmJlNzA3NTM4YmEzOWQ4ZTI5N2Y0MzlkY2E5MjhhZjRiNGQ2MzkzZTliOTk0MDJhOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzA5NTQ3ZDNjMDYzYjc3MmNjYmJhMzUxNDg0MjM5YmFlZGUyYTZjOGFlYzkyZWUwNTllMjZhNDlhZTIzNWE5MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzY1ODNjMTM3OTFjZWNjYzQxODA3NjljYmYxZGNlYTIwOGQ0ZDg4MDRmZGQ3NWM2ZDQxYWZlNjBlY2E4YTQzNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2VhYWVhZWM3ZmYxNmEwYjZmMmQ5YzQ3Y2NiNzdhNDFjOTE0YmE0Y2E2YmMzMTAzYWIwYjRkYzMxNmIwN2E4NSJ9"
+        },
+        {
+          "resource": "repo://README.md#L132-L136",
+          "version": "repo-lines-v1:sha256:f1c819a8d1ff8ba2350f4252438de8c4eee46891c83887612a4ec0d807c0ea9c:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGY5NmU2OTA4YzAzZGM1OTMwZDYwMWVjODdiN2VkYzU0NmE5MDQwNzI1YTlkMzY2MDc5NWJjZjFkM2JlNzdiZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWEyN2E3MjRlOTIyNmNhMDFhYjI1NDdlZjJhYjBhZWI3YjgzMTk4OTc5MzQzMzM1MjI3ODc5MjE0NDA0NzMxZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWI2ZGM5YjQ3MTE0NmJhZGRhZjk0ZjcyMzA1MzQ5YjQyZDc1NGFlNDJkMGFiOWI0MmMzZjk4NzcyOWEyZGRlYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGIxZWEwNzQyM2NmMjkwZWY1YzRiYTFlNDg5YWYxMzFjNzBlYmEwNzk4MGVjMzEwZGMxYTA4YjlhOTg1NTIxMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_73ff1607822d4d21a97577f88d4d9bef",
+      "statement": "The store tests round-trip entries, notes, day pages, page metadata and state.md through to_files/from_files, and pin readable paths, ignored unrelated files, refused future versions and automatic re-inference.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/store.rs#L482-L547",
+          "version": "repo-lines-v1:sha256:9b3fd1ec9908ccfe0eb02fd61f84e63590bde65b0d73082f3d067dbc37978999:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVmOGYxMWMwMzRlNWRiYzE1N2Q2NDU4YzNiN2NhM2UyYzhjZmVmZGE2ZDkyMTBmOWUxODAzNGU3OGNhY2JiYzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEwMGRiMDQwZjI5MDliZjk3OGZmMGE5NTZhNTVlODNjNjUzNDE4ZGU2YmI2OGY4MDQxZGE5NzZmOGQzZDIyNzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1472a09c877e42739f624ef188eb34e8",
+      "statement": "The app store tests write a Markdown folder, read it back, remove an entry and verify the stale file is deleted; an absent folder reads as empty.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/storage.rs#L356-L393",
+          "version": "repo-lines-v1:sha256:28282246e569f70b28d215d130d6dbe54221d050153c1e4d64d0b61048e6b2f3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0ZTM3OWMxNzUwZjIzNWUxM2MwMWZiMjRlNzNmNjQyNDAzNDdiNWIzOGExYTFiNTQ1NGNmY2UxNDViOWM3YmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4YzEzYjNlNjNiY2VkYmMwY2UyYTVlNzViNjg2ZjJiNTI3MzJmN2Q4NDAwZjUwZmQ4MTQ5YjUxMzI4YmU0ODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_96f604b3df814370a5ab1353959606d5",
+      "statement": "A native end-to-end run with HORIZON_STORE and HORIZON_DEMO=1 produced 31 entry files, 4 note files, 6 day files and state.md; a second launch loaded the folder without duplication.",
+      "evidence": [
+        {
+          "resource": "repo://HANDOFF.md#L71-L74",
+          "version": "repo-lines-v1:sha256:f49b46e5f32489e6d687baa4f551173124625ccb5854594212cdad8fc7d48498:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDQxZDVkMzVkZjhlYzQzZjNlYzZhY2U4NWE5MGQ2YTAyOWViNGViYjQ4M2JjMTc5Y2VhMTVhZmMzYTBmNjA0OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODU1ZGIzODgwYWE3ZjkwM2Q4ZTQ3NjdjZTRiODk0ODBjNmZkMTZmOGNlMWJmNjE2NTVjMWY5OTI5NWI4YmM1ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmU2OTIwNmRmZDE1ZmMzY2I5YmE5MTVjYzI2OTY2ZjQ0ZTE2YTIyMzIxNWI5MDQ5NWMyZDE5MDQwZjAzNDY4NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjU4ZTJkZDg3MjU2NThmYzI4ZTE3NzliOWRkOTNlZmZkNjgwNjZiYTk3ZWJlNGM1ZjgyYjEyMDk1MWM4NTFmZCJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-04T22:52:59.779Z"
+  }
+}

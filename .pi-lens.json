@@ -1,0 +1,3 @@
+{
+  "ignore": ["target/**", "dist/**", ".playwright-mcp/**", ".ruff_cache/**"]
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Horizon: debug desktop (demo)",
+    "adapter": "CodeLLDB",
+    "request": "launch",
+    "build": "Horizon: build desktop",
+    "program": "$ZED_WORKTREE_ROOT/target/debug/horizon-app",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "sourceLanguages": ["rust"],
+    "env": {
+      "HORIZON_DEMO": "1",
+      "LD_LIBRARY_PATH": "${env:HOME}/.local/lib",
+      "RUST_BACKTRACE": "1"
+    }
+  },
+  {
+    "label": "Horizon: debug desktop (no demo)",
+    "adapter": "CodeLLDB",
+    "request": "launch",
+    "build": "Horizon: build desktop",
+    "program": "$ZED_WORKTREE_ROOT/target/debug/horizon-app",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "sourceLanguages": ["rust"],
+    "env": {
+      "LD_LIBRARY_PATH": "${env:HOME}/.local/lib",
+      "RUST_BACKTRACE": "1"
+    }
+  }
+]

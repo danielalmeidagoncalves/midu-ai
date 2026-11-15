@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:5843d41f7a9fc50b3ad79873304c08768ccbb3fc3b1fb95c9817dde983768221",
+  "claims": [
+    {
+      "id": "claim_0161ead7f18947d08b8d526f14de8892",
+      "statement": "horizon-app exposes desktop, mobile and web Cargo features that map to the corresponding Dioxus backends, with desktop as the default feature.",
+      "evidence": [
+        {
+          "resource": "repo://Dioxus.toml#L1-L4",
+          "version": "repo-lines-v1:sha256:0cbb10038e05f36f7878a1a9af88c3e61c55afe4cf9e2597272c161fbe9a70fc:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmMzNzdmZGYyN2ViZmU1NmRjMTU2N2Y2YjdhN2EyYWEyMjdiOTM4OWYwYTdjNTFkYjgwMDI4Zjc0ZDZkOTg5MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTAzNzhkMTE3MzVmOGZlZmJiOWFhNDJlNjI4Zjg5MTdkMGJmZGZiOGRmYjE2ZmMzZTdmOTllZmM1OGUyYTZiMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzFmMGUyMDFkMDYwMDc5ZWQwNGJlOTc0YTlhNjFmZDU3NmExNDczZDg0YWIzZTk1ZjVkN2MwYzJlZTgwNmYzYiJ9"
+        },
+        {
+          "resource": "repo://horizon-app/Cargo.toml#L7-L11",
+          "version": "repo-lines-v1:sha256:9d0e275154a32836bf9debec1381773a3f63f6152a72b13ec66e0f7cdf879cd4:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjZmNmMxYzczZTQ2ODViNmY1NTc5MmFlNTM5MjU1M2ZmNzlkM2NjMDY3YjBiNzRlMDY4Njk4ZjZiMmM3NmI4MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjhkZjFkYmY4N2UwN2EyYzU4ZDgxNjg4YWRjZWYxMTJhZWE0YjUyYWZjNzhiYmI5M2RjNTMwZjkyNDU1MzNmOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2IzYjM4Njg0MjhmYjcyY2M4NDI4NDM5NGMxNGZlNzQzZWEwN2JhM2UwZmY1MzcwMDlhNjk4ZmYyYzg4Y2MyMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjEwMzFjZDg4MzYyMGFkNjcwNjQ1MjU5YjA5OTFlNzJmOTNjOGM2ODJkMWJiMWVkOGZjZWVmNjI1NjcyNDA1YSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ffc0289e61fb484b9a9ffe079bbe41fe",
+      "statement": "Desktop Linux may need libxdo; tools/with-libxdo.sh prepends ~/.local/lib to LIBRARY_PATH and LD_LIBRARY_PATH only when that directory exists, then execs the requested command.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L33-L35",
+          "version": "repo-lines-v1:sha256:e80ca42663ac255d8eae818da4ad78540be889a0be0d85a6d2062bd0078e1a2f:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2Q4YzE2MWI2NzljNzQ4NjRiNDYzNjc2MjcxYTY1NTBkYTk4NDE1NzkwNTcyYzc1YjU1OTVkY2UyZjc2N2IyYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjc5NWM0ZGE1OTNlYTc5ZDUxM2EwZDE5MDE5MGQzZGNkNmRkNDZiZWRjOWVhZDRjODc2MzVmYTU3NWNmNDZhMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2MzMDYyYTViNmRhNmU5ODIxMjJjMWU0MGQ3OGNjNWZhMGVhMDI1YzZiMGVhNDE0ZjAwZjhjOWM0YzY1ZmQ1ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmQ1ZWRmM2U4NGVjZDYxM2ZmNzNhOWFlZTBkNDUzYzJlNmUzNDQxZmI4MDY2OWI2OGI3YTBjODU4NWMyNzczOSJ9"
+        },
+        {
+          "resource": "repo://tools/with-libxdo.sh#L1-L13",
+          "version": "repo-lines-v1:sha256:71cb04bfbbdb89f71c4f3e02f24615850ba51bde48413d3aee352c385584052a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4MDc2ZDNkMjhkMjFlMDIwMTJiMjBlYWY3ZGJmNzU0MDlhNjI3NzEzNDQzOTAyNWYyODJlMzY4ZTMzMDVhYmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlMTI0YjMwMTEzZGQyYWJiZTY4NGQ5MjJjMDk3YWE0OThjZTVhOGE1ZjIyNTVhOTQxZmYyYzFlMDVkNGUxOTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c6c72ecd657d4dadb79e5af0f98e7897",
+      "statement": "Android builds use the mobile feature; the live store is app-private Markdown addressed through sysdirs, while the separate markdown-folder export falls back to one downloadable bundle. The Android target was cargo-checked but not built or device-verified.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L84-L98",
+          "version": "repo-lines-v1:sha256:0d4875ce64ea7aad336e5e18ee255d525091d4f55aaea8c6882982667c6fb7ad:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1MmU1N2NkNWI3MWRkYjg1YWU4ZTUzOTYzYWMzYWQwYWZkNjM0MDM2M2JlMGY5YWRlMmZmN2NjNjIyNzA2Y2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUxZWMzMTUwYWQzYzgyZmEzMjJjNGVkNGMzOTIwNDM2MGFjYjAzYjZjZjM0M2E1NzIwOWM0ODBlYmQyYTg2YzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMyMDdkZjYzOTRkNjcwODE3MjFhODM3ZDc0N2NmNTAzZmFlMjA0OGYyZWY5YzA5NDFiYmY3NWIwYTJjZTNjMDMifQ"
+        },
+        {
+          "resource": "repo://horizon-app/Cargo.toml#L31-L32",
+          "version": "repo-lines-v1:sha256:a64a5973a741ee888ea83ed2292d55bb4393cd3b6c958f3e9c2bbc343af144bf:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2JmMzQ2M2FlY2M1NzI5ZTg2Mzc0ZGNmYjQ5M2Y0YTkxNDdjNDgxNmZkYmZhYTA1MWNjMDliYTllZWEwNmRlYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTI5ZGQ1ODU4NGVjNjJkYmFmOTBmMWRmMmIxZDE2YzI5ZWFkOTE4ZWRhZmE0ZmY4NWNhZTViMjdkMDBkYjIwNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODE0YTE1NDJiNzA5MDEzZWMzN2E5MjIzMmE0ZDQ4ZWE0M2RiZjJlOWM3ZGU2ZGZhNDZlNTc1ZGZhYWYwYjZlMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2E1Y2Y3Mzc5Njk4MDkzODg2NjRiY2JkZjc1NmZmY2I4YjFhNzE3MDJlNGJlN2U4MTc4ZmVmZDI3MjI2ZjdlZSJ9"
+        },
+        {
+          "resource": "repo://horizon-app/src/storage.rs#L31-L50",
+          "version": "repo-lines-v1:sha256:4aab1756839486e5bac9e06c3b2654ebf1da76002e87d22c5de610a3f78ec616:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NDM5NjFjY2Y3YzM2MmU0OWYxYzI5YWE0MDFkOWYxNGE3NzhkODhhMjE0MThhY2NhM2UwMjRlOWRjOTlmYzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYxYzBjZWI4ZTYzYzJiNzNmODg0YzEzMTkxZjA0Y2M1ODJlNWFhMmZiMjExOTE2OTYwNTViMGJmYzc4NTJiZWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQyMTFhODkzNjE4YmMzNzlkM2NmNTFjNWYyY2RhMzUzMzRmNjljZGRjYmM2MzRlYTMyZWJmZTJlYzk4N2E0MjEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7f5a68cf591a4f13823aedc9cc24a6c4",
+      "statement": "Zed's project tasks cover desktop demo/no-demo runs, hot reload, web serve/build, core tests, checks, clippy, formatting, contrast and the local wiki; the desktop run/serve/build tasks go through the libxdo wrapper.",
+      "evidence": [
+        {
+          "resource": "repo://.zed/tasks.json#L1-L137",
+          "version": "repo-lines-v1:sha256:940301b1c39eb9a8095f79fb3611e3bc16261e8ed91a47ee9bef9f43006171b9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTM3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI5NWQyYjE5MzQ5MzE2OTE2NjljYzM1YTg3NjE5NTE4MDE1MzM2MjEzZGRhMGE2MGZlMWIwOWY5YjhlM2U5OTNkIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJmOTQxNmUwOWY3OGJhMzE2YzAzMjU2ODIxM2I4NTVlZTc1NmU0MTU2NWQ5MThmMDk1MTljODFmZDYyMGY0MDYwIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_aa536ffd4e704974b494afc0a22db829",
+      "statement": "Zed debug profiles use CodeLLDB, build through the build-desktop task, launch target/debug/horizon-app, and set LD_LIBRARY_PATH to ${env:HOME}/.local/lib for the local libxdo prefix.",
+      "evidence": [
+        {
+          "resource": "repo://.zed/debug.json#L1-L28",
+          "version": "repo-lines-v1:sha256:f6e7a8020717b208575ce305fb8ab7b79318d51a3ba3a01ab37189f06a00fe37:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1ZDJiMTkzNDkzMTY5MTY2OWNjMzVhODc2MTk1MTgwMTUzMzYyMTNkZGEwYTYwZmUxYjA5ZjliOGUzZTk5M2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY5NDE2ZTA5Zjc4YmEzMTZjMDMyNTY4MjEzYjg1NWVlNzU2ZTQxNTY1ZDkxOGYwOTUxOWM4MWZkNjIwZjQwNjAifQ"
+        },
+        {
+          "resource": "repo://.zed/tasks.json#L41-L49",
+          "version": "repo-lines-v1:sha256:fe917a9e3da2c0116268cfe6d135290507dece73348be0c9289c2397f8ddfece:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjExMWYyMzlhYzY1YzlmZWNkNGY3OTc1ZDRlZTBjNjc3YjU4YThlYTY3ODUyZWEyNWQyNzkyMzkyNTE4ZDJmOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWY1OTRjN2JjNzhkY2VkMmJjNjBiZjgyNTQxYzhhNzI2YTFlZDg0OTNlZDMzZjgyNGUwYjg0ZWI1Mzk0Njg2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTBhMWNmZmMyMWQ2Mjg2NDIyMDE5NzY0MDMyNGJhMGQyZWUzZDNmNmE5OWYxOWI5ODlhYjQ1ZWJiYjcxNDJlNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a4fbda7c652f413f893d34a65380e0bd",
+      "statement": "The native live store is a plain-Markdown folder (entries, notes, days and state.md); the web build keeps JSON in localStorage; JSON download/restore and markdown folder/bundle export remain the portability boundary, with no account or sync.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L44-L48",
+          "version": "repo-lines-v1:sha256:093327c46d6aebbff2c0de901e0b1c6fa28094157f9b1e5e447d8f99dedccd80:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFkZGM0NjVjZjEwNDMyNmVjMzc1MGVjMWZkZjBkMDkxMjUwMDliMzE3YTJjM2NiNTQ3M2MyODIwYWUxYTNlMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWVjZDcxMDEwYWM3ZjBjNWQ2NmZiNTM5M2MyMDllMTgyY2QxMzlkM2FmMTc0ODczNWEzYzIxMGU4NTc3OTcyNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTBlMjAzMzU1MmQzYjY3OTI2N2FmZWI4MDM2YWIzODgzNDcyMTUyMTlhNTVhZGUxNzFmN2I1MTEyYmExMDZkYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGEwZGVjNTQwYzIxZjZjNTMxMjQ2YWYzM2Y4MjIxMGM4NmU1NzVmYTk1MjBiMjA5ODhkNGRjZDIxMmRhNjkzYSJ9"
+        },
+        {
+          "resource": "repo://horizon-app/src/state.rs#L447-L468",
+          "version": "repo-lines-v1:sha256:dbc206a4ab9965127b1b293bf15d19ac6c7b8413e5b7ac68aff592a1204f52a2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlMzlkMjU4ZDE1OTBlMzg5YzVlZmRiNzkzMWQ3YjNjNTZlODkyMmQ5NmM1M2IzMTJhMWUzMGViYmFmZWU1YjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ5ZGYwNjVmNzZjMjBkYjYzYzI1M2FmZDM2NjBiMjgxNTM4ZDFhMTRkM2VmMzkyODExOTRjNGFmNjk2YTM5ODgifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/storage.rs#L164-L218",
+          "version": "repo-lines-v1:sha256:d0c95a8085ab85df54b538ce5c8c33077f3290038749862cd6c6016da1f91341:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3MGNiYzE2MjhiOTM5YTU2ZjNiMmJmZTQ3MTRmN2I3OWM2MzAzMTk1MjFlMTJkNDJhNTliMDY5NGFhZWI3ZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkwYTA5MDhiMjFlMDVjMmM3YjAxMzU5NGZlZTMwYTM1ZmViZjFjZTkxNmIzNzU1MzU3MzcxYTM3MWRjOTEwODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA0MjEzMTc3ZWRhMjljZGMwM2QzNzAzZTQxMzk4ZGJmMmIwYWQwZjU0M2Q0OWY3MTBhNzk1ODY2MThmNGFmYzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_611def2f06e54e9ca4f24c26f45e0a1c",
+      "statement": "The release profile is tuned for a small binary with opt-level z, LTO, one codegen unit and stripped debuginfo.",
+      "evidence": [
+        {
+          "resource": "repo://Cargo.toml#L16-L20",
+          "version": "repo-lines-v1:sha256:77837d18d9f0b0ac4666079e7a847b20f665f07631a5872f521a4308c37bd15c:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTYxYjk5MGFkOGY0Mjg0YzM1NGNkOGY5YjZiMWIwZDAxNTY1MDJhYmIwOGFiMjlhYjUwODI0OTRkN2EwNzYwYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjAxYjBjY2U1NTk5ZjA4OGQwMDI2MjFlZTRlM2U4MWRiOGU4NDcxNTgxZWVkYmM1YjcyZmQ1ZmQwZDQ4OGQ3OSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODVjZTI3ZjljOGQ4NTViOTA0MWYyNmZkNTVhMzZjNWQ3YTllZDQyZThkYjY4MTYyMmRlNDQ4MGY4YmIxYTQ0NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_87ad95ac9dfd4d2d9911824c93922687",
+      "statement": "The native store defaults to data_dir()/horizon on desktop and sysdirs data_dir()/horizon on Android, with HORIZON_STORE overriding the folder.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L44-L48",
+          "version": "repo-lines-v1:sha256:093327c46d6aebbff2c0de901e0b1c6fa28094157f9b1e5e447d8f99dedccd80:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFkZGM0NjVjZjEwNDMyNmVjMzc1MGVjMWZkZjBkMDkxMjUwMDliMzE3YTJjM2NiNTQ3M2MyODIwYWUxYTNlMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWVjZDcxMDEwYWM3ZjBjNWQ2NmZiNTM5M2MyMDllMTgyY2QxMzlkM2FmMTc0ODczNWEzYzIxMGU4NTc3OTcyNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTBlMjAzMzU1MmQzYjY3OTI2N2FmZWI4MDM2YWIzODgzNDcyMTUyMTlhNTVhZGUxNzFmN2I1MTEyYmExMDZkYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGEwZGVjNTQwYzIxZjZjNTMxMjQ2YWYzM2Y4MjIxMGM4NmU1NzVmYTk1MjBiMjA5ODhkNGRjZDIxMmRhNjkzYSJ9"
+        },
+        {
+          "resource": "repo://horizon-app/src/storage.rs#L31-L50",
+          "version": "repo-lines-v1:sha256:4aab1756839486e5bac9e06c3b2654ebf1da76002e87d22c5de610a3f78ec616:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NDM5NjFjY2Y3YzM2MmU0OWYxYzI5YWE0MDFkOWYxNGE3NzhkODhhMjE0MThhY2NhM2UwMjRlOWRjOTlmYzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYxYzBjZWI4ZTYzYzJiNzNmODg0YzEzMTkxZjA0Y2M1ODJlNWFhMmZiMjExOTE2OTYwNTViMGJmYzc4NTJiZWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQyMTFhODkzNjE4YmMzNzlkM2NmNTFjNWYyY2RhMzUzMzRmNjljZGRjYmM2MzRlYTMyZWJmZTJlYzk4N2E0MjEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_517b19b0a9144763ac0039081ff329e8",
+      "statement": "On native, load reads the Markdown folder first; if it is empty and legacy localStorage JSON exists, the JSON is imported through export::from_json and written as Markdown, with the JSON kept as a backup.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/storage.rs#L164-L193",
+          "version": "repo-lines-v1:sha256:c4084e3bad810f050b2206e7f48093437471edd9f610c2ff646ec6efb30e24d0:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3MGNiYzE2MjhiOTM5YTU2ZjNiMmJmZTQ3MTRmN2I3OWM2MzAzMTk1MjFlMTJkNDJhNTliMDY5NGFhZWI3ZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzZjk3NjQ2MGNhYWEwYTA4MzNiNzc1MmJjMDhkMGE0Njc0NjY4NzYwZTQyNGM5OTg4OTk5NWM2OTFiNTkxZDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkwYTA5MDhiMjFlMDVjMmM3YjAxMzU5NGZlZTMwYTM1ZmViZjFjZTkxNmIzNzU1MzU3MzcxYTM3MWRjOTEwODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMwNTg1MmQ1MmZhMTI3MzUxNTYxNDUxOWEyOTgwZGNjZTVjYjcxOTYwMjVmMjIyZTZjNTJhNDViNTEyNDZiYjYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_03ccef5fc23c4a89843e50c710d9fd1e",
+      "statement": "Verification recorded 50 core tests, 2 app store tests, an Android cargo check, and a native end-to-end run that produced 31 entry files, 4 note files, 6 day files and state.md without duplication on reload.",
+      "evidence": [
+        {
+          "resource": "repo://HANDOFF.md#L62-L74",
+          "version": "repo-lines-v1:sha256:411a3f799f3a2da9c6d418568c194fe53554b05852673efee3f2825a9fa80390:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiNjE1ZjBhNWZlMzVhYTIyYjU5M2FmZDIzODY5OTljOGMzN2U3NTAxMjZkZTY1OThiZGZkNjdmZjNhYjM5ZjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1NWRiMzg4MGFhN2Y5MDNkOGU0NzY3Y2U0Yjg5NDgwYzZmZDE2ZjhjZTFiZjYxNjU1YzFmOTkyOTViOGJjNWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQxZjU2MjhlYmM5ODE2YzBmOTY2NzhiYzAyZTQyMTAxMjMyYzkyZmMyOTU5OWY4NjUzYTUwZDg4NTdhOWI3ZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI1OGUyZGQ4NzI1NjU4ZmMyOGUxNzc5YjlkZDkzZWZmZDY4MDY2YmE5N2ViZTRjNWY4MmIxMjA5NTFjODUxZmQifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-04T22:52:59.779Z"
+  }
+}

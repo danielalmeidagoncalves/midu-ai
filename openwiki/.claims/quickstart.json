@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:e9ae1daa07da85c240b3498f562794d799f1a973a08bdad0e1e25fb433157ff4",
+  "claims": [
+    {
+      "id": "claim_243a9469605e465f9eadde6f70194fbb",
+      "statement": "Horizon is a local-first personal life OS built around a 90-day Monday-first wall, eighteen marks, seventeen subjects and a markdown page under every thing and every day.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L3-L14",
+          "version": "repo-lines-v1:sha256:a42b8b9ce314b8a042410c8f7ed966b807d16a906c12e10f7363352d941e8643:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU3NjliZDIyNDA0ZWI3NjU5ZjkxN2Y3NTJmYTY0MDc1NjMxZDFiNzFlMzBlMjk3MmYxYjRjYmZiZDZkYTBiNjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNhYzk5MTY5Y2FhYWUzMzMxNzk2YTQwZjQwN2U4NTRkMDc1M2QyMjMwOWRmMzhhMzU4MjRiYjRkMDgwNTg4N2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhYWM3NjBiMmU3NmUxZDg5NDkzOWJlNmRmMjc4ODBhMzU5M2NhNTgwNTQyN2RlZDJlNmExMWQxNTZkNmE5OTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZjZGRmN2M5MTE4YjlkOGViMTg2ZTY0ZmIzMDRjMGM2ODNlYmYwYTNhOGMwODQ2MjYzZWQ4YThmZjYwZmEyYTkifQ"
+        },
+        {
+          "resource": "repo://README.md#L44-L48",
+          "version": "repo-lines-v1:sha256:093327c46d6aebbff2c0de901e0b1c6fa28094157f9b1e5e447d8f99dedccd80:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFkZGM0NjVjZjEwNDMyNmVjMzc1MGVjMWZkZjBkMDkxMjUwMDliMzE3YTJjM2NiNTQ3M2MyODIwYWUxYTNlMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWVjZDcxMDEwYWM3ZjBjNWQ2NmZiNTM5M2MyMDllMTgyY2QxMzlkM2FmMTc0ODczNWEzYzIxMGU4NTc3OTcyNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTBlMjAzMzU1MmQzYjY3OTI2N2FmZWI4MDM2YWIzODgzNDcyMTUyMTlhNTVhZGUxNzFmN2I1MTEyYmExMDZkYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGEwZGVjNTQwYzIxZjZjNTMxMjQ2YWYzM2Y4MjIxMGM4NmU1NzVmYTk1MjBiMjA5ODhkNGRjZDIxMmRhNjkzYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_fab5dafd803a40f283a39ddfe7b10cf3",
+      "statement": "The repository is a two-crate Cargo workspace: horizon-core is a pure core with no DOM or I/O, and horizon-app is the Dioxus renderer that launches the app.",
+      "evidence": [
+        {
+          "resource": "repo://Cargo.toml#L1-L3",
+          "version": "repo-lines-v1:sha256:ee2041e897fba39ab8f64bd48c329888f908a4c71d4d025c8c1ebdbf02c1b7d1:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDM0ZTEwMmM4NjFmOTk0ZDJhYWNlOTExNGQzOTJkYmMxNjIxOTBlMDBiZThmZTM1N2Q0NzIxNTBjYTQzOTYxNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDI3NjAwYzRjMTM1OGUwOGY2ZGU0NDAyNGU0NWI2M2EwNTJlN2JiMzA4ZTMzNWEzMmE5N2Y5ZTdiYmQzN2JlZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmY0OTdmZDRlN2M5NjY5NWU1YjZiYjEyZGYyZGJjNzI4YjE2NzAwZTkyYjkxN2UyMDU1MjVhMzI4ZjQwZGMwZSJ9"
+        },
+        {
+          "resource": "repo://horizon-app/src/main.rs#L1-L9",
+          "version": "repo-lines-v1:sha256:9a1b9c656e0f9b17f7ce5c66aeb2fed89893ce94b4dfca42a9c9d32ef914c916:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmI0MDg2MjVmMmJjY2FmNTA0ZjU5MTQ1YjZhODljMzg1YzU4OGMwZTlkZmY0MzkxOWJhYmQ1MmZlMGVmNDRiZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTdhNGQzNTJlMDZjNGMxYjIyNzlmN2QzZTk0YTJiZWVkZmNjODMzMjRhNDM4NzUyZjk3YmFlNjAyZGMwYzc1NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        },
+        {
+          "resource": "repo://horizon-core/src/lib.rs#L1-L13",
+          "version": "repo-lines-v1:sha256:ae3f4ba98365433adaa6897ffe0072d907b33cf0fb2723a18d424b20f57fd95c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyNjhlMmIwYTE1YjZkNWExMzUxNWI2YzhmMjVhOGU3ZGIwODY1MmZlZTA5MzczMTI0Y2EyYjA2NWUxOGNhMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3YTI3ZGIxZjZjYWI4YWE0YjhmYTMwYjVkNDg0MDI4NjU3ZWY5MTZkNzAxOWI1YTMxZThmOWRkMjc5NmUxMmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY3M2VkOTRmMGNjOTIxMTQzYWE2MjJlMWE0YjFlM2MyNGMxMDA4YTVjZmRkNGI3NGZhN2Y2MWViMWE5YjU5ZDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b87de0cd3aa64110985f12f975b0cbff",
+      "statement": "The documented commands cover core tests, desktop run with and without the demo seed, Dioxus hot reload, web release build/serve, and Android mobile builds.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L22-L43",
+          "version": "repo-lines-v1:sha256:bed53483d96f10d9dcedd1b762569fb9dd02d27b09f1142cfb9cc6cb244e72f2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjNDNmYjg5ZGQ3MTM5MTcwNmJiNjU1MzM3MTM5YWU2NmFjMTBmYWNjNDI2MmJjZDI0OGMyMjljZjBlMjVkMDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUwYmY0NmUzYmEyYWMzNzVmYWU1YWVjMDJhMmVhYzVjNmZiYWVhMzAwZTdhNWE3MThhNDk2NWViYTQ1Y2NkZDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE2MGZjNWNiYTkyMDYxZjBiZTNjNWUzODNlYjQwOTRkODkwM2QxZjYxMTc1OGY1NGJmYzJmZTUzODZkZTE3ZTIifQ"
+        },
+        {
+          "resource": "repo://README.md#L84-L98",
+          "version": "repo-lines-v1:sha256:0d4875ce64ea7aad336e5e18ee255d525091d4f55aaea8c6882982667c6fb7ad:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1MmU1N2NkNWI3MWRkYjg1YWU4ZTUzOTYzYWMzYWQwYWZkNjM0MDM2M2JlMGY5YWRlMmZmN2NjNjIyNzA2Y2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUxZWMzMTUwYWQzYzgyZmEzMjJjNGVkNGMzOTIwNDM2MGFjYjAzYjZjZjM0M2E1NzIwOWM0ODBlYmQyYTg2YzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMyMDdkZjYzOTRkNjcwODE3MjFhODM3ZDc0N2NmNTAzZmFlMjA0OGYyZWY5YzA5NDFiYmY3NWIwYTJjZTNjMDMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_707b6f45a2824a0b82859f4ab2618c95",
+      "statement": "Desktop Linux may need libxdo; tools/with-libxdo.sh adds ~/.local/lib to LIBRARY_PATH and LD_LIBRARY_PATH only when the directory exists, and is otherwise a no-op.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L33-L35",
+          "version": "repo-lines-v1:sha256:e80ca42663ac255d8eae818da4ad78540be889a0be0d85a6d2062bd0078e1a2f:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2Q4YzE2MWI2NzljNzQ4NjRiNDYzNjc2MjcxYTY1NTBkYTk4NDE1NzkwNTcyYzc1YjU1OTVkY2UyZjc2N2IyYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjc5NWM0ZGE1OTNlYTc5ZDUxM2EwZDE5MDE5MGQzZGNkNmRkNDZiZWRjOWVhZDRjODc2MzVmYTU3NWNmNDZhMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2MzMDYyYTViNmRhNmU5ODIxMjJjMWU0MGQ3OGNjNWZhMGVhMDI1YzZiMGVhNDE0ZjAwZjhjOWM0YzY1ZmQ1ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmQ1ZWRmM2U4NGVjZDYxM2ZmNzNhOWFlZTBkNDUzYzJlNmUzNDQxZmI4MDY2OWI2OGI3YTBjODU4NWMyNzczOSJ9"
+        },
+        {
+          "resource": "repo://tools/with-libxdo.sh#L1-L13",
+          "version": "repo-lines-v1:sha256:71cb04bfbbdb89f71c4f3e02f24615850ba51bde48413d3aee352c385584052a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4MDc2ZDNkMjhkMjFlMDIwMTJiMjBlYWY3ZGJmNzU0MDlhNjI3NzEzNDQzOTAyNWYyODJlMzY4ZTMzMDVhYmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlMTI0YjMwMTEzZGQyYWJiZTY4NGQ5MjJjMDk3YWE0OThjZTVhOGE1ZjIyNTVhOTQxZmYyYzFlMDVkNGUxOTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f820ebbe0ebb4411ae5ff129cb85227e",
+      "statement": "App owns today/quarter/doc/ui/narrow/dirty signals, derives the UI from Doc, and a single saver loop awaits the Markdown-folder write on native or the JSON localStorage write on web.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/app.rs#L12-L53",
+          "version": "repo-lines-v1:sha256:6df2aad5fa17cf316fab85ca002420b40abb9cc1a6444ff800647ee06be5c52c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJkODNkZDMzNzk0OGY1ODRhODE0ZjQwMDQzNjU3N2U2ZmJlYzMzNzAyOTFiMmI3NTVhN2JjNGFiOTYyZGMyOTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyZDExY2FmNDNlOTdlZjM2OWU2YmVlZDFhMjY4YmQwNTgzOGYyOWI5ZGQyNTRiZjY5YmE2NDg4NDE0NzIzNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlmZTk5ZjgwYjJhNDBiYjg2ZGFjOWI5YzAzMzhjODE3Y2M3ODI2NjQ5Y2ZkNDEwYzgyOTdiNTM2YzYwMTFhMGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI2NzczY2FiNTdmYzEwN2E2OTRiMjY2OWQyMWVmOWMzZDZkZDkyNWEzNTYwNGQ4YmQxNjIwYzY4OGIzOWQ5ZDIifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/storage.rs#L164-L218",
+          "version": "repo-lines-v1:sha256:d0c95a8085ab85df54b538ce5c8c33077f3290038749862cd6c6016da1f91341:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3MGNiYzE2MjhiOTM5YTU2ZjNiMmJmZTQ3MTRmN2I3OWM2MzAzMTk1MjFlMTJkNDJhNTliMDY5NGFhZWI3ZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkwYTA5MDhiMjFlMDVjMmM3YjAxMzU5NGZlZTMwYTM1ZmViZjFjZTkxNmIzNzU1MzU3MzcxYTM3MWRjOTEwODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA0MjEzMTc3ZWRhMjljZGMwM2QzNzAzZTQxMzk4ZGJmMmIwYWQwZjU0M2Q0OWY3MTBhNzk1ODY2MThmNGFmYzIifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L252-L266",
+          "version": "repo-lines-v1:sha256:de5f32375530ae3943ce929ef2cfbb7f69acfed3a044c738af6e0dd4afea9b82:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ4ZDBhZmFmNDZjMGUyN2I4YTg5M2ViOWE2OWZmM2JlMzczZDVlYjNhMjhjMGZiNWE2NWI1ZGQwMjkyZGVjMTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMxZWRhNGNhZWY1MzkyYmUzMmQ4MWQwZTAyZjk4M2U3NzdhY2U3MWU5OWIzYWJkZjMwODZhNzdiNDE0NmIwOTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ba1d31c92f2b4e77ab79da0d1958c38d",
+      "statement": "Zed project tasks cover run/serve/build/test/check/clippy/fmt/contrast/wiki, and debug profiles use CodeLLDB with the build-desktop task and the local libxdo loader path.",
+      "evidence": [
+        {
+          "resource": "repo://.zed/debug.json#L1-L28",
+          "version": "repo-lines-v1:sha256:f6e7a8020717b208575ce305fb8ab7b79318d51a3ba3a01ab37189f06a00fe37:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1ZDJiMTkzNDkzMTY5MTY2OWNjMzVhODc2MTk1MTgwMTUzMzYyMTNkZGEwYTYwZmUxYjA5ZjliOGUzZTk5M2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY5NDE2ZTA5Zjc4YmEzMTZjMDMyNTY4MjEzYjg1NWVlNzU2ZTQxNTY1ZDkxOGYwOTUxOWM4MWZkNjIwZjQwNjAifQ"
+        },
+        {
+          "resource": "repo://.zed/tasks.json#L1-L137",
+          "version": "repo-lines-v1:sha256:940301b1c39eb9a8095f79fb3611e3bc16261e8ed91a47ee9bef9f43006171b9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTM3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI5NWQyYjE5MzQ5MzE2OTE2NjljYzM1YTg3NjE5NTE4MDE1MzM2MjEzZGRhMGE2MGZlMWIwOWY5YjhlM2U5OTNkIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJmOTQxNmUwOWY3OGJhMzE2YzAzMjU2ODIxM2I4NTVlZTc1NmU0MTU2NWQ5MThmMDk1MTljODFmZDYyMGY0MDYwIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_4d0c070a5f7549a4a57a3d332c4b759b",
+      "statement": "The repository records four OPEN defaults and a deliberate omission list (no tags, folders, priorities, colours, streaks, reviews, overdue states, notifications, charts or accounts).",
+      "evidence": [
+        {
+          "resource": "repo://HANDOFF.md#L137-L138",
+          "version": "repo-lines-v1:sha256:7982d75da8ff87288642651750856760a4d030c8bf1121679a7fd8f6c3fdf332:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlZGQ3YjlhYWRlZjA2YmJlNzA3NTM4YmEzOWQ4ZTI5N2Y0MzlkY2E5MjhhZjRiNGQ2MzkzZTliOTk0MDJhOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzA5NTQ3ZDNjMDYzYjc3MmNjYmJhMzUxNDg0MjM5YmFlZGUyYTZjOGFlYzkyZWUwNTllMjZhNDlhZTIzNWE5MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzY1ODNjMTM3OTFjZWNjYzQxODA3NjljYmYxZGNlYTIwOGQ0ZDg4MDRmZGQ3NWM2ZDQxYWZlNjBlY2E4YTQzNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2VhYWVhZWM3ZmYxNmEwYjZmMmQ5YzQ3Y2NiNzdhNDFjOTE0YmE0Y2E2YmMzMTAzYWIwYjRkYzMxNmIwN2E4NSJ9"
+        },
+        {
+          "resource": "repo://HANDOFF.md#L104-L116",
+          "version": "repo-lines-v1:sha256:9b34e23dd9ce4a81283dfb3f94f849349a20383e9bb203f2f69213fdd89de954:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkMDMyM2M5NWQwZjI5NmIzNDI1NWQxZTY4Y2FkZGE3YmU3MjRkZTc0MjYwYmVjZmFmYWJjZTFmMDk3NGQ5N2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2Nzc3ZWRhNjY5MWMyZTNlYTFlYzkyZTdmYTdhMGZjNTg1NWQ2NjVhZTRmZDAzMzBmOWQ5ZmU2YWUxM2MxYTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImExOGFkZDg2NjhmZWE2M2I3OTE5ZmJlNzBjM2VjMWQ4NGI5MzcwYjZlZDExYjc2M2I2NmIxYzY3MzIwYzg2ZGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZjNzA0OTU4ZWUwMTllM2VmYzlkZWRlZWY4ZjRhNzBjOTQ2ZmVkOWE4NGYxZWNlZWRiNzQ4MDIwMzRkYTkxZmIifQ"
+        },
+        {
+          "resource": "repo://README.md#L122-L136",
+          "version": "repo-lines-v1:sha256:ed5fb5d64bcc6e5108c61c64bd55801d2c543cd5369a5a67478ce690c7adca98:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmODRkNjY3MjQ1ZTFjODFmODU1MDM2M2NmMGUxMWNjNmVkYTAxYjZlYTVlOWY0ODVlZmU0ZmVlZGNhNGEyNzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhMjdhNzI0ZTkyMjZjYTAxYWIyNTQ3ZWYyYWIwYWViN2I4MzE5ODk3OTM0MzMzNTIyNzg3OTIxNDQwNDczMWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYzMjlkYTdkMDJlMjY2ZmE3Mzg2ZjlkOTM4NTE5ZGFmMmRlM2Y4NzJlMjFhOTAxMGI4ZDkyYTVmYmJlMzA5Y2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiMWVhMDc0MjNjZjI5MGVmNWM0YmExZTQ4OWFmMTMxYzcwZWJhMDc5ODBlYzMxMGRjMWEwOGI5YTk4NTUyMTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_77a1c3820cc24739b2e71482164f6750",
+      "statement": "The 13-versus-14-row caveat is explicit: 90 days starting today yields 13 rows only on Monday or Tuesday; other weekdays yield 14 without dropping a day.",
+      "evidence": [
+        {
+          "resource": "repo://HANDOFF.md#L126-L129",
+          "version": "repo-lines-v1:sha256:a20e342026bbdc068a7f28ab286983c30feab8f02c646813703d5bcb21a95efa:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWIxNzFmZjgwYzY2MzM4MDhlMDUwMzBjYjYxMzViYzJhYTg5YjRjMzQwYTU4Y2IyY2ZiMmQyNGU2ODNhNmFiNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGQ5ODM5NzM3ZTI1YzVlYzA5ZTNiMWFlNDNmOGY0NzZhNmM5NWMwMzgyZmNjMmY5ZjEzMjk4M2E5ZjE1N2M1NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTRlNGMzM2M3MjliOGU1Mzc1ZGRhNDIyZGMzZjM3MzcxNjAxOGFiZDI1NGJiMDA3YjMxMzJmZjcxNzljODYxNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmEzYzUwYWEwNGVlNTJhZjJlMmIzNWUyMWViZDU2ZTAzY2EzYTcxNDJhYzcyYWE2MjkyMjZmZDMyNmEwNzYzZSJ9"
+        },
+        {
+          "resource": "repo://horizon-core/src/dates.rs#L222-L241",
+          "version": "repo-lines-v1:sha256:d49243f5dd029bea9456cee2693f1d40fdd921993a6da9eb346a3db91cc37339:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYjVlZGY1OTQ5Y2ZlYTY3ODIyY2Y2OTExMzIzNjNkNjhkNmYxZTE2OWY1ZTBkNGY3YzE0ZTVmYTFlNmQ0ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFlNzc2NGM0MWJiMTExMmU4M2NlMDQ4ZjY2ZTBjYjM2ZDAyM2VmOWQzNmZmN2ZkNDc4MGQ4ZDczNzRlODBlZjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU3YjNkYjZhM2FiMTc0ZGE2YTNjNWUzOGRmNjI2N2YzMTdhYmMyMjVjNjNkYmU3ZmEwMWU4ODljYTczZTUxOWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b980ca96b7b041d596d49eb4914c9e31",
+      "statement": "The live store is ~/.local/share/horizon on desktop and the app-files horizon folder on Android, with HORIZON_STORE as an override; the web build keeps JSON in localStorage.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L44-L48",
+          "version": "repo-lines-v1:sha256:093327c46d6aebbff2c0de901e0b1c6fa28094157f9b1e5e447d8f99dedccd80:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFkZGM0NjVjZjEwNDMyNmVjMzc1MGVjMWZkZjBkMDkxMjUwMDliMzE3YTJjM2NiNTQ3M2MyODIwYWUxYTNlMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWVjZDcxMDEwYWM3ZjBjNWQ2NmZiNTM5M2MyMDllMTgyY2QxMzlkM2FmMTc0ODczNWEzYzIxMGU4NTc3OTcyNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTBlMjAzMzU1MmQzYjY3OTI2N2FmZWI4MDM2YWIzODgzNDcyMTUyMTlhNTVhZGUxNzFmN2I1MTEyYmExMDZkYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGEwZGVjNTQwYzIxZjZjNTMxMjQ2YWYzM2Y4MjIxMGM4NmU1NzVmYTk1MjBiMjA5ODhkNGRjZDIxMmRhNjkzYSJ9"
+        },
+        {
+          "resource": "repo://horizon-app/src/storage.rs#L31-L58",
+          "version": "repo-lines-v1:sha256:79725622095c70792e5471df5653a20f241dac3174c7f8d2bb5cdbc65cc40705:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYxYzBjZWI4ZTYzYzJiNzNmODg0YzEzMTkxZjA0Y2M1ODJlNWFhMmZiMjExOTE2OTYwNTViMGJmYzc4NTJiZWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImEzMjhmOGU5ZTIxNTVkZjI4OTkyOGY2NzUxMTc2YTgyMTNlMjcwOWM0MzMxYzJkMzhhY2M0NzA3OTVkMDhjOWQifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-04T22:52:59.779Z"
+  }
+}

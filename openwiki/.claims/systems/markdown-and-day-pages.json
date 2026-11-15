@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:61cf15c0655c7264d68d9ccc0c96bb24fb02a2a098b3a9216b76ca31162ca2ea",
+  "claims": [
+    {
+      "id": "claim_9fd8c249bd0a4b679037d0abd76655d6",
+      "statement": "Horizon parses notes and day pages into a small Block/Inline AST and renders it as typed Dioxus nodes rather than HTML, so note content cannot inject markup.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/components/markdown.rs#L1-L18",
+          "version": "repo-lines-v1:sha256:283d2db3fb6d722c8ddb1c9c0fd3b7b9edf10b38cade931c7ad34900a0c159bf:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1OTc1YzdjMGM5OTQwOTVhODgwZGY4MmQ4NTc3NWU1ZjE2ZjRkNGQ2YzQ3MzM0MTgyYTNlYWVkZjkzMDU5NWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA1ZTc3NzVlZDYxMjIyNjBmYTE0MzkyMTE4ZmMwZDdjMjRkYmFlMjNkOTljZDQ4MWNmYTc1YWQwYjY4ODM1MjYifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/components/markdown.rs#L112-L155",
+          "version": "repo-lines-v1:sha256:1b22d776efd606542171b46090e63d23e0c91c10fd1bb69f1f73c726449bfa24:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEyYTQ1OWY1MWQzNWM4MGJjY2IxZGE2NGVjOWNmOGZmODU5MmFlNDdkMmIxMTI4MGVmMjIxNjc1ZGMzNzYwNzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ4NmYxNDhkM2M2MjcwZTgyNjJiYjg2NzMyYzRlZDgwOTNlNjM5MWE2ZjU1NWY3YTJlYmYwNzVmNzFkMDMzMjIifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/markdown.rs#L9-L54",
+          "version": "repo-lines-v1:sha256:8aa87376e830f1a1e8aecb96845879b7118901e05b9b0bf6400f88ac0f6bd417:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU3MjNjNGM0ZjI1ZjFjZTMyZmNhZGQ5OTFjMDcyMjIwNDcwYmY4MzA1MWJkNWFkNWYyOTM5ZDgxMWNkNzcwMTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVlMjc5YjUyODFlNDc5MDdiYTM5MWNjMzI2MWE3MDhmNjhhNjJhYzcxZGEyMzkyN2Q0MzEwMzU0MmQ2OWI4OWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE0Yzc2OTkxYjNkNTc2ZmFkNDM3MTBhYzRmZWNmODkyYjY1NTdkYzhmYjdiMzY5OWNlYmZiZDEyNzFiM2Y0YzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_84fcebef62ff40f590a430198e92cb46",
+      "statement": "The markdown parser recognizes headings, paragraphs, lists, tasks, quotes, tables and rules; raw HTML stays text and links are limited to http(s) and mailto.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/markdown.rs#L342-L351",
+          "version": "repo-lines-v1:sha256:db2201c6c8cc847c6dd7dbd2e44fd16e3f60a6d81a48e2b26e4b4ad13f4537ac:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3NDBiYTg3NTU1MzZkY2E5OTdmYzA1MDM0OGRjNDk5MDdhYjU3ZmFkNjJlNzE5NmVhNzI5YjRmNjk2YTlmMGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjljNTk4NjczMGFmM2Y4YTQxNWZhOGIxY2YzNWY0OTM5ODQ0N2RjZTAzM2YyZDFlN2IwNTNjNTU2N2ExOWE3ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkZDJkOGMyNmMxMzdlMzMyNjUwYzIwMWYxM2U0ZGUxNDY0NWNlYzE1MzFlMmYxNGI0OGNmZTcwZjg3ZjU5MWEifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/markdown.rs#L56-L194",
+          "version": "repo-lines-v1:sha256:c093fa788eff09c0de35ede3d6b4ae207085345277330a941a5287eb909d747e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTM5LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIxMmFhYmZiMmIxOTc0YTRkNTk1MjQyNmM3MjliMDM5NmY5MTVkNDA1OWVhMThhNTI0MTUyYmViMTkxMWQzMjE2IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI2ODRmNWFjZWRhM2EzMDY3ZWUzY2RhOTY0NDc1NWU0Yjg4MDU5ZmE4NzdmMWVjZTYzMDY5NzY4YWU4OGRlYWYyIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxMTQxNTVmNjdmNmY4MDQ5NWViMjIzOGMwYmExMDQ4N2RhY2NiZTE0N2Y1ZGY2NTYxMDZmOWM1NTM0MTQ2MjY5In0"
+        },
+        {
+          "resource": "repo://horizon-core/src/markdown.rs#L612-L632",
+          "version": "repo-lines-v1:sha256:9df308aef295e9f039d8feea2bb34af72ec11ab252c3e3ead34ebdb0e23db3b8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYjVlZGY1OTQ5Y2ZlYTY3ODIyY2Y2OTExMzIzNjNkNjhkNmYxZTE2OWY1ZTBkNGY3YzE0ZTVmYTFlNmQ0ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ4N2RhNjQ5MzUwYTJmYTVmNGFjNTBiNzM1YmNmZTg4MmEwMTA2YTRlOTEyM2ZiMzJjMTU0ZDIzNWE5YTJlMzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU0NTNmYTYwOTVkYWRjZjA5OWM2NDVkZjdlM2IyMDMyMzQ2MTA2ZjM0ZWRkN2VlNzE4MDVkZDI5OGJjMjEzN2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_60689e7446ba4990adfa3b9cf343d2dc",
+      "statement": "Task items carry their zero-based source line; toggle_task_line flips only the selected marker while preserving indentation and the rest of the line.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/markdown.rs#L107-L124",
+          "version": "repo-lines-v1:sha256:83e494e64b4d9c144a7c404ad62e7791cd68ee9d2d75c347eae89482b33ef3ea:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZiZTMyZTM5M2FiOWRjMzMyNTUwNTM3ZjgxNmU4ZjEyYjc2OGU1YTAyNWUzNTQ0Mjk3NjVkZjVhOGJmMGZkYTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFkMGJhNWFlZWMyYjk5N2UxZDc5N2M2NjAxNTMyMWQ2YzIzMGU2YzYxYTY3MWU4ODllMDkxZGI5YTdjMzllMTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM2NmM3NjEyZDU1YTg3ZDYzZWEwM2M2MGZmNTc4NGY3MDRlNjI3MjYxODE5OThjM2Q3ZmZjZTZmODJhZjUyYzUifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/markdown.rs#L28-L35",
+          "version": "repo-lines-v1:sha256:c045a565736681a4094cf35b29f4f5b298d11c6ad134ba2cbe9fb032b6239970:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTcyM2M0YzRmMjVmMWNlMzJmY2FkZDk5MWMwNzIyMjA0NzBiZjgzMDUxYmQ1YWQ1ZjI5MzlkODExY2Q3NzAxOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjc2YTU0NGNjMDIzZWQ0MDVlM2I5OGI4YTM1NDA5MGZhZDE2ZTllMThkNWVlOWY3YmE2YzNlNzAwNTMwMDlkMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjU0ZGExNDhhODZlY2NlODM5YzVmNmRiZmU2YTI5Mjg0ZmY2NjA4N2FiOTAyYmVkZmY5YjY2NzI2MzE3YWU3ZSJ9"
+        },
+        {
+          "resource": "repo://horizon-core/src/markdown.rs#L509-L535",
+          "version": "repo-lines-v1:sha256:70bf326ab950b4eedcaacae0abc3d28a4caa2f5b3cc07c781687b5e564b01a65:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1Yjk0MjViNDVkNTg3NzI5OTQ2NDAxOGE1ODc4ZmUxNjhmNGI5YzkyMzNmYjY5NjhhNGNiZjRlYWI2YzAxMTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwZTNkMjU2MGZjNzUzZGEyY2ExYTdkZjc5NzcxNWU5ZTFjODI2NzE1ZWYyOTk4YzVmY2EwYTkxYTAwMzQ0NGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdiYzk4ZDZiMGRjNDkyYzUwMTZkZjEwODA1YTNhNTRlYjljMTg0YTVhNjEzN2U3ZjRiZWNmYTBjMjIwNTUwZDAifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/markdown.rs#L634-L652",
+          "version": "repo-lines-v1:sha256:fdb744092954f286db592db79e03b6fc5393e9fbe461ff5ca5f2a67b4fc5bd01:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYjVlZGY1OTQ5Y2ZlYTY3ODIyY2Y2OTExMzIzNjNkNjhkNmYxZTE2OWY1ZTBkNGY3YzE0ZTVmYTFlNmQ0ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1ZGYyYzE2ZjBiZWQzZTFiMGRkN2FmZmY0YTU1OWNlMjM5NmExMjA3MTAyNmExZjA3YjNlMGEyY2EzNDMwYWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7f258ce73f1042259ed3c6d4ca433b94",
+      "statement": "NoteEditor defaults written notes to read view, commits on blur, Escape or Cmd/Ctrl+Enter, and syncs the buffer from the document while reading so external changes appear.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/components/notes.rs#L19-L53",
+          "version": "repo-lines-v1:sha256:4705fbd8629cf5f0a82605e9a3b0eaccfb45da36f84f35e54d380b5cf13b91d1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRkNmQ0YWNiMTAyZjU0MmIwOTExZWYyNjkyMWNkODBhMThjZWU5MDM1ZDExNzEyMjVjZGY2OGNhZTUwMzA0Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkOWUxMjU0NjQyNTU3NmQzZGVhZThjOWI5ZGJmMTI4ZDVkNmRkYWY1ZDdmZTg1NzkzNDkyN2RlZmZhM2I5ZGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA4ZTY5MDE5MWZlMjlhZDExMjBiNmE3YzBiNGE0YjIzYmFiOGE1ODc2NjM1NDMxZTYwOTAzNTA1OWNlZDI5ZjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc0ZmExMTE3OGI0OTA1OThiYjA3ZGVmZjUxNzNlM2NjOGI4NjllOGZmN2YzYjk2MjhmMGZjN2RiOWFhNWYwMjMifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/components/notes.rs#L76-L208",
+          "version": "repo-lines-v1:sha256:653511c1b6c6d72ad5b650ae53fd8c590392852635645b1ba83af923b267a389:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJhYzBiNWMzMDVhYjg5OGQ4NDgyODcwYjUyOGQ2ZjVlYmQ4YTg4OTBiOTlhZDdlZDUwYTNhYjkyNTZkNWY1NjMyIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJiOWE1MmUwMTQ3ZTNiZDdkOTIyZTJjYTZkZDZjOTM0ZWZjMDY0NzZkYTRlYmI1MWU5OTA3ZDg0MDU5NzA0NTJjIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI0ODVjYjQ5OTQzMmIzZDMwMzYxNzYzMGYyYzdhZTI5NzBjOTQ2ODczZDQ3N2NmMDkxY2U4MTRlYjA5ZjA0YzFmIn0"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L551-L557",
+          "version": "repo-lines-v1:sha256:c9674c11f898e3a4a412873cd92e7d789d94f33fb70ec7b0c9bbab32df0c2d43:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGMwZTU2YjRjNWE2NDkxMDA3YmI2Zjk1YzRiNjVlZWVmMDJmOGYxMjA4Zjc3OWI4OGQ4MWY3NWUxOTE2Yzg4OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGE0Y2YxMDM3YWUxYjA3MjE5ZGVmNmIyMzQ3MDc3NTNiNmU2MzdkN2FkNTFkOTdjZmU1ZGRjMjczN2RiODAyOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmZkODhiOWUzYzBjMmE5NmIyZDc5YTRhMjJhNWQ1Y2ZmYjIyMmQ5ODhlMzRmZWU2ZDVlOTIzMWU4OTEyYzhmMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_906fd670e89948e2804a0d7640384efb",
+      "statement": "A day page is stored in Doc.pages; the first non-empty write records first_written, written-ahead and past markers derive from it, and an empty write removes the page and metadata.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/components/fold.rs#L249-L309",
+          "version": "repo-lines-v1:sha256:2f5f9ff6accf382c1f373e508954dffc1ed888c897c70949eba42cc8a0d2d0a8:eyJzZWxlY3RlZExpbmVDb3VudCI6NjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1YjkxZjVmNWVkNjNlOWM1MmExNGEyZTYwMTY5NDU4MDI1NDI2NTI3MzIxZjNiZjQ3MWM5MDlhNDFjMWI5MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4NWNiNDk5NDMyYjNkMzAzNjE3NjMwZjJjN2FlMjk3MGM5NDY4NzNkNDc3Y2YwOTFjZTgxNGViMDlmMDRjMWYifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L372-L404",
+          "version": "repo-lines-v1:sha256:5bf1582f0618e59ef58780606490058e6b9983ebd4e24fbefd9e376a909fb666:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4OWRiM2QyNjFiYjcxMDUxYmUxZGYzNTJkOGUyZjEzNWVkNmZmYTNjNTZmMTcyZjUyNWZmNWJiYzc1ZDkxYWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmNGMxYjg0YWQzM2Q1Nzk3ZmVjZDVhMDg2OGNhYzhlZTQ3YzRkZWUwYWM3MDQ0NjcwYzA3ZDQxMmQ0YTQ1YmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJlNjkxNWI5NGFkMjY3OTc0M2Y1MjY0MGU3NTdkZTg0MDVjZDFkZjE2ZTQ3YzZiYTVmMzVjZTVhNWVkNjEwM2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0dd4af79e8994d36828e3512c9cd3e92",
+      "statement": "The wall and agenda show N only when entries on the day have notes and MD only when the day has a page, and hide both under a subject lens.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/components/agenda.rs#L142-L155",
+          "version": "repo-lines-v1:sha256:ae84e70bc81bd37dfaa9cf2a4b69a13637c9fe35753aa35927857272313d44aa:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyMjc5ZWNmNjBjMDVhNjcxYzA3ZTE5YzIyMTdkZDIxYzc1NDcwZWQ4NjBiODRiYWFlYjU1NzU2ZTQ4MjkxM2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5YzEzNTkwNjY1NjMyM2QxYzVlYTQxNjU0ZWU2NmFmYjU4NWFjZGNmYWVhY2ExMjFkNWUzMGJmMTkzZWVkZDciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIzZTMwYzEwMzg5MmNlOTMyZDAzNjI0YTc4YjgzNWU0MGNjNDY0MjBiMTRiZjRhMWQ4NmFlM2VjZWMwMDA4MDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3MWNlODIyODhiNjMxODIwM2NkMjk5NGQ0N2JkYTM4MzA0YjBkYTZlY2FjM2Q5OWU1NGM1MWIwZWQ5ODcxMDIifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/components/wall.rs#L150-L163",
+          "version": "repo-lines-v1:sha256:eeae4b7a7482d67463098cd28a81822ab121044103811d9b4ec90762e24aa7df:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5ZjE0MTMyNTBiNTIyNjQ3MmY2YjkxYzQ4ZGQ2ZmViZjMwNDM5ZDBjOGZkMTY2MWJjNTRmODEyNjY0MDU1NzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwZWFjZWM1MTBkYzU3N2U1MWZhZDYxYmM5OTMwMzc5OTNmMjllYTE2MTE0OTYyYjZiNzdjYjNlYTg2NWFmMWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIwZjg0OThiMDFlNmViMjg1NDRlMDI1YjczMmYwOTBhZWUwODBlNGMyYzM4MWQ5YWFkMjZhOTdmNGZiMjE5NDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYyZTJhMDBhOTY2ZmI1YTU1MzlkZjRkN2Y4MTFlNjIxNTZkOGY4MmM2MmFlNjYwODQ0Y2I1YTA2ZGQxMWQ1MTIifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/components/wall.rs#L237-L249",
+          "version": "repo-lines-v1:sha256:1987f69659bb4d8391c878dbc875e7929566c30b8e70841a3631a582a83f1058:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1OTdjNzIzM2I5N2JmYjY4OTM5MjY5YzA2Y2Q0OTNhYmNkYTAwZmM0NWU5ZDdmZDkzYjc0NTE1OTIzMTExYmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkYjMzOWMxN2Q0Y2M1NGU3MGM0ZmNmZWNiNjExYmI5ZTdkMzYzZjI1YjE4ZTA5MjNhMWQzMDZjYzk1OTI0ZTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlMjk2ZDYxNmYyODU2N2Y2NjkwZGU3NzYzZTQzYjQzZjU0YmQ0N2M3MjlhYjEzYjE2NmUzMTc1NjA2NjE2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJmYzg4YTA2NGYwYjQ2ZjJkMWI4ZTJjZGI2Njc3NjNiNTYyZWJiNDIzZmExYjI2Mzc3YTY5MjU3MTUzMjJjMzgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e2665b9ae0d4406ba167cf3a192b2876",
+      "statement": "The note toolbar wraps the live textarea selection with markdown syntax through the webview and dispatches an input event; it never writes HTML.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/components/notes.rs#L211-L234",
+          "version": "repo-lines-v1:sha256:8c5f2ef388a81abc55d970d59379e6c59b10cb19f7d99b1186027cff741f8c22:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1YjkxZjVmNWVkNjNlOWM1MmExNGEyZTYwMTY5NDU4MDI1NDI2NTI3MzIxZjNiZjQ3MWM5MDlhNDFjMWI5MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/components/notes.rs#L55-L74",
+          "version": "repo-lines-v1:sha256:0e1cc4040b8a25eb6b40af784f0954dd8f7b59fe507737eb65848ae2ebb7c666:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3N2I0N2VmMDhkYzJlNzNkZmVmYjgxOTFmNTQ4MmEyZGU2NGE2MWZlYTEwZDU3OTgwMjZmODQ2OTNkY2YyOGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5NTkyODBmNjE1NmMxZjY1MWI1MjJiMWIxODYxNjNiNjZkYjQ1YWRiZmE5YmM2NzFiZWQwNzM1MjllZWMxZDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4M2Q1YzU5NTU4NmI2ODEyNjY1NTI3YjNhZjUxOWJhNDhmYzA5NmM1Y2JmNDdlNzY5ZTBlOWU1NDQ0MjI5NjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1ZTBhZmQ4NmQzODIwOTBkY2ZmYjkxYWMwZDliZjNjYjg5ZTVmMTYxOTQ5MmE3ZDY3NTg1NTJkYjM2NDM2ODEifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/storage.rs#L306-L329",
+          "version": "repo-lines-v1:sha256:fef3b3f014a95105f1e7d821a9198eaf99a69a7d7795e42fbc71fe6a740bb55b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkYWU1OTE2MzJmODI1ODVjZjBiYTdiNjM0NWM5Nzg2YTQzNzcwM2JkM2E3YTMyYzkxYWFiOTQ2OWZkOTg5MDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM1YjYyNDYxZjVlM2M2NGMxNzRlNjYzMzUzMjczZTQ0NDRhYmQ5NTlhOGI5YjczYjBlMTZlZDJlZTA2OTRjNjEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_da9c8a2071194dedaef08c2a6d4e5e43",
+      "statement": "On native, entry note bodies, day-page bodies and loose/clipped note text are individual Markdown files in the store; in memory the same strings are Entry.note, Doc.pages[day] and LooseNote.text, and store::to_files/from_files move between the two.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/model.rs#L85-L112",
+          "version": "repo-lines-v1:sha256:90d820f853e85018dfc38e49b42c89556ca000286466184e9de1b4d45868ce2e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ4ZDBhZmFmNDZjMGUyN2I4YTg5M2ViOWE2OWZmM2JlMzczZDVlYjNhMjhjMGZiNWE2NWI1ZGQwMjkyZGVjMTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5MTg4OWY5MzE2Y2VkZmE0Yzc3MWQ0ZmU1ZGQ3YTcyNjkzMjFkN2Y5ODRjZGQ4ZjIzZmYyMWZlOTMyNGE2YzcifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/store.rs#L110-L192",
+          "version": "repo-lines-v1:sha256:3e8df264fd694c34753d8d7cc90de4f5763bec32d72d760d197119ec2fe5f022:eyJzZWxlY3RlZExpbmVDb3VudCI6ODMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkZjAyYjhiMDI1ZjBiNTUwYWY2YzRlZDdlY2UxM2RmNDU4YWU4YjZjYjUzMDYwMjU0MDk3Yzg0YTEwZmUxYmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE0MmM0MDY4NGViNmY2NDU3YmNmNWFmYTMyMmFkM2M0MTMzOTIxNjBkYjljZTgyMWEyMTNjODk4YWIyNGM5OTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFkMmQ4MWI4YTQ2Y2Y1YTAzZTQzNDljMzgzMmI2ODdkMTdhMjk5YTYzMTczNGM0ZDAwYjdkYmU5MWM2Yzk1MGQifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/store.rs#L195-L234",
+          "version": "repo-lines-v1:sha256:88cd676a280d0a4a05db832f20ff62cbb67b137f8efda765686aff088946cee8:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlOGI1OGM1M2JiMDRkZTIxNmM5MWM4YWVkODE5MmEwN2MxZmZjZjI1MWM5NzVlNjM3ZTRhZDg1NTQ5YTY5NDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNhY2VkNzY1Nzc1ZGNkOGM4MGIzNzA2M2MyZGU5MTg4OTA0ZTc5OTBmMTc2ZmNiYmY2M2UwODA2NWY1MTRkMWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBiZjA5ZDY1ZDEwM2RiYWNjNTlhMWY5NzNhMTRhNWY0Y2UwMGMzYTlhODg0Y2YyYTNmODJhZDFmZGJiNjhjY2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJhZTU2MTg2ZWZjOWRkNDliOTU2OWQxMzQyYmU0ZGYxZTQzZmI4ZmI1MGI1YzY3NWQwYjJiNGVhMzcxMTQ1OTcifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-04T22:52:59.779Z"
+  }
+}

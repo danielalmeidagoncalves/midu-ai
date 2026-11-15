@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "pages": {
+    "/openwiki/architecture/system-overview.md": {
+      "pageVersion": "sha256:462bc5cd8ccc44f0d230f563c55cb6dee862c59ef4b5bf4ba489346e5dfeb47f",
+      "completedBy": "pi",
+      "completedRunId": "a8fb901a-c812-4f3c-8c27-7fe03d7532ac",
+      "gitHead": "1a8030c89ceac5fc87a66f2330866a9bcb2d2551",
+      "sourceFingerprint": "sha256:215052a670430b97f2209c2984e5af7085de46a72ffe908e3b1d12c04895afa1"
+    },
+    "/openwiki/operations/build-run-and-platforms.md": {
+      "pageVersion": "sha256:5843d41f7a9fc50b3ad79873304c08768ccbb3fc3b1fb95c9817dde983768221",
+      "completedBy": "pi",
+      "completedRunId": "a8fb901a-c812-4f3c-8c27-7fe03d7532ac",
+      "gitHead": "1a8030c89ceac5fc87a66f2330866a9bcb2d2551",
+      "sourceFingerprint": "sha256:215052a670430b97f2209c2984e5af7085de46a72ffe908e3b1d12c04895afa1"
+    },
+    "/openwiki/quality/testing-and-invariants.md": {
+      "pageVersion": "sha256:f4c672d94901f6b5c7f521b9f7352d03c00be5a5de1c32a260ef8d791ffc00cc",
+      "completedBy": "pi",
+      "completedRunId": "a8fb901a-c812-4f3c-8c27-7fe03d7532ac",
+      "gitHead": "1a8030c89ceac5fc87a66f2330866a9bcb2d2551",
+      "sourceFingerprint": "sha256:215052a670430b97f2209c2984e5af7085de46a72ffe908e3b1d12c04895afa1"
+    },
+    "/openwiki/quickstart.md": {
+      "pageVersion": "sha256:e9ae1daa07da85c240b3498f562794d799f1a973a08bdad0e1e25fb433157ff4",
+      "completedBy": "pi",
+      "completedRunId": "a8fb901a-c812-4f3c-8c27-7fe03d7532ac",
+      "gitHead": "1a8030c89ceac5fc87a66f2330866a9bcb2d2551",
+      "sourceFingerprint": "sha256:215052a670430b97f2209c2984e5af7085de46a72ffe908e3b1d12c04895afa1"
+    },
+    "/openwiki/surfaces/ui-and-accessibility.md": {
+      "pageVersion": "sha256:745e96ae990bd28c3aa29c035730b94729844904ddd3785529f7aa1b17316ff5",
+      "completedBy": "pi",
+      "completedRunId": "a8fb901a-c812-4f3c-8c27-7fe03d7532ac",
+      "gitHead": "1a8030c89ceac5fc87a66f2330866a9bcb2d2551",
+      "sourceFingerprint": "sha256:215052a670430b97f2209c2984e5af7085de46a72ffe908e3b1d12c04895afa1"
+    },
+    "/openwiki/systems/composer-and-capture.md": {
+      "pageVersion": "sha256:24d92b763deed8f1715d360b3ab205577f79a66d16f3af4d3df6636c095729f9",
+      "completedBy": "pi",
+      "completedRunId": "43696aa6-6686-469d-b5d2-10cd5209b647",
+      "gitHead": "1a8030c89ceac5fc87a66f2330866a9bcb2d2551",
+      "sourceFingerprint": "sha256:1fe51870ec4c32458510e2a10e35b6b16c18058645c1765debb9e6b14f32a0f0"
+    },
+    "/openwiki/systems/document-model-and-persistence.md": {
+      "pageVersion": "sha256:372baba80407db5c2d01c26275e18bacfcb04194b73383ac617aa878e3ac0ed4",
+      "completedBy": "pi",
+      "completedRunId": "a8fb901a-c812-4f3c-8c27-7fe03d7532ac",
+      "gitHead": "1a8030c89ceac5fc87a66f2330866a9bcb2d2551",
+      "sourceFingerprint": "sha256:215052a670430b97f2209c2984e5af7085de46a72ffe908e3b1d12c04895afa1"
+    },
+    "/openwiki/systems/markdown-and-day-pages.md": {
+      "pageVersion": "sha256:61cf15c0655c7264d68d9ccc0c96bb24fb02a2a098b3a9216b76ca31162ca2ea",
+      "completedBy": "pi",
+      "completedRunId": "a8fb901a-c812-4f3c-8c27-7fe03d7532ac",
+      "gitHead": "1a8030c89ceac5fc87a66f2330866a9bcb2d2551",
+      "sourceFingerprint": "sha256:215052a670430b97f2209c2984e5af7085de46a72ffe908e3b1d12c04895afa1"
+    },
+    "/openwiki/systems/marks-and-subjects.md": {
+      "gitHead": "1a8030c89ceac5fc87a66f2330866a9bcb2d2551",
+      "sourceFingerprint": "sha256:1fe51870ec4c32458510e2a10e35b6b16c18058645c1765debb9e6b14f32a0f0",
+      "pageVersion": "sha256:25fdf4364babb61cb472f94945598770dc41485e4ab8b8bb4929797b376f3d9d",
+      "completedBy": "pi",
+      "completedRunId": "43696aa6-6686-469d-b5d2-10cd5209b647"
+    },
+    "/openwiki/systems/quarter-and-wall.md": {
+      "gitHead": "1a8030c89ceac5fc87a66f2330866a9bcb2d2551",
+      "sourceFingerprint": "sha256:1fe51870ec4c32458510e2a10e35b6b16c18058645c1765debb9e6b14f32a0f0",
+      "pageVersion": "sha256:e53db83f92c38dfdec8203b1ea003041d6e2a2bd799c08fa44aa81f1a070b7dd",
+      "completedBy": "pi",
+      "completedRunId": "43696aa6-6686-469d-b5d2-10cd5209b647"
+    },
+    "/openwiki/workflows/day-lifecycle.md": {
+      "pageVersion": "sha256:73b8a79476383bf7b0a6c0726bd381602db0edecd269b544d83d1c4c97efd747",
+      "completedBy": "pi",
+      "completedRunId": "a8fb901a-c812-4f3c-8c27-7fe03d7532ac",
+      "gitHead": "1a8030c89ceac5fc87a66f2330866a9bcb2d2551",
+      "sourceFingerprint": "sha256:215052a670430b97f2209c2984e5af7085de46a72ffe908e3b1d12c04895afa1"
+    },
+    "/openwiki/workflows/lens-and-margin.md": {
+      "gitHead": "1a8030c89ceac5fc87a66f2330866a9bcb2d2551",
+      "sourceFingerprint": "sha256:1fe51870ec4c32458510e2a10e35b6b16c18058645c1765debb9e6b14f32a0f0",
+      "pageVersion": "sha256:4e749c277ce6aaec00c5673649814e5ae68b3a05483088ce951c14a4153d18fd",
+      "completedBy": "pi",
+      "completedRunId": "43696aa6-6686-469d-b5d2-10cd5209b647"
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:25fdf4364babb61cb472f94945598770dc41485e4ab8b8bb4929797b376f3d9d",
+  "claims": [
+    {
+      "id": "claim_a16208d13bc249a590d26ab82c99ce2b",
+      "statement": "Horizon defines exactly eighteen marks in a fixed order with Thing as the default, and seventeen subjects in a fixed order with Me as the default; each has an id, printed name and (for subjects) a handle.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/inference.rs#L220-L327",
+          "version": "repo-lines-v1:sha256:928494251f4f9372124f08dbbcfb06bedd68ecc823595daea6e359c064aa9b5a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA4LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiNjIyYzMwMzExMTJhYTlkNDc3N2M4MmY3YWY3MWMzZGMzNDhhYmRhZDkzOTc1NzU3M2QwYmZlMjQzZmNmNDQwIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIxOWU3NjM1NWNmMTE5OTQ4MGMzZjk5ODM2YjE0ODZjODQxZDg5MWZhYWQ5MDRjNjA4ZTA5MzAyMmQzNzU3YWVlIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiJhZWNhMTU3MzI3ZjM4YTQ3M2VlNzVlMDdmYWUxZGRkMDQ3Y2U2MDQyNGNiYTEyODZkNDcyYzI1MDUwOTliNjVlIn0"
+        },
+        {
+          "resource": "repo://horizon-core/src/inference.rs#L8-L58",
+          "version": "repo-lines-v1:sha256:5510b05efba06ca6c0bcf09634d0c7da0af260cbf2b76e94c2a9215a55b5bb2f:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2MjJjMzAzMTExMmFhOWQ0Nzc3YzgyZjdhZjcxYzNkYzM0OGFiZGFkOTM5NzU3NTczZDBiZmUyNDNmY2Y0NDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5NTkyODBmNjE1NmMxZjY1MWI1MjJiMWIxODYxNjNiNjZkYjQ1YWRiZmE5YmM2NzFiZWQwNzM1MjllZWMxZDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAwYjU3MDk0NTc4YjdhOTcyYzE3YmJjMTkyMzY1ODAyNWEwYTBiNjYxZmQ4YzhhNzBkZGE1N2I2YzRkNDA0MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU2YzczNjEyYmU0ZDliOGU1MTRjZjcwYWZkYWY2NDgyMGVkYzFlNmM5ZTBhMzE0MjJkMGZiYWQ2ZTJkZGMyYWMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_386c39d9b141416cb6a19e888747b12b",
+      "statement": "Every mark has 24-unit geometry built from paths, circles and rectangles, rendered by MarkGlyph as SVG strokes with no fills.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/components/marks.rs#L50-L68",
+          "version": "repo-lines-v1:sha256:f61c937722a8d216d4a67f09ec79825ce87245710d96c3d33fdbcb9927f36d49:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJjNmRkM2Y4YmMzNWUyYTQ1MTlmYTAxN2E0MjYwZGY2MWQ2YjQyZjQwYWMwYTNlYmI5ZDMzODgwNGI3ZGFhMTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYyZWE1MThlMzMzNGFiYWZiY2I0YzcyYzgyMzJiMWEyNTZlYTQ4ZGEyOWIyMzI3OGU4MTZhZmI4NDBhYzhiYjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YTM2NWE5MGVjMTFlOTA0MzI3NTJjZjkzNzZlYzVlZDM2YjgwYmE1ZThlNjg1NGZjZjk4OTcwZDMwNDQ0NjkifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/inference.rs#L129-L195",
+          "version": "repo-lines-v1:sha256:c3383f5581d456a7c5bfff7f837236771eb4bb0609a439b9c2a68a678ae6f321:eyJzZWxlY3RlZExpbmVDb3VudCI6NjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdmN2U4MmFmOWFiOGMzMzE5MWYzMDVjYjhkN2U1NDQ3MWEwM2Y1ZDBiNzdiNzRmZGY0N2NmNDkzMDgwNDNkOWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5YjExODA1NzgwOGFjNWRlNjhlMTk5N2I1YjRhZDQyZDYxNmMxZDMzOTg4ZmE3MzUwYmE5OWZjY2M3NDc1YWEifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/inference.rs#L31-L36",
+          "version": "repo-lines-v1:sha256:6ebfd1b1bd27aab33d918c962bdd6975d1297a9b6941f962c7847f94c28d8186:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDE0MDlhNGRiZWNjZDAzMzM3NjY1YzgwMzg2YzgyNzNjMTgxZDc2Y2UxZmI2ZTE5ZDZkY2FlN2U5YWE5YWRjMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWZjOThjN2ZiMWI2MTY5OTNmY2JmZDExZDZiNDQ3YzljMjk3YjE3YmU5YTJjOGU0ZGRmN2YwNjI5NDE2MTUyOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzQ0YTFjNmEyNGIwYjAzZWY3OGM3OGU1Njk3ZTdhZmJhNDIzOTc2MzQ1ZTNhOTE3YTJjMzdiZTkxNzQzMWRlMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_7d77773b0cea4c128f299c38717ace17",
+      "statement": "Subject::from_query resolves exact ids and handles first, then unique prefixes of id, handle or name, and refuses ambiguous prefixes such as 'a'.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/inference.rs#L337-L365",
+          "version": "repo-lines-v1:sha256:7efcbba93cbc198e1fb11ce5cd029952a25f8dc4168079ec67cbbf4ce68888bd:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhZThmMTBhYWU5ODVhZjA4NmIyODliOWMxODM5MzA0M2ZiYmYzN2FiZjBiYjAwNjA2ZTU2MGNhNWIxOWNjZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZmZmZhZDcxOTFlN2E4NDhlNmVhMzNhYzdiNDAzNzBjZWNmMzVlMzY4Mzg2Zjc3YzIwMzI3ZjcwNzU5NTA3MTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwOGViNGE1ZjlmY2MwNjFjN2U1NzVmMDlmZGY3YTA2N2Q5YWE5MGVlN2YyNjg1MzhjNmE0Y2NlZjkxNGRlM2YifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/inference.rs#L945-L954",
+          "version": "repo-lines-v1:sha256:627fcfa5e32791d3bd93acfb32f01ba5e011646378e107d72737888c9a5ce1ac:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYjVlZGY1OTQ5Y2ZlYTY3ODIyY2Y2OTExMzIzNjNkNjhkNmYxZTE2OWY1ZTBkNGY3YzE0ZTVmYTFlNmQ0ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM0NzIwMmRhNmNkOGUwZjdiYTE2ODUxODhhMDE0Mzk2ZTI2YzBlMzk3YjU0ZDhkODAxNjlkOTI2NTkwY2EwNTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRmNWE0N2QzOTU4ZWM3ZTQ5N2I1MGRhY2Q3OWNmZDVmZTE5OWYyMWVjNGU4ZGZiYzM1OTgxODM0ZTA2ODA3NWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_77453127016a42c3ab578d64170aaf94",
+      "statement": "Inference normalizes text, matches whole keywords with plural tolerance, sums matched keyword lengths, and gives ties to the earlier table row; marks fall back to Thing and subjects to Me.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/inference.rs#L822-L897",
+          "version": "repo-lines-v1:sha256:ae21b10da503a2a7380342924508f468bda8be1d52f9f863c94ff876a97c9892:eyJzZWxlY3RlZExpbmVDb3VudCI6NzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhOTg2MGNjZDViYmM4NzMzYmYwNjJjODM4NDJmZjYzMTQxMDg4OGNlYzc2MGRmMmQ4NGY5NzFlMTk4MDNhNTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUxZDYzNmRlMjJkMDgyMWE0YTIwZjg5YjA3NGI1Y2VmODFiMzE2NzExYzJiNjZhZjhmYTc0M2M2MDRlZmQ3YTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdiYzk4ZDZiMGRjNDkyYzUwMTZkZjEwODA1YTNhNTRlYjljMTg0YTVhNjEzN2U3ZjRiZWNmYTBjMjIwNTUwZDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fe81704ac4e54034b281f13e814153ea",
+      "statement": "Mark and subject keyword tables are ordered product data, and inference scores them independently, so a text can receive different mark and subject results.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/inference.rs#L381-L626",
+          "version": "repo-lines-v1:sha256:ca33a18b322e13c569b90b5927b8f7be2e13f8c314f7d1b81751c6c0d54ee056:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQ2LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2NmJhMmI1OTk2NzMyZTcxMzkwZDNlMGNjNWI5YmZkZmU1OGFlM2Q2ZDM4M2NlYWEzMjc0YjM3NTk2NTVkZWJlIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJiMDJkMmMwZDZkYzVlNzRkOTJmYTE0YjkxZGJlYTI2NDA5MGJlYjM1ZmRiOTE4OGQ5YjM0MTE4MWRjZTlmNGNlIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIxOWU3NjM1NWNmMTE5OTQ4MGMzZjk5ODM2YjE0ODZjODQxZDg5MWZhYWQ5MDRjNjA4ZTA5MzAyMmQzNzU3YWVlIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIyZWNhZjVjMjA3NjRiY2ExNTYxOGQ3NDM3ODYwZDVmYzRjZWUyODEyZmVjNTMzZGY5NjE4MjA1ODZiNWFiNDE5In0"
+        },
+        {
+          "resource": "repo://horizon-core/src/inference.rs#L628-L820",
+          "version": "repo-lines-v1:sha256:a2ca65ffc17f1c644cb912f5796065b3fee603ad47da6eea595b4cfa7e1862b4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTkzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI0NjhmMTlkNzQ1N2EyOGNhMzIyZjRiMDk2NzRkZTYxMTIwYmVjMGMyZWQ1MjI0YWEyNjVmYzkxZDAyZWEzMWI0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJiMDJkMmMwZDZkYzVlNzRkOTJmYTE0YjkxZGJlYTI2NDA5MGJlYjM1ZmRiOTE4OGQ5YjM0MTE4MWRjZTlmNGNlIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlMWQ2MzZkZTIyZDA4MjFhNGEyMGY4OWIwNzRiNWNlZjgxYjMxNjcxMWMyYjY2YWY4ZmE3NDNjNjA0ZWZkN2ExIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxNjM0ZjAyNTEwYTQyZjZlZTBmNmYxOGU5YzczMTI3NDU0NjU2NTZlMjYxZmQ0ZDlhNDViOTVjMzhlNWYxMjMzIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_35fb6c349eb44d0a94bd422ae8534137",
+      "statement": "Entries and loose notes infer mark/subject on creation; mark_auto and subject_auto control later title re-inference, and the UI's pickers and reset actions flip those flags.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/state.rs#L191-L246",
+          "version": "repo-lines-v1:sha256:19496f1482cb23bfe8c8a55c3446c6cb23a2e7e1e9462520503745738c30358f:eyJzZWxlY3RlZExpbmVDb3VudCI6NTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljODk4ZmI0MDRjNTMyODUwYzFkMGQyZTdiMTczNWRiOGU4NDZlYmQ1NzMwNTYzMDUwZDI0ZjE5N2Q3OWE0NmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFiMzcxNDVjM2ExNWU4NDljNmQwNTk4NTg2ZTgwZWFmOTIyZGFkODVlNGU3OTFlN2ZkMjBjZDRmOTA5Mzk2ODciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ0MTU5MWNkNmY4OTgyYTU2ZTZmMTI3ZjY1NzBiNmNhODZjNzdmNDA1ZDc3ZDcyNWIwMzEyYzAxNjZiYzExODQifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/state.rs#L303-L318",
+          "version": "repo-lines-v1:sha256:f7695a7e28703a1699b6493c88fb07293562fa2dfe8f3d8bef2e587c6a3eff1e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzg3NGNmYzY1Y2IzYTk2NjQ2M2I3M2U1MzY4MTFjMTJiMTc5YzlkNjRhOGViMjc0ZTRhNjQxZDc2ZjczMWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIxZTk3OWZjYjQwZjZlMDgzN2FhNjUwM2VhMjJmYWJkNDYzM2U0NGEyNzFiNDU2ZTczMzM0OTY3NTA1ODFiOWQifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L138-L160",
+          "version": "repo-lines-v1:sha256:4f48e2ae13c4a62e7484876c464af1a350860fc9a9739463878d35bc9e5776e9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiNDFiYTA3YTU4NDEwZmE0YjJjMzFkMTdlY2Y0YmE4MjdhN2IwN2MwZTFlZjFhMzAzNTI3ZWNkM2EyODZjZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjMzk0Y2YzZTMyZmRmMDI0Y2NhNTI5NTA4ZGNiMmFhNTk1ZWE4OThmZGY5OTZmODFiMmY1Njc4ODExYTM4MWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg1MjZlOTU5ZDI0NzcxNDQ0OTNkZDkxNjlhYzUxYjI0NDhmMmQwOTI1MTg2NzEzMWYxMTc0N2Y1OTIzZGQ3OWUifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L210-L219",
+          "version": "repo-lines-v1:sha256:ba2b8e710e85bf6a24bf201880429584cb4626f27ed5e4760e50ec906d9a2f1d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk0ZjIyOTJlODg2M2YyMjc1MjYyMTkzZDQ1ZmYwMjU2YjA2NTJmMTdlZTkzYjhhNWIyNDllNDVlZWE5MjkyNTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQwYjAxMDg1OGNjY2JiMmMyOWIxZjMyYThkOGFjNzZiZmM0Yjc2MjIzYjQ5MjMzNzY3MWNlMTA4NmI5YmJmMTkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1239fd2924964f92a892cca50773c616",
+      "statement": "The spec-example tests deliberately pin lexical outcomes, including Place for the Nelspruit sketches, Study for Thabo's school fees, Thing for retrogaming, and the corresponding subject results.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/inference.rs#L903-L935",
+          "version": "repo-lines-v1:sha256:2cb9000f24175c667a2e34e8e40aa94c99a2cf110aa12033f45cfe7cb2c4c987:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYjVlZGY1OTQ5Y2ZlYTY3ODIyY2Y2OTExMzIzNjNkNjhkNmYxZTE2OWY1ZTBkNGY3YzE0ZTVmYTFlNmQ0ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ5ZWMzYjNmYzljZWRmMDgyMDRiY2M0YWUwYTVmMTMwYzhkODEzYjgxNTQ0ZWQ0NGVhYWJjYTA4ODEzOTg2MzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk4MTBiMDQwZWNiNGI2ZWY4MDgwYTE2ZjllYTQyNmQ4YmY2NjJjNzM4NWU4YmU5YmY0NmE2MGIxMjRmNTNiOTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bce2037cea404b6d83c7fe56af733eb4",
+      "statement": "Unknown mark and subject ids deserialize to Thing and Me instead of failing an import.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/inference.rs#L198-L217",
+          "version": "repo-lines-v1:sha256:de20e5f4937b3138c104989b5c76725a9dd4b1dfb067facc610cc51c1ec3361f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyNTRmODY0NThhMDgwYTE4OTM0NzEzMTRmZThlMDUxYTFiN2JkMTVmN2U1OTYwZjBkYmY3NGJlOGEzM2RiMTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4ZTc5Y2YzMjk4MzQyMzljOTA5OThkNjI4ZGQxYTZmN2U0NDA5ZTA4MjY5NDM3MjQ5YmVlMTVkZTVmNjU3MzYifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/inference.rs#L329-L378",
+          "version": "repo-lines-v1:sha256:906af7eac2ad920e0efe61c0d361789c42e1872b77cffe90aa5e8a50455dd546:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1MmMyMWVjNDRlZGZhNGJkOTc3N2RhNDg1ZTU1MWQxZTdmMGYwODUxNzNjZjIzOGEwOGE5M2VhNjhjMjk5NmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJhMmJmNDgwMjU1M2ZmYmU2ZTNjZDlhOTgxYTdkY2Y0MjM2ODE1NzZlNTNlNzY1MDBjMTgxN2U4MmZlZDMzMGUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-04T14:46:47.383Z"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:4e749c277ce6aaec00c5673649814e5ae68b3a05483088ce951c14a4153d18fd",
+  "claims": [
+    {
+      "id": "claim_999bc33540844e18bebb5c5add479759",
+      "statement": "The index always lists all seventeen subjects in fixed order, counts entries in the current quarter, prints an en dash and quiet styling for zero-count subjects, and offers a quiet-subject toggle.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/assets/main.css#L502-L514",
+          "version": "repo-lines-v1:sha256:d422bbf0b782c5de200acc4d61a548102c735b23869b67f703bee8eef8dfc82d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1NjNiODZmNmYwNWE3MWY5ZGJlYTdjOTY5NDdiYjAyYjNkODFlM2M2NWE2MGUzM2U5OTkzMTM3NjQ4NGQ4YTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5MDNlYzY4M2JlZWI1NDMzYjU1NzE2NmFlZTRiMTM3MTBmMjdiMDhmMGQ4MTM2NjQwM2JmOGIxMTQ3OGRiNTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVkZWYyYjVmODc4YmFlN2YyYTFjMDNjYjA5NTRiMmZjN2ZkMTdiYzJhYzU5NTljYTc2MDRkMTZhMzQ3OTc0N2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU5YmU1N2UzMTU5NGQ1MmJiMWE0OGI2ZTI4NzQ2MTc0NmIwMGY4ZjA4NTU2MzY4ZTFiZjhkZmI5Y2NkMjVmYTEifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/components/index.rs#L15-L45",
+          "version": "repo-lines-v1:sha256:3ce60bcc2bfcc0df1c6c353e872a7198c384c53a4dd117d7eea11bf96dc37c14:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQwYmU2ZWEzODk0Y2NjOTMxZWE5YTViODdkNmYyMWE3OWI0MWMyNjcwZjE3YjFjNzYwN2QzNDkxODA1ZDJjMmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkOWUxMjU0NjQyNTU3NmQzZGVhZThjOWI5ZGJmMTI4ZDVkNmRkYWY1ZDdmZTg1NzkzNDkyN2RlZmZhM2I5ZGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5MWI2MjVlNzZlY2I3MTBlNTMzODlhZDExNTE1OTQ3MzM5OWJmYzk2NWM3N2NmZTViNDM2OTlhNDMyNzJlMWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjExZWRiMmFkZmEzZWNmZDdjNjNjZjc4ZmM5OTA4MGUwMjc5NWRhN2MwNmM3Zjg1Zjc5ZjUxMTI2MTY3YTA3YzkifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/components/index.rs#L76-L120",
+          "version": "repo-lines-v1:sha256:4bb674e8776c317240e126ee20a44d893ca952602de40ad1b2852f89ceef145e:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0MzcxY2U0MDQ3MjdmNGVmZjA4NDRhZGEwYmNhZDQxZTkzMzAwYWQxMzU3MTc2Njk4ZDNiNGUzM2ViMjIwNWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3NjMzOGIxZGZmYTRiZTIxODI2YWIxYWY1NTY3Zjk5ZDdhZTBkOWNmMGUzZmQ3NTlhMjY2YzU0MTZkZWNiNTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YTM2NWE5MGVjMTFlOTA0MzI3NTJjZjkzNzZlYzVlZDM2YjgwYmE1ZThlNjg1NGZjZjk4OTcwZDMwNDQ0NjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_525e4ea967c04392b6126bfe032f786d",
+      "statement": "Subject count, distinct days and next entry are computed only from entries inside the current quarter; outside-window entries are ignored.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/model.rs#L509-L540",
+          "version": "repo-lines-v1:sha256:5daa44e3317ff63bafb849ab7e7bd9b790d580bbce187829bde3a68fc0d87bd7:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3NGZlNDg3MGU3MzlkOTFjMGQxMThlYmYwNTU2MjhhN2IxNzJlMDNmZmFjNDEwNWM0MjBmMWE1MDNkOWMzZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwNzY3NGExOWU2ZDE1NzkxZDA5MGQ5YmNlNjMwM2FmOGFjNTQ4YmUyYzNhNzYwM2VkNzE2ZTg2NGU2YTM2YmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVhN2I4YjdmOTM5YjQxNzc5MDNlMDljYTk4ZWQ4MjUyMzNmODg1YTA2NDllZDdjOWY4NTk1N2Y5NjRmNjdjN2IifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L677-L688",
+          "version": "repo-lines-v1:sha256:bdbe81194f2277d96b1c367c30298ed7e60008b501233419a317fb88687520a4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4ODdkM2M5ZWNlNThmOGYxMTU5MmZjNTJmYTQ1YWZjNjkxOTgwNjZiMTQzZDhlMmVhMTA3ZmY5MDkwZTQ5MjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEwMGRiMDQwZjI5MDliZjk3OGZmMGE5NTZhNTVlODNjNjUzNDE4ZGU2YmI2OGY4MDQxZGE5NzZmOGQzZDIyNzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZkZGM1NjQ1OGI2NDc2OWY5NjY1OThhY2VlNTUzOTFiNmVkMGZjNDVkZGVjNmViNDY2YjM1YzdlNDcyNmFlZGUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b9a38b01d3804ad7969756fef6602734",
+      "statement": "Applying a lens writes Doc.ui.lens, closes the open day and saves; clicking the same subject again or the reset clears the lens.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/components/index.rs#L76-L83",
+          "version": "repo-lines-v1:sha256:686aa5baef16d9969378624cf152d06f7fc5d06dca28e99ceecd73cd047fed6b:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDQzNzFjZTQwNDcyN2Y0ZWZmMDg0NGFkYTBiY2FkNDFlOTMzMDBhZDEzNTcxNzY2OThkM2I0ZTMzZWIyMjA1YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGM2NDc5Y2MyMzA0NDBmZDQxZTgyMjQyMTg2Nzk2OTg1NTlkMjg5M2JkNjdiNDM4MGFmYWI4MTFiMzhhNTVhYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTc2MzM4YjFkZmZhNGJlMjE4MjZhYjFhZjU1NjdmOTlkN2FlMGQ5Y2YwZTNmZDc1OWEyNjZjNTQxNmRlY2I1OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMWI0ZDAyZWVlOTk4NWIzZTE1OGExMzc3MzRjNzUyMTU5NDg2OWUwMmUyZjgxY2RkOWRhZTI0ZDQ2ZDBkYTg1NiJ9"
+        },
+        {
+          "resource": "repo://horizon-app/src/state.rs#L118-L134",
+          "version": "repo-lines-v1:sha256:1b48c424d356fbc3d81827039a0d9315c9a1b9d646093ee7b78f11dd572b849f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5NGYxNGQ1MjQ3ZDk4NWNiYjRiYjdlNmM5ZmY0NjllNWE3ZGRlZTFmODljNTliODY5NjdkOTNjOTAyYTdiZjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBmOGY3NTU0Y2I1OTgzMmE4MGZlZDU0ODVhZDNiNjc1MDZlYjhjOTk5NzBjZjAxOTZjNjYyNGVkZjM2MThkNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhhNzVlM2YxYWZkMGJkZmUzMWFiN2Y5YzAwY2JiNzAyOTE4NDdjOWNmNGRkMWM2YzU2YjM4MzM2Mzk1NDUzZGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3a4cab8b0ecd4814bc53f61e3b2f5b4b",
+      "statement": "The lens filters wall entries, clipped notes, weight and tier, but the fold always reads the whole day with lens None; N/MD badges are hidden and the page is excluded from the lens measure.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/components/fold.rs#L23-L27",
+          "version": "repo-lines-v1:sha256:f070a21f5fe0cfbee8927abf1c1baee7bcd05b7d08adc41cb4db677fc66c7d6f:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFmNWM0OGE5YWNlMDg3NmE2YjI4N2I1M2UxM2Y3NGVhOGUxODg5YWNlM2U2NzYyYjU5MWJlM2ZkZmI1MjdkNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODY1YjlkNDNiMGRjNDJkZDRkODM2OGJhZWU0ZDM5YTcyZGVkNjAwNzA3YzQ4MzJmZmI4ZTI5YjNhMDljZWY4ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2I0ZWRmMGMzMTI5YTgxMmYxZDJmYjY0ZDQ3ZTg1OThhMmRkMzUzZjk3MzBjZjg0NzY1ZGFkZWQ3MTc0OWQ4YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmUwYWUxMzdmNTkwZjQzZDZmYTljYTQ5M2RkZTlkYjkyOGNmMDIwYjY4MDZiMjlmOGIwNTM4Y2MxMjc0YTZkZSJ9"
+        },
+        {
+          "resource": "repo://horizon-app/src/components/wall.rs#L150-L152",
+          "version": "repo-lines-v1:sha256:7124ae2e78f132d99254afd3cd63b45701cddbe22738536a2449eabd145449c0:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTlmMTQxMzI1MGI1MjI2NDcyZjZiOTFjNDhkZDZmZWJmMzA0MzlkMGM4ZmQxNjYxYmM1NGY4MTI2NjQwNTU3MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzI5MGMyNDEwZWI0MGI0MTEyMGI3MGMyMDJjYWJlMjQ4NjJhMjVkODJkNTVkMzEwNDRkNjZlODRhZmI0MmU5ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjBmODQ5OGIwMWU2ZWIyODU0NGUwMjViNzMyZjA5MGFlZTA4MGU0YzJjMzgxZDlhYWQyNmE5N2Y0ZmIyMTk0NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGY2NWExOGI1MTQzNzhjZTJjZjQ3MWI0Y2MyZTJhZWQyMGFkOTM1OGZkNjI3Zjc0OWJhOWVmM2QwMzBhYzE3ZCJ9"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L329-L347",
+          "version": "repo-lines-v1:sha256:a3fe3381e7d535d87a4fa52f6fd227377c614132bfff5ae05459c472b4371750:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY3ZGU0MzE5MGMzOWFhNGY3ZDY3MDg2NGQzNDBhMWRlOTNjMTBlMWM1ZDY5YWU0YzA2MzdkYTFiNGYxZjFiNmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI4ZjY1ZDNmNWJjYzVmM2Y3ZTY4NGM3YzEyNTQ3MGRkYTFhNThkMmU4MzFiYjBkYWEzMTdkMDEzMjMwNDU0MmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgxM2E2NDZlZWM1NmUxN2VjMDdlNjM0ZjEzZmIyOWUxYzMzYTU2OGJmMDE0ZWJiY2ViMzg4YjY0ZDE1ZTY2MDcifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L413-L421",
+          "version": "repo-lines-v1:sha256:bb7e9d87d9bcfd8d11782d9c0c1bd31fc49b17723c268457ab4367db406857cd:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODI1YWEzZDNkOTViZGI5YzMyMGIxY2IwYTNlZWI3NGRlMWM4YzI4YjY2YTlmMmI0NWVkMDc2NmRhYjdhZTQwZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzZkYWFmNTc1NzViYWM2MDljNTE0ODE0ZGQ2ZTlhZDViYjU5YzY3MTE3MTJkMWVjOWVmYWIwY2Y4ZTIxNzE0YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDA1YjdkNTZlMjM2ZWFiODMxODQ3MTdmNjMyZmI4MDZjYTUyYTM3NTU5OWMwNjg4OWQxZDVlZjIzMTIwZGMzOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_bdbcc0dd87b042a581820976f1086480",
+      "statement": "Loose notes are day-less LooseNote values inserted at the front of Doc.notes with inferred mark/subject (lens as default); clipping is an arm-then-day click, detaching sets the day back to None, and remove deletes the note.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/components/margin.rs#L40-L92",
+          "version": "repo-lines-v1:sha256:064762e3e32465ff769ccfec53f5ad2f182838f15c8933bf623e74884ffb6b1d:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVlZTI3NzM1ZmI0NTRmZjVkNTI2OThhMTY1MTI2YWViNGMwZTdjNjNiYTlhY2E2N2UwZTljNGMwODQzNTA3MzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ4NWNiNDk5NDMyYjNkMzAzNjE3NjMwZjJjN2FlMjk3MGM5NDY4NzNkNDc3Y2YwOTFjZTgxNGViMDlmMDRjMWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3NzUwNjViYTFmYzZkODFmMmE3NmE1NTRiNTI1YTAzNWIwYjg3YjBhNmU5N2YzM2I5YzYwNjEyMzAyNDM4ZTcifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/state.rs#L356-L409",
+          "version": "repo-lines-v1:sha256:b9e114acc5b09166e709c5e1f91cb7b6eb95b5dc075d6de34b0d126443826417:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc2ZDY4NWYxODY4ZWQzMDljY2IzZjUxM2Q5MmJjMDhlMDRiZWMzNjJkYWEzMjdhOTk0ZGIyNjEyZGMyODJmZWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5ZGY3YTNkYWJkYzE1MjcwY2QwYjdjMjc3OGY1MDEwZDhiMmJjNjdlOWNmNWMwODMwNDAzZmU2ZTEzYjVlNzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE2N2U4NGRjNDE1Y2Y3ZTEzMTY5ZmY2MzVlNWM4MjkzMmNkZDFmZjAxZDdmMDdlMjI1NjUyNTRjMWY1ODRlNGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJkNTE3M2M4ODRhMDJmMDI5NzhmNjMxMjNmMTk0NmZlMDQwOGM1Y2U1N2VhNmMzM2Q2Y2IzZjY2M2NhNzZjMDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6a30627087604cc6807e9af59da7978a",
+      "statement": "An armed clip is cancelled by Escape without clipping; the app clears arm_note and flashes a cancellation message.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/app.rs#L141-L151",
+          "version": "repo-lines-v1:sha256:9bf5217b700733a919bde6981d9061b2dec65dee42cf1a3a39d5dcf5d036c527:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzNDZmZTcxZGQwZjNhOGE4NDQxNmQ2ZGMyMjQzNDhiZjcyYmQ5ZTdkMzIwZDZhZGQyZWJhMzlhNGRhZDFlY2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkYjMzOWMxN2Q0Y2M1NGU3MGM0ZmNmZWNiNjExYmI5ZTdkMzYzZjI1YjE4ZTA5MjNhMWQzMDZjYzk1OTI0ZTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiMDllZmM1MDc2YmEzMzVmZmJhN2Y0ODBhNGRhYzM4NjRjYjZjZTEzYjhiNmE0YzEwMWIyY2RkNjgxNjZiM2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmMzVmODQzZjlmYjI3NjY0MmIxNWI2NmE3NzY3ZTE0YTkyZDEwMTkyMzBlNmI0ZTVjM2MyYTQ5Y2NjOWZjOGIifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-04T14:46:47.383Z"
+  }
+}

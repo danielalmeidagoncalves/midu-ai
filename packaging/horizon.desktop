@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Horizon
+GenericName=Personal life OS
+Comment=Ninety days as a wall of marks, with a markdown page underneath every day
+Exec=horizon-app
+Icon=horizon
+Terminal=false
+Categories=Utility;Office;
+Keywords=journal;notes;markdown;planner;calendar;
+StartupWMClass=Horizon

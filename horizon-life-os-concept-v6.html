@@ -1,0 +1,2521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Horizon — ninety days, seventeen subjects, and the writing underneath</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg: oklch(98% 0.004 95);
+  --surface: oklch(100% 0.002 95);
+  --fg: oklch(20% 0.018 70);
+  --muted: oklch(44% 0.012 70);
+  --border: oklch(90% 0.006 95);
+  --accent: oklch(52% 0.10 28);
+  --ink-2: oklch(34% 0.016 70);
+  --ink-3: oklch(46% 0.012 70);
+  --rule-soft: oklch(94% 0.005 95);
+  --paper-dim: oklch(96.5% 0.005 95);
+  --wash-1: oklch(94.5% 0.006 95);
+  --wash-2: oklch(91.5% 0.007 95);
+  --hover: oklch(95.5% 0.007 95);
+  --accent-ink: oklch(44% 0.11 28);
+  --accent-on-ink: oklch(76% 0.09 28);
+  --font-display: 'Iowan Old Style','Charter','Instrument Serif',Georgia,serif;
+  --font-body: 'Newsreader',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --font-mono: 'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --gut: 74px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}
+::selection{background:oklch(88% 0.03 28);color:var(--fg)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.app{display:flex;flex-direction:column;min-height:100vh}
+.app[data-view="brief"] .subhead,.app[data-view="brief"] .index,.app[data-view="brief"] .body,.app[data-view="brief"] .foot,.app[data-view="brief"] .agenda{display:none}
+
+/* masthead */
+.masthead{display:flex;align-items:center;gap:22px;padding:14px 28px 12px;border-bottom:1px solid var(--fg);flex-wrap:wrap}
+.wordmark{font-family:var(--font-display);font-size:27px;line-height:1;letter-spacing:-0.015em;white-space:nowrap}
+.wordmark span{color:var(--accent)}
+.mast-range{font-family:var(--font-mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.mast-right{margin-left:auto;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.viewtabs{display:flex;border:1px solid var(--border)}
+.viewtab{font-family:var(--font-mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;padding:8px 13px;background:transparent;border:0;color:var(--muted);cursor:pointer;min-height:36px}
+.viewtab+.viewtab{border-left:1px solid var(--border)}
+.viewtab:hover{color:var(--fg);background:var(--hover)}
+.viewtab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.viewtab[aria-selected="true"]{background:var(--fg);color:var(--bg)}
+.viewtab[aria-selected="true"]:hover{background:oklch(28% 0.018 70);color:var(--bg)}
+.modegroup{display:flex;align-items:center;border:1px solid var(--border);background:var(--surface)}
+.modegroup .lbl{font-family:var(--font-mono);font-size:9px;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink-3);padding:0 2px 0 10px}
+.modebtn{font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;padding:8px 10px;min-height:36px;background:transparent;border:0;color:var(--muted);cursor:pointer}
+.modebtn:hover{color:var(--fg);background:var(--hover)}
+.modebtn:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.modebtn[aria-pressed="true"]{color:var(--fg);background:var(--wash-2);box-shadow:inset 0 -2px 0 var(--fg)}
+.modebtn[aria-pressed="true"]:hover{background:var(--wash-2);color:var(--fg)}
+.composer{display:flex;align-items:stretch;border:1px solid var(--border);background:var(--surface)}
+.composer .peek{display:grid;place-items:center;width:34px;flex:none;border-right:1px solid var(--border);color:var(--fg)}
+.composer .peek .mk svg{width:17px;height:17px}
+.composer .peek[data-empty="true"]{color:oklch(78% 0.006 95)}
+.composer input{border:0;background:transparent;padding:8px 12px;width:228px;font-size:14px;outline:none}
+.composer input::placeholder{color:var(--ink-3);font-style:italic}
+.composer input:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.composer button{border:0;border-left:1px solid var(--border);background:var(--fg);color:var(--bg);padding:0 16px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;min-height:40px;transition:background .12s ease}
+.composer button:hover{background:oklch(28% 0.018 70)}
+.composer button:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.composer .subtok{align-self:center;font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;color:var(--ink-3);padding:0 3px;white-space:nowrap}
+.foldadd .subtok{align-self:stretch;display:flex;align-items:center;font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;color:var(--ink-3);padding:0 9px 0 11px;white-space:nowrap;border-left:1px solid var(--border)}
+
+/* subhead */
+.subhead{display:flex;align-items:baseline;gap:20px;padding:14px 28px 10px;flex-wrap:wrap}
+.subhead h1{font-family:var(--font-display);font-weight:400;font-size:22px;line-height:1.2;letter-spacing:-0.012em;margin:0}
+.subhead h1 em{font-style:italic}
+.nowline{display:inline-flex;align-items:center;gap:9px;margin-left:auto;border:0;background:none;padding:3px 2px;cursor:pointer;text-align:left;color:var(--muted);flex-wrap:wrap;min-height:34px}
+.nowline .dot{width:6px;height:6px;background:var(--accent);flex:none}
+.nowline .t{font-family:var(--font-display);font-size:16px;letter-spacing:-0.01em;color:var(--fg);white-space:nowrap}
+.nowline .t b{font-weight:400;font-style:italic}
+.nowline .meta{font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.nowline .meta .mk svg{width:12px;height:12px}
+.nowline:hover .t{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.nowline:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* the index — seventeen subjects across ninety days */
+.index{padding:0 28px}
+.index-head{display:flex;align-items:baseline;gap:12px;padding:7px 0 6px;flex-wrap:wrap;border-bottom:1px solid var(--rule-soft)}
+.index-head h2{font-family:var(--font-mono);font-size:9px;letter-spacing:0.13em;text-transform:uppercase;font-weight:400;color:var(--muted);margin:0}
+.index-meta{margin-left:auto;display:inline-flex;align-items:baseline;gap:7px;flex-wrap:wrap;font-family:var(--font-mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-3)}
+.index-meta b{color:var(--fg);font-weight:500}
+.index-meta .mk{color:var(--muted)}
+.index-meta .mk svg{width:12px;height:12px}
+.index-clear{border:1px solid var(--border);background:transparent;font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);padding:5px 8px;min-height:26px;cursor:pointer}
+.index-clear:hover{color:var(--bg);background:var(--fg);border-color:var(--fg)}
+.index-clear:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.index-more{display:none;border:0;background:none;font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink-3);padding:6px 2px;min-height:26px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.index-more:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.index-list{list-style:none;margin:0;padding:7px 0 9px;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 11px}
+.ix{display:flex}
+.ix button{position:relative;z-index:0;display:inline-flex;align-items:baseline;gap:6px;border:0;background:none;padding:3px;cursor:pointer;color:var(--fg);text-align:left;min-height:26px}
+.ix button::before{content:"";position:absolute;top:0;bottom:0;left:-6px;right:-6px;background:transparent;z-index:-1}
+.ix button:hover::before{background:var(--hover)}
+.ix button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.ix .n{font-family:var(--font-mono);font-size:9px;color:var(--ink-3);font-variant-numeric:tabular-nums;min-width:8px}
+.ix .t{font-size:12px;line-height:1.25;letter-spacing:-0.005em}
+.ix button:hover .t{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.ix.quiet .t{font-style:italic;color:var(--ink-3)}
+.ix.quiet .n{color:var(--ink-3)}
+.ix button[aria-pressed="true"]::before{background:var(--fg)}
+.ix button[aria-pressed="true"] .t,.ix button[aria-pressed="true"]:hover .t{color:var(--bg);text-decoration:none;font-style:normal}
+.ix button[aria-pressed="true"] .n{color:var(--accent-on-ink)}
+.ix.quiet button[aria-pressed="true"] .n{color:var(--accent-on-ink)}
+.ix button[aria-pressed="true"]:hover::before{background:oklch(28% 0.018 70)}
+
+/* body layout */
+.body{flex:1;display:grid;grid-template-columns:minmax(0,1fr) 272px;min-height:0;padding:0 28px 0 0;gap:0}
+.wall-wrap{display:flex;flex-direction:column;min-width:0}
+
+/* the wall */
+.wall{position:relative;border-top:1px solid var(--fg);display:grid;grid-template-columns:var(--gut) minmax(0,1fr);align-content:start}
+.week{display:contents}
+.gut{display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;gap:2px;padding:7px 9px 0 0;border-right:1px solid var(--border);border-bottom:1px solid var(--rule-soft);min-height:0}
+.gut .mon{font-family:var(--font-display);font-size:14px;line-height:1;letter-spacing:-0.01em;color:var(--fg);min-height:14px}
+.gut .wk{font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.05em;color:var(--ink-3)}
+.gut .gcount{font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.04em;color:var(--ink-3);margin-top:auto;padding-bottom:6px}
+.gut .gnow{font-family:var(--font-mono);font-size:8px;letter-spacing:0.13em;text-transform:uppercase;background:var(--accent-ink);color:var(--bg);padding:1px 5px 2px;margin-bottom:4px}
+.gut.now .mon{color:var(--accent-ink)}
+.gut.quiet .mon{color:var(--ink-3)}
+.row{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-bottom:1px solid var(--rule-soft);min-height:0}
+/* weekday band */
+.wkhead{grid-column:1/-1;display:grid;grid-template-columns:var(--gut) minmax(0,1fr);background:var(--bg)}
+.wkhead-gut{border-right:1px solid var(--border)}
+.wkhead-row{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:5px 0 6px;border-bottom:1px solid var(--rule-soft)}
+.wkhead-row span{font-family:var(--font-mono);font-size:8px;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink-3);padding-left:7px}
+.row.quiet{background:oklch(97.2% 0.003 95)}
+.cell{position:relative;display:flex;flex-direction:column;gap:1px;text-align:left;background:transparent;border:0;border-right:1px solid var(--rule-soft);padding:5px 7px 5px;overflow:hidden;cursor:pointer;transition:background .12s ease;min-height:46px}
+.cell.has{min-height:62px}
+.cell.off{border-right:1px solid var(--rule-soft);cursor:default;background:oklch(97.5% 0.003 95)}
+.cell.off:hover{background:oklch(97.5% 0.003 95)}
+.cell:last-child{border-right:0}
+.cell.we{background:var(--paper-dim)}
+.row.quiet .cell.we{background:oklch(95.5% 0.004 95)}
+.cell:hover{background:var(--hover)}
+.cell:focus-visible{outline:2px solid var(--fg);outline-offset:-3px;z-index:3}
+.cell.land:focus-visible{outline-color:var(--accent-on-ink)}
+.cell.is-open{background:var(--paper-dim);cursor:default;border-right:0;border-bottom:0}
+.cell.is-open::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--fg)}
+.cell.is-open::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--fg)}
+.num{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--font-mono);font-size:10px;line-height:1.2;color:var(--ink-3);flex:none}
+.cell.has .num{color:var(--fg)}
+.cell.l1:hover{background:var(--hover)}
+.ctags{display:inline-flex;gap:3px;align-items:center;margin-left:6px}
+.cell.land .ctags .badge{color:var(--accent-on-ink)}
+.more{font-size:8.5px;color:var(--ink-3)}
+.ev{font-size:12px;line-height:1.3;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:none}
+.cell.has .ev{color:var(--fg)}
+.cell.l1{background:var(--wash-1)}
+.cell.l1:hover{background:var(--hover)}
+.cell.l2{background:var(--wash-2)}
+.cell.l2:hover{background:oklch(89% 0.008 95)}
+.cell.land{background:var(--fg)}
+.cell.land .num{color:var(--accent-on-ink)}
+.cell.land .ev{color:var(--bg)}
+.cell.land .more{color:var(--accent-on-ink)}
+.cell.land:hover{background:oklch(28% 0.018 70)}
+.cell.today{box-shadow:inset 0 0 0 1px var(--accent-ink)}
+.cell.today .stamp{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 5px;margin:-4px 0 -4px -5px;background:var(--accent-ink);color:var(--bg);font-size:9.5px;font-weight:500;letter-spacing:0.01em;line-height:1}
+.cell.today.land{box-shadow:inset 0 0 0 1px var(--accent-on-ink)}
+.cell.today.land .stamp{background:var(--accent-on-ink);color:var(--fg)}
+.today-tag{font-family:var(--font-mono);font-size:8px;letter-spacing:0.13em;text-transform:uppercase;color:var(--accent-ink);margin-top:auto;padding-top:3px;white-space:nowrap;overflow:hidden}
+.cell.land .today-tag{color:var(--accent-on-ink)}
+.cell.armed{outline:2px dashed var(--accent);outline-offset:-3px;background:oklch(96% 0.02 28)!important;cursor:copy}
+
+/* marks — one small closed vocabulary, drawn as printer's marks */
+.mk{display:inline-flex;align-items:center;justify-content:center;color:var(--ink-2);flex:none;position:relative;line-height:0}
+.mk svg{display:block;width:16px;height:16px;overflow:visible}
+.mk svg *{stroke:currentColor;stroke-width:1.7;stroke-linecap:square;stroke-linejoin:miter;fill:none}
+.mk.is-note::after{content:"·";position:absolute;right:-2px;top:-7px;font-size:13px;line-height:1;opacity:.75}
+.badge{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:7.5px;letter-spacing:0.02em;line-height:1;border:1px solid currentColor;padding:1px 3px 2px;color:var(--ink-3)}
+.cell.land .badge,.cell.land .more{color:var(--accent-on-ink)}
+.marks{display:flex;flex-wrap:wrap;align-content:flex-start;gap:6px 7px;padding:5px 0 2px;min-width:0}
+.marks .mk svg{width:18px;height:18px}
+.marks.one .mk svg{width:30px;height:30px}
+.marks.two .mk svg{width:24px;height:24px}
+.marks.dense .mk svg{width:15px;height:15px}
+.marks.one{padding:3px 0 1px}
+.cell.has .mk{color:var(--fg)}
+.cell.land .mk{color:var(--bg)}
+.cell.land .mk.is-note::after{background:var(--bg)}
+
+/* mark tooltip */
+.tip{position:fixed;z-index:80;max-width:290px;background:oklch(22% 0.018 70);color:oklch(97% 0.004 95);border:1px solid oklch(30% 0.018 70);padding:6px 9px 7px;pointer-events:none;display:flex;flex-direction:column;gap:1px}
+.tip b{font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.13em;text-transform:uppercase;font-weight:500;color:var(--accent-on-ink)}
+.tip span{font-size:13px;line-height:1.35}
+
+.evd{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);background:var(--surface);margin-bottom:9px}
+.evd.whole{margin-bottom:0;border-left:0;border-right:0}
+.evd-note{font-family:var(--font-mono);font-size:8px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);background:var(--bg)}
+.evd-note span{padding:0}
+.evd-note .who{padding:4px 8px 4px 9px;color:var(--muted);border-right:1px solid var(--border);max-width:9ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.evd-note .mode{margin-left:auto;display:flex}
+.evd-note .mode button{border:0;border-left:1px solid var(--border);background:transparent;color:var(--ink-3);font-family:var(--font-mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:4px 8px;min-height:24px;cursor:pointer}
+.evd-note .mode button:hover{background:var(--hover);color:var(--fg)}
+.evd-note .mode button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.evd-note .mode button[aria-pressed="true"]{background:var(--wash-2);color:var(--fg)}
+.evd-note .mode button[aria-pressed="true"]:hover{background:var(--wash-2);color:var(--fg)}
+.mdbar{display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--bg);overflow-x:auto;scrollbar-width:none}
+.mdbar::-webkit-scrollbar{display:none}
+.mdbar button{flex:none;border:0;border-right:1px solid var(--border);background:transparent;color:var(--ink-2);font-family:var(--font-mono);font-size:10px;letter-spacing:0.02em;padding:0 9px;min-width:30px;min-height:28px;cursor:pointer}
+.mdbar button:hover{background:var(--hover);color:var(--fg)}
+.mdbar button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.mdbar button.b{font-weight:500}
+.mdbar button.i{font-family:var(--font-display);font-style:italic;font-size:13px}
+.mdbar button.d{font-family:var(--font-display);font-size:13px}
+.mdbar button.q{border-left:0}
+.mdbar .sep{margin-left:auto;width:1px;flex:none}
+.mdbox{position:relative;display:grid}
+.mdbox>*{grid-area:1/1}
+.mdin{width:100%;min-height:66px;resize:vertical;border:0;background:transparent;padding:8px 10px;font-family:var(--font-mono);font-size:12.5px;line-height:1.62;color:var(--fg);tab-size:2}
+.mdin::placeholder{color:var(--ink-3);font-family:var(--font-body);font-style:italic;font-size:14px}
+.mdin:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.mdout{padding:8px 11px 10px;overflow:visible;cursor:text;background:transparent}
+.mdout[hidden]{display:none}
+.mdout .hint{font-family:var(--font-body);font-style:italic;font-size:13.5px;color:var(--ink-3)}
+.evd-foot{display:flex;align-items:center;gap:8px;border-top:1px dashed var(--border);padding:3px 9px;font-family:var(--font-mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);min-height:26px}
+.evd-foot .grow{margin-left:auto}
+.evd-foot .hint{text-transform:none;letter-spacing:0.02em;font-family:var(--font-body);font-style:italic;font-size:12.5px;color:var(--ink-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.evd-tools{display:flex;gap:5px;flex-wrap:wrap;padding:7px 9px;border-top:1px solid var(--border);background:var(--bg)}
+.evd-tools .lbl{font-family:var(--font-mono);font-size:7.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3);align-self:center;padding-right:2px}
+.dournal{display:flex;flex-direction:column;border:1px solid var(--border);background:var(--surface)}
+.dournal .head{display:flex;align-items:baseline;gap:9px;border-bottom:1px solid var(--fg);padding:6px 9px}
+.dournal .head .t{font-family:var(--font-display);font-size:15px;letter-spacing:-0.01em}
+.dournal .head .k{margin-left:auto;font-family:var(--font-mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3)}
+/* markdown rendering */
+.md{font-family:var(--font-body);font-size:14.5px;line-height:1.55;color:var(--fg);min-width:0;overflow-wrap:anywhere}
+.md>*:first-child{margin-top:0}
+.md>*:last-child{margin-bottom:0}
+.md p{margin:0 0 7px}
+.md h4{font-family:var(--font-display);font-weight:400;font-size:19px;line-height:1.2;margin:14px 0 5px;letter-spacing:-0.015em}
+.md h4+h4,.md h4:first-child{margin-top:0}
+.md h5{font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:10px 0 4px;font-weight:400}
+.md ul,.md ol{margin:0 0 8px;padding-left:19px}
+.md li{margin:0 0 3px}
+.md li::marker{color:var(--ink-3);font-family:var(--font-mono);font-size:12px}
+.md li.cb{list-style:none;margin-left:-19px;padding-left:19px;position:relative}
+.md li.cb .box{position:absolute;left:0;top:4px;width:10px;height:10px;border:1px solid var(--fg)}
+.md li.cb.on{color:var(--ink-3);text-decoration:line-through;text-decoration-thickness:1px}
+.md li.cb.on .box{background:var(--fg);box-shadow:inset 0 0 0 2px var(--surface)}
+.md a{border-bottom:1px solid var(--ink-3);text-decoration:none}
+.md a:hover{border-bottom-color:var(--fg)}
+.md code{font-family:var(--font-mono);font-size:12px;background:var(--paper-dim);border:1px solid var(--border);padding:0 3px}
+.md cite{font-family:var(--font-mono);font-size:11.5px;font-style:normal;border-left:2px solid var(--border);padding-left:7px;color:var(--ink-2)}
+.md hr{border:0;border-top:1px solid var(--border);margin:10px 0}
+.md blockquote{margin:0 0 8px;padding-left:9px;border-left:2px solid var(--accent);font-style:italic;color:var(--ink-2)}
+.md table{border-collapse:collapse;margin:4px 0 9px;font-size:13px;width:100%;table-layout:fixed}
+.md th,.md td{border-bottom:1px solid var(--border);padding:3px 6px 3px 0;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+.md th{font-family:var(--font-mono);font-size:7.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);font-weight:400;border-bottom-color:var(--fg)}
+.md .tipmark{font-family:var(--font-mono);font-size:10px;color:var(--accent-ink)}
+.md-narrow{font-size:13.5px;line-height:1.45}
+.md-narrow h4{font-size:16px;margin:10px 0 3px}
+/* the fold */
+.fold{position:relative;grid-column:1/-1;border-top:1px solid var(--fg);border-bottom:1px solid var(--fg);background:var(--surface);display:grid;grid-template-columns:236px minmax(0,1fr)}
+.fold.anim{animation:foldin .18s ease both}
+@keyframes foldin{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.fold-aside{position:relative;padding:20px 20px 18px 26px;border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.fold-day{font-family:var(--font-display);font-weight:400;font-size:clamp(62px,6.6vw,92px);line-height:.82;letter-spacing:-0.04em;margin:6px 0 0}
+.fold-eyebrow{margin:0;font-family:var(--font-mono);font-size:9px;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted)}
+.fold-eyebrow .land{color:var(--accent-ink)}
+.fold-eyebrow .nowmark{color:var(--accent-ink);font-weight:500}
+.fold-month{margin:8px 0 0;font-size:15px;font-style:italic;color:var(--muted)}
+.fold-stand{font-family:var(--font-display);font-size:17px;line-height:1.28;letter-spacing:-0.005em;margin:15px 0 0;max-width:22ch}
+.fold-nav{margin-top:auto;padding-top:16px;display:flex;gap:4px;flex-wrap:wrap}
+.fold-ink{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--fg)}
+.fold.land .fold-ink{background:var(--accent)}
+.fold-main{padding:18px 26px 20px;min-width:0}
+.fold-head{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--fg);padding-bottom:5px}
+.fold-head span{font-family:var(--font-mono);font-size:9px;letter-spacing:0.11em;text-transform:uppercase;color:var(--muted)}
+.fold-head .r{margin-left:auto}
+.fold-head .x{border:0;background:none;font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;padding:6px 6px;min-height:32px}
+.fold-head .x:hover{color:var(--fg);background:var(--paper-dim)}
+.fold-head .x:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.fold-marks{display:flex;flex-wrap:wrap;gap:13px;align-items:center;padding:12px 0 11px;border-bottom:1px solid var(--border);min-height:44px}
+.fold-marks .mk{color:var(--fg)}
+.fold-marks .mk svg{width:28px;height:28px}
+.fold-marks .empty{font-family:var(--font-display);font-style:italic;font-size:15px;color:var(--muted)}
+.fold-marks .cap{margin-left:auto;font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3)}
+.evs{list-style:none;margin:0;padding:0}
+.evrow{display:grid;grid-template-columns:36px 30px minmax(0,1fr) 42px 34px;gap:2px;align-items:start;border-bottom:1px solid var(--border)}
+.evsub{width:42px;height:40px;border:0;background:none;cursor:pointer;font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);padding:0;display:grid;place-items:center}
+.evsub:hover{color:var(--fg);background:var(--paper-dim)}
+.evsub:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.evsub[aria-expanded="true"]{color:var(--fg);background:var(--wash-2)}
+.evrow .chk{position:relative;width:36px;height:40px;border:0;background:none;cursor:pointer}
+.evrow .chk::before{content:"";position:absolute;inset:9px;border:1px solid var(--fg);transition:background .12s ease}
+.evrow .chk:hover::before{background:var(--wash-1)}
+.evrow .chk:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.evrow .chk[aria-checked="true"]::before{background:var(--fg)}
+.evrow .chk[aria-checked="true"]::after{content:"";position:absolute;left:14px;top:12px;width:5px;height:9px;border-right:1.5px solid var(--bg);border-bottom:1.5px solid var(--bg);transform:rotate(42deg)}
+.mkbtn{width:30px;height:40px;display:grid;place-items:center;border:0;background:none;cursor:pointer;color:var(--ink-2);padding:0}
+.mkbtn .mk svg{width:18px;height:18px}
+.mkbtn:hover{background:var(--paper-dim);color:var(--fg)}
+.mkbtn:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.mkbtn[aria-expanded="true"]{background:var(--wash-2);color:var(--fg)}
+.evt{width:100%;min-width:0;border:0;background:transparent;font-size:16px;line-height:1.35;padding:9px 0 8px;margin-top:-2px;text-overflow:ellipsis}
+.evt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.evrow.done .evt{text-decoration:line-through;text-decoration-thickness:1px;color:var(--muted);font-style:italic}
+.evrow .exp{position:relative;width:34px;height:40px;border:0;background:none;cursor:pointer}
+.evrow .exp::before{content:"";position:absolute;left:12px;top:14px;width:7px;height:7px;border-right:1px solid var(--muted);border-bottom:1px solid var(--muted);transform:rotate(45deg);transition:transform .15s ease,border-color .12s ease}
+.evrow .exp:hover::before{border-color:var(--fg)}
+.evrow .exp:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.evrow[data-open="true"] .exp::before{transform:rotate(225deg);top:18px}
+.evdet{grid-column:2/6;padding:2px 0 12px;display:flex;flex-direction:column;gap:9px}
+
+.evacts{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.chip{border:1px solid var(--border);background:transparent;padding:7px 11px;min-height:34px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color .12s ease,border-color .12s ease,background .12s ease}
+.chip:hover{color:var(--fg);border-color:var(--fg);background:var(--paper-dim)}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.chip[aria-pressed="true"]{color:var(--fg);border-color:var(--fg);background:var(--wash-1)}
+.chip.danger:hover{color:var(--bg);background:var(--accent);border-color:var(--accent)}
+.markpick{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:2px;border-top:1px solid var(--border);padding-top:9px;margin-top:1px}
+.markpick[hidden]{display:none}
+.markpick button{display:grid;place-items:center;height:36px;border:1px solid transparent;background:none;cursor:pointer;color:var(--ink-2)}
+.markpick button .mk svg{width:18px;height:18px}
+.markpick button:hover{border-color:var(--border);background:var(--paper-dim);color:var(--fg)}
+.markpick button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.markpick button[aria-pressed="true"]{border-color:var(--fg);color:var(--fg);background:var(--wash-1)}
+.markpick .lbl{grid-column:1/-1;font-family:var(--font-mono);font-size:8px;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink-3);padding:0 0 4px}
+.subpick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;border-top:1px solid var(--border);padding-top:9px;margin-top:1px}
+.subpick[hidden]{display:none}
+.subpick button{display:flex;align-items:baseline;gap:8px;min-height:34px;border:1px solid transparent;background:none;cursor:pointer;padding:6px 8px;text-align:left;font-size:13.5px;line-height:1.25;color:var(--ink-2)}
+.subpick button .o{font-family:var(--font-mono);font-size:8px;letter-spacing:0.04em;color:var(--ink-3);flex:none}
+.subpick button:hover{border-color:var(--border);background:var(--paper-dim);color:var(--fg)}
+.subpick button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.subpick button[aria-pressed="true"]{border-color:var(--fg);color:var(--fg);background:var(--wash-1)}
+.subpick .lbl{grid-column:1/-1;font-family:var(--font-mono);font-size:8px;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink-3);padding:0 0 4px}
+.emptyline{margin:0;padding:18px 0 16px;border-bottom:1px solid var(--border);font-family:var(--font-display);font-style:italic;font-size:17px;color:var(--muted)}
+.dournal{margin-top:16px}
+.sheet-open{margin-top:16px;border:1px dashed var(--border);background:transparent;color:var(--ink-3);font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;padding:9px 11px;min-height:36px;cursor:pointer;display:block;width:100%;text-align:left}
+.sheet-open:hover{color:var(--fg);border-color:var(--fg);border-style:solid;background:var(--paper-dim)}
+.sheet-open:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.foldadd{display:flex;margin-top:14px;border:1px solid var(--border);background:var(--bg)}
+.foldadd .peek{display:grid;place-items:center;width:36px;flex:none;border-right:1px solid var(--border);color:var(--muted)}
+.foldadd .peek .mk svg{width:17px;height:17px}
+.foldadd input{flex:1;min-width:0;border:0;background:transparent;padding:11px 12px;font-size:15px;outline:none}
+.foldadd input::placeholder{color:var(--ink-3);font-style:italic}
+.foldadd input:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.foldadd button{border:0;background:var(--fg);color:var(--bg);padding:0 18px;min-height:44px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer}
+.foldadd button:hover{background:oklch(28% 0.018 70)}
+.foldadd button:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.fold-clips{margin:14px 0 0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.fold-clips .lbl{font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);margin-right:2px}
+.fold-clips .c{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:13.5px;background:var(--wash-1);border:1px solid var(--border);padding:3px 8px;color:var(--ink-2)}
+.fold-clips .c .mk svg{width:13px;height:13px}
+
+/* margins */
+.margins{border-top:1px solid var(--fg);border-left:1px solid var(--border);display:flex;flex-direction:column;min-height:0;background:var(--paper-dim)}
+.margins-head{padding:9px 16px 8px;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:8px}
+.margins-head h2{font-family:var(--font-mono);font-size:9px;letter-spacing:0.13em;text-transform:uppercase;font-weight:400;color:var(--muted);margin:0}
+.margins-head .n{margin-left:auto;font-family:var(--font-mono);font-size:9px;color:var(--ink-3)}
+.margins-list{list-style:none;margin:0;padding:0;overflow:auto;flex:1}
+.note{border-bottom:1px solid var(--border);padding:11px 14px 12px 16px;display:flex;flex-direction:column;gap:7px}
+.note-top{display:flex;align-items:flex-start;gap:9px}
+.note-top .mk{margin-top:3px;color:var(--ink-2)}
+.note p{margin:0;font-size:14.5px;line-height:1.4}
+.note-acts{display:flex;gap:6px;align-items:center}
+.note-clip{border:1px solid var(--border);background:transparent;font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);padding:5px 8px;min-height:30px;cursor:pointer}
+.note-clip:hover{color:var(--fg);border-color:var(--fg)}
+.note-clip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.note-clip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.note-clip[aria-pressed="true"]:hover{background:oklch(28% 0.018 70);color:var(--bg);border-color:oklch(28% 0.018 70)}
+.note-day{font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent-ink)}
+.note-rm{border:0;background:none;font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);cursor:pointer;padding:5px 4px;min-height:28px;margin-left:auto}
+.note-rm:hover{color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px}
+.note-rm:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.margins-foot{padding:9px 16px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-3);line-height:1.5}
+.margins-foot b{color:var(--fg);font-weight:500}
+
+/* loose-note composer */
+.noteadd{display:flex;align-items:stretch;flex:none;border-top:1px solid var(--border);background:var(--surface)}
+.noteadd .peek{display:grid;place-items:center;width:32px;flex:none;border-right:1px solid var(--border);color:var(--ink-2)}
+.noteadd .peek[data-empty="true"]{color:oklch(80% 0.006 95)}
+.noteadd .peek .mk svg{width:15px;height:15px}
+.noteadd input{flex:1;min-width:0;border:0;background:transparent;padding:8px 9px;font-size:13px;outline:none}
+.noteadd input::placeholder{color:var(--ink-3);font-style:italic}
+.noteadd input:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.noteadd button{border:0;border-left:1px solid var(--border);background:transparent;color:var(--fg);padding:0 10px;min-height:36px;font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.09em;text-transform:uppercase;cursor:pointer}
+.noteadd button:hover{background:var(--fg);color:var(--bg)}
+.noteadd button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+/* tooltip + faint peek states */
+.tip[hidden]{display:none}
+.composer .peek[data-empty="true"] .mk{color:oklch(80% 0.006 95)}
+.nowline .meta .mk{color:var(--muted)}
+
+/* foot */
+.foot{display:flex;align-items:baseline;gap:20px;padding:10px 28px 14px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);flex-wrap:wrap}
+.foot .stat b{font-weight:500;color:var(--fg)}
+.foot .status{color:var(--accent-ink);letter-spacing:0.04em}
+.foot .note{margin-left:auto;font-family:var(--font-body);font-style:italic;font-size:14px;letter-spacing:0;text-transform:none;color:var(--muted)}
+
+/* brief */
+.brief{display:none;padding:52px 28px 90px}
+.app[data-view="brief"] .brief{display:block}
+.brief-inner{max-width:740px;margin:0 auto}
+.kicker{font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-ink);margin:0 0 20px}
+.brief h2{font-family:var(--font-display);font-weight:400;font-size:clamp(34px,4.4vw,50px);line-height:1.06;letter-spacing:-0.025em;margin:0 0 24px;max-width:16ch}
+.brief h2 em{font-style:italic}
+.brief p{font-size:18px;line-height:1.6;margin:0 0 18px;max-width:64ch}
+.brief .lede{font-size:21px;line-height:1.55;color:var(--ink-2)}
+.brief h3{font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted);margin:44px 0 4px;padding-bottom:9px;border-bottom:1px solid var(--fg);font-weight:400}
+.diff{list-style:none;margin:0;padding:0}
+.diff li{padding:15px 0;border-bottom:1px solid var(--border)}
+.diff .from{display:block;font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
+.diff .to{font-size:17.5px;line-height:1.55}
+.diff .to b{font-weight:500}
+.principles{list-style:none;margin:0;padding:0}
+.principles li{padding:14px 0;border-bottom:1px solid var(--border);font-size:17px;line-height:1.55}
+.principles b{font-weight:500}
+.open-q{font-size:18px;line-height:1.6}
+.colophon{margin-top:44px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+code{font-family:var(--font-mono);font-size:0.82em;background:var(--paper-dim);padding:1px 5px}
+.mkindex{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:26px}
+.mkindex li{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px}
+.mkindex .mk{color:var(--fg)}
+.mkindex .mk svg{width:19px;height:19px}
+.mkindex .n{font-family:var(--font-mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-3);margin-left:auto;text-align:right}
+.subindex .o{font-family:var(--font-mono);font-size:9px;letter-spacing:0.04em;color:var(--ink-3);flex:none;min-width:18px}
+.subindex .h{font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);flex:none;margin-left:auto}
+
+/* mobile agenda */
+.agenda{display:none;padding:0 20px 10px}
+.ag-week{display:flex;align-items:baseline;gap:10px;padding:16px 0 6px;border-bottom:1px solid var(--fg)}
+.ag-week .m{font-family:var(--font-display);font-size:17px;letter-spacing:-0.01em}
+.ag-week .w{margin-left:auto;font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.ag-week.now .w{color:var(--accent-ink)}
+.ag-day{display:grid;grid-template-columns:66px minmax(0,1fr);gap:12px;align-items:start;width:100%;text-align:left;background:transparent;border:0;border-bottom:1px solid var(--rule-soft);padding:11px 0;min-height:46px;cursor:pointer}
+.ag-day:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
+.ag-date{font-family:var(--font-mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap;padding-top:2px}
+.ag-date b{font-weight:500;color:var(--fg)}
+.ag-body{display:flex;flex-direction:column;gap:5px;min-width:0}
+.ag-marks{display:flex;flex-wrap:wrap;gap:6px}
+.ag-marks .mk svg{width:18px;height:18px}
+.ag-words{display:flex;align-items:baseline;gap:8px;min-width:0;font-size:14.5px;line-height:1.35;color:var(--ink-2)}
+.ag-words .t{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ag-words .ag-more{flex:none;font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.06em;color:var(--ink-3)}
+.ag-day.land .ag-words .ag-more{color:var(--accent-on-ink)}
+.ag-day.armed{outline:2px dashed var(--accent);outline-offset:-2px;background:oklch(96% 0.02 28)!important}
+.ag-day.l1{background:var(--wash-1)}
+.ag-day.l2{background:var(--wash-2)}
+.ag-day.land{background:var(--fg);padding-left:12px;padding-right:12px}
+.ag-day.land .ag-date,.ag-day.land .ag-date b{color:var(--accent-on-ink)}
+.ag-day.land .ag-marks .mk{color:var(--bg)}
+.ag-day.land .ag-words{color:var(--bg)}
+.ag-day.land .ag-today{color:var(--accent-on-ink)}
+.ag-day.today{box-shadow:inset 0 0 0 1px var(--accent-ink)}
+.ag-day.land.today{box-shadow:inset 0 0 0 1px var(--accent-on-ink)}
+.ag-today{font-family:var(--font-mono);font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent-ink);margin-left:6px}
+.ag-fold{border-bottom:1px solid var(--fg);background:var(--surface);margin:0 -20px;padding:16px 20px 18px}
+.ag-fold .fold{grid-template-columns:1fr;display:block}
+.ag-fold .fold-aside{border-right:0;border-bottom:1px solid var(--border);padding:0 0 12px;flex-direction:row;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.ag-fold .fold-ink{display:none}
+.ag-fold .fold-eyebrow{width:100%}
+.ag-fold .fold-day{font-size:52px;margin:0;line-height:.86}
+.ag-fold .fold-month{margin:0 0 2px;font-size:14px}
+.ag-fold .fold-stand{display:none}
+.ag-fold .fold-nav{margin:0 0 2px auto;padding:0}
+.ag-fold .fold-nav .chip{padding:6px 9px;font-size:8.5px}
+.ag-fold .fold-main{padding:0}
+.ag-fold .fold-head{padding-top:10px;margin-top:2px}
+.ag-fold .evrow{grid-template-columns:36px 30px minmax(0,1fr) 42px 30px}
+.ag-fold .fold-marks .mk svg{width:22px;height:22px}
+
+@media (max-width:1180px){
+  .body{grid-template-columns:minmax(0,1fr) 232px}
+  .fold{grid-template-columns:196px minmax(0,1fr)}
+  .masthead{gap:14px;padding:13px 20px 11px}
+  .mast-range{display:none}
+  .mast-right{width:100%;margin-left:0;justify-content:flex-end;gap:12px}
+  .composer{flex:1 1 100%;width:auto}
+  .composer input{width:auto;flex:1;min-width:0}
+  .mkindex{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:1080px){
+  .mast-right{display:contents}
+  .viewtabs{margin-left:auto}
+  .composer{order:5;flex:1 1 100%}
+  .modegroup{display:none}
+  .agenda{order:2}
+  .body{order:3}
+  .foot{order:4}
+  .viewtab{min-height:44px;padding:8px 12px;font-size:9px;letter-spacing:0.07em}
+  .composer button{min-height:46px}
+  .composer input{padding:11px 12px;font-size:15px}
+  .note-clip{min-height:44px;padding:8px 10px;font-size:9px}
+  .evd-note .mode button{min-height:34px}
+  .mdbar button{min-height:40px;min-width:38px}
+  .mdin{font-size:13.5px;min-height:90px}
+  .evd-tools .chip{min-height:38px}
+  .note-rm{min-height:44px;font-size:9px}
+  .noteadd input{padding:10px;font-size:14px}
+  .noteadd button{min-height:44px}
+  .chip{min-height:44px;padding:9px 12px}
+  .fold-head .x{min-height:44px;font-size:9px}
+  .ag-day{min-height:56px;padding:12px 0}
+  .ag-words{font-size:15px}
+  .subhead{padding:13px 20px 8px}
+  .subhead h1{font-size:20px}
+  .nowline{margin-left:0;width:100%;gap:6px 9px}
+  .nowline .meta{font-size:9px;white-space:normal;line-height:1.45}
+  .body{display:block;padding:0 20px}
+  .wall{display:none}
+  .agenda{display:block;padding:0 20px 10px}
+  .margins{margin:24px 0 0;border-left:0}
+  .foot{padding:10px 20px 16px;gap:12px;font-size:9px}
+  .foot .note{display:none}
+  .brief{padding:34px 20px 70px}
+  .brief p{font-size:17px}
+  .mkindex{grid-template-columns:1fr}
+  .viewtab{padding:8px 10px;font-size:9px}
+  .modegroup{display:none}
+  .fold-aside{padding:16px 18px 14px 22px}
+  .fold{animation:none}
+  .index{padding:0 20px}
+  .index-list{gap:0 10px;padding:6px 0 4px}
+  .ix button{padding:7px 4px;min-height:44px}
+  .ix button::before{left:-3px;right:-3px}
+  .ix .t{font-size:14px}
+  .index-more{display:inline-block}
+  .index:not([data-show-all="true"]) .ix[data-quiet="1"]{display:none}
+}
+@media (max-width:520px){
+  .wordmark{font-size:22px}
+  .masthead{padding:10px 14px 9px;gap:9px}
+  .subhead{padding:11px 14px 6px}
+  .body{padding:0 14px}
+  .agenda{padding:0 14px 8px}
+  .margins{margin:18px 0 0}
+  .ag-fold{margin:0 -14px;padding:14px 14px 16px}
+  .markpick{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .index{padding:0 14px}
+  .index-meta{margin-left:0;width:100%;order:3}
+  .subpick{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .evrow{grid-template-columns:32px 28px minmax(0,1fr) 32px}
+  .evsub{display:none}
+  .evdet{grid-column:2/5}
+  .ag-fold .evrow{grid-template-columns:32px 28px minmax(0,1fr) 32px}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app" data-view="wall">
+
+  <header class="masthead" data-od-id="masthead">
+    <div class="wordmark">Horizon<span>.</span></div>
+    <div class="mast-range" id="mastRange">2 Nov 2026 — 30 Jan 2027</div>
+    <div class="mast-right">
+      <div class="modegroup" role="group" aria-label="How days are drawn">
+        <span class="lbl" aria-hidden="true">Draw</span>
+        <button class="modebtn" id="mode-marks" data-mode="marks" aria-pressed="true" data-od-id="mode-marks">Marks</button>
+        <button class="modebtn" id="mode-words" data-mode="words" aria-pressed="false" data-od-id="mode-words">Words</button>
+      </div>
+      <div class="viewtabs" role="tablist" aria-label="View">
+        <button class="viewtab" role="tab" id="tab-wall" aria-selected="true" data-view-btn="wall" data-od-id="tab-wall">The wall</button>
+        <button class="viewtab" role="tab" id="tab-brief" aria-selected="false" data-view-btn="brief" data-od-id="tab-brief">The brief</button>
+      </div>
+      <form class="composer" id="composer" data-od-id="composer">
+        <span class="peek" id="peek" data-empty="true" aria-hidden="true"></span>
+        <label for="capture" class="sr-only">File something to a day</label>
+        <input id="capture" name="capture" type="text" autocomplete="off" spellcheck="false" placeholder="dec 3 - flight · tomorrow - call mum" />
+        <span class="subtok" id="peekSub" aria-hidden="true">ME</span>
+        <button type="submit" data-od-id="composer-submit">File</button>
+      </form>
+    </div>
+  </header>
+
+  <div class="subhead">
+    <h1>Ninety days, <em>in marks.</em></h1>
+    <button class="nowline" id="nowline" type="button" data-od-id="nowline" aria-label="Open today">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="t">Today, <b id="nowDate">Mon 2 Nov</b></span>
+      <span class="meta" id="nowMeta">open</span>
+    </button>
+  </div>
+
+  <section class="index" id="index" data-od-id="subject-index" aria-labelledby="indexHead">
+    <div class="index-head">
+      <h2 id="indexHead">The index</h2>
+      <span class="index-meta" id="indexMeta"></span>
+      <button class="index-clear" id="indexClear" type="button" hidden>Show the whole quarter</button>
+      <button class="index-more" id="indexMore" type="button" aria-expanded="false" hidden></button>
+    </div>
+    <ul class="index-list" id="indexList"></ul>
+  </section>
+
+  <div class="body" data-od-id="wall-view">
+    <div class="wall-wrap">
+      <div class="wall" id="wall" role="group" aria-label="Quarter wall, 2 November 2026 to 30 January 2027"></div>
+    </div>
+
+    <aside class="margins" data-od-id="margins" aria-labelledby="marginsHead">
+      <div class="margins-head">
+        <h2 id="marginsHead">Loose notes</h2>
+        <span class="n" id="noteCount">0</span>
+      </div>
+      <ul class="margins-list" id="notesList"></ul>
+      <form class="noteadd" id="noteAdd" data-od-id="note-composer">
+        <span class="peek" id="notePeek" data-empty="true" aria-hidden="true"></span>
+        <input id="noteInput" type="text" autocomplete="off" placeholder="A detail with no day yet" aria-label="Add a loose note" />
+        <button type="submit">Add</button>
+      </form>
+      <div class="margins-foot" id="marginsFoot">
+        Details with no day yet. Clip one when it gets a date.
+      </div>
+    </aside>
+  </div>
+
+  <div class="agenda" id="agenda" data-od-id="agenda-view"></div>
+
+  <footer class="foot" data-od-id="wall-footer">
+    <span class="stat"><b id="statDays">0</b> days carry something</span>
+    <span class="stat"><b id="statOpen">0</b> still open</span>
+    <span class="stat"><b id="statLoose">0</b> loose notes</span>
+    <span class="status" id="status" role="status" aria-live="polite"></span>
+    <span class="note" id="footNote">Nothing here needs tidying.</span>
+  </footer>
+
+  <section class="brief" id="brief" data-od-id="brief-view" aria-labelledby="briefTitle">
+    <div class="brief-inner">
+      <p class="kicker">Concept · Life OS · revision six</p>
+      <h2 id="briefTitle">Ninety days,<br /><em>and the writing underneath.</em></h2>
+      <p class="lede">Revision five made the quarter readable at a glance: ninety days, seventeen subjects, a wall of marks. Revision six adds the layer that was missing — under every thing, and under every day, a real <b>markdown page</b>. The wall is still the map; the writing is what you actually needed to keep.</p>
+      <p>This matters because of why the earlier tools died. Not the capture, not the filing — the stack of things that were half-written and never opened again. So the writing here is not a “details” drawer that eats what you type. It is printed back to you, formatted, the moment you stop editing.</p>
+      <p>Seventeen is too many to hold in your head, and that is the original problem. The list is not a filing system; it is a portrait. Some of these subjects arrive on their own: payments fall due, school terms start, children have birthdays. Others only happen if you make room — sketches, prompts, a shelf of cartridges, a notebook. The first kind will find you. The second kind goes quiet without ever announcing it.</p>
+
+      <h3>Markdown, in two places</h3>
+      <ul class="diff">
+        <li>
+          <span class="from">Under one thing</span>
+          <span class="to"><b>A note that belongs to an entry.</b> Open a thing in the day page and it has its own page: headings, bold and italic, lists, numbered steps, quotes, a table, a rule. The textarea is monospaced — which is what markdown is for, and honest about the fact that you are writing source. Switch to <b>Read</b> and it prints as a page.</span>
+        </li>
+        <li>
+          <span class="from">Under a whole day</span>
+          <span class="to"><b>Every unfolded day carries a space of its own</b>, whether or not it has anything filed on it. That is where a day goes when it is not a list: what you decided, who you spoke to, what to do next. It is written in the same markdown, and it prints at the foot of the day page.</span>
+        </li>
+        <li>
+          <span class="from">How you know there is writing</span>
+          <span class="to"><b>Two small letters on the wall.</b> <code>MD</code> means the day has its own page; <code>N</code> means one or more entries carry a note. They are type, not colour, so the wall's ink system is untouched — and both disappear when you are reading the quarter through a single subject.</span>
+        </li>
+        <li>
+          <span class="from">Keeping a task from a note</span>
+          <span class="to"><b>Tick it in the reading view, not the source.</b> A <code>- [ ]</code> line prints as a real checkbox; clicking it rewrites the markdown underneath. The note stays a note — it never becomes a second task list competing with the wall.</span>
+        </li>
+        <li>
+          <span class="from">What is deliberately not supported</span>
+          <span class="to"><b>No HTML, no embedded files, no pasted images.</b> A note is text that can be printed back safely. Everything is rendered node by node, never as markup, so nothing can be injected through a written note — and the syntax is the eight things a note actually needs.</span>
+        </li>
+      </ul>
+
+      <h3>The syntax, in full</h3>
+      <p>A note accepts <code>#</code> heading, <code>##</code> sub-heading, <code>**bold**</code>, <code>*italic*</code>, <code>`code`</code>, <code>-</code> list, <code>1.</code> numbered list, <code>- [ ]</code> task, <code>&gt;</code> quote, <code>| table |</code>, <code>---</code> rule, <code>[label](url)</code> link. Two gestures exist only inside Horizon: <code>@Name</code> prints a person in citation type, and <code>^[day^what]</code> prints a chip pointing at another day in the quarter — a note that refers forward without becoming a dependency.</p>
+
+      <h3>The index</h3>
+      <p>The band under the masthead is a printed index, not a filter menu. It prints a count in front of each subject — how many things sit in the next ninety days — and a dash where there is nothing. The dash is the point. It is not a warning, a badge, or a streak to protect; it is the same fact the wall already tells you about a quiet week, printed where you cannot avoid seeing it.</p>
+      <p>Click one subject and the quarter is read through it. Every other mark leaves the page, the ink weight recomputes from what remains, and the gaps inside that subject become the shape — six weeks of nothing before the wedding, three payments in the same week. Click it again and the whole quarter returns. Nothing was filtered away; you simply looked closer. The day page still opens whole, because a day is never only one thing.</p>
+
+      <h3>What changed in six</h3>
+      <ul class="diff">
+        <li>
+          <span class="from">Where writing lives</span>
+          <span class="to"><b>Under the thing, and under the day.</b> A plain one-line detail still belongs in the margins; the moment it needs structure, it becomes markdown — and it is printed back the way you wrote it.</span>
+        </li>
+      </ul>
+
+      <h3>What changed in five</h3>
+      <ul class="diff">
+        <li>
+          <span class="from">How a thing gets a subject</span>
+          <span class="to"><b>The same way it gets a mark — you never file it.</b> The words decide. <code>dentist</code> is Me, <code>bond</code> is Payments, <code>sketches</code> is Sketches. The composer prints the subject it will use while you type, a slash overrides it (<code>/travels</code>), and any entry can be moved from its own row in one click.</span>
+        </li>
+        <li>
+          <span class="from">What the index measures</span>
+          <span class="to"><b>Ninety days per subject, not a lifetime.</b> A count if there is something ahead, a dash if there is not. No completion percentages, no red, no streak to keep alive.</span>
+        </li>
+        <li>
+          <span class="from">Reading one subject</span>
+          <span class="to"><b>The wall becomes that subject's quarter.</b> Other marks leave the page, weight is recomputed from what remains, and the gaps are the reading. In the day page every entry still carries its own handle, so the territory is visible one level down.</span>
+        </li>
+        <li>
+          <span class="from">How a day reads</span>
+          <span class="to"><b>In stamps, not sentences.</b> Each thing on a day becomes one mark in the cell. A day with four things shows four marks; a day with one shows it large. Density is count, not a number you have to interpret.</span>
+        </li>
+        <li>
+          <span class="from">Who chooses the mark</span>
+          <span class="to"><b>You never do.</b> Type <code>dentist</code> and a cross appears; type <code>bond</code> and a coin. The composer shows the mark it will use while you are still typing, so the vocabulary teaches itself in the act of writing.</span>
+        </li>
+        <li>
+          <span class="from">How you read an unfamiliar mark</span>
+          <span class="to"><b>Hover it, and its words answer</b> — in place, with the exact sentence you wrote and the subject it sits in. There is no key on the wall, and no legend to memorise before you can start.</span>
+        </li>
+        <li>
+          <span class="from">What repetition buys</span>
+          <span class="to"><b>Runs become visible.</b> Eighteen marks, used over and over, turn the quarter into a pattern you recognise the way you recognise handwriting. A one-off is a mark; a habit is a row of them.</span>
+        </li>
+        <li>
+          <span class="from">Where colour went</span>
+          <span class="to"><b>Nowhere.</b> Every mark is the same ink. Seventeen coloured subjects would shatter the palette and turn scanning into decoding; terracotta stays reserved for today, and ink coverage still carries weight.</span>
+        </li>
+        <li>
+          <span class="from">When a mark fails</span>
+          <span class="to"><b>Words are one click away.</b> The masthead switch redraws the whole quarter in full sentences. The fold always prints the sentence, and a mark can be corrected on any single entry.</span>
+        </li>
+      </ul>
+
+      <h3>The risk, stated plainly</h3>
+      <p>An unreadable mark is worse than a word, and an index of seventeen can become a chore. Three guards answer that. The vocabulary is <b>small and closed</b> — eighteen marks on one 24-unit grid with a single stroke weight, so they read as a printer's set rather than clip art. Every mark <b>answers to its words</b> on hover or focus. And nothing is ever asked twice: the sentence is in the fold, in the tooltip, in the composer, and one switch away on the wall; the subject is inferred, printed while you type, and changed in place if the guess is wrong.</p>
+      <p>The wall still shows <em>how much</em> a day holds without a chart: an ordinary day is bare paper, a loaded day takes a band of wash, a landmark floods the block with ink and prints its numeral in terracotta. Marks sit inside that field. Weight in ink, kind in symbol, territory in the margin, words underneath.</p>
+
+      <h3>The seventeen</h3>
+      <p>In the order they were given, with the handle the app prints where space is tight. A subject has a name, a shorthand and a place in the list — and none of them is a colour.</p>
+      <ul class="mkindex subindex" id="subjectIndex"></ul>
+
+      <h3>The eighteen marks</h3>
+      <ul class="mkindex" id="markIndex"></ul>
+
+      <h3>The four rules this app refuses to break</h3>
+      <ul class="principles">
+        <li><b>Nothing needs tending.</b> There is no inbox, no tag tree, no streak. Marks and subjects are a byproduct of writing, not a filing decision you owe the app.</li>
+        <li><b>A blank day is a legal state.</b> Open days are drawn as paper, not as unfinished work — and a subject with a dash is allowed to stay that way.</li>
+        <li><b>The full picture never leaves the screen.</b> The quarter stays visible while a day is folded open, and a subject is read by narrowing the wall, never by leaving it.</li>
+        <li><b>One flourish.</b> The wall is quiet paper, ink, and one terracotta. The only theatrical moment is a day unfolding to full size.</li>
+      </ul>
+
+      <h3>Still open</h3>
+      <p class="open-q">Three things this revision deliberately leaves undecided. <em>Recurring things</em> — a standing Tuesday still has to be typed each week. <em>A subject that ends</em> — the index has no way to say “closed”, only “quiet”. And a sharper one this revision introduces: <em>the day after</em> — a page written for a future day is a plan, and the same page read afterwards is a record; the app currently treats them as one object. A fourth, smaller: whether an entry's note should graduate into a page of its own when it outgrows its parent.</p>
+
+      <p class="colophon">Concept artifact — sample data, fixed demo “today” of Mon 2 Nov 2026, not a working backend. Your marks, subjects, notes, markdown pages and edits are kept in this browser only.</p>
+    </div>
+  </section>
+</div>
+
+<div class="tip" id="tip" role="tooltip" hidden></div>
+
+<script>
+/* Horizon v6 — the wall in marks, the writing underneath. Sample data, browser-local persistence. */
+(function () {
+  "use strict";
+
+  var TODAY = new Date(2026, 10, 2);       // fixed demo "today": Mon 2 Nov 2026
+  var SPAN = 90;
+  var MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var WDSHORT = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  var WDFULL = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var STORE = "horizon-v6";
+
+  // ── the vocabulary: eighteen marks, one 24-unit grid ────────────────
+  // Each mark is geometry, never markup: paths ["p", d], circles ["c", cx, cy, r], rects ["r", x, y, w, h].
+  var MARKS = [
+    { id:"travel",   name:"Travel",    ex:"flight, visa",      d:[['p',"M4 20 20 4"],['p',"M11 4h9v9"]] },
+    { id:"health",   name:"Health",    ex:"dentist, bloods",   d:[['p',"M12 3.5v17"],['p',"M3.5 12h17"]] },
+    { id:"people",   name:"People",    ex:"mum, birthday",     d:[['c',12,8.4,3.5],['p',"M4.5 20.2c.7-3.8 3.7-6.1 7.5-6.1s6.8 2.3 7.5 6.1"]] },
+    { id:"money",    name:"Money",     ex:"bond, invoice",     d:[['c',12,12,7.6],['p',"M12 6.6v10.8M9 9.8h6M9 14.2h6"]] },
+    { id:"work",     name:"Work",      ex:"offsite, client",   d:[['r',4.5,4.5,15,15],['p',"M12 4.5v15M4.5 12h15"]] },
+    { id:"home",     name:"Home",      ex:"desk, lease",       d:[['p',"M3.5 10.5 12 3.5l8.5 7v10H3.5z"],['p',"M9.5 20.5v-6h5v6"]] },
+    { id:"ceremony", name:"Ceremony",  ex:"wedding, lobola",   d:[['p',"M6 20.5V12a6 6 0 0 1 12 0v8.5"],['p',"M3.5 20.5h17"]] },
+    { id:"admin",    name:"Admin",     ex:"passport, form",    d:[['p',"M6 3.5h7.5L18 8v12.5H6z"],['p',"M13.5 3.5V8H18"],['p',"M9 12h6M9 15.5h6"]] },
+    { id:"study",    name:"Study",     ex:"course, reading",   d:[['p',"M12 7v12.5"],['p',"M12 7C10.3 5.6 8.4 5 6 5v12c2.4 0 4.3.6 6 2 1.7-1.4 3.6-2 6-2V5c-2.4 0-4.3.6-6 2z"]] },
+    { id:"body",     name:"Body",      ex:"gym, run",          d:[['p',"M2.5 12h4l2.4-5.2 4 10.4 2.4-5.2h6.2"]] },
+    { id:"food",     name:"Food",      ex:"dinner, braai",     d:[['p',"M3.5 11h17a8.5 8.5 0 0 1-17 0z"],['p',"M9 7.5c0-1.2 1-1.2 1-2.5M14 7.5c0-1.2 1-1.2 1-2.5"]] },
+    { id:"gift",     name:"Gift",      ex:"present, flowers",  d:[['p',"M4.5 10.5h15V20h-15z"],['p',"M12 10.5V20M4.5 14.5h15"],['p',"M8.5 10.5V7h7v3.5"]] },
+    { id:"place",    name:"Place",     ex:"hotel, venue",      d:[['p',"M12 21s6.2-5.6 6.2-10.2A6.2 6.2 0 1 0 5.8 10.8C5.8 15.4 12 21 12 21z"],['c',12,10.6,2.4]] },
+    { id:"call",     name:"Call",      ex:"call, zoom",        d:[['p',"M4 5.5h16v10H11l-4.5 3.5V15.5H4z"]] },
+    { id:"deadline", name:"Deadline",  ex:"due, final",        d:[['p',"M7 3.5v17"],['p',"M7 5h11l-2.6 4L18 13H7"]] },
+    { id:"rest",     name:"Rest",      ex:"leave, quiet",      d:[['p',"M16 4.6a8.2 8.2 0 1 0 3.4 12.2A9 9 0 0 1 16 4.6z"]] },
+    { id:"note",     name:"Note",      ex:"idea, maybe",       d:[['p',"M12 4v16M4 12h16M6.3 6.3l11.4 11.4M17.7 6.3 6.3 17.7"]] },
+    { id:"thing",    name:"Unsorted",  ex:"everything else",   d:[['p',"M9 9h6v6H9z"]] }
+  ];
+  var MARKBY = {};
+  MARKS.forEach(function (m) { MARKBY[m.id] = m; });
+
+  // keyword → mark. Longer matches win, so "visa interview" beats "interview".
+  var KW = [
+    ["travel",   ["flight","flights","fly","airport","terminal","travel","trip","train","drive up","drive","driving","uber","lift","journey","bus","check-in","visa interview","visa"]],
+    ["health",   ["dentist","doctor","clinic","hospital","cardio","cardiology","physio","vaccin","blood","surgery","optician","therapy","checkup","check-up","scan"]],
+    ["ceremony", ["lobola meeting","wedding","lobola","funeral","ceremony","graduation","church","baptism","memorial","christmas","fitting"]],
+    ["money",    ["rent","lease","bond","rates","rate","invoice","tax","accountant","salary","payment","pay","bank","insurance","premium","budget","mortgage","loan","quote","contract","sign","renewal","cost","price"]],
+    ["work",     ["work","offsite","team","client","meeting","standup","deck","review","shoot","presentation","office","brief","pitch","role","interview"]],
+    ["people",   ["mum","mom","dad","rui","birthday","friend","family","anniversary","visit","call"]],
+    ["home",     ["desk","flat","house","move","clean","plumber","electrician","delivery","arrives","furniture","garden","pack"]],
+    ["study",    ["book","read","reading","study","exam","course","class","lecture","research","chapter","assignment","school","term"]],
+    ["body",     ["gym","run","walk","swim","yoga","fitness","ride","hike","pilates","training"]],
+    ["food",     ["food","market","groceries","grocery","shop","cook","braai","supper","breakfast","restaurant","dinner","lunch","drinks","eat"]],
+    ["gift",     ["gift","present","flowers","card","surprise"]],
+    ["place",    ["venue","hotel","airbnb","studio","sandton","nelspruit","polokwane","cape town","johannesburg"]],
+    ["admin",    ["form","file","register","renew","passport","licence","license","permit","application","submit","paperwork","passport photos"]],
+    ["deadline", ["deadline","due","final","cut-off","cutoff","close"]],
+    ["call",     ["call","phone","whatsapp","zoom","ring","chat","facetime"]],
+    ["rest",     ["rest","sleep","holiday","leave","quiet","break","sabbath","away"]],
+    ["note",     ["maybe","idea","ask","check","think","remember","note","consider","who","how","why"]]
+  ];
+
+  function inferMark(text) {
+    var t = " " + String(text || "").toLowerCase().replace(/[^a-z0-9\- ]+/g, " ") + " ";
+    var best = null, bestScore = 0;
+    KW.forEach(function (row) {
+      var score = 0;
+      row[1].forEach(function (k) {
+        var re = new RegExp("\\b" + k.replace(/-/g, "\\-") + "s?\\b");
+        if (re.test(t)) score += k.length;
+      });
+      if (score > bestScore) { bestScore = score; best = row[0]; }
+    });
+    return best || "thing";
+  }
+
+  // ── the index: seventeen subjects, in the order they were given ───────
+  // The mark says what a thing is. The subject says whose territory it is.
+  var SUBJECTS = [
+    { id:"ai",          name:"AI",                                    h:"AI",   kw:["ai","llm","agent","model","dataset","embedding","fine-tune","neural","inference"] },
+    { id:"assets",      name:"Assets",                                h:"AST",  kw:["asset","assets","insurance","policy","valuation","portfolio","inventory","deed"] },
+    { id:"backpack",    name:"Backpack",                              h:"BKP",  kw:["backpack","rucksack","bag","packing list","gear list"] },
+    { id:"everyone",    name:"because everyone deserves to be happy", h:"EVRY", kw:["charity","donate","donation","kindness","volunteer","fundraiser"] },
+    { id:"bosch",       name:"Bosch",                                 h:"BOS",  kw:["bosch","drill","tool","tools","toolbox","workshop","sander","saw"] },
+    { id:"sketches",    name:"Sketches",                              h:"SKT",  kw:["sketch","sketches","draw","drawing","illustration","series","print","ink"] },
+    { id:"family",      name:"Family",                                h:"FAM",  kw:["family","mum","mom","dad","rui","sipho","naledi","lobola","wedding","christmas","birthday","anniversary","dinner","supper"] },
+    { id:"finances",    name:"Finances",                              h:"FIN",  kw:["finance","finances","tax","accountant","budget","salary","contract","invoice","quote","savings"] },
+    { id:"house",       name:"House",                                 h:"HSE",  kw:["house","flat","lease","desk","move","plumber","electrician","furniture","garden","clean","paint"] },
+    { id:"journalling", name:"Journalling",                           h:"JRN",  kw:["journal","journalling","journaling","diary","review","morning pages","gratitude"] },
+    { id:"kids",        name:"Kids",                                  h:"KID",  kw:["thabo","kid","kids","school","term","homework","teacher","soccer","practice"] },
+    { id:"me",          name:"Me",                                    h:"ME",   kw:["dentist","doctor","clinic","cardiology","blood","physio","health","checkup","check-up","sleep","rest","role"] },
+    { id:"payments",    name:"Payments",                              h:"PAY",  kw:["payment","payments","pay","instalment","installment","bond","rates","rent","due","fees"] },
+    { id:"prompts",     name:"Prompts",                               h:"PRM",  kw:["prompt","prompts","eval","evals","library","template"] },
+    { id:"retro",       name:"Retrogaming",                          h:"RTG",  kw:["retro","retrogaming","gaming","game","console","arcade","cartridge","emulator"] },
+    { id:"tech",        name:"Tech",                                  h:"TEC",  kw:["tech","laptop","ssd","server","nas","keyboard","device","backup","firmware"] },
+    { id:"travels",     name:"Travels",                              h:"TRV",  kw:["travel","travels","flight","flights","fly","airport","visa","passport","trip","drive","train","hotel","booking","luggage"] }
+  ];
+  var SUBJ_BY = {};
+  SUBJECTS.forEach(function (s) { SUBJ_BY[s.id] = s; });
+
+  // Inferred, never asked for. "Me" is the fallback because the rest is you too.
+  function inferSubject(text) {
+    var t = " " + String(text || "").toLowerCase().replace(/[^a-z0-9\- ]+/g, " ") + " ";
+    var best = "me", bestScore = 0;
+    SUBJECTS.forEach(function (s) {
+      var score = 0;
+      s.kw.forEach(function (k) {
+        var re = new RegExp("\\b" + k.replace(/-/g, "\\-") + "s?\\b");
+        if (re.test(t)) score += k.length;
+      });
+      if (score > bestScore) { bestScore = score; best = s.id; }
+    });
+    return best;
+  }
+
+  // ── dates ────────────────────────────────────────────────────────────
+  function iso(d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+  function addDays(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x; }
+  function isoWeek(date) {
+    var t = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    var day = t.getUTCDay() || 7;
+    t.setUTCDate(t.getUTCDate() + 4 - day);
+    var y0 = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+    return Math.ceil(((t - y0) / 86400000 + 1) / 7);
+  }
+  function isToday(day) { return day.key === iso(TODAY); }
+  function shortDay(day) { return WDSHORT[(day.date.getDay() + 6) % 7] + " " + day.date.getDate() + " " + MON[day.date.getMonth()]; }
+  function cut(s, n) { s = String(s); return s.length > n ? s.slice(0, n - 1).trim() + "…" : s; }
+
+  // ── data ─────────────────────────────────────────────────────────────
+  var days = [], byKey = {};
+  var entries = {}, notes = [];
+  var eid = 0, nid = 0;
+  var openKey = null, expandedId = null, pickFor = null, armNote = null;
+  var sheets = {}, noteEdit = {}, sheetOpen = {};
+  var activeSub = null, pickSub = null;
+  var mode = "marks";
+
+  var SEED = [
+    ["2026-11-03","Dentist, 09:20",1],
+    ["2026-11-05","Standing desk arrives",1],
+    ["2026-11-07","Mum's birthday",2],
+    ["2026-11-07","Call Rui about the flat",1],
+    ["2026-11-09","Bosch — service the drill",1],
+    ["2026-11-11","Lease renewal — sign",2],
+    ["2026-11-14","Lobola meeting, Nelspruit",3],
+    ["2026-11-14","Book the flights down",1],
+    ["2026-11-19","Cardiology follow-up",2],
+    ["2026-11-24","Tax pack to the accountant",1],
+    ["2026-11-28","Sipho & Naledi's wedding",3],
+    ["2026-11-30","Backpack — replace the strap",1],
+    ["2026-12-02","Sipho's suit fitting",1],
+    ["2026-12-04","Visa interview",2],
+    ["2026-12-04","Passport photos",1],
+    ["2026-12-08","Sketches — ink the Nelspruit series",1],
+    ["2026-12-11","Contract ends — decide renewal",3],
+    ["2026-12-14","Retrogaming night with Thabo",1],
+    ["2026-12-18","Drive up to Polokwane",1],
+    ["2026-12-22","Thabo's school fees",2],
+    ["2026-12-25","Christmas at home",2],
+    ["2026-12-27","Prompts — rebuild the eval set",1],
+    ["2026-12-31","Year-end dinner",1],
+    ["2027-01-05","Start the new role",3],
+    ["2027-01-08","Thabo's school term starts",1],
+    ["2027-01-12","AI — ship the reading agent",1],
+    ["2027-01-14","Journalling: the ninety-day review",1],
+    ["2027-01-21","Housing bond first payment",2],
+    ["2027-01-27","Thabo's birthday",1],
+    ["2027-01-30","Assets — annual insurance check",1]
+  ];
+  var LOOSE = [
+    ["Ask the bond consultant about January rates", null],
+    ["Nelspruit — who is driving back on the Sunday?", "2026-11-14"],
+    ["Renewal: get the notice period in writing", "2026-12-11"],
+    ["Passport expires 2029 — no rush", null]
+  ];
+
+  var SHEET_SEED = {
+    "2026-11-02": "## Today\n\nThree things matter this week, and only one has a time on it.\n\n# Where the quarter turns\n\n- **14 Nov** — Lobola in Nelspruit. Everything before it is travel admin.\n- **11 Dec** — the contract answers itself one way or the other.\n- **5 Jan** — the new role starts, whether or not the flat is sorted.\n\n# Before the Nelspruit trip\n\n- [x] book the flights down\n- [ ] who is driving back on Sunday\n- [ ] confirm with Sipho what the family expects us to bring\n\n> Ask the bond consultant about January rates — the answer changes which month we move.\n\n| what | when | cost |\n| --- | --- | --- |\n| flights | 14 Nov | ~R4 200 |\n| car back | 15 Nov | still asking |",
+    "2026-11-14": "# Nelspruit — lobola\n\nThe day the whole quarter was arranged around.\n\n- 09:00 — meet the family at the house, not the venue.\n- Bring the envelope; the uncles will ask twice.\n- @Sipho has the list of what was agreed in June.\n\n## After\n\n- [ ] settle the driving back on Sunday ^[2026-11-15^drive home]\n- [ ] photographs from Naledi's brother",
+    "2026-11-24": "Tax pack.\n\n- invoices for the contract, Aug–Nov\n- the bond statement (they need the interest figure)\n- **nothing else** — the accountant asked for exactly these three",
+    "2026-12-11": "# Contract ends\n\nDecide before the 11th, not on it.\n\n- [ ] read the notice period again — *in writing, from them*\n- [ ] the new role: what does it actually pay after tax\n- [ ] if we stay, ask for the four-day week instead of the raise\n\n> The renewal is not the question. The question is whether the work still fits the life we are building.",
+    "2026-12-27": "## Prompts — rebuild the eval set\n\nKeep it small enough to run in an evening.\n\n1. twenty real questions from the notebook\n2. five that used to fail\n3. one that should be refused\n\n- [ ] score the old set for comparison",
+    "2026-12-31": "Year-end.\n\nWrite down what this year was, in four sentences, before midnight."
+  };
+  var SEED_SHEETS = ["2026-11-02", "2026-11-14", "2026-11-24", "2026-12-11", "2026-12-27", "2026-12-31"];
+
+  var ENTRY_NOTES = {
+    "Lobola meeting, Nelspruit": "# What we agreed in June\n\n- **Nine head of cattle**, of which six are already arranged.\n- The envelope goes to the eldest uncle, not the father.\n- We arrive at *the house*, 09:00 — `not the venue`.\n\n- [x] flights\n- [ ] who drives back Sunday\n- [ ] photographs\n\nSee ^[2026-11-07^Mum's birthday] — she wants to come but the drive is long.",
+    "Contract ends — decide renewal": "## The three things that actually decide it\n\n1. the notice period, in writing\n2. take-home after tax vs. the new role\n3. whether four days a week is on the table\n\n> Everything else is noise this month.\n\n`notice` says 30 days — **check the annexure**.",
+    "Visa interview": "- folder: passport, bank statements, invitation letter\n- [x] photos\n- [ ] print two copies of the itinerary\n- arrive 20 minutes early, phones off"
+  };
+
+  function buildDays() {
+    days = []; byKey = {};
+    for (var i = 0; i < SPAN; i++) {
+      var date = addDays(TODAY, i), key = iso(date);
+      var d = { date: date, key: key };
+      days.push(d); byKey[key] = d;
+    }
+  }
+  function dayNum(key) {
+    var d = byKey[key];
+    if (d) return d.date.getDate();
+    var p = String(key || "").split("-");
+    return p.length === 3 ? parseInt(p[2], 10) : 0;
+  }
+  function evs(key) { return entries[key] || []; }
+  function notesFor(key) { return notes.filter(function (n) { return n.day === key; }); }
+  // The lens: what the wall shows when one subject is being read.
+  function evsIn(key) {
+    var all = evs(key);
+    return activeSub ? all.filter(function (e) { return e.sub === activeSub; }) : all;
+  }
+  function notesIn(key) {
+    var all = notesFor(key);
+    return activeSub ? all.filter(function (n) { return n.sub === activeSub; }) : all;
+  }
+  function weightOf(key, lens) {
+    return (lens ? evsIn(key) : evs(key)).reduce(function (a, e) { return Math.max(a, e.w || 1); }, 0);
+  }
+  function dayHas(day, lens) {
+    if (lens) return evsIn(day.key).length > 0 || notesIn(day.key).length > 0;
+    return evs(day.key).length > 0 || notesFor(day.key).length > 0 || sheetHas(day.key);
+  }
+  function sheetHas(key) {
+    if (sheets[key] == null) sheets[key] = SHEET_SEED[key] || "";
+    return !!String(sheets[key]).trim();
+  }
+  function tierClass(w) { return w >= 3 ? " land" : w === 2 ? " l2" : w === 1 ? " l1" : ""; }
+
+  function seed() {
+    entries = {}; notes = []; eid = 0; nid = 0;
+    sheets = {}; SEED_SHEETS.forEach(function (k) { sheets[k] = SHEET_SEED[k]; });
+    SEED.forEach(function (row) {
+      (entries[row[0]] = entries[row[0]] || []).push({
+        id: "e" + (eid++), t: row[1], w: row[2], done: false, note: ENTRY_NOTES[row[1]] || "",
+        m: inferMark(row[1]), auto: true, sub: inferSubject(row[1]), subAuto: true
+      });
+    });
+    LOOSE.forEach(function (row) {
+      notes.push({ id: "n" + (nid++), t: row[0], day: row[1], m: inferMark(row[0]), sub: inferSubject(row[0]) });
+    });
+  }
+
+  function save() {
+    try {
+      var flat = [];
+      Object.keys(entries).forEach(function (k) {
+        entries[k].forEach(function (e) {
+          flat.push({ d: k, t: e.t, w: e.w, done: e.done, note: e.note, m: e.m, auto: e.auto, s: e.sub, sa: e.subAuto });
+        });
+      });
+      localStorage.setItem(STORE, JSON.stringify({
+        mode: mode, open: openKey, sub: activeSub, entries: flat,
+        sheets: sheets,
+        notes: notes.map(function (n) { return { t: n.t, day: n.day, m: n.m, s: n.sub }; })
+      }));
+    } catch (err) { /* private mode — the concept still runs in memory */ }
+  }
+
+  function load() {
+    var raw = null;
+    try { raw = localStorage.getItem(STORE); } catch (err) { raw = null; }
+    if (raw) {
+      try {
+        var s = JSON.parse(raw);
+        if (s && s.entries && s.entries.length) {
+          entries = {}; notes = []; eid = 0; nid = 0;
+          s.entries.forEach(function (o) {
+            (entries[o.d] = entries[o.d] || []).push({
+              id: "e" + (eid++), t: o.t, w: o.w || 1, done: !!o.done, note: o.note || "",
+              m: MARKBY[o.m] ? o.m : inferMark(o.t), auto: o.auto !== false,
+              sub: SUBJ_BY[o.s] ? o.s : inferSubject(o.t), subAuto: o.sa !== false
+            });
+          });
+          (s.notes || []).forEach(function (o) {
+            notes.push({ id: "n" + (nid++), t: o.t, day: o.day || null,
+              m: MARKBY[o.m] ? o.m : inferMark(o.t), sub: SUBJ_BY[o.s] ? o.s : inferSubject(o.t) });
+          });
+          mode = s.mode === "words" ? "words" : "marks";
+          sheets = {};
+          if (s.sheets) Object.keys(s.sheets).forEach(function (k) { sheets[k] = String(s.sheets[k] || ""); });
+          SEED_SHEETS.forEach(function (k) { if (!(k in sheets)) sheets[k] = SHEET_SEED[k]; });
+          openKey = s.open && byKey[s.open] ? s.open : null;
+          activeSub = s.sub && SUBJ_BY[s.sub] ? s.sub : null;
+          return;
+        }
+      } catch (err) { /* fall through to seed */ }
+    }
+    seed();
+  }
+
+  // ── helpers ──────────────────────────────────────────────────────────
+  var app = document.getElementById("app");
+  var wallEl = document.getElementById("wall");
+  var agendaEl = document.getElementById("agenda");
+  var notesEl = document.getElementById("notesList");
+  var tipEl = document.getElementById("tip");
+  var statusEl = document.getElementById("status");
+  var statusTimer = null;
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function svgMark(def) {
+    var svg = document.createElementNS(SVGNS, "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    def.forEach(function (part) {
+      var tag = part[0] === "p" ? "path" : part[0] === "c" ? "circle" : "rect";
+      var n = document.createElementNS(SVGNS, tag);
+      if (tag === "path") n.setAttribute("d", part[1]);
+      else if (tag === "circle") {
+        n.setAttribute("cx", part[1]); n.setAttribute("cy", part[2]); n.setAttribute("r", part[3]);
+      } else {
+        n.setAttribute("x", part[1]); n.setAttribute("y", part[2]);
+        n.setAttribute("width", part[3]); n.setAttribute("height", part[4]);
+      }
+      svg.appendChild(n);
+    });
+    return svg;
+  }
+  function markEl(id, text, isNote, subId) {
+    var m = MARKBY[id] || MARKBY.thing;
+    var s = el("span", "mk" + (isNote ? " is-note" : ""));
+    s.appendChild(svgMark(m.d));
+    s.dataset.name = m.name;
+    if (text) s.dataset.text = text;
+    if (subId && SUBJ_BY[subId]) s.dataset.sub = subId;
+    return s;
+  }
+  function flash(msg) {
+    statusEl.textContent = msg;
+    if (statusTimer) clearTimeout(statusTimer);
+    statusTimer = setTimeout(function () { statusEl.textContent = ""; }, 4600);
+  }
+  function focusEntry(id, sel) {
+    var n = document.querySelector('.evrow[data-id="' + id + '"] ' + (sel || ""));
+    if (n) n.focus();
+  }
+  function hideTip() { tipEl.hidden = true; }
+  function showTip(mk) {
+    tipEl.innerHTML = "";
+    var head = (mk.dataset.sub && SUBJ_BY[mk.dataset.sub] ? SUBJ_BY[mk.dataset.sub].name + " · " : "") + (mk.dataset.name || "");
+    tipEl.appendChild(el("b", null, head));
+    if (mk.dataset.text) tipEl.appendChild(el("span", null, mk.dataset.text));
+    tipEl.hidden = false;
+    var r = mk.getBoundingClientRect();
+    var w = tipEl.offsetWidth, h = tipEl.offsetHeight;
+    var left = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, window.innerWidth - w - 8));
+    var top = r.top - h - 9;
+    if (top < 8) top = r.bottom + 9;
+    tipEl.style.left = left + "px";
+    tipEl.style.top = top + "px";
+  }
+
+  // ── weeks ────────────────────────────────────────────────────────────
+  function weeksOf() {
+    var out = [], cur = [];
+    var off = (days[0].date.getDay() + 6) % 7;
+    for (var k = 0; k < off; k++) cur.push(null);
+    days.forEach(function (d) {
+      cur.push(d);
+      if (cur.length === 7) { out.push(cur); cur = []; }
+    });
+    if (cur.length) { while (cur.length < 7) cur.push(null); out.push(cur); }
+    return out;
+  }
+
+  // ── the index ────────────────────────────────────────────────────────
+  var indexEl = document.getElementById("index");
+
+  function countSubject(id) {
+    var n = 0;
+    Object.keys(entries).forEach(function (k) {
+      if (!byKey[k]) return;
+      entries[k].forEach(function (e) { if (e.sub === id) n++; });
+    });
+    return n;
+  }
+  function daysOfSubject(id) {
+    return days.filter(function (d) {
+      return evs(d.key).some(function (e) { return e.sub === id; });
+    }).length;
+  }
+  function nextOfSubject(id) {
+    for (var i = 0; i < SPAN; i++) {
+      var list = evs(days[i].key).filter(function (e) { return e.sub === id; });
+      if (list.length) return { day: days[i].key, m: list[0].m, t: list[0].t };
+    }
+    return null;
+  }
+
+  function setSubject(id, focusId) {
+    activeSub = id;
+    openKey = null;
+    pickSub = null; pickFor = null; expandedId = null;
+    save(); render();
+    flash(id ? "Reading the quarter through " + SUBJ_BY[id].name + "." : "Reading the whole quarter.");
+    var f = document.querySelector('.ix button[data-sub="' + (focusId || "") + '"]');
+    if (f) f.focus();
+  }
+
+  function buildIndex() {
+    var listEl = document.getElementById("indexList");
+    var metaEl = document.getElementById("indexMeta");
+    var clearEl = document.getElementById("indexClear");
+    var moreEl = document.getElementById("indexMore");
+    var quiet = 0, used = 0;
+    listEl.replaceChildren();
+
+    SUBJECTS.forEach(function (s) {
+      var c = countSubject(s.id);
+      if (c) used++; else quiet++;
+      var li = el("li", "ix" + (c ? "" : " quiet"));
+      li.dataset.quiet = c ? "0" : "1";
+      var b = el("button");
+      b.type = "button";
+      b.dataset.sub = s.id;
+      b.dataset.odId = "subject-" + s.id;
+      b.setAttribute("aria-pressed", activeSub === s.id ? "true" : "false");
+      b.setAttribute("aria-label", s.name + " — " + (c ? c + (c === 1 ? " thing" : " things") : "nothing") + " in the next ninety days");
+      b.appendChild(el("span", "n", c ? String(c) : "–"));
+      b.appendChild(el("span", "t", s.name));
+      b.addEventListener("click", function () { setSubject(activeSub === s.id ? null : s.id, s.id); });
+      li.appendChild(b);
+      listEl.appendChild(li);
+    });
+
+    metaEl.replaceChildren();
+    if (activeSub) {
+      var s = SUBJ_BY[activeSub], c = countSubject(activeSub), dd = daysOfSubject(activeSub), nx = nextOfSubject(activeSub);
+      metaEl.appendChild(el("b", null, s.name));
+      metaEl.appendChild(document.createTextNode(" · " + c + (c === 1 ? " thing" : " things") + " · " + dd + (dd === 1 ? " day" : " days")));
+      if (nx) {
+        metaEl.appendChild(document.createTextNode(" · next "));
+        metaEl.appendChild(markEl(nx.m, nx.t, false, activeSub));
+        metaEl.appendChild(document.createTextNode(" " + cut(nx.t, 26) + " · " + shortDay(byKey[nx.day])));
+      } else {
+        metaEl.appendChild(document.createTextNode(" · nothing ahead"));
+      }
+    } else {
+      metaEl.appendChild(document.createTextNode(SUBJECTS.length + " subjects · " + used + " in use · " + quiet + " quiet"));
+    }
+    clearEl.hidden = !activeSub;
+    moreEl.hidden = !quiet;
+    moreEl.textContent = "Quiet subjects (" + quiet + ")";
+    moreEl.setAttribute("aria-expanded", indexEl.dataset.showAll === "true" ? "true" : "false");
+  }
+
+  // ── the wall ─────────────────────────────────────────────────────────
+  function dayLabel(day) {
+    var all = evs(day.key).map(function (e) { return e.t; })
+      .concat(notesFor(day.key).map(function (n) { return n.t; }));
+    return WDFULL[day.date.getDay()] + " " + day.date.getDate() + " " + MONTHS[day.date.getMonth()] +
+      (isToday(day) ? ", today" : "") + " — " + (all.length ? all.join("; ") : "open, nothing on it") +
+      (sheetHas(day.key) ? ". Day page written." : "");
+  }
+  function cellLabel(day) {
+    return activeSub ? SUBJ_BY[activeSub].name + " only — " + dayLabel(day) : dayLabel(day);
+  }
+
+  function itemsFor(day, lens) {
+    var list = (lens ? evsIn(day.key) : evs(day.key)).map(function (e) {
+      return { m: e.m, t: e.t, w: e.w || 1, note: false, sub: e.sub, noteOn: !!(e.note && e.note.trim()) };
+    });
+    (lens ? notesIn(day.key) : notesFor(day.key)).forEach(function (n) {
+      list.push({ m: n.m, t: n.t, w: 0, note: true, sub: n.sub, noteOn: false });
+    });
+    return list.sort(function (a, b) { return b.w - a.w; });
+  }
+
+  function makeCell(day, lens) {
+    var items = itemsFor(day, lens);
+    var total = items.length;    var w = weightOf(day.key, lens);
+    var weekend = ((day.date.getDay() + 6) % 7) >= 5;
+    var b = el("button", "cell" + (total ? " has" : "") + tierClass(w) +
+      (sheetHas(day.key) && !lens ? " sheeted" : "") +
+      (weekend ? " we" : "") + (isToday(day) ? " today" : "") + (armNote ? " armed" : ""));
+    b.type = "button";
+    b.dataset.key = day.key;
+    b.dataset.odId = "day-" + day.key;
+    b.setAttribute("aria-label", cellLabel(day));
+
+    var num = el("span", "num");
+    var stamp = el("span", isToday(day) ? "stamp" : null, String(day.date.getDate()));
+    num.appendChild(stamp);
+    var written = !lens && sheetHas(day.key);
+    var noted = items.filter(function (it) { return it.noteOn; }).length;
+    if (written || noted) {
+      var tags = el("span", "ctags");
+      if (noted) {
+        var nb = el("span", "badge", "N" + (noted > 1 ? noted : ""));
+        nb.title = noted + (noted === 1 ? " entry has a markdown note" : " entries have markdown notes");
+        tags.appendChild(nb);
+      }
+      if (written) {
+        var wb = el("span", "badge", "MD");
+        wb.title = "This day has its own markdown page";
+        tags.appendChild(wb);
+      }
+      num.appendChild(tags);
+    }
+
+    if (mode === "words") {
+      var list = evs(day.key);
+      var room = 3;
+      if (list.length > room) num.appendChild(el("span", "more", "+" + (list.length - room)));
+      b.appendChild(num);
+      if (!list.length && notesFor(day.key).length) {
+        b.appendChild(el("span", "ev", notesFor(day.key)[0].t));
+      }
+      list.slice(0, room).forEach(function (e) { b.appendChild(el("span", "ev", e.t)); });
+    } else {
+      var shown = items.slice(0, 9);
+      if (total > shown.length) num.appendChild(el("span", "more", "+" + (total - shown.length)));
+      b.appendChild(num);
+      if (shown.length) {
+        var wrap = el("div", "marks" + (shown.length === 1 ? " one" : shown.length === 2 ? " two" :
+          shown.length >= 5 ? " dense" : ""));
+        shown.forEach(function (it) { wrap.appendChild(markEl(it.m, it.t, it.note, it.sub)); });
+        b.appendChild(wrap);
+      }
+    }
+    if (isToday(day)) b.appendChild(el("span", "today-tag", "today"));
+    return b;
+  }
+
+  function buildWall() {
+    var lens = !!activeSub;
+    wallEl.replaceChildren();
+    wallEl.setAttribute("aria-label", activeSub
+      ? "Quarter wall through " + SUBJ_BY[activeSub].name + ", 2 November 2026 to 30 January 2027"
+      : "Quarter wall, 2 November 2026 to 30 January 2027");
+    var band = el("div", "wkhead");
+    band.setAttribute("aria-hidden", "true");
+    band.appendChild(el("span", "wkhead-gut"));
+    var bandRow = el("div", "wkhead-row");
+    WDSHORT.forEach(function (d) { bandRow.appendChild(el("span", null, d)); });
+    band.appendChild(bandRow);
+    wallEl.appendChild(band);
+
+    var lastMon = -1;
+    weeksOf().forEach(function (week) {
+      var real = week.filter(Boolean);
+      var live = real.filter(function (d) { return dayHas(d, lens); }).length;
+      var holdsToday = week.some(function (d) { return d && isToday(d); });
+      var quiet = live === 0 && !holdsToday;
+      var ref = real[0] || days[0];
+
+      var gut = el("div", "gut" + (quiet ? " quiet" : "") + (holdsToday ? " now" : ""));
+      var mon = ref.date.getMonth();
+      gut.appendChild(el("span", "mon", mon !== lastMon ? MON[mon] : ""));
+      lastMon = mon;
+      gut.appendChild(el("span", "wk", "W" + isoWeek(ref.date)));
+      if (holdsToday) gut.appendChild(el("span", "gnow", "now"));
+      gut.appendChild(el("span", "gcount", live ? live + (live === 1 ? " day" : " days") : ""));
+
+      var row = el("div", "row" + (quiet ? " quiet" : ""));
+      week.forEach(function (day) {
+        row.appendChild(day ? makeCell(day, lens) : el("span", "cell off"));
+      });
+      wallEl.appendChild(gut);
+      wallEl.appendChild(row);
+
+      if (openKey && week.some(function (d) { return d && d.key === openKey; })) {
+        row.after(buildFold(byKey[openKey]));
+      }
+    });
+  }
+
+  function refreshCell(key) {
+    var old = wallEl.querySelector('.cell[data-key="' + key + '"]');
+    if (old) old.replaceWith(makeCell(byKey[key], !!activeSub));
+  }
+
+  // ── the fold ─────────────────────────────────────────────────────────
+  function standfirst(day) {
+    var w = weightOf(day.key), n = notesFor(day.key).length, e = evs(day.key).length;
+    if (w >= 3) return "This one changes something.";
+    if (w === 2) return "A long one — it takes the whole day.";
+    if (e > 1) return "A handful of small things, and the day is yours.";
+    if (e === 1) return n ? "One thing, and a detail hanging off it." : "One thing, and the day is otherwise yours.";
+    return n ? "Details only. Nothing here has a time." : "Open. Nothing has to resolve here.";
+  }
+  function weightLabel(day) {
+    var w = weightOf(day.key);
+    return w >= 3 ? "landmark" : w === 2 ? "full day" : w === 1 ? "one thing" : "open";
+  }
+
+  function buildFold(day) {
+    var f = el("div", "fold" + (weightOf(day.key) >= 3 ? " land" : "") + " anim");
+    f.tabIndex = -1;
+    f.setAttribute("data-od-id", "fold-day");
+    f.setAttribute("role", "region");
+    f.setAttribute("aria-label", "Day page — " + dayLabel(day));
+
+    var aside = el("div", "fold-aside");
+    aside.appendChild(el("span", "fold-ink"));
+    var eb = el("p", "fold-eyebrow");
+    eb.appendChild(document.createTextNode("Week " + isoWeek(day.date) + " · " + weightLabel(day)));
+    if (isToday(day)) eb.appendChild(el("span", "nowmark", " · today"));
+    aside.appendChild(eb);
+    aside.appendChild(el("div", "fold-day", String(day.date.getDate())));
+    aside.appendChild(el("p", "fold-month",
+      WDFULL[day.date.getDay()] + " · " + day.date.getDate() + " " +
+      MONTHS[day.date.getMonth()] + " " + day.date.getFullYear()));
+    aside.appendChild(el("p", "fold-stand", standfirst(day)));
+
+    var nav = el("div", "fold-nav");
+    var i = days.indexOf(day);
+    [i - 1, i + 1].forEach(function (j) {
+      if (j < 0 || j >= SPAN) return;
+      var target = days[j];
+      var b = el("button", "chip", (j < i ? "← " : "") + shortDay(target) + (j > i ? " →" : ""));
+      b.type = "button";
+      b.addEventListener("click", function () {
+        openKey = target.key; expandedId = null; pickFor = null; save(); render(); focusFold();
+      });
+      nav.appendChild(b);
+    });
+    aside.appendChild(nav);
+
+    var main = el("div", "fold-main");
+    var head = el("div", "fold-head");
+    head.appendChild(el("span", null, "On this day"));
+    var total = itemsFor(day).length;
+    head.appendChild(el("span", "r", total + (total === 1 ? " thing" : " things")));
+    var x = el("button", "x", "Close · Esc");
+    x.type = "button";
+    x.addEventListener("click", function () { closeFold(day.key); });
+    head.appendChild(x);
+    main.appendChild(head);
+
+    var mrow = el("div", "fold-marks");
+    var items = itemsFor(day);
+    if (!items.length) {
+      mrow.appendChild(el("span", "empty", "Nothing yet — the day is a clean page."));
+    } else {
+      items.forEach(function (it) { mrow.appendChild(markEl(it.m, it.t, it.note, it.sub)); });
+      mrow.appendChild(el("span", "cap", items.length + (items.length === 1 ? " mark" : " marks")));
+    }
+    main.appendChild(mrow);
+
+    var ul = el("ul", "evs");
+    var list = evs(day.key);
+    if (!list.length) {
+      ul.appendChild(el("li", "emptyline", "No appointments filed. Anything you write on the page below still belongs to this day."));
+    }
+    list.forEach(function (e) { ul.appendChild(buildEntry(day, e)); });
+    main.appendChild(ul);
+
+    var shownNotes = notesFor(day.key);
+    if (shownNotes.length) {
+      var clips = el("div", "fold-clips");
+      clips.appendChild(el("span", "lbl", "Clipped details"));
+      shownNotes.forEach(function (n) {
+        var c = el("span", "c");
+        c.appendChild(markEl(n.m, n.t, true));
+        c.appendChild(el("span", null, n.t));
+        clips.appendChild(c);
+      });
+      main.appendChild(clips);
+    }
+
+    var sheetDirty = !!sheetOf(day.key).trim();
+
+    var form = el("form", "foldadd");
+    var peek = el("span", "peek");
+    form.appendChild(peek);
+    var inp = document.createElement("input");
+    inp.type = "text";
+    inp.autocomplete = "off";
+    inp.placeholder = "Add to this day — dentist, 09:20";
+    inp.setAttribute("aria-label", "Add something to this day");
+    form.appendChild(inp);
+    var subTok = el("span", "subtok", subjHandle(activeSub || "me"));
+    form.appendChild(subTok);
+    var btn = el("button", null, "Add");
+    btn.type = "submit";
+    form.appendChild(btn);
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var raw = inp.value.trim();
+      if (!raw) return;
+      var p = parse(raw);
+      if (!p.ok) { flash(p.msg); return; }
+      var filed = addEntry(p.key, p.title, p.sub);
+      flash("Filed to " + shortDay(byKey[p.key]) + " · " + SUBJ_BY[filed.sub].name);
+    });
+    inp.addEventListener("input", function () {
+      var raw = inp.value.trim();
+      var taken = takeSubject(raw);
+      var subId = taken.sub || activeSub || inferSubject(taken.text);
+      peek.replaceChildren();
+      peek.style.visibility = raw ? "visible" : "hidden";
+      if (raw) peek.appendChild(markEl(inferMark(taken.text), taken.text, false, subId));
+      subTok.textContent = subjHandle(subId);
+      subTok.title = SUBJ_BY[subId].name;
+    });
+    peek.style.visibility = "hidden";
+    main.appendChild(form);
+
+    // the day's own page closes the sheet: compose first, write underneath
+    var page = buildSheet(day);
+    var openW = el("button", "sheet-open", "+ Write the day's page");
+    openW.type = "button";
+    openW.setAttribute("aria-label", "Open the markdown page for " + shortDay(day));
+    page.hidden = !sheetDirty && !sheetOpen[day.key];
+    openW.hidden = !page.hidden;
+    openW.addEventListener("click", function () {
+      sheetOpen[day.key] = true;
+      page.hidden = false;
+      openW.hidden = true;
+      if (page.md) page.md.edit();
+    });
+    main.appendChild(openW);
+    main.appendChild(page);
+
+    f.appendChild(aside);
+    f.appendChild(main);
+    return f;
+  }
+
+  function subjHandle(id) { return (SUBJ_BY[id] || SUBJ_BY.me).h; }
+
+  function buildEntry(day, e) {
+    var li = el("li", "evrow" + (e.done ? " done" : ""));
+    li.dataset.id = e.id;
+    li.dataset.odId = "entry-" + e.id;
+    li.dataset.open = expandedId === e.id ? "true" : "false";
+
+    var chk = el("button", "chk");
+    chk.type = "button";
+    chk.setAttribute("role", "checkbox");
+    chk.setAttribute("aria-checked", e.done ? "true" : "false");
+    chk.setAttribute("aria-label", (e.done ? "Mark not done — " : "Mark done — ") + e.t);
+    chk.addEventListener("click", function () {
+      e.done = !e.done;
+      save(); render(); focusEntry(e.id, ".chk");
+    });
+    li.appendChild(chk);
+
+    var mkbtn = el("button", "mkbtn");
+    mkbtn.type = "button";
+    mkbtn.dataset.id = e.id;
+    mkbtn.setAttribute("aria-label", "Change mark — currently " + MARKBY[e.m].name);
+    mkbtn.setAttribute("aria-expanded", pickFor === e.id ? "true" : "false");
+    mkbtn.appendChild(markEl(e.m, e.t));
+    mkbtn.addEventListener("click", function () {
+      expandedId = e.id;
+      pickFor = pickFor === e.id ? null : e.id;
+      render(); focusEntry(e.id, ".mkbtn");
+    });
+    li.appendChild(mkbtn);
+
+    var inp = document.createElement("input");
+    inp.type = "text";
+    inp.className = "evt";
+    inp.value = e.t;
+    inp.setAttribute("aria-label", "Entry text");
+    inp.addEventListener("input", function () {
+      e.t = inp.value;
+      if (e.auto !== false) e.m = inferMark(e.t);
+      mkbtn.replaceChildren();
+      mkbtn.appendChild(markEl(e.m, e.t));
+      mkbtn.setAttribute("aria-label", "Change mark — currently " + MARKBY[e.m].name);
+      if (e.subAuto !== false) {
+        e.sub = inferSubject(e.t);
+        sub.textContent = subjHandle(e.sub);
+        sub.title = SUBJ_BY[e.sub].name;
+        sub.setAttribute("aria-label", "Subject — " + SUBJ_BY[e.sub].name + ". Change it.");
+      }
+      save();
+    });
+    inp.addEventListener("blur", function () {
+      if (!inp.value.trim()) { inp.value = e.t; return; }
+      save(); refreshCell(day.key); updateStats(); buildIndex();
+    });
+    li.appendChild(inp);
+
+    var sub = el("button", "evsub", subjHandle(e.sub));
+    sub.type = "button";
+    sub.dataset.act = "sub";
+    sub.title = SUBJ_BY[e.sub].name;
+    sub.setAttribute("aria-label", "Subject — " + SUBJ_BY[e.sub].name + ". Change it.");
+    sub.setAttribute("aria-expanded", pickSub === e.id ? "true" : "false");
+    sub.addEventListener("click", function () {
+      expandedId = e.id;
+      pickSub = pickSub === e.id ? null : e.id;
+      pickFor = null;
+      render(); focusEntry(e.id, ".evsub");
+    });
+    li.appendChild(sub);
+
+    var exp = el("button", "exp");
+    exp.type = "button";
+    exp.setAttribute("aria-expanded", expandedId === e.id ? "true" : "false");
+    exp.setAttribute("aria-label", "Details for " + e.t);
+    exp.addEventListener("click", function () {
+      expandedId = expandedId === e.id ? null : e.id;
+      if (expandedId !== e.id) { pickFor = null; pickSub = null; }
+      render(); focusEntry(e.id, ".exp");
+    });
+    li.appendChild(exp);
+
+    li.addEventListener("click", function (ev) {
+      var t = ev.target;
+      if (!t || t.closest(".chk, .mkbtn, .evsub, .exp, input, textarea, button, a")) return;
+      expandedId = expandedId === e.id ? null : e.id;
+      if (expandedId !== e.id) { pickFor = null; pickSub = null; }
+      render(); focusEntry(e.id, ".exp");
+    });
+
+    if (expandedId === e.id) li.appendChild(buildDetail(day, e));
+    return li;
+  }
+
+  function buildDetail(day, e) {
+    var det = el("div", "evdet");
+    det.appendChild(buildNote({
+      who: "Note",
+      keyHint: "entry",
+      get: function () { return e.note || ""; },
+      set: function (v) { e.note = v; save(); },
+      onchange: function () { refreshCell(day.key); },
+      placeholder: "**Call back** about the *notice period*\n- ask for it in writing\n- [ ] save the reply here",
+      emptyHint: "Nothing written under this yet.",
+      label: "Markdown note for " + e.t
+    }));
+
+    var acts = el("div", "evacts");
+
+    var subchip = el("button", "chip", SUBJ_BY[e.sub].name);
+    subchip.type = "button";
+    subchip.dataset.act = "sub";
+    subchip.setAttribute("aria-expanded", pickSub === e.id ? "true" : "false");
+    subchip.addEventListener("click", function () {
+      pickSub = pickSub === e.id ? null : e.id;
+      pickFor = null;
+      render(); focusEntry(e.id, '.chip[data-act="sub"]');
+    });
+    acts.appendChild(subchip);
+
+    var land = el("button", "chip", e.w >= 3 ? "Landmark ✓" : "Mark as landmark");
+    land.type = "button";
+    land.dataset.act = "land";
+    land.setAttribute("aria-pressed", e.w >= 3 ? "true" : "false");
+    land.addEventListener("click", function () {
+      e.w = e.w >= 3 ? 1 : 3;
+      save(); render(); focusEntry(e.id, '.chip[data-act="land"]');
+    });
+    acts.appendChild(land);
+
+    var pick = el("button", "chip", "Change mark");
+    pick.type = "button";
+    pick.dataset.act = "mark";
+    pick.setAttribute("aria-expanded", pickFor === e.id ? "true" : "false");
+    pick.addEventListener("click", function () {
+      pickFor = pickFor === e.id ? null : e.id;
+      render(); focusEntry(e.id, '.chip[data-act="mark"]');
+    });
+    acts.appendChild(pick);
+
+    if (e.auto === false) {
+      var auto = el("button", "chip", "Back to the automatic mark");
+      auto.type = "button";
+      auto.addEventListener("click", function () {
+        e.auto = true; e.m = inferMark(e.t);
+        save(); render(); refreshCell(day.key); focusEntry(e.id, ".mkbtn");
+      });
+      acts.appendChild(auto);
+    }
+
+    var del = el("button", "chip danger", "Remove");
+    del.type = "button";
+    del.addEventListener("click", function () {
+      var arr = entries[day.key] || [];
+      var i = arr.indexOf(e);
+      if (i > -1) arr.splice(i, 1);
+      expandedId = null; pickFor = null;
+      save(); render(); flash("Removed from " + shortDay(day) + ".");
+    });
+    acts.appendChild(del);
+    det.appendChild(acts);
+
+    if (pickFor === e.id) det.appendChild(buildPicker(e, day));
+    if (pickSub === e.id) det.appendChild(buildSubPicker(e, day));
+    return det;
+  }
+
+  function buildSubPicker(e, day) {
+    var p = el("div", "subpick");
+    p.appendChild(el("div", "lbl", "Seventeen subjects — the territory this belongs to"));
+    SUBJECTS.forEach(function (s, i) {
+      var b = el("button");
+      b.type = "button";
+      b.setAttribute("aria-pressed", e.sub === s.id ? "true" : "false");
+      b.appendChild(el("span", "o", ("0" + (i + 1)).slice(-2)));
+      b.appendChild(el("span", null, s.name));
+      b.addEventListener("click", function () {
+        e.sub = s.id; e.subAuto = false; pickSub = null;
+        save(); render(); refreshCell(day.key);
+        focusEntry(e.id, '.chip[data-act="sub"]');
+        flash("Filed under " + s.name + ".");
+      });
+      p.appendChild(b);
+    });
+    return p;
+  }
+
+  function buildPicker(e, day) {
+    var p = el("div", "markpick");
+    p.appendChild(el("div", "lbl", "Eighteen marks — pick the one that fits"));
+    MARKS.forEach(function (m) {
+      var b = el("button");
+      b.type = "button";
+      b.title = m.name;
+      b.setAttribute("aria-label", m.name);
+      b.setAttribute("aria-pressed", e.m === m.id ? "true" : "false");
+      b.appendChild(markEl(m.id));
+      b.addEventListener("click", function () {
+        e.m = m.id; e.auto = false; pickFor = null;
+        save(); render(); focusEntry(e.id, ".mkbtn");
+      });
+      p.appendChild(b);
+    });
+    return p;
+  }
+
+  // ── loose notes ──────────────────────────────────────────────────────
+  // ── the day sheet: markdown that belongs to the day itself ──────────
+  var sheetEdit = true;
+  var MD_TIP = "**Markdown.** Type freely: `#` heading, `**bold**`, `-` list, `1.` numbered, `- [ ] task`, `> quote`, `| table |`, `---` rule. Tick a box in the reading view to keep a task.";
+
+  function sheetOf(key) {
+    if (sheets[key] == null) {
+      sheets[key] = SHEET_SEED[key] || "";
+      if (sheets[key]) sheetOpen[key] = true;
+    }
+    return sheets[key] || "";
+  }
+
+  function buildSheet(day) {
+    var wrap = el("div", "dournal");
+    wrap.setAttribute("data-od-id", "sheet-day");
+    fillSheet(wrap, day);
+    return wrap;
+  }
+
+  function fillSheet(wrap, day) {
+    var head = el("div", "head");
+    head.appendChild(el("span", "t", day.key === iso(TODAY) ? "Today's page" : "The day's page"));
+    head.appendChild(el("span", "k", "Markdown \u00b7 week " + isoWeek(day.date)));
+    wrap.appendChild(head);
+    wrap.appendChild(buildNote({
+      who: "Page",
+      keyHint: "page-" + day.key,
+      whole: true,
+      get: function () { return sheetOf(day.key); },
+      set: function (v) {
+        sheets[day.key] = v;
+        save();
+        refreshCell(day.key);
+        updateStats();
+      },
+      placeholder: "Write the day itself\u2026\n\n# Nelspruit\n- who is driving back on Sunday\n- [ ] confirm the venue with Sipho",
+      emptyHint: "No page for this day yet.",
+      label: "Markdown page for " + shortDay(day)
+    }));
+  }
+
+  // A fresh note starts in the writing view; anything already written opens as a page.
+  function noteEditState(key, hasText) {
+    if (noteEdit[key] == null) noteEdit[key] = !hasText;
+    return noteEdit[key];
+  }
+
+  function buildNote(o) {
+    // Proxy so the first paint reads the saved text: a detached textarea would answer "".
+    var src = o.get;
+    o.get = function () { return src() || ""; };
+    var kind = o.keyHint || "note";
+    var box = el("div", "evd" + (o.whole ? " whole" : ""));
+    var key = "k-" + kind;
+    var editing = noteEditState(key, !!String(o.get()).trim());
+
+    var bar = el("div", "evd-note");
+    bar.appendChild(el("span", "who", o.who));
+    var mode = el("span", "mode");
+    var bw = el("button", null, "Write");
+    bw.type = "button";
+    bw.setAttribute("aria-label", "Write the note as markdown");
+    var br = el("button", null, "Read");
+    br.type = "button";
+    br.setAttribute("aria-label", "Read the note as a page");
+    mode.appendChild(bw); mode.appendChild(br);
+    bar.appendChild(mode);
+    box.appendChild(bar);
+
+    var tools = el("div", "mdbar");
+    var ta = document.createElement("textarea");
+    ta.className = "mdin";
+    ta.spellcheck = true;
+    ta.placeholder = o.placeholder || "";
+    ta.setAttribute("aria-label", o.label || "Markdown note");
+
+    var out = el("div", "mdout");
+    out.setAttribute("role", "document");
+
+    function paint() {
+      var src = o.get();
+      if (!editing && !String(src).trim()) { editing = true; noteEdit[key] = true; }
+      out.replaceChildren();
+      if (String(src).trim()) out.appendChild(mdRender(src, { onTask: toggleTaskLine(o) }));
+      else out.appendChild(el("p", "hint", o.emptyHint || "Nothing written here yet."));
+      tools.hidden = !editing;
+      ta.hidden = !editing;
+      out.hidden = editing;
+      bw.setAttribute("aria-pressed", editing ? "true" : "false");
+      br.setAttribute("aria-pressed", editing ? "false" : "true");
+    }
+
+    function apply(next, caret) {
+      o.set(next);
+      ta.value = o.get();
+      paint();
+      ta.focus();
+      ta.setSelectionRange(caret, caret);
+    }
+
+    var ACTS = [
+      ["B", "b", "Bold", "**", "**", "bold text"],
+      ["I", "i", "Italic", "*", "*", "italic text"],
+      ["H", "d", "Heading", "## ", "", "Heading"],
+      ["\u2022", "q", "Bulleted list", "- ", "", "list item"],
+      ["1.", "q", "Numbered list", "1. ", "", "item"],
+      ["\u2610", "q", "Task", "- [ ] ", "", "task"],
+      ["\u201c", "q", "Quote", "> ", "", "quote"],
+      ["{}", "q", "Code", "`", "`", "code"],
+      ["a", "q", "Link", "[", "]()", "link text"],
+      ["|\u2014", "q", "Table", "\n| what | when |\n| --- | --- |\n| ", " |  |", "cell"],
+      ["\u2014", "q", "Rule", "\n---\n", "", ""]
+    ];
+    ACTS.forEach(function (a) {
+      var btn = el("button", a[1], a[0]);
+      btn.type = "button";
+      btn.title = a[2];
+      btn.setAttribute("aria-label", a[2]);
+      btn.addEventListener("mousedown", function (ev) { ev.preventDefault(); });
+      btn.addEventListener("click", function () {
+        editing = true;
+        noteEdit[key] = true;
+        var v = ta.value, st = ta.selectionStart, en = ta.selectionEnd;
+        var sel = v.slice(st, en) || a[5];
+        apply(v.slice(0, st) + a[3] + sel + a[4] + v.slice(en), st + a[3].length + sel.length + a[4].length);
+      });
+      tools.appendChild(btn);
+    });
+    tools.appendChild(el("span", "sep"));
+
+    var lastBadge = !!String(o.get()).trim();
+    ta.addEventListener("input", function () {
+      o.set(ta.value);
+      var has = !!ta.value.trim();
+      if (has !== lastBadge) { lastBadge = has; if (o.onchange) o.onchange(); }
+      paint();
+    });
+    ta.addEventListener("blur", function () { if (o.onchange) o.onchange(); });
+    ta.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape") {
+        ev.preventDefault();
+        ev.stopPropagation();
+        editing = false; noteEdit[key] = false; paint();
+        if (o.onchange) o.onchange();
+        bw.focus();
+        return;
+      }
+      if (ev.key === "Enter" && (ev.metaKey || ev.ctrlKey)) {
+        ev.preventDefault();
+        editing = false; noteEdit[key] = false; paint();
+        if (o.onchange) o.onchange();
+        bw.focus();
+      }
+    });
+
+    var grid = el("div", "mdbox");
+    grid.appendChild(ta);
+    grid.appendChild(out);
+    box.appendChild(tools);
+    box.appendChild(grid);
+
+    if (o.whole) {
+      var foot = el("div", "evd-foot");
+      foot.appendChild(el("span", "hint", "# heading, **bold**, - list, - [ ] task, > quote \u2014 Esc reads it back"));
+      foot.appendChild(el("span", "grow"));
+      box.appendChild(foot);
+    }
+
+    function setEditing(on) {
+      editing = on;
+      noteEdit[key] = on;
+      paint();
+      (on ? ta : bw).focus();
+      if (on) ta.setSelectionRange(ta.value.length, ta.value.length);
+      else if (o.onchange) o.onchange();
+    }
+    bw.addEventListener("click", function (ev) { ev.stopPropagation(); setEditing(true); });
+    br.addEventListener("click", function (ev) { ev.stopPropagation(); setEditing(false); });
+    out.addEventListener("dblclick", function (ev) {
+      if (ev.target.closest && ev.target.closest(".task")) return;
+      setEditing(true);
+    });
+
+    ta.value = o.get();
+    paint();
+    box.md = { ta: ta, paint: paint, edit: function () { setEditing(true); } };
+    return box;
+  }
+
+  function toggleTaskLine(o) {
+    return function (lineNo) {
+      var lines = o.get().split("\n");
+      var ln = lines[lineNo];
+      if (ln == null) return;
+      if (/^\s*-\s\[[ xX]\]/.test(ln)) {
+        lines[lineNo] = /^\s*-\s\[ \]/.test(ln)
+          ? ln.replace(/^(\s*-\s\[) (\])/, "$1x$2")
+          : ln.replace(/^(\s*-\s\[)[xX](\])/, "$1 $2");
+        o.set(lines.join("\n"));
+        if (o.onchange) o.onchange();
+      }
+    };
+  }
+
+  // ── a small, careful markdown renderer ──────────────────────────────
+  // No library, no innerHTML: every node is built with textContent, so a note can
+  // never inject markup. Line structure first, then inline spans.
+  function mdRender(src, opts) {
+    opts = opts || {};
+    var root = el("div", "md" + (opts.narrow ? " md-narrow" : ""));
+    var lines = String(src).replace(/\r\n?/g, "\n").replace(/\t/g, "  ").split("\n");
+    var i = 0;
+
+    function isRule(s) { return /^\s{0,3}(?:-{3,}|\*{3,}|_{3,})\s*$/.test(s); }
+    function isHead(s) { return /^\s{0,3}(#{1,6})\s+/.test(s); }
+    function isUL(s) { return /^\s{0,3}[-*+]\s+/.test(s); }
+    function isTask(s) { return /^\s{0,3}[-*+]\s+\[[ xX]\]\s*/.test(s); }
+    function isOL(s) { return /^\s{0,3}\d{1,3}[.)]\s+/.test(s); }
+    function isQuote(s) { return /^\s{0,3}>\s?/.test(s); }
+    function isTable(s) { return /\s*\|\s*/.test(s) && /\|/.test(s); }
+    function isTableRule(s) { return /^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/.test(s); }
+
+    while (i < lines.length) {
+      var ln = lines[i];
+      if (!ln.trim()) { i++; continue; }
+
+      if (isRule(ln)) { root.appendChild(el("hr")); i++; continue; }
+
+      var hm = ln.match(/^\s{0,3}(#{1,6})\s+(.*)$/);
+      if (hm) {
+        var lvl = hm[1].length <= 2 ? 4 : 5;
+        var h = el("h" + lvl);
+        mdInline(h, hm[2].replace(/\s+#+\s*$/, ""));
+        root.appendChild(h);
+        i++; continue;
+      }
+
+      if (isTable(ln) && i + 1 < lines.length && isTableRule(lines[i + 1])) {
+        var head = splitRow(ln), tbl = el("table"), thead = el("thead"), tr = el("tr");
+        head.forEach(function (c) { var th = el("th"); mdInline(th, c); tr.appendChild(th); });
+        thead.appendChild(tr); tbl.appendChild(thead);
+        i += 2;
+        var tbody = el("tbody");
+        while (i < lines.length && lines[i].trim() && isTable(lines[i])) {
+          var r = el("tr");
+          splitRow(lines[i]).forEach(function (c) { var td = el("td"); mdInline(td, c); r.appendChild(td); });
+          tbody.appendChild(r); i++;
+        }
+        tbl.appendChild(tbody); root.appendChild(tbl); continue;
+      }
+
+      if (isTask(ln)) {
+        var ul = el("ul");
+        while (i < lines.length && isTask(lines[i])) {
+          var done = /^\s{0,3}[-*+]\s+\[([xX])\]/.test(lines[i]);
+          var body = lines[i].replace(/^\s{0,3}[-*+]\s+\[[ xX]\]\s*/, "");
+          ul.appendChild(taskItem(body, done, i, opts));
+          i++;
+        }
+        root.appendChild(ul); continue;
+      }
+
+      if (isUL(ln)) {
+        var ul2 = el("ul");
+        while (i < lines.length && isUL(lines[i]) && !isTask(lines[i])) {
+          var li = el("li");
+          mdInline(li, lines[i].replace(/^\s{0,3}[-*+]\s+/, ""));
+          ul2.appendChild(li); i++;
+        }
+        root.appendChild(ul2); continue;
+      }
+
+      if (isOL(ln)) {
+        var ol = el("ol");
+        while (i < lines.length && isOL(lines[i])) {
+          var li2 = el("li");
+          mdInline(li2, lines[i].replace(/^\s{0,3}\d{1,3}[.)]\s+/, ""));
+          ol.appendChild(li2); i++;
+        }
+        root.appendChild(ol); continue;
+      }
+
+      if (isQuote(ln)) {
+        var bq = el("blockquote");
+        var buf = [];
+        while (i < lines.length && isQuote(lines[i])) {
+          buf.push(lines[i].replace(/^\s{0,3}>\s?/, "")); i++;
+        }
+        mdInline(bq, buf.join(" "));
+        root.appendChild(bq); continue;
+      }
+
+      var para = [];
+      while (i < lines.length && lines[i].trim() && !isHead(lines[i]) && !isUL(lines[i]) &&
+             !isOL(lines[i]) && !isQuote(lines[i]) && !isRule(lines[i]) &&
+             !(isTable(lines[i]) && i + 1 < lines.length && isTableRule(lines[i + 1]))) {
+        para.push(lines[i]); i++;
+      }
+      var p = el("p");
+      mdInline(p, para.join(" "));
+      root.appendChild(p);
+    }
+    return root;
+  }
+
+  function splitRow(s) {
+    var t = s.trim().replace(/^\|/, "").replace(/\|$/, "");
+    return t.split("|").map(function (c) { return c.trim(); });
+  }
+
+  function taskItem(body, done, lineNo, opts) {
+    var li = el("li", "cb" + (done ? " on" : ""));
+    var box = el("span", "box");
+    li.appendChild(box);
+    var inner = el("span");
+    mdInline(inner, body);
+    li.appendChild(inner);
+    li.classList.add("task");
+    li.setAttribute("role", opts.onTask ? "button" : "listitem");
+    li.tabIndex = 0;
+    li.setAttribute("aria-pressed", done ? "true" : "false");
+    li.setAttribute("aria-label", (done ? "Done — " : "Not done — ") + body.replace(/[*`_]/g, ""));
+    if (opts.onTask) {
+      var go = function () { opts.onTask(lineNo); };
+      li.addEventListener("click", go);
+      li.addEventListener("keydown", function (ev) {
+        if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); go(); }
+      });
+    }
+    return li;
+  }
+
+  function mdInline(parent, text) {
+    var s = String(text);
+    var i = 0, buf = "";
+    function flush() { if (buf) { parent.appendChild(document.createTextNode(buf)); buf = ""; } }
+    while (i < s.length) {
+      var c = s[i];
+      if (c === "\\" && i + 1 < s.length && "*_`[]#>-|!".indexOf(s[i + 1]) > -1) {
+        buf += s[i + 1]; i += 2; continue;
+      }
+      if (c === "`") {
+        var end = s.indexOf("`", i + 1);
+        if (end > i) { flush(); parent.appendChild(el("code", null, s.slice(i + 1, end))); i = end + 1; continue; }
+      }
+      if ((c === "*" || c === "_") && s[i + 1] === c) {
+        var e2 = s.indexOf(c + c, i + 2);
+        if (e2 > i + 1) {
+          flush(); var b = el("b"); mdInline(b, s.slice(i + 2, e2)); parent.appendChild(b); i = e2 + 2; continue;
+        }
+      }
+      if ((c === "*" || c === "_") && s[i + 1] !== c && s[i + 1] !== " ") {
+        var e1 = s.indexOf(c, i + 1);
+        if (e1 > i + 1) {
+          flush(); var it = el("i"); mdInline(it, s.slice(i + 1, e1)); parent.appendChild(it); i = e1 + 1; continue;
+        }
+      }
+      if (c === "[") {
+        var close = s.indexOf("]", i + 1);
+        var open2 = close > -1 ? s.indexOf("(", close) : -1;
+        var close2 = open2 > -1 ? s.indexOf(")", open2) : -1;
+        if (close > -1 && open2 === close + 1 && close2 > open2) {
+          var url = s.slice(open2 + 1, close2).trim();
+          flush();
+          var a = el("a", null, s.slice(i + 1, close));
+          if (/^https?:\/\//i.test(url)) { a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer"; }
+          else a.className = "tipmark";
+          if (/^https?:\/\//i.test(url)) a.title = url;
+          parent.appendChild(a);
+          i = close2 + 1; continue;
+        }
+      }
+      if (c === "@" && (i === 0 || /[\s(]/.test(s[i - 1]))) {
+        var am = s.slice(i).match(/^@([A-Za-z][\w-]{1,30})/);
+        if (am) {
+          flush();
+          var who = el("cite", null, "@" + am[1]);
+          parent.appendChild(who);
+          i += am[0].length; continue;
+        }
+      }
+      if (c === "^" && s[i + 1] === "[") {
+        var closeRef = s.indexOf("]", i + 2);
+        var ref = closeRef > i + 2 ? s.slice(i + 2, closeRef).split("^") : null;
+        if (ref && ref.length >= 1 && /^\d{4}-\d{2}-\d{2}$/.test(ref[0])) {
+          flush();
+          var chip = el("span", "badge");
+          chip.appendChild(document.createTextNode(dayNum(ref[0]) + (ref[1] ? " " + cut(ref[1], 14) : "")));
+          chip.title = "Refers to " + ref[0] + (ref[1] ? " — " + ref[1] : "");
+          parent.appendChild(chip);
+          i = closeRef + 1; continue;
+        }
+      }
+      buf += c; i++;
+    }
+    flush();
+  }
+
+  function buildNotes() {
+    notesEl.innerHTML = "";
+    notes.forEach(function (n) {
+      var li = el("li", "note");
+      li.dataset.odId = "note-" + n.id;
+      var top = el("div", "note-top");
+      top.appendChild(markEl(n.m, n.t, true, n.sub));
+      top.appendChild(el("p", null, n.t));
+      li.appendChild(top);
+
+      var acts = el("div", "note-acts");
+      var clip = el("button", "note-clip", n.day ? "Detach" : (armNote === n.id ? "Pick a day…" : "Clip to a day"));
+      clip.type = "button";
+      clip.setAttribute("aria-pressed", armNote === n.id ? "true" : "false");
+      clip.addEventListener("click", function () {
+        if (n.day) {
+          n.day = null; armNote = null;
+          save(); render(); flash("Detached — back in the margins.");
+        } else {
+          armNote = armNote === n.id ? null : n.id;
+          render();
+          if (armNote) flash("Pick a day. Esc to cancel.");
+        }
+      });
+      acts.appendChild(clip);
+      if (n.day) acts.appendChild(el("span", "note-day", shortDay(byKey[n.day])));
+
+      var rm = el("button", "note-rm", "Remove");
+      rm.type = "button";
+      rm.addEventListener("click", function () {
+        var i = notes.indexOf(n);
+        if (i > -1) notes.splice(i, 1);
+        if (armNote === n.id) armNote = null;
+        save(); render();
+      });
+      acts.appendChild(rm);
+      li.appendChild(acts);
+      notesEl.appendChild(li);
+    });
+    document.getElementById("noteCount").textContent = String(notes.length);
+  }
+
+  // ── mobile agenda ────────────────────────────────────────────────────
+  function makeAgRow(day, lens) {
+    var w = weightOf(day.key, lens);
+    var b = el("button", "ag-day" + tierClass(w) + (isToday(day) ? " today" : "") + (armNote ? " armed" : ""));
+    b.type = "button";
+    b.dataset.key = day.key;
+    b.setAttribute("aria-label", cellLabel(day));
+
+    var date = el("span", "ag-date");
+    date.appendChild(document.createTextNode(WDSHORT[(day.date.getDay() + 6) % 7] + " "));
+    date.appendChild(el("b", null, String(day.date.getDate())));
+    date.appendChild(document.createTextNode(" " + MON[day.date.getMonth()]));
+    if (isToday(day)) date.appendChild(el("span", "ag-today", "today"));
+    b.appendChild(date);
+
+    var body = el("span", "ag-body");
+    var items = itemsFor(day, lens);
+    if (items.length) {
+      var mm = el("span", "ag-marks");
+      items.slice(0, 8).forEach(function (it) { mm.appendChild(markEl(it.m, it.t, it.note, it.sub)); });
+      body.appendChild(mm);
+    }
+    var words = (lens ? evsIn(day.key) : evs(day.key)).map(function (e) { return e.t; })
+      .concat((lens ? notesIn(day.key) : notesFor(day.key)).map(function (n) { return n.t; }));
+    var line = el("span", "ag-words");
+    line.appendChild(el("span", "t", words.length ? words[0] : (sheetHas(day.key) && !lens ? "a written page" : "open")));
+    if (words.length > 1) line.appendChild(el("span", "ag-more", "+" + (words.length - 1)));
+    if (words.length > 1) line.appendChild(el("span", "ag-more", "+" + (words.length - 1)));
+    if (sheetHas(day.key) && !lens) line.appendChild(el("span", "badge", "MD"));
+    body.appendChild(line);
+    b.appendChild(body);
+    return b;
+  }
+
+  function buildAgenda() {
+    var lens = !!activeSub;
+    agendaEl.replaceChildren();
+    weeksOf().forEach(function (week) {
+      var real = week.filter(Boolean);
+      if (!real.length) return;
+      var live = real.filter(function (d) { return dayHas(d, lens); }).length;
+      var holdsToday = week.some(function (d) { return d && isToday(d); });
+      var holdsFold = openKey && week.some(function (d) { return d && d.key === openKey; });
+      if (!live && !holdsToday && !holdsFold) return;
+
+      var head = el("div", "ag-week" + (holdsToday ? " now" : ""));
+      var a = real[0], z = real[real.length - 1];
+      var range = a.date.getMonth() === z.date.getMonth()
+        ? a.date.getDate() + "–" + z.date.getDate() + " " + MON[a.date.getMonth()]
+        : a.date.getDate() + " " + MON[a.date.getMonth()] + " – " + z.date.getDate() + " " + MON[z.date.getMonth()];
+      head.appendChild(el("span", "m", range));
+      head.appendChild(el("span", "w", "Week " + isoWeek(a.date)));
+      agendaEl.appendChild(head);
+
+      week.forEach(function (day) {
+        if (!day) return;
+        if (!dayHas(day, lens) && !isToday(day) && day.key !== openKey) return;
+        agendaEl.appendChild(makeAgRow(day, lens));
+        if (day.key === openKey) {
+          var wrap = el("div", "ag-fold");
+          wrap.appendChild(buildFold(day));
+          agendaEl.appendChild(wrap);
+        }
+      });
+    });
+  }
+
+  // ── filing ───────────────────────────────────────────────────────────
+  function findInRange(monthNum, d) {
+    var y0 = TODAY.getFullYear();
+    for (var y = y0; y <= y0 + 1; y++) {
+      var dt = new Date(y, monthNum - 1, d);
+      if (dt.getMonth() !== monthNum - 1 || dt.getDate() !== d) return null;
+      if (byKey[iso(dt)]) return iso(dt);
+    }
+    return null;
+  }
+  function monthIndex(name) {
+    if (!name || name.length < 3) return -1;
+    for (var i = 0; i < MONTHS.length; i++) {
+      if (MONTHS[i].toLowerCase().indexOf(name) === 0) return i;
+    }
+    return -1;
+  }
+  function resolveNamedMonth(name, d) {
+    var i = monthIndex(name);
+    return i < 0 ? null : findInRange(i + 1, d);
+  }
+  function resolveNumMonth(month, d) {
+    if (month < 1 || month > 12) return null;
+    return findInRange(month, d);
+  }
+
+  function takeSubject(raw) {
+    var s = String(raw || "");
+    var m = s.match(/(?:^|\s)\/([a-z0-9\-]+)\s*$/i);
+    if (!m) return { text: s, sub: null };
+    var q = m[1].toLowerCase(), found = null;
+    SUBJECTS.forEach(function (x) {
+      if (x.id === q || x.h.toLowerCase() === q) found = x.id;
+    });
+    if (!found) SUBJECTS.forEach(function (x) {
+      if (!found && (x.id.startsWith(q) || x.name.toLowerCase().startsWith(q))) found = x.id;
+    });
+    if (!found) return { text: s, sub: null, bad: m[1] };
+    return { text: s.slice(0, m.index).trim(), sub: found };
+  }
+
+  function parse(raw) {
+    var taken = takeSubject(raw);
+    if (taken.bad) return { ok: false, msg: "No subject called “" + taken.bad + "”." };
+    var s = taken.text.trim();
+    if (!s) return { ok: false, msg: "Type something first." };
+    var low = s.toLowerCase();
+    var key = null, title = s, m, dated = false;
+
+    if ((m = low.match(/^(day after tomorrow|tomorrow|today)\b/))) {
+      var n = m[1] === "today" ? 0 : m[1] === "tomorrow" ? 1 : 2;
+      key = iso(addDays(TODAY, n)); dated = true; title = s.slice(m[0].length);
+    } else if ((m = low.match(/^([a-z]{3,9})\.?\s+(\d{1,2})\b/)) && monthIndex(m[1]) >= 0) {
+      key = resolveNamedMonth(m[1], parseInt(m[2], 10)); dated = true; title = s.slice(m[0].length);
+    } else if ((m = low.match(/^(\d{1,2})\s+([a-z]{3,9})\b/)) && monthIndex(m[2]) >= 0) {
+      key = resolveNamedMonth(m[2], parseInt(m[1], 10)); dated = true; title = s.slice(m[0].length);
+    } else if ((m = low.match(/^(\d{1,2})\s*\/\s*(\d{1,2})\b/))) {
+      key = resolveNumMonth(parseInt(m[2], 10), parseInt(m[1], 10)); dated = true; title = s.slice(m[0].length);
+    }
+
+    if (dated && !key) return { ok: false, msg: "That date is outside this quarter (2 Nov – 30 Jan)." };
+    if (!dated) key = openKey || iso(TODAY);
+    title = title.replace(/^[\s—–\-·:,+.]+/, "").trim();
+    if (!title) return { ok: false, msg: "Add a word or two after the date." };
+    return { ok: true, key: key, title: title, sub: taken.sub };
+  }
+
+  function addEntry(key, title, sub) {
+    var e = {
+      id: "e" + (eid++), t: title, w: 1, done: false, note: "",
+      m: inferMark(title), auto: true,
+      sub: sub || activeSub || inferSubject(title), subAuto: !sub && !activeSub
+    };
+    (entries[key] = entries[key] || []).push(e);
+    save(); render();
+    var inp = document.querySelector(".foldadd input");
+    if (inp) inp.focus();
+    return e;
+  }
+
+  function clipNote(noteId, key) {
+    var n = notes.filter(function (x) { return x.id === noteId; })[0];
+    if (!n) return;
+    n.day = key; armNote = null;
+    if (activeSub) n.sub = activeSub;
+    save(); render();
+    flash("Clipped to " + shortDay(byKey[key]) + ".");
+  }
+
+  // ── folding ──────────────────────────────────────────────────────────
+  function focusFold() {
+    var fs = document.querySelectorAll(".fold");
+    for (var i = 0; i < fs.length; i++) {
+      if (fs[i].offsetParent) { fs[i].focus(); return; }
+    }
+  }
+  function foldDay(key) {
+    if (armNote) { clipNote(armNote, key); return; }
+    openKey = key; expandedId = null; pickFor = null;
+    save(); render(); focusFold();
+  }
+  function closeFold(key) {
+    var k = key || openKey;
+    openKey = null; expandedId = null; pickFor = null;
+    save(); render();
+    if (!k) return;
+    var c = wallEl.querySelector('.cell[data-key="' + k + '"]');
+    if (c && c.offsetParent) { c.focus(); return; }
+    var ag = agendaEl.querySelector('.ag-day[data-key="' + k + '"]');
+    if (ag && ag.offsetParent) ag.focus();
+  }
+
+  // ── chrome ───────────────────────────────────────────────────────────
+  function updateStats() {
+    var carrying = days.filter(function (d) { return dayHas(d, false); }).length;
+    document.getElementById("statDays").textContent = String(carrying);
+    document.getElementById("statOpen").textContent = String(SPAN - carrying);
+    document.getElementById("statLoose").textContent = String(notes.filter(function (n) { return !n.day; }).length);
+  }
+
+  function updateNow() {
+    var day = byKey[iso(TODAY)];
+    document.getElementById("nowDate").textContent = shortDay(day);
+    var meta = document.getElementById("nowMeta");
+    meta.innerHTML = "";
+    var n = evs(day.key).length;
+    meta.appendChild(document.createTextNode(n ? n + (n === 1 ? " thing · " : " things · ") : "open · "));
+    var next = null;
+    for (var i = 1; i < SPAN; i++) {
+      if (evs(days[i].key).length) { next = days[i]; break; }
+    }
+    if (next) {
+      var e0 = evs(next.key)[0];
+      meta.appendChild(document.createTextNode("next "));
+      meta.appendChild(markEl(e0.m, e0.t));
+      meta.appendChild(document.createTextNode(" " + cut(e0.t, 18) + " · " + shortDay(next)));
+    } else {
+      meta.appendChild(document.createTextNode("nothing ahead"));
+    }
+    document.getElementById("nowline").setAttribute("aria-label", "Open today — " + dayLabel(day));
+  }
+
+  function updatePeek() {
+    var cap = document.getElementById("capture");
+    var peek = document.getElementById("peek");
+    var subEl = document.getElementById("peekSub");
+    var raw = cap.value.trim();
+    var taken = takeSubject(raw);
+    var subId = taken.sub || activeSub || inferSubject(taken.text);
+    peek.replaceChildren();
+    peek.dataset.empty = raw ? "false" : "true";
+    peek.appendChild(markEl(raw ? inferMark(taken.text) : "thing", raw || "Unsorted", false, subId));
+    subEl.textContent = subjHandle(subId);
+    subEl.title = SUBJ_BY[subId].name;
+    cap.placeholder = activeSub
+      ? "Into " + cut(SUBJ_BY[activeSub].name, 24)
+      : "dec 3 - flight · tomorrow - call mum";
+  }
+
+  function syncMode() {
+    document.getElementById("mode-marks").setAttribute("aria-pressed", mode === "marks" ? "true" : "false");
+    document.getElementById("mode-words").setAttribute("aria-pressed", mode === "words" ? "true" : "false");
+  }
+
+  function render() {
+    updatePeek();
+    buildIndex();
+    buildWall();
+    buildNotes();
+    buildAgenda();
+    updateStats();
+    updateNow();
+    syncMode();
+    hideTip();
+  }
+
+  // ── keyboard + pointer ───────────────────────────────────────────────
+  function onKey(ev) {
+    var tag = (ev.target && ev.target.tagName || "").toLowerCase();
+    var typing = tag === "input" || tag === "textarea";
+
+    if (ev.key === "Escape") {
+      if (armNote) { armNote = null; render(); flash("Clipped nothing."); ev.preventDefault(); return; }
+      if (typing) { ev.target.blur(); return; }
+      if (openKey) { ev.preventDefault(); closeFold(); }
+      return;
+    }
+    if (typing) return;
+
+    var step = ev.key === "ArrowRight" ? 1 : ev.key === "ArrowLeft" ? -1 :
+               ev.key === "ArrowDown" ? 7 : ev.key === "ArrowUp" ? -7 : 0;
+    if (!step) return;
+
+    var cell = ev.target.closest ? ev.target.closest(".cell[data-key]") : null;
+    if (cell) {
+      var idx = -1;
+      for (var i = 0; i < days.length; i++) if (days[i].key === cell.dataset.key) { idx = i; break; }
+      var j = idx + step;
+      if (j >= 0 && j < SPAN) {
+        ev.preventDefault();
+        var nc = wallEl.querySelector('.cell[data-key="' + days[j].key + '"]');
+        if (nc) nc.focus();
+      }
+      return;
+    }
+
+    if (openKey) {
+      var k = -1;
+      for (var q = 0; q < days.length; q++) if (days[q].key === openKey) { k = q; break; }
+      var t = days[k + step];
+      if (t) {
+        ev.preventDefault();
+        openKey = t.key; expandedId = null; pickFor = null;
+        save(); render(); focusFold();
+      }
+    }
+  }
+
+  // ── bind ─────────────────────────────────────────────────────────────
+  function bind() {
+    var composer = document.getElementById("composer");
+    var capture = document.getElementById("capture");
+    composer.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var p = parse(capture.value);
+      if (!p.ok) { flash(p.msg); return; }
+      var filed = addEntry(p.key, p.title, p.sub);
+      capture.value = ""; updatePeek();
+      flash("Filed to " + shortDay(byKey[p.key]) + " · " + SUBJ_BY[filed.sub].name);
+    });
+    capture.addEventListener("input", updatePeek);
+
+    document.getElementById("indexClear").addEventListener("click", function () {
+      var prev = activeSub;
+      setSubject(null, prev);
+    });
+    document.getElementById("indexMore").addEventListener("click", function () {
+      var on = indexEl.dataset.showAll === "true";
+      indexEl.dataset.showAll = on ? "false" : "true";
+      this.setAttribute("aria-expanded", on ? "false" : "true");
+      buildIndex();
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll(".modebtn"), function (b) {
+      b.addEventListener("click", function () {
+        mode = b.dataset.mode === "words" ? "words" : "marks";
+        save(); render();
+        flash(mode === "marks" ? "The quarter in marks." : "The quarter in words.");
+      });
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll("[data-view-btn]"), function (b) {
+      b.addEventListener("click", function () {
+        app.dataset.view = b.dataset.viewBtn;
+        Array.prototype.forEach.call(document.querySelectorAll("[data-view-btn]"), function (x) {
+          x.setAttribute("aria-selected", x === b ? "true" : "false");
+        });
+        hideTip();
+      });
+    });
+
+    document.getElementById("nowline").addEventListener("click", function () {
+      var today = iso(TODAY);
+      if (openKey === today) { focusFold(); return; }
+      foldDay(today);
+    });
+
+    wallEl.addEventListener("click", function (ev) {
+      var cell = ev.target.closest ? ev.target.closest(".cell[data-key]") : null;
+      if (cell) foldDay(cell.dataset.key);
+    });
+    agendaEl.addEventListener("click", function (ev) {
+      var row = ev.target.closest ? ev.target.closest(".ag-day[data-key]") : null;
+      if (row) foldDay(row.dataset.key);
+    });
+
+    var noteForm = document.getElementById("noteAdd");
+    var noteInput = document.getElementById("noteInput");
+    var notePeek = document.getElementById("notePeek");
+    noteInput.addEventListener("input", function () {
+      var raw = noteInput.value.trim();
+      notePeek.innerHTML = "";
+      notePeek.dataset.empty = raw ? "false" : "true";
+      if (raw) notePeek.appendChild(markEl(inferMark(raw), raw));
+    });
+    noteForm.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var raw = noteInput.value.trim();
+      if (!raw) { noteInput.focus(); return; }
+      notes.unshift({ id: "n" + (nid++), t: raw, day: null, m: inferMark(raw), sub: activeSub || inferSubject(raw) });
+      noteInput.value = ""; notePeek.innerHTML = ""; notePeek.dataset.empty = "true";
+      save(); render();
+      flash("Added to the margins — no day needed.");
+    });
+
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mouseover", function (ev) {
+      var mk = ev.target.closest ? ev.target.closest(".mk[data-name]") : null;
+      if (mk) showTip(mk);
+    });
+    document.addEventListener("mouseout", function (ev) {
+      var mk = ev.target.closest ? ev.target.closest(".mk[data-name]") : null;
+      if (mk) hideTip();
+    });
+    window.addEventListener("scroll", hideTip, true);
+    window.addEventListener("resize", hideTip);
+
+    var idx = document.getElementById("markIndex");
+    MARKS.forEach(function (m) {
+      var li = el("li");
+      li.appendChild(markEl(m.id, m.name));
+      li.appendChild(el("span", null, m.name));
+      li.appendChild(el("span", "n", m.ex));
+      idx.appendChild(li);
+    });
+
+    var six = document.getElementById("subjectIndex");
+    SUBJECTS.forEach(function (s, i) {
+      var li = el("li");
+      li.appendChild(el("span", "o", ("0" + (i + 1)).slice(-2)));
+      li.appendChild(el("span", null, s.name));
+      li.appendChild(el("span", "h", s.h));
+      six.appendChild(li);
+    });
+  }
+
+  buildDays();
+  load();
+  bind();
+  render();
+})();
+</script>
+</body>
+</html>

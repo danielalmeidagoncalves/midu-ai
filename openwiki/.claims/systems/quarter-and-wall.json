@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:e53db83f92c38dfdec8203b1ea003041d6e2a2bd799c08fa44aa81f1a070b7dd",
+  "claims": [
+    {
+      "id": "claim_aef00bb1d5c340a1a5af5acf5586c6f7",
+      "statement": "Quarter::new(today) creates a 90-day window starting today and ending today+89, with a Day for each date and Monday-first weeks padded before and after the window.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/dates.rs#L209-L241",
+          "version": "repo-lines-v1:sha256:fd8436ad6cc7385af0213d46ececaa123cc606a1be3faea24288f13916a1b2e3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYjVlZGY1OTQ5Y2ZlYTY3ODIyY2Y2OTExMzIzNjNkNjhkNmYxZTE2OWY1ZTBkNGY3YzE0ZTVmYTFlNmQ0ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEwZGQ3NGE4ZGMyZmU4ODY4OGIzZDI5ZTY2YjY4NjM0NjNlMjAzMzg0ZGM1NDk2NzYwYmNhNTQ5ZjBiMTU1MTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU3YjNkYjZhM2FiMTc0ZGE2YTNjNWUzOGRmNjI2N2YzMTdhYmMyMjVjNjNkYmU3ZmEwMWU4ODljYTczZTUxOWIifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/dates.rs#L5-L105",
+          "version": "repo-lines-v1:sha256:ba8f66b928c943c835d0d64f1d3990eae6d86e93e087791990b4643aeee31e7a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAxLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJhNTI2ZGQ0OGRiZDAxZTg1ODllZmQyZDg2OGJjOTJhNDRmNTlhZGZkMTRmMTVjZGI2OGFkMDU3MmM4NGQ0ZWM0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJiZTIxMGVjZDU0YzUzZjIzYjcwMjAzYmU2N2YxODJlMGRhNTA4NzZkYWY5NDgwYjZmNmNiYjc5NmY2ODFmOTU5IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiJjNjU1YTFhZDliNzZmYzlmNDRmMTRhYTVhMGQ2ZjA3MGM2ZTEzOWM3YjljZGU4NTZlZjQ0MWQ1ZTExMDg5ODBkIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_a9d5d393f13b483a9026a546f27e1074",
+      "statement": "Each Week carries an ISO week number, a month label and seven slots; the month and week come from the first real day in the row, not the padded Monday.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/dates.rs#L243-L249",
+          "version": "repo-lines-v1:sha256:23460e2c8fc477e60a05acd326db69589d9a7b58636a1026c1b3065e005423f6:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTJiNWVkZjU5NDljZmVhNjc4MjJjZjY5MTEzMjM2M2Q2OGQ2ZjFlMTY5ZjVlMGQ0ZjdjMTRlNWZhMWU2ZDRlNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDA1MTRiZGMxMWNmYjc2YmFjMjRiNzdkYmZlOTcwMGQ5YWFlN2M3MDY1Nzc3ZWQ4YzU0YWJkYjk5NzY1NWE0MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2ZkNzZlOWJmOThmMTdlNGViODcxODdiOTZlOGEwOTUyOGIwZmRmY2E3ZWU3MjEyZTY1YTY0Y2VkMzE5OGIwMCJ9"
+        },
+        {
+          "resource": "repo://horizon-core/src/dates.rs#L43-L105",
+          "version": "repo-lines-v1:sha256:2eedfad41127379416f04890e6fd9bc59827045274e2b3216ef346ba5ddb532a:eyJzZWxlY3RlZExpbmVDb3VudCI6NjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc2ODMxNWRkYjNjY2VmYzU1ZDk3MzYwZDEzZGE0NjgyNjdjOGFhYzZlMzA5MzM1MDE5ODk3ZjVlNDcwMGU0YWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFmN2ZlYjYxZWZlMDM2N2E3ODE4ZTUwZjcyOTc4ZjE2OTRiNjZlOWE4ZjY1MDUxNGM0ZGNmYmU0NGY1NjJhYTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM2NTVhMWFkOWI3NmZjOWY0NGYxNGFhNWEwZDZmMDcwYzZlMTM5YzdiOWNkZTg1NmVmNDQxZDVlMTEwODk4MGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3c7647893ebd44a19aec6ff7659a3dc2",
+      "statement": "Tier is derived from the maximum real entry weight under the lens: 0 Open, 1 One, 2 Full, 3+ Landmark, with classes l1/l2/land used by the wall and agenda.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/model.rs#L353-L362",
+          "version": "repo-lines-v1:sha256:a84ddb4e96a73983a5e32b2f6397d37223a4466a8790619705aa4aabe737f7a8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJjYzc1ZDlmNjBlZjA4YTUzODJkNGFhNTk4ODViZjMwNGFiMDQ1NGE0NDY1YjdmOTUzNDE1YWQ3NmMzYzM3N2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUyOWFkZWYxZWNkZmI1OTEyNmUwZTQ3MjAzY2NkNTYwZDE4NWRlMDkyYTQwOGY2OGI5NDAyNTk3N2JmNThlMjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5NmQ5YzNiMTgyNDc0ZDM1ODkxNDI0NjY5NzZjNGJmM2FmNjI3NGQ2ODBkMjg0MDI5NDZmMjg1ODFjYjBkYmUifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L39-L83",
+          "version": "repo-lines-v1:sha256:fd59932e27236c6d5cff0b3b9dbd2c32cbbe71010eac66527ead660dddb96d7f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMxN2IzYjM2ZmFmNjEzMGQ2ZGE4MzBjNjZmMGJlMmI3YTljN2JmZWVkY2EyNTNiZTE4ZGZmODFiOTYwOGZjYTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxYWZiODE4NTBmYmE4OTAxYzM2Y2YyMWZkYWEwZDM5NmRmNzBjM2U3MTJlNDRmYjY5YWFjNWUyYTg0MzVlYTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_78c6ec9337c944998264ecb8969e45f4",
+      "statement": "The wall compresses quiet weeks unless they hold today, and its gutter prints the month only on change, the ISO week, a now marker for today's week and a live-day count.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/components/wall.rs#L31-L63",
+          "version": "repo-lines-v1:sha256:0691575023cad4507923cceb8c540b01dc9808d587a10f290070847b9985154e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwNDI5NTJiZjQ2ZGEyM2NhYzIyNjI0ODJkNTE0NTMzYjkwODNmOTc4ZmQ0MzVkMTM1OTE5MjU0Mjg3NjFiZWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU2NDMzNWU5ZTU4ZTVlNzk3ZDc5NGY4NGVmZDZiNGEzZWFlMGE1MGRkOWNkNGE3NTQyNjY2ZjE0MDk5NzA4MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNhNjRhMmQxYzBlNjMzZWYzZTcyZWI2Y2U2MjU3NjAwOWNiNGEyNzhlN2IzZjc0NmQzNjk3YTVlZjYzNjIxNzYifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/components/wall.rs#L80-L129",
+          "version": "repo-lines-v1:sha256:501a489a75f33fdfdb4a4ecfe7b76d096f9f72e2dc6a1a9b8b5c36bac3d87c1e:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkYWVhZDc5OTZmODZiYzU2MGY2YzUwNzg0YmEzZDkyNzVkNDdmNDFkNGYzYjk2ZjdlMzZkMjE0ZjExZmUzYTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdkZWQ1N2NkZjYyOGU3YmNmYjdkNzY2MzJhOGQ3MTQ4NzM0YzA0MWJjNjUwMjBkZDg5NmJlZjE4OGE3YTIyMTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4NWNiNDk5NDMyYjNkMzAzNjE3NjMwZjJjN2FlMjk3MGM5NDY4NzNkNDc3Y2YwOTFjZTgxNGViMDlmMDRjMWYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_aab35fdfb3ff4fa39bbd36b9a2828f5c",
+      "statement": "Wall cells show up to nine marks or three words plus overflow, MD/N badges, and the four today markers; the today cell is the default tab stop and arrow keys move focus.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/components/wall.rs#L146-L284",
+          "version": "repo-lines-v1:sha256:2edfadc4262d1acc92896e867a98a6c983634d921343858bf28d3ea2cf7060cb:eyJzZWxlY3RlZExpbmVDb3VudCI6MTM5LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI1Y2RjMjAwNzM0OWVhNjllNzVkOGE2NWFiNDBjMzg4YmJkNDU1MTMwODA4ZDU0OTQwMGRkYWZkMzc0MmVkMzkxIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJlNmIwNDQ5MTQ2OTcyMmU4MzYzYTk0ZTQwNDQ1MzhlMDEzYTJhMjE3ZTM2YjFlNTY4YmE2MGFjYjdiNGM4ZjJlIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIzNzkxMjI4ZDBmZmYwZWUwOWQ5NDMyN2ZmODUzZTMyZWNmNTA5ZmJmNjU1YzI3NDE2YzUwMWRjN2Q3ZWNmNjhjIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MiwiZm9sbG93aW5nQ29udGV4dEhhc2giOiIzNzk0ZDAyYTgxMjE5NDRkMTc2ZDI2NWU5YmI5Y2M1OWY2YWI4OTBiY2FkZjhhZWZkZWJkYmJiNGYyZWE4NDQ0In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_248c2ff473254f7c8a6ccbbd8b4fec2a",
+      "statement": "The mobile agenda prints the current week in full even when empty, skips empty non-current weeks, and adds today's stamp, frame and word to the open day's row.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/components/agenda.rs#L127-L225",
+          "version": "repo-lines-v1:sha256:7e69981e09cf79659fb93c24c0dafe10c72cfa31c9d1b0f727575ee1f7002278:eyJzZWxlY3RlZExpbmVDb3VudCI6OTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1YjkxZjVmNWVkNjNlOWM1MmExNGEyZTYwMTY5NDU4MDI1NDI2NTI3MzIxZjNiZjQ3MWM5MDlhNDFjMWI5MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/components/agenda.rs#L17-L104",
+          "version": "repo-lines-v1:sha256:30a71fd1f23c8730ef56ce340c541022016e1bbc35d4880e4d95bf5f001a62ba:eyJzZWxlY3RlZExpbmVDb3VudCI6ODgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1YjkxZjVmNWVkNjNlOWM1MmExNGEyZTYwMTY5NDU4MDI1NDI2NTI3MzIxZjNiZjQ3MWM5MDlhNDFjMWI5MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM1NTRjOTk4YWY2NTUzOWYwYTQzNGJhMmMwYWYwNGVjNzQ0NTNmNzk2NzAwZDQ5MzNhMzM2MzNjNGQ5NjdkZjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA2MzI3Mjc3ZGRhMGJhMjc2MzE1YWM4MTYzMjg1YzdhODAzNWFjYjA1MTE2OTk1NDgxMzVmYjQ0YjVmZDg0ZTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4aa02ba79515490cb4fbc053f1054071",
+      "statement": "items_on combines real entries, clipped notes and weekly projections, but weight and tier are carried only by real entries; projections are zero-weight outline texture.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/model.rs#L425-L507",
+          "version": "repo-lines-v1:sha256:f7b8b636491ec85914a4a9eaaf78ceb828389ec68ce0d3fd28b5b84d199afa77:eyJzZWxlY3RlZExpbmVDb3VudCI6ODMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwNjcyNjNjZGExMzk0YWNmYTkxMzc4NDM2NTEzZmVhOWIzMmEyZWYxNWNkMWQwZDQ3NzAzZTY1NzFiYWMzOTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAwNWI3ZDU2ZTIzNmVhYjgzMTg0NzE3ZjYzMmZiODA2Y2E1MmEzNzU1OTljMDY4ODlkMWQ1ZWYyMzEyMGRjMzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkNDY3Zjk2NGQ5MWEzMWUxMzczN2Y5NzBkNzdhZmE4ZWEzOTBjZDQxZTFhOTkyNzM1ZjJmNzhhZTRiMzRjZGMifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L699-L716",
+          "version": "repo-lines-v1:sha256:add83283baba0c2c3a038463152ba62a7f5962021ca4d0c09da3411716f98f48:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYjVlZGY1OTQ5Y2ZlYTY3ODIyY2Y2OTExMzIzNjNkNjhkNmYxZTE2OWY1ZTBkNGY3YzE0ZTVmYTFlNmQ0ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjMmQ2Yjc2ZTZhODA5MjI1OTMxOTc1Y2RjZjdhYTEyYjRiNTZmMjdjMTNhMGY4N2VlMWY2MGNmZTZjODdjZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNjZmMyMmU2ZTE3ZTZlMjk4MjE0MjNlMmE0ZGNjYmNmZjY1MDJhMjBjNzk0YzE3NzFhMWU2ZDM0YmY3MTRjYjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_128cf7c94e0f45489883f2fe5759b26e",
+      "statement": "The repository documents the 13-versus-14-row caveat: 90 days starting today yields 13 rows only on Monday or Tuesday, and 14 rows otherwise, without dropping any day.",
+      "evidence": [
+        {
+          "resource": "repo://HANDOFF.md#L115-L118",
+          "version": "repo-lines-v1:sha256:a20e342026bbdc068a7f28ab286983c30feab8f02c646813703d5bcb21a95efa:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWIxNzFmZjgwYzY2MzM4MDhlMDUwMzBjYjYxMzViYzJhYTg5YjRjMzQwYTU4Y2IyY2ZiMmQyNGU2ODNhNmFiNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGQ5ODM5NzM3ZTI1YzVlYzA5ZTNiMWFlNDNmOGY0NzZhNmM5NWMwMzgyZmNjMmY5ZjEzMjk4M2E5ZjE1N2M1NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTRlNGMzM2M3MjliOGU1Mzc1ZGRhNDIyZGMzZjM3MzcxNjAxOGFiZDI1NGJiMDA3YjMxMzJmZjcxNzljODYxNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmEzYzUwYWEwNGVlNTJhZjJlMmIzNWUyMWViZDU2ZTAzY2EzYTcxNDJhYzcyYWE2MjkyMjZmZDMyNmEwNzYzZSJ9"
+        },
+        {
+          "resource": "repo://horizon-core/src/dates.rs#L222-L241",
+          "version": "repo-lines-v1:sha256:d49243f5dd029bea9456cee2693f1d40fdd921993a6da9eb346a3db91cc37339:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYjVlZGY1OTQ5Y2ZlYTY3ODIyY2Y2OTExMzIzNjNkNjhkNmYxZTE2OWY1ZTBkNGY3YzE0ZTVmYTFlNmQ0ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFlNzc2NGM0MWJiMTExMmU4M2NlMDQ4ZjY2ZTBjYjM2ZDAyM2VmOWQzNmZmN2ZkNDc4MGQ4ZDczNzRlODBlZjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU3YjNkYjZhM2FiMTc0ZGE2YTNjNWUzOGRmNjI2N2YzMTdhYmMyMjVjNjNkYmU3ZmEwMWU4ODljYTczZTUxOWIifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-04T14:46:47.383Z"
+  }
+}

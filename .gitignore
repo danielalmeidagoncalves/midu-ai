@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+/target
+/dist
+.playwright-mcp
+.ruff_cache
+openwiki/.run.json
+.DS_Store
+
+/packaging/bin
+/packaging/src
+/packaging/pkg
+/packaging/*.pkg.tar.*

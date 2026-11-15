@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:24d92b763deed8f1715d360b3ab205577f79a66d16f3af4d3df6636c095729f9",
+  "claims": [
+    {
+      "id": "claim_3ae5dddb63944195a5ba3cf8b600795f",
+      "statement": "The composer accepts named-month-first, day-first and numeric absolute dates, relative dates (today/tomorrow/day after tomorrow), and a no-date path that uses the open day or today.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/composer.rs#L200-L279",
+          "version": "repo-lines-v1:sha256:477ced4435ccaadd877f854d80d06bbee1ac4749c22933c93bb55cee00ab2817:eyJzZWxlY3RlZExpbmVDb3VudCI6ODAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkxMWM4NTVkMTExNzVjYmY0MWU1MjgxNGViZjYyOTkwNDlmMDlkMWVjMGZmM2QwODZiMTU4NGY0YTNmOWFjMDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRkYTkxYzFmZDY1OGMyMjVlNDY5ZTkwMDU4NWUwODIwNmFkYmI5OTlkZDk4M2ViNDRhYTdhNTdiNzZlYjk2NmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYyNGU5NDhhYzExZTM0YzFmN2NhZDQzNzUxOWQ2YWRjOGRjNGQxZDZmOTUwODJmN2E1MWY0ZGYwMjk0ODcyM2IifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/composer.rs#L313-L367",
+          "version": "repo-lines-v1:sha256:f4b87e7c6bc3532954be41add973c1ef5a5e3f55c34cbb00ee8a73caa8856698:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYjVlZGY1OTQ5Y2ZlYTY3ODIyY2Y2OTExMzIzNjNkNjhkNmYxZTE2OWY1ZTBkNGY3YzE0ZTVmYTFlNmQ0ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZkMTBiZWFmZTI1MGExZGRjY2QzYzIxOWU1NTdhOGMzZmZjNWY1OWZhYmNiZGJiYzExZDlmOTlmNzNmMDI1MmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFhZmNlMjkxNzcwMzllM2ZlYjM1NjQxZTgxZjRlYjA4Y2FhMTgwNzA0MDZhNzJhYjJiMDUxMTQzNzU4OTRiYTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_25bedfb1d2484b439004e8eebacb254c",
+      "statement": "Absolute dates resolve against the current, next and previous year, and a recognized date outside the 90-day quarter is refused with OutsideWindow rather than moved.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/composer.rs#L181-L194",
+          "version": "repo-lines-v1:sha256:5eaa5349cada0f8637bf2f8def6ac60c23dab42e1ebbeef9773f49a32d94e55b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwMzcyNDE5Y2NmMThmM2FhY2Q1NTBhNmVhMTdjNzAzZDFiN2M5NjI0NTgwZmI5ZTlkYmYwNDFlNzFkMzkzMTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZlZTM0NGIwMGU5OGMyZGVmNmI4YzcyYjBjYzdhNDdkYTFjZTM0NmFjMTYwODQzM2Q3OTE3ZGUwMjcwMTc3Y2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQzZTBlNzZhMzZjYmFiOTZhODM0NmRmZGRlNDFjNTg1NDVjNzM4YTcwM2NhZGNjMWUwYTAyMmE0Y2I0ZGExNjgifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/composer.rs#L249-L256",
+          "version": "repo-lines-v1:sha256:e564bd6b057d1982ab9e0cbb498a5ed5d12e8a54b39600eaf542d011c8680ed5:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2VjYzYyZGJhM2MzYzI5ODZkMmJiMjQ2ZWIzNDJkNGE3ZGM4ZmIxMTY5ODcxNmNhZmFjZmEwOWU5Y2E1YTgyYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDdjM2FhYmMxZTM1YjAxMzY0ZDgwMTgwMDU5YmIxN2I2ODIyNDA4Y2NmMDZmNzg1YjQ4YjA1YmRjYzQxNzhkNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTk5YmRlZmVlYWNhNjM0MGUwMjkwZGM4NmU4ODljODlkNWUxODlhYTViYTQ0YjU4NWIzYjcwNzM0ZjRhNjJkOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjJiOWJlN2Q3N2QyZDgzNTM4MDZjNDljZmY4OTY2NzExNmEwNGQwNDY5MTZjZGZjNTQxMDFiNGViODJhMzk2YiJ9"
+        },
+        {
+          "resource": "repo://horizon-core/src/composer.rs#L351-L367",
+          "version": "repo-lines-v1:sha256:b8291550617d8e0a6dd835cd7eb5f0a13e1e09809c38ca740333c9f8a50e063e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYjVlZGY1OTQ5Y2ZlYTY3ODIyY2Y2OTExMzIzNjNkNjhkNmYxZTE2OWY1ZTBkNGY3YzE0ZTVmYTFlNmQ0ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU4ZTY3MThlNjM1MThjOWFjN2E4N2M2MmQ0ZmNlNmQ5ODg0MDgzOGM4YmQ5Yzg0MzdiYjUwMTM3YjA2MGVhOTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFhZmNlMjkxNzcwMzllM2ZlYjM1NjQxZTgxZjRlYjA4Y2FhMTgwNzA0MDZhNzJhYjJiMDUxMTQzNzU4OTRiYTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c2858e038e764dba98067eb5c929405e",
+      "statement": "A trailing /subject token overrides inference; the active lens is the default when no token exists; an unknown token is refused; explicit subjects set subject_auto false so later title edits do not overwrite them.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/state.rs#L412-L427",
+          "version": "repo-lines-v1:sha256:3705793a73802d3422c084fdb1d624412261ba06105ee60f6fda9a058966f07f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMxMGY3OWQ1YWJlMTIzMzdhYjNlOGVhOWFiMDRhNGM5NWM0MmVlOTA0NjYzOTNjNDc5NjBlY2ZkZGI2YjY2YzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMxOTA2NjgyMGRmM2NlOTUxNDUzYTg5MzAxM2VkYTA4NmNiYjg0MTI5NGEyY2ZhN2M3Y2U1NGY0OTM5M2E1ZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3OGQ0NjAxYTk3ZjU0ZjQxOTIyODc0OTZjMDA1NjdkYmM1NTE0NDI5OWU2MDRhNmE3OWJjNjBiMzAxZjBhMmUifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/composer.rs#L268-L278",
+          "version": "repo-lines-v1:sha256:de47f1d559ad95fa8214e4a06a8487da10d0877d3124ecd756319e3f80495181:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI0OTA3Njc4YzA2NmQyOWQ4MjJiYzYyZDUzM2EzNzEwYjhmMGI3MzU4ZTQ5NjgyMzE5NDEyOTdhYmRlNzlhNjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0NzVlOTRhOTA0YWM0OWIzMTU0ZDQ2NzJhNjZlODYyOWI4NmRhYzc0ZTNlMjkzN2JlNjkyN2FlM2RhMTFjNTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiZDY0NWM0MjZmMmMyOThkZDJiMzBmNTk2ZjRmZjQ0NGQ0ZjQ2MThmZWJlNGJlODhhYTc4OTAyNGQ0ZjBmM2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg4NzdjMjgyMjUxMDk4ZDc1OWE1ZjE4NDY5ZmQwYjUyNTQxYmE5NTg2YTY4NjY1NWJjYzJlZTMyNmI3YTRjMTUifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/composer.rs#L52-L67",
+          "version": "repo-lines-v1:sha256:654b0cfe4d36a79f001b56085ece34514223bbfa509d379a21b2ae6de95836ca:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcyZjMyNTcwZWIzMGJmN2EzZDA4YTI5NzkwMDVlZjVlZThkMDU2ZWJkY2Y1MzdhMDU2ZTM1MjljZGJjNmYyODEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZkYzFkNTM1YTFkZTc4Mjg3ODFhYzAyMTQ1NzY3ZmU0YjFhOTdmZjdiMGI2MzM5ZTdmYzNmMDhiMDdmMDAxYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyYWNhMTM5MDczZDM4NDhmZGFkYzg3YTY0OWJiMGI1YzYxMjRlOTc5ZDZjY2FjZGZjZTI2YmMwMTRlZWY0YTUifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L138-L160",
+          "version": "repo-lines-v1:sha256:4f48e2ae13c4a62e7484876c464af1a350860fc9a9739463878d35bc9e5776e9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiNDFiYTA3YTU4NDEwZmE0YjJjMzFkMTdlY2Y0YmE4MjdhN2IwN2MwZTFlZjFhMzAzNTI3ZWNkM2EyODZjZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjMzk0Y2YzZTMyZmRmMDI0Y2NhNTI5NTA4ZGNiMmFhNTk1ZWE4OThmZGY5OTZmODFiMmY1Njc4ODExYTM4MWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg1MjZlOTU5ZDI0NzcxNDQ0OTNkZDkxNjlhYzUxYjI0NDhmMmQwOTI1MTg2NzEzMWYxMTc0N2Y1OTIzZGQ3OWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_928abc382708419f8945c37ac5e2109b",
+      "statement": "Composer preview reports the mark, subject and subject_ok flag without failing on an unknown token; the masthead and fold inputs render that preview before submission.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/components/chrome.rs#L62-L120",
+          "version": "repo-lines-v1:sha256:d46be3fa03538d0e33dc83579426df4c2ea831a30796e1cd404c912582c50333:eyJzZWxlY3RlZExpbmVDb3VudCI6NTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1YWU4NTcwNTY4NTZhYjYxMzA4YzRlYWYyODY2Y2I2Yzk2MDYzODBlNDRkZWRjZjdjNzA3ZTU2YTM2NDRlZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ4NWNiNDk5NDMyYjNkMzAzNjE3NjMwZjJjN2FlMjk3MGM5NDY4NzNkNDc3Y2YwOTFjZTgxNGViMDlmMDRjMWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4NWNiNDk5NDMyYjNkMzAzNjE3NjMwZjJjN2FlMjk3MGM5NDY4NzNkNDc3Y2YwOTFjZTgxNGViMDlmMDRjMWYifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/components/fold.rs#L188-L247",
+          "version": "repo-lines-v1:sha256:b7b9d3ad395c7c36bebe388459a2b3949c164e494cb849ce8a16481ac4869077:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1YjkxZjVmNWVkNjNlOWM1MmExNGEyZTYwMTY5NDU4MDI1NDI2NTI3MzIxZjNiZjQ3MWM5MDlhNDFjMWI5MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI5YmY2YzRiNmRjMzUzYjc3ZjFlOGZkZTJkZjU3MTIyMzM0NzJjMTFhYWViODU4M2I5Y2QzMzI2NDE1NDJhYWEifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/composer.rs#L281-L294",
+          "version": "repo-lines-v1:sha256:fb1d46f3903467308ffd8d191c0195ae510177437c5032b91392c66a52f94642:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2YzU1NTRiMjkyMjFkMmIwNmZjMjlkMDc1MTg1M2MxNzAzMjJhY2M3YjA0YzcxODk0Njc3ODkzY2NlMTNjZWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYwNjNjNGQxYWY4Y2Q4OWJiMGJkZDc2NTdmZmNiZjY4MDZhNjEwZDc5ZDZjOGQ0YzMwN2MyNDFkZjM5MDA1MjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdiYzk4ZDZiMGRjNDkyYzUwMTZkZjEwODA1YTNhNTRlYjljMTg0YTVhNjEzN2U3ZjRiZWNmYTBjMjIwNTUwZDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_24036e19930749c49a43249508a30a36",
+      "statement": "Both composer surfaces delegate to parse_line, file through AppCtx::add_entry, clear the draft on success and return focus to their input; the fold composer always files to its bound day.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/components/chrome.rs#L77-L120",
+          "version": "repo-lines-v1:sha256:eff5ddd1bd0e4cb9d69d2bb3fc0516b642237e9cbe4cd331de22943183472527:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFjMGI1YzMwNWFiODk4ZDg0ODI4NzBiNTI4ZDZmNWViZDhhODg5MGI5OWFkN2VkNTBhM2FiOTI1NmQ1ZjU2MzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUyYzE5MzMxYjRmNDM1Y2MzYzljMzkwZTNhNDk3NjFiM2FkOTc1MDNjNTBiNjk4ZTgzOWY0ZjUxNDQxMjVkMjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4NWNiNDk5NDMyYjNkMzAzNjE3NjMwZjJjN2FlMjk3MGM5NDY4NzNkNDc3Y2YwOTFjZTgxNGViMDlmMDRjMWYifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/components/fold.rs#L202-L246",
+          "version": "repo-lines-v1:sha256:069fef1ca8776cc65da83c1c305222744fa14675b91a8bccc332fcc56cf1b032:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFjMGI1YzMwNWFiODk4ZDg0ODI4NzBiNTI4ZDZmNWViZDhhODg5MGI5OWFkN2VkNTBhM2FiOTI1NmQ1ZjU2MzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEwNGM1MDM4NzY4MjNmMDBhMmZhYjI3ZmYzZmNiMGIyYjNmNjkyNjMwOWM1ZTE0NWY5M2VjNWJkODViYzk3MTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4NWNiNDk5NDMyYjNkMzAzNjE3NjMwZjJjN2FlMjk3MGM5NDY4NzNkNDc3Y2YwOTFjZTgxNGViMDlmMDRjMWYifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/state.rs#L412-L427",
+          "version": "repo-lines-v1:sha256:3705793a73802d3422c084fdb1d624412261ba06105ee60f6fda9a058966f07f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMxMGY3OWQ1YWJlMTIzMzdhYjNlOGVhOWFiMDRhNGM5NWM0MmVlOTA0NjYzOTNjNDc5NjBlY2ZkZGI2YjY2YzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMxOTA2NjgyMGRmM2NlOTUxNDUzYTg5MzAxM2VkYTA4NmNiYjg0MTI5NGEyY2ZhN2M3Y2U1NGY0OTM5M2E1ZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3OGQ0NjAxYTk3ZjU0ZjQxOTIyODc0OTZjMDA1NjdkYmM1NTE0NDI5OWU2MDRhNmE3OWJjNjBiMzAxZjBhMmUifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/state.rs#L530-L542",
+          "version": "repo-lines-v1:sha256:eb791b5743976e10f3f0c11ea8f246ca080277437579aba1775c4f26acf5a624:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI0OWEwNzgwOGQ1MDU2ZmY5OTM3MmE2NjhlZWM1ODk1YjZjMzdiZjM0N2E0YzE2NzVmYWU2OTViYzJkZjU3M2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_70da389657544d9f8b1fe3518f66be75",
+      "statement": "Composer failures are explicit variants with user-facing messages: Empty, UnknownSubject, OutsideWindow and MissingTitle.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/composer.rs#L24-L43",
+          "version": "repo-lines-v1:sha256:c0338dc9ef5e44e81d1e241a72457e138df46ddebd1e3fa3b6de7c6be8da89d1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU3MjNjNGM0ZjI1ZjFjZTMyZmNhZGQ5OTFjMDcyMjIwNDcwYmY4MzA1MWJkNWFkNWYyOTM5ZDgxMWNkNzcwMTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMyMzRlZWNlYmVhMmRjMjZmMjU5MjFhMzA1NzUyMDUxM2YxZGNhNTVkYWQ5MWFjODVkYzIwOGI0Nzg4MGVhMGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRkNjY0YjlkMDM5NzJmNjkyZWViZTc5NDAzMjk4YTMzYTQ1OTBjMDE0NTk4YjMyZTM3NTMxZmVlZTZmM2RlZGYifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/composer.rs#L387-L397",
+          "version": "repo-lines-v1:sha256:41ee2346dbac16074b7b6b9095fe3fb48453f98e8172dc6fb8f672df2963d1dc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYjVlZGY1OTQ5Y2ZlYTY3ODIyY2Y2OTExMzIzNjNkNjhkNmYxZTE2OWY1ZTBkNGY3YzE0ZTVmYTFlNmQ0ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRmODA0M2JkNGU2OWU3MDg3ZTA3MTkzNDU5NTE3MzY3YTk0MGJlZTdlNjFlMWE0YjFiMDllOGFiY2M5M2YzYjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmOWI2YmY5M2Y4OWZiMjU0ODVhYjE5YTQ1YWM1ZjliNGQzNjllYTUyNGQwOTk2MTAwMjY1OTY4NzMyMWQzYzgifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-04T14:46:47.383Z"
+  }
+}

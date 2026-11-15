@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:462bc5cd8ccc44f0d230f563c55cb6dee862c59ef4b5bf4ba489346e5dfeb47f",
+  "claims": [
+    {
+      "id": "claim_03fef977abda496bbd3be96e5617cfbc",
+      "statement": "Horizon is a two-crate Cargo workspace where horizon-core owns pure product logic and horizon-app owns the Dioxus renderer.",
+      "evidence": [
+        {
+          "resource": "repo://Cargo.toml#L1-L3",
+          "version": "repo-lines-v1:sha256:ee2041e897fba39ab8f64bd48c329888f908a4c71d4d025c8c1ebdbf02c1b7d1:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDM0ZTEwMmM4NjFmOTk0ZDJhYWNlOTExNGQzOTJkYmMxNjIxOTBlMDBiZThmZTM1N2Q0NzIxNTBjYTQzOTYxNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDI3NjAwYzRjMTM1OGUwOGY2ZGU0NDAyNGU0NWI2M2EwNTJlN2JiMzA4ZTMzNWEzMmE5N2Y5ZTdiYmQzN2JlZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmY0OTdmZDRlN2M5NjY5NWU1YjZiYjEyZGYyZGJjNzI4YjE2NzAwZTkyYjkxN2UyMDU1MjVhMzI4ZjQwZGMwZSJ9"
+        },
+        {
+          "resource": "repo://horizon-app/src/main.rs#L1-L9",
+          "version": "repo-lines-v1:sha256:9a1b9c656e0f9b17f7ce5c66aeb2fed89893ce94b4dfca42a9c9d32ef914c916:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmI0MDg2MjVmMmJjY2FmNTA0ZjU5MTQ1YjZhODljMzg1YzU4OGMwZTlkZmY0MzkxOWJhYmQ1MmZlMGVmNDRiZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTdhNGQzNTJlMDZjNGMxYjIyNzlmN2QzZTk0YTJiZWVkZmNjODMzMjRhNDM4NzUyZjk3YmFlNjAyZGMwYzc1NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        },
+        {
+          "resource": "repo://horizon-core/src/lib.rs#L1-L5",
+          "version": "repo-lines-v1:sha256:9c9d4d7a8c5927693197d1e4a773f58c107530fb50c4b94d8262b79e82692fbe:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzI2OGUyYjBhMTViNmQ1YTEzNTE1YjZjOGYyNWE4ZTdkYjA4NjUyZmVlMDkzNzMxMjRjYTJiMDY1ZTE4Y2EzMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzY5OGEwMjk5NDUzOGM5MDIxNDViYjU3NGFmZWM1N2Y5MWI3YWNjNjNmZjJlZDk1NjcyNzZmZTFkMzJkYjEwMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDVhOTY2N2EzODA5Mjg2NjM0ODFkMmE1NmEzYTg3OGViMTAyNTJhMDlkNzJhOGY5NjAxNzM4NjNlMGYwMzEzYyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_0a7dedefbb834caa87cb00902ff12464",
+      "statement": "Doc is the single durable document: it stores entries, loose notes, day pages, page metadata and the persisted UI slice, while derived views are computed from those fields rather than serialized.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/model.rs#L252-L266",
+          "version": "repo-lines-v1:sha256:de5f32375530ae3943ce929ef2cfbb7f69acfed3a044c738af6e0dd4afea9b82:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ4ZDBhZmFmNDZjMGUyN2I4YTg5M2ViOWE2OWZmM2JlMzczZDVlYjNhMjhjMGZiNWE2NWI1ZGQwMjkyZGVjMTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMxZWRhNGNhZWY1MzkyYmUzMmQ4MWQwZTAyZjk4M2U3NzdhY2U3MWU5OWIzYWJkZjMwODZhNzdiNDE0NmIwOTcifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L300-L421",
+          "version": "repo-lines-v1:sha256:8514b169bfbba3300be27051b0854d4fdcdf39f01147b094b8ed2dc489bca96c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIyLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIxYjZiYTdjMTJmZjMzOGI0Y2E3ZDYxMDNjMWVhMWI2OGMzYmRhZjBiMzM5MTJhMTY1NTQwZjkxZjc2ZGE3YjA0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIxOWU3NjM1NWNmMTE5OTQ4MGMzZjk5ODM2YjE0ODZjODQxZDg5MWZhYWQ5MDRjNjA4ZTA5MzAyMmQzNzU3YWVlIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIwMDViN2Q1NmUyMzZlYWI4MzE4NDcxN2Y2MzJmYjgwNmNhNTJhMzc1NTk5YzA2ODg5ZDFkNWVmMjMxMjBkYzM4In0"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L425-L467",
+          "version": "repo-lines-v1:sha256:2f7a84378fe58201a6d97efe188d05629080c13a9d5dc9ab0169ae1913c7a6bc:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwNjcyNjNjZGExMzk0YWNmYTkxMzc4NDM2NTEzZmVhOWIzMmEyZWYxNWNkMWQwZDQ3NzAzZTY1NzFiYWMzOTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAwNWI3ZDU2ZTIzNmVhYjgzMTg0NzE3ZjYzMmZiODA2Y2E1MmEzNzU1OTljMDY4ODlkMWQ1ZWYyMzEyMGRjMzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM4MWM2MDNhMmNmNjMxOWJmOWY2Mzk1YWQ5OWEwYzdkOTJlMzFhNTE5ZTU2MjM1ODU2NGZmM2ZhMTIzZDBhMjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_19a37a7448f046b5858664264830c9a2",
+      "statement": "Horizon keeps an in-memory Doc and persists it as a folder of plain Markdown files on desktop and Android; a single saver loop coalesces dirty ticks and awaits each write.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/app.rs#L40-L53",
+          "version": "repo-lines-v1:sha256:4827c61ceedd8111d278ce2303baf06df85343e0eb9d60348ac0e1ad446c9b51:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1YWVhNzc4YjBiZjQ2N2RlZjkzMWQ5MjU2NmRjMTgxYTFlOTJlMmY1MDg1Yjg5MGRkMjliMTI1MjBiY2M4MzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyZDExY2FmNDNlOTdlZjM2OWU2YmVlZDFhMjY4YmQwNTgzOGYyOWI5ZGQyNTRiZjY5YmE2NDg4NDE0NzIzNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlZDJmMjkwZTAwNzU2OTY2MGVmOTJhZDk3ODVmZjA0NmVmYWNiNWIyNmQxNmVlYTg2ZGEzMWRlYzE4YTY0MmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI2NzczY2FiNTdmYzEwN2E2OTRiMjY2OWQyMWVmOWMzZDZkZDkyNWEzNTYwNGQ4YmQxNjIwYzY4OGIzOWQ5ZDIifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/storage.rs#L195-L218",
+          "version": "repo-lines-v1:sha256:a0582bf312349a2fb03c1dea3c6213c450d3602f7dc1a30d2bd5949fdfa35b66:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiNWFlMmZjYzdiYjA5YmJmMTNjY2I3MjVmMDg2ZDgzZjI2ZmJkYWE4OTcyNTE3Yzk4YmE0Zjc1ZjQ2NGY0OWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcyZTU3NmQ0MWRhOTczMjJkMGQ1NTRjYTAyZjFiMWEyNDdlZDhjMjRkNTM1OTY1NWMxMjM3MjllZWM1MTQ2MWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA0MjEzMTc3ZWRhMjljZGMwM2QzNzAzZTQxMzk4ZGJmMmIwYWQwZjU0M2Q0OWY3MTBhNzk1ODY2MThmNGFmYzIifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/store.rs#L195-L234",
+          "version": "repo-lines-v1:sha256:88cd676a280d0a4a05db832f20ff62cbb67b137f8efda765686aff088946cee8:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlOGI1OGM1M2JiMDRkZTIxNmM5MWM4YWVkODE5MmEwN2MxZmZjZjI1MWM5NzVlNjM3ZTRhZDg1NTQ5YTY5NDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNhY2VkNzY1Nzc1ZGNkOGM4MGIzNzA2M2MyZGU5MTg4OTA0ZTc5OTBmMTc2ZmNiYmY2M2UwODA2NWY1MTRkMWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBiZjA5ZDY1ZDEwM2RiYWNjNTlhMWY5NzNhMTRhNWY0Y2UwMGMzYTlhODg0Y2YyYTNmODJhZDFmZGJiNjhjY2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJhZTU2MTg2ZWZjOWRkNDliOTU2OWQxMzQyYmU0ZGYxZTQzZmI4ZmI1MGI1YzY3NWQwYjJiNGVhMzcxMTQ1OTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ca6efced7525430e8b7bda6e581b3be5",
+      "statement": "The app renders exactly one of the desktop wall or the mobile agenda using a 700px viewport signal, matching the CSS breakpoint and avoiding duplicate fold and entry ids.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/assets/main.css#L503-L508",
+          "version": "repo-lines-v1:sha256:06bc3974013eb25a528a30d672b81ff575b73344e4343f3044f7cf2c5d438495:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODU2M2I4NmY2ZjA1YTcxZjlkYmVhN2M5Njk0N2JiMDJiM2Q4MWUzYzY1YTYwZTMzZTk5OTMxMzc2NDg0ZDhhNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjg2MWZlNDFkZWEzZWRkYjRjNWIzNjViZjE1YWQ0MzM2ZjFkYWQzODgwMTBjN2U0NTQ5Y2U1Mzc3MTMzYmZkNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWRlZjJiNWY4NzhiYWU3ZjJhMWMwM2NiMDk1NGIyZmM3ZmQxN2JjMmFjNTk1OWNhNzYwNGQxNmEzNDc5NzQ3YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDZmYzUyYzEyYmQwMGI2OGJiZmM4YjEwMGMwZTUzZmNhNTlhNGMzZjBhMmFmOTg2YzE3OWIwNWU0MmNkMGZjZCJ9"
+        },
+        {
+          "resource": "repo://horizon-app/src/app.rs#L159-L171",
+          "version": "repo-lines-v1:sha256:b8a46a37f98c6acaf7acd61e23d82b3cdfdd651a2fb0de17153b978cc6fa0fc0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYzNjE2Nzg4YjhjM2E2NmFkZGRhZDIyNzFiNGEyNjNiYjQ5MDBjNGM2YmJmMGM3OTM2ODJjNzA1ZDk2NWFmOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkYjMzOWMxN2Q0Y2M1NGU3MGM0ZmNmZWNiNjExYmI5ZTdkMzYzZjI1YjE4ZTA5MjNhMWQzMDZjYzk1OTI0ZTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUxZWEzM2RlMDFhZTQ2MDZiMTExMDQyMTA5YjNhMDZkYmQxODEwZDM3MjVmNmNjN2E3YzNkYWRhZTdiNjQ4MzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc2MmMxNjVhMTlkMmE3ZWZmYjRkNzIxZDZjMjc3YmYwZmI0OWZjY2YwMDMyMWQxNGNlNTg5MjNiZGI4Y2U1ZGEifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/app.rs#L55-L65",
+          "version": "repo-lines-v1:sha256:95b3c5c048589c741da6223f523ad5d0fee91b4899a3cec36b3931ea7ec9204a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5YjJiYTAzMDc5ODkyODk0NTlmNWQ0YWE5ODkxN2ZmODU1ZGEwMjZmN2ExZTJkYTE5ODcyZDc0MTM2Y2ZjN2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyZDExY2FmNDNlOTdlZjM2OWU2YmVlZDFhMjY4YmQwNTgzOGYyOWI5ZGQyNTRiZjY5YmE2NDg4NDE0NzIzNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2NmQzYTI2ZDhmYzVjNThlNGUzYTdlMzVjYWRhN2JmODcyZmY0MGU0MDM3ZWFhNjFiNDU4YmU1MGRlNWIxMzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVkNjA2MTFhZGY4Y2IxMDFmZDI0YzhkNGYzMTU3OTQ1ZWZkYTJmZDdkNTgwNDFlYTQxN2ZkZjA5NzZkZDRhMjYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ae51248063ed4f749f6712bbbc35c63c",
+      "statement": "Durable UI state is deliberately limited to draw mode, subject lens, open day and per-note editor mode; transient interaction state lives in AppCtx's Ui rather than in Doc.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/state.rs#L118-L152",
+          "version": "repo-lines-v1:sha256:c4c6138a9c9f0c51bda56c5f400e40a7767f81e91f48361c64a605fa6d5e2ad6:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5NGYxNGQ1MjQ3ZDk4NWNiYjRiYjdlNmM5ZmY0NjllNWE3ZGRlZTFmODljNTliODY5NjdkOTNjOTAyYTdiZjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBmOGY3NTU0Y2I1OTgzMmE4MGZlZDU0ODVhZDNiNjc1MDZlYjhjOTk5NzBjZjAxOTZjNjYyNGVkZjM2MThkNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE3ZWRkZmM1YTVlZWM0Mzc2NTgwMmJhNTk4ZmRiMzI4MzczMzNhNzEzZDUzODE0YTlmMWFmN2Q2MGUwZTUwNzgifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/state.rs#L28-L40",
+          "version": "repo-lines-v1:sha256:d13faef861e6113d820cdafe33a07ee316324ecb5efac4449e9e00f0ef8c9cca:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyZGUxYzVhMjFjZWUyNGYxZjVkYjZiYjk5NjdiNTZlMTJjYjBjZDRjMGE4ZGRiNGEyODczODg0MjE3YmUzNmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQxYTZkM2Y5MDk3ZWU1NWQ5OTA0YzRiOTdiNDlhYmVhN2RlNGQ5ZDQ3N2MwNWYwMDBmMGRlNTAzYzFiYmQ2NGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFmM2ZmOWEyZDllNDQzMmM0MjY5N2Y0MjYzOWVmYjkyMjg4YmFhOWE2OTFjNGNkOGIxZDMyNTcwOThkOGFhNDgifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/model.rs#L228-L239",
+          "version": "repo-lines-v1:sha256:ff7638647b678052bcd688b1f5ad59441d70db00fdf3ddf211e9997d673ebc8f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ4ZDBhZmFmNDZjMGUyN2I4YTg5M2ViOWE2OWZmM2JlMzczZDVlYjNhMjhjMGZiNWE2NWI1ZGQwMjkyZGVjMTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiN2EzNjUyYzEzYjZhYzliNTAzNTk2N2FmYTU1MDM2MjZlZWJhMGM1NjhiYzc0OTU2MjhhMzJhOTg4ZTY1ZmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZjM2VhNTZhOGY5MWFlNWM1MTA1NWFmMzAyOGM2YWU2ZDFlYmE2MGY1ZWY5OTBhYzEzOWJkOGI3YTA2ZDYwMjgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3d17ce509fdb4258954a70c6d3579877",
+      "statement": "horizon-core has no DOM, renderer or I/O dependency; its Cargo dependencies are limited to serde, serde_json, chrono and uuid.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/Cargo.toml#L7-L14",
+          "version": "repo-lines-v1:sha256:c42569864b497494b7fad885c7545ad9cf7968c1eeff593d57c8feb7d0242a8a:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDJkZjZjNzE0Yzk5NGQwOGRjODVhYWZmZTYxZWM2NGUwMjU1YmUyYjhiZjZjY2FjNzU2ZjE3OTBhYzk5NDBjNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWFiMWQyNzJhYTc0NTdiNGZhM2ZlNDNkMjIyZjJjZGI5YTg0ODNiNjUzNTcwZjZhNDRkNWFjYTkzYTc0YzExMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2IzYjM4Njg0MjhmYjcyY2M4NDI4NDM5NGMxNGZlNzQzZWEwN2JhM2UwZmY1MzcwMDlhNjk4ZmYyYzg4Y2MyMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiJ9"
+        },
+        {
+          "resource": "repo://horizon-core/src/lib.rs#L1-L5",
+          "version": "repo-lines-v1:sha256:9c9d4d7a8c5927693197d1e4a773f58c107530fb50c4b94d8262b79e82692fbe:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzI2OGUyYjBhMTViNmQ1YTEzNTE1YjZjOGYyNWE4ZTdkYjA4NjUyZmVlMDkzNzMxMjRjYTJiMDY1ZTE4Y2EzMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzY5OGEwMjk5NDUzOGM5MDIxNDViYjU3NGFmZWM1N2Y5MWI3YWNjNjNmZjJlZDk1NjcyNzZmZTFkMzJkYjEwMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDVhOTY2N2EzODA5Mjg2NjM0ODFkMmE1NmEzYTg3OGViMTAyNTJhMDlkNzJhOGY5NjAxNzM4NjNlMGYwMzEzYyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_206c4a60061043338bd30fae5bfe65e6",
+      "statement": "store::to_files maps a Doc to one Markdown file per entry, one per note, one per day page, plus state.md; store::from_files rebuilds the document from that map.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/store.rs#L195-L234",
+          "version": "repo-lines-v1:sha256:88cd676a280d0a4a05db832f20ff62cbb67b137f8efda765686aff088946cee8:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlOGI1OGM1M2JiMDRkZTIxNmM5MWM4YWVkODE5MmEwN2MxZmZjZjI1MWM5NzVlNjM3ZTRhZDg1NTQ5YTY5NDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNhY2VkNzY1Nzc1ZGNkOGM4MGIzNzA2M2MyZGU5MTg4OTA0ZTc5OTBmMTc2ZmNiYmY2M2UwODA2NWY1MTRkMWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBiZjA5ZDY1ZDEwM2RiYWNjNTlhMWY5NzNhMTRhNWY0Y2UwMGMzYTlhODg0Y2YyYTNmODJhZDFmZGJiNjhjY2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJhZTU2MTg2ZWZjOWRkNDliOTU2OWQxMzQyYmU0ZGYxZTQzZmI4ZmI1MGI1YzY3NWQwYjJiNGVhMzcxMTQ1OTcifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/store.rs#L411-L458",
+          "version": "repo-lines-v1:sha256:eee0acafe1338a8036e99019946e7134bc49a9df81a6103be42cc98d62893f86:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ1YTJhMTQ2NDU1MDQ4YTQ1MDY5YTE3ODY4ODIwODdiNDhjZDE3NzQ1M2U0YWZkYzI3NmRhZGMzMTg4MGNmZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc4ODQ2Zjc5ZWExMTA4Y2RhY2FiNGNjYWE1Mzk3MWFjM2E5NTkzMDMyZGQzNDVmZDc2YjMzNThhNGQ1YzM5MGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI2YmVhYTBlOTgzM2Y1N2M0MjUzMjQzZWI3YjkzNWI0NDI3MWQ3NmFlNjI2MWQzNzU2Zjc1MmUzNDllY2VkNzgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8ba1021289e34e9ab057ca4e97b6dcd1",
+      "statement": "The Markdown files carry YAML-style frontmatter with kind/version and entry or note metadata; state.md persists draw mode, lens, open day and note_edit.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-core/src/store.rs#L313-L405",
+          "version": "repo-lines-v1:sha256:85b9122e5d771f0d1e3b69bd7ed464bb2fa7d152d451fb66da1db1ce40d756f2:eyJzZWxlY3RlZExpbmVDb3VudCI6OTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0NWZlMjFlMTY3MTMxMGEwMWFjYWZlNGY0MDc1ZTJmMjhjN2NhMmYwMTcyZjEyZGJhN2I5NWY2MTU3ZDhiNmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjllZGNiYzFhMWE5NTYyMjMyZDgxMjgzNDg0YThmMDU2NTNiMzExZTg4OTY0ZTI2ODg0ZWMyZGZkMzBjNTc3MDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjViNzE0N2Q3ZDE1ZDE4NDUyODI0YzI2YmIzN2YzZTEyYTVjMWE2OWIyMmIzZjJiN2ZlYjc1N2NlNWUzZTAyNWMifQ"
+        },
+        {
+          "resource": "repo://horizon-core/src/store.rs#L85-L192",
+          "version": "repo-lines-v1:sha256:ea576ba42fe4318592118716294e19ad235895feaad0b19bf53fd7a1bf5829cd:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA4LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlOGUxNzFmNTA5YjA2MGEwN2FkM2QzMDZiODc0YzE1Y2UyMzM3OWQ5ZjNlYzk4NTYwNmQ3YTc3MDk5YzZhNWUyIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIyZjhiMmEwMjBkOTk2NzEyYTQwOTA0YjAzNzE5NTg5MTVhNTU5OTcxMjI0YmM5NDNjMDM3ZDUzM2MyOGFlODNmIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxZDJkODFiOGE0NmNmNWEwM2U0MzQ5YzM4MzJiNjg3ZDE3YTI5OWE2MzE3MzRjNGQwMGI3ZGJlOTFjNmM5NTBkIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_a354d05eeb3244d1bc726f467f2d0c64",
+      "statement": "Native storage reads the Markdown folder first, imports legacy localStorage JSON once when the folder is empty, writes the whole folder on save, and removes stale managed files; the web build keeps JSON.",
+      "evidence": [
+        {
+          "resource": "repo://horizon-app/src/storage.rs#L164-L218",
+          "version": "repo-lines-v1:sha256:d0c95a8085ab85df54b538ce5c8c33077f3290038749862cd6c6016da1f91341:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3MGNiYzE2MjhiOTM5YTU2ZjNiMmJmZTQ3MTRmN2I3OWM2MzAzMTk1MjFlMTJkNDJhNTliMDY5NGFhZWI3ZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkwYTA5MDhiMjFlMDVjMmM3YjAxMzU5NGZlZTMwYTM1ZmViZjFjZTkxNmIzNzU1MzU3MzcxYTM3MWRjOTEwODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA0MjEzMTc3ZWRhMjljZGMwM2QzNzAzZTQxMzk4ZGJmMmIwYWQwZjU0M2Q0OWY3MTBhNzk1ODY2MThmNGFmYzIifQ"
+        },
+        {
+          "resource": "repo://horizon-app/src/storage.rs#L60-L131",
+          "version": "repo-lines-v1:sha256:cd052bae926e879a246c98cba7e49eff154158437fd0e2d5fa0cb44052507d92:eyJzZWxlY3RlZExpbmVDb3VudCI6NzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmOGJmOTEzYmUxMzc4MTA3MGRkYTBhMDRlNjM3ZTFjYWE2NTY5NWVlNmZhMjcyMjJiODFlMzNmOTYyNzQyOWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwZmMzOThiZWE0OTM0ODIxMTA2OTNhY2ZkYzZmODhmMDFkZmJmMDdkNjM0MmEyZWIwMDAzOGQ3NzM5MWEwNTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ4OWViNjY1NjYyMDNhZGUyNmI2ZWQ2N2U3ZDUzOTZmN2ZkYzYyMzEwZGZmMDJhNzA1ZjhmNDg1ODQ3Njc2MWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJmOTFlNmM2M2U3YWI4ZWRlYzYxYmRlZTgwZDA0Yzg5N2UyNzM5NDc0YzExMmYwYWRmNTFmMzdhZTUzZmEzMjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fec15090f7bc47559627d6795a11ea85",
+      "statement": "The native store defaults to data_dir()/horizon on desktop and sysdirs data_dir()/horizon on Android, with HORIZON_STORE as an override.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L44-L48",
+          "version": "repo-lines-v1:sha256:093327c46d6aebbff2c0de901e0b1c6fa28094157f9b1e5e447d8f99dedccd80:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFkZGM0NjVjZjEwNDMyNmVjMzc1MGVjMWZkZjBkMDkxMjUwMDliMzE3YTJjM2NiNTQ3M2MyODIwYWUxYTNlMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWVjZDcxMDEwYWM3ZjBjNWQ2NmZiNTM5M2MyMDllMTgyY2QxMzlkM2FmMTc0ODczNWEzYzIxMGU4NTc3OTcyNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTBlMjAzMzU1MmQzYjY3OTI2N2FmZWI4MDM2YWIzODgzNDcyMTUyMTlhNTVhZGUxNzFmN2I1MTEyYmExMDZkYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGEwZGVjNTQwYzIxZjZjNTMxMjQ2YWYzM2Y4MjIxMGM4NmU1NzVmYTk1MjBiMjA5ODhkNGRjZDIxMmRhNjkzYSJ9"
+        },
+        {
+          "resource": "repo://horizon-app/Cargo.toml#L31-L32",
+          "version": "repo-lines-v1:sha256:a64a5973a741ee888ea83ed2292d55bb4393cd3b6c958f3e9c2bbc343af144bf:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2JmMzQ2M2FlY2M1NzI5ZTg2Mzc0ZGNmYjQ5M2Y0YTkxNDdjNDgxNmZkYmZhYTA1MWNjMDliYTllZWEwNmRlYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTI5ZGQ1ODU4NGVjNjJkYmFmOTBmMWRmMmIxZDE2YzI5ZWFkOTE4ZWRhZmE0ZmY4NWNhZTViMjdkMDBkYjIwNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODE0YTE1NDJiNzA5MDEzZWMzN2E5MjIzMmE0ZDQ4ZWE0M2RiZjJlOWM3ZGU2ZGZhNDZlNTc1ZGZhYWYwYjZlMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2E1Y2Y3Mzc5Njk4MDkzODg2NjRiY2JkZjc1NmZmY2I4YjFhNzE3MDJlNGJlN2U4MTc4ZmVmZDI3MjI2ZjdlZSJ9"
+        },
+        {
+          "resource": "repo://horizon-app/src/storage.rs#L31-L50",
+          "version": "repo-lines-v1:sha256:4aab1756839486e5bac9e06c3b2654ebf1da76002e87d22c5de610a3f78ec616:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NDM5NjFjY2Y3YzM2MmU0OWYxYzI5YWE0MDFkOWYxNGE3NzhkODhhMjE0MThhY2NhM2UwMjRlOWRjOTlmYzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYxYzBjZWI4ZTYzYzJiNzNmODg0YzEzMTkxZjA0Y2M1ODJlNWFhMmZiMjExOTE2OTYwNTViMGJmYzc4NTJiZWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQyMTFhODkzNjE4YmMzNzlkM2NmNTFjNWYyY2RhMzUzMzRmNjljZGRjYmM2MzRlYTMyZWJmZTJlYzk4N2E0MjEifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-04T22:52:59.779Z"
+  }
+}

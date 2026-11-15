@@ -1,0 +1,39 @@
+# Maintainer: Daniel Almeida Gonçalves
+# Local Arch package for the current Horizon checkout. Use tools/package.sh to
+# build and stage the release binary, then install dist/horizon-*.pkg.tar.zst.
+pkgname=horizon
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Ninety days as a wall of marks, with a markdown page underneath every day"
+arch=(x86_64)
+url="https://github.com/danielagoncalves/horizon"
+license=(MIT)
+# Dioxus's menu crate links libxdo.so.4 on Linux; Arch ships it in xdotool.
+depends=(webkit2gtk-4.1 gtk3 xdotool)
+makedepends=(cargo rust)
+options=(!debug)
+
+# `makepkg -D packaging` makes $startdir this directory.
+_repo=$(dirname "$startdir")
+_bin="$startdir/bin/horizon-app"
+
+build() {
+  [[ -x "$_bin" ]] || {
+    echo "Missing staged binary. Run tools/package.sh from the repository root." >&2
+    return 1
+  }
+}
+
+package() {
+  install -Dm755 "$_bin" "$pkgdir/usr/bin/horizon-app"
+  local size
+  for size in 48 64 96 128 256 512; do
+    install -Dm644 "$_repo/packaging/icons/horizon-$size.png" \
+      "$pkgdir/usr/share/icons/hicolor/${size}x${size}/apps/horizon.png"
+  done
+  install -Dm644 "$_repo/assets/icon.svg" \
+    "$pkgdir/usr/share/icons/hicolor/scalable/apps/horizon.svg"
+  install -Dm644 "$_repo/packaging/horizon.desktop" \
+    "$pkgdir/usr/share/applications/horizon.desktop"
+  install -Dm644 "$_repo/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

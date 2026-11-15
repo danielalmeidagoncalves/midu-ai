@@ -1,0 +1,16 @@
+[application]
+name = "Horizon"
+identifier = "app.horizon"
+default_platform = "desktop"
+
+[bundle]
+identifier = "app.horizon"
+product_name = "Horizon"
+short_description = "Ninety days as a wall of marks, with a markdown page underneath every day."
+long_description = "Horizon is a personal life OS: a ninety-day wall of monochrome marks, an index of seventeen subjects, day pages that open in place, and a markdown file under every thing, note and day. No tags, folders, priorities, streaks or reviews."
+authors = ["Daniel Almeida Gonçalves"]
+publisher = "Daniel Almeida Gonçalves"
+category = "Utility"
+# Linux desktop ships as an AppImage: one executable file, no package manager,
+# no system webkit dependency to chase.
+formats = ["appimage"]

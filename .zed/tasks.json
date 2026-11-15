@@ -1,0 +1,179 @@
+[
+  {
+    "label": "Horizon: run desktop (demo)",
+    "command": "$ZED_WORKTREE_ROOT/tools/with-libxdo.sh",
+    "args": [
+      "cargo",
+      "run",
+      "-p",
+      "horizon-app"
+    ],
+    "env": {
+      "HORIZON_DEMO": "1"
+    },
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": true,
+    "save": "all"
+  },
+  {
+    "label": "Horizon: run desktop (no demo)",
+    "command": "$ZED_WORKTREE_ROOT/tools/with-libxdo.sh",
+    "args": [
+      "cargo",
+      "run",
+      "-p",
+      "horizon-app"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": true,
+    "save": "all"
+  },
+  {
+    "label": "Horizon: serve desktop (hot reload)",
+    "command": "$ZED_WORKTREE_ROOT/tools/with-libxdo.sh",
+    "args": [
+      "dx",
+      "serve",
+      "--package",
+      "horizon-app",
+      "--desktop"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": true,
+    "save": "all"
+  },
+  {
+    "label": "Horizon: build desktop",
+    "command": "$ZED_WORKTREE_ROOT/tools/with-libxdo.sh",
+    "args": [
+      "cargo",
+      "build",
+      "-p",
+      "horizon-app"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "save": "all"
+  },
+  {
+    "label": "Horizon: test core",
+    "command": "cargo",
+    "args": [
+      "test",
+      "-p",
+      "horizon-core"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "save": "all"
+  },
+  {
+    "label": "Horizon: test app",
+    "command": "$ZED_WORKTREE_ROOT/tools/with-libxdo.sh",
+    "args": [
+      "cargo",
+      "test",
+      "-p",
+      "horizon-app"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "Horizon: check workspace",
+    "command": "cargo",
+    "args": [
+      "check",
+      "--workspace",
+      "--all-targets"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "save": "all"
+  },
+  {
+    "label": "Horizon: check android",
+    "command": "$ZED_WORKTREE_ROOT/tools/with-libxdo.sh",
+    "args": [
+      "cargo",
+      "check",
+      "-p",
+      "horizon-app",
+      "--no-default-features",
+      "--features",
+      "mobile",
+      "--target",
+      "aarch64-linux-android"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "Horizon: clippy",
+    "command": "cargo",
+    "args": [
+      "clippy",
+      "--workspace",
+      "--all-targets"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "save": "all"
+  },
+  {
+    "label": "Horizon: fmt (check)",
+    "command": "cargo",
+    "args": [
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "save": "all"
+  },
+  {
+    "label": "Horizon: fmt (write)",
+    "command": "cargo",
+    "args": [
+      "fmt",
+      "--all"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "save": "all"
+  },
+  {
+    "label": "Horizon: contrast",
+    "command": "python3",
+    "args": [
+      "tools/contrast.py"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "save": "all"
+  },
+  {
+    "label": "Horizon: serve wiki",
+    "command": "$ZED_WORKTREE_ROOT/tools/serve-wiki.sh",
+    "args": [],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": true,
+    "reveal": "always",
+    "save": "all"
+  }
+]
