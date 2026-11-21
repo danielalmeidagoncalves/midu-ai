@@ -127,10 +127,14 @@ pub fn Brief() -> Element {
 
                 {sync_block()}
 
+                crate::components::agent::AgentSettings {}
+
                 h3 { "Deliberately not supported" }
                 p {
-                    "No raw HTML, embedded files or pasted images. No notifications. No conflict dialogs. "
-                    "No rich-text editor. No charts, because a chart is an abstraction you decode before you can read it."
+                    "No raw HTML, embedded files or pasted images. No notification stream, no badges, no \
+                     unread counts — reminders are one quiet strip and one line each, and nothing else. \
+                     No conflict dialogs. No rich-text editor. No charts, because a chart is an \
+                     abstraction you decode before you can read it."
                 }
 
                 p { class: "colophon",

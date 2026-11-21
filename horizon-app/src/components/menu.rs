@@ -11,22 +11,24 @@
 use dioxus::prelude::*;
 use dioxus_icons::lucide;
 
-use crate::state::AppCtx;
+use crate::state::{AppCtx, MarginMode, View};
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 enum Entry {
     Store,
     OpenFolder,
+    Agent,
     Quit,
 }
 
 impl Entry {
-    const ALL: [Entry; 3] = [Entry::Store, Entry::OpenFolder, Entry::Quit];
+    const ALL: [Entry; 4] = [Entry::Store, Entry::OpenFolder, Entry::Agent, Entry::Quit];
 
     fn label(self) -> &'static str {
         match self {
             Entry::Store => "where the files are",
             Entry::OpenFolder => "open the folder",
+            Entry::Agent => "the agent",
             Entry::Quit => "quit horizon",
         }
     }
@@ -43,6 +45,13 @@ impl Entry {
                     Ok(()) => "Opening the folder.".to_string(),
                     Err(why) => why,
                 });
+                false
+            }
+            Entry::Agent => {
+                // The agent lives in the margin; from the brief, the wall has to
+                // come back first for the column to exist.
+                ctx.set_view(View::Wall);
+                ctx.set_margin_mode(MarginMode::Agent);
                 false
             }
             Entry::Quit => true,

@@ -1,6 +1,6 @@
 # Horizon — handoff
 
-Built as a Rust workspace: a pure, tested core and a Dioxus 0.7 desktop/Android UI. The product
+Built as a Rust workspace: a pure, tested core and a Dioxus 0.7 desktop UI. The product
 spec is the contract; the v6 concept is the visual reference.
 
 ## What shipped
@@ -20,7 +20,7 @@ spec is the contract; the v6 concept is the visual reference.
 - A small markdown parser and AST: headings, bold/italic, code, lists, tasks with source line
   numbers, quotes, tables, rules, safe links, `@Name`, `^[day^label]`, raw-HTML-as-text, and
   `toggle_task_line` for the reading-view checkbox.
-- One plain-Markdown store format, identical on desktop and Android: one file per entry, note and
+- One plain-Markdown store format: one file per entry, note and
   day, plus `state.md`, with frontmatter, a blank line and a Markdown body. The core owns
   serialization/parsing; the app owns the folder I/O. The rules are frozen in
   `openwiki/systems/document-model-and-persistence.md`.
@@ -60,7 +60,7 @@ spec is the contract; the v6 concept is the visual reference.
   masthead's ink hairline; and `E pluribus unum` set small at the foot of the margins, where
   the club keeps its ribbon — out of many loose details, one day. Red stays
   interaction-and-today only; ink and paper still carry the structure.
-- The mobile shape below 700px: vertical week-by-week agenda, current week always in full,
+- The narrow shape below 700px: vertical week-by-week agenda, current week always in full,
   landmark rows filled with ink, today stamp + frame + word, no horizontal scroll, 44px targets.
 - The brief: the key, the principles, the four open defaults, JSON download, a copy of the
   Markdown store, JSON restore, and the Sync block with its configuration form. No charts,
@@ -78,12 +78,29 @@ spec is the contract; the v6 concept is the visual reference.
   an SSH auth failure is explained in place (`explain`) and the form flags an SSH address at the
   Remote field, because that transport wants keys, not the credentials below it. The brief also shows the state, the remote and the last twelve versions, with each
   commit's files and any file's text at that commit. Conflicts are never a dialog.
-- Persistence: the live store is a Markdown folder, on desktop and on Android alike. One saver loop
+- Persistence: the live store is a Markdown folder. One saver loop
   coalesces mutations and awaits each write, so a later save cannot be overtaken by an earlier one.
   Open day, lens, draw mode and note editor modes survive reload. The window ticker rolls forward
   without deleting data.
+- The agent: the margin's second reading (`Notes | Agent`, `Alt+N` / `Alt+A`) and a wide
+  conversation band above the wall (`Wide ↗`, `Esc` returns). `agent::Service` owns one lazily
+  started `pi --mode rpc` child per app run, streams text/thinking/tool calls into a transcript,
+  and persists that transcript plus a generated manual under `~/.config/horizon/agent/` — never in
+  the vault. The child runs in the store, so it reads the same Markdown the wall does; a short
+  `<horizon-context>` preamble carries today, the window, the lens, the open day and the loose
+  notes. With writing on it gets `write/edit/bash` and the app merges the folder after each run
+  with the same three-way merge as sync (the saver stays paused until the merge finishes); with
+  writing off it is read-only. The app never commits for the agent. Seven keys in `config.toml`
+  (`agent`, `agent.command`, `agent.provider`, `agent.model`, `agent.thinking`, `agent.context`,
+  `agent.write`) are edited in the brief's `The agent` block, which also restarts the harness and
+  can run `Check harness`. Pi is the first adapter; `agent/pi.rs` is the only file that knows its
+  wire format. Thinking arrives as a folded row — chevron, `thinking`, a
+  one-line italic peek and a word count — that opens by hand; while a thought is
+  still streaming it is open so the work is visible. A working harness shows
+  `working` with each letter brightening in turn, plus a pulsing dot on the
+  column's status, so the panel says it is busy before the first token lands.
 - Focus: restored open days focus the fold; opening/moving a fold focuses it after the DOM update;
-  closing returns focus to the same cell (desktop) or agenda row (mobile). Arrow navigation works
+  closing returns focus to the same cell or agenda row. Arrow navigation works
   on cells and inside the fold.
 - Zed integration: project tasks for run/serve/build/test/check/clippy/fmt/contrast/wiki, and CodeLLDB
   debug profiles for the demo and no-demo desktop app. Desktop tasks go through
@@ -95,10 +112,13 @@ spec is the contract; the v6 concept is the visual reference.
 - Loose-note bodies are unit-tested: task toggling inside an undated note's markdown, subject
   re-filing, removal clearing the note's editing state, the `/subject` token split, and a
   multi-line undated note round-tripping through the store with `day: null`.
-- `cargo test -p horizon-app` — **20 passed** (Markdown store write/read, stale-file cleanup, v1→v2
-  name migration, three git tests, eight `sync::status` tests pinning the masthead label, and three
-  vault tests (`~` expansion, choosing a folder, a fresh vault reading as an empty store);
-  needs `LIBRARY_PATH=$HOME/.local/lib` on this machine).
+- `cargo test -p horizon-app` — **37 passed** (Markdown store write/read, stale-file cleanup, v1→v2
+  name migration, three git tests, eight `sync::status` tests pinning the masthead label, three
+  vault tests, the config parser and the three-way merge, and twelve agent tests (event translation,
+  transcript cap, context block, manual, config); one live test is ignored by default and needs a
+  real harness). The live test was run against `/tmp/horizon-live`: a prompt returned `ready`, the
+  run settled, and `busy()` stayed true until `reconciled()` — the saver contract.
+  Needs `LIBRARY_PATH=$HOME/.local/lib` on this machine.
 - The git tests use a real bare repository as the remote: two device folders, fast-forward,
   a disjoint merge, a same-file conflict with the aside file identical on both sides, and
   `state.md` absent from every commit.
@@ -107,8 +127,10 @@ spec is the contract; the v6 concept is the visual reference.
   a second empty store pointed at the same remote pulled all 31 entries, merged the unrelated
   histories, and pushed the merge commit.
 - `cargo check -p horizon-app` — clean.
-- `cargo check -p horizon-app --no-default-features --features mobile --target aarch64-linux-android`
-  — clean (compiled, not device-verified).
+- The agent was checked in the running desktop window: the `Notes | Agent` switch, the agent
+  column (status, model slot, `Wide ↗` / `New`, three example prompts, composer), the parked column
+  while wide, and the wide band above the wall with the quarter still visible beneath it. Screenshots
+  were taken of the Notes reading, the Agent reading and the wide band.
 - `dx build --desktop` (Dioxus CLI 0.7.10) — succeeded. Linux needed `libxdo`; it was built locally
   into `~/.local/lib` for this environment. A normal install is `xdotool`.
 - Native Markdown store end-to-end: launched the app with `HORIZON_STORE=/tmp/horizon-e2e
@@ -138,7 +160,7 @@ spec is the contract; the v6 concept is the visual reference.
     printed as a citation and `^[2026-11-15^drive]` as a day chip;
   - `written ahead` marker on a future page; recurrence projections rendered dashed and did not add
     a tier class;
-  - mobile agenda current week in full, empty weeks skipped, today stamp/frame/word, no horizontal
+  - narrow agenda current week in full, empty weeks skipped, today stamp/frame/word, no horizontal
     scroll at 390px; the wall remains at 800px with no horizontal scroll.
 - `python3 tools/contrast.py` — every normal-text pair meets 4.5:1; the lowest reported pair is
   encarnado-on-paper at 6.78:1; the tooltip text is 15.90:1 and its label 16.38:1. Hover backgrounds were included
@@ -170,7 +192,7 @@ spec is the contract; the v6 concept is the visual reference.
   `THIRD_PARTY_NOTICES.md` record it.
 - **`dioxus_components` 0.1.2 was not used.** The crate is a Tailwind v4 / Radix-styled component
   collection built for the browser (`js-sys`, `dioxus/web`). Its unconditional `js-sys` dependency and
-  Tailwind/Radix theme make it unsuitable for the desktop/Android targets here and would replace
+  Tailwind/Radix theme make it unsuitable for the desktop target here and would replace
   the locked editorial visual system. Horizon uses Dioxus's component model with a local
   `components/` library instead. This is the one place the architecture note and the implementation
   differ, and it is recorded here rather than hidden.
@@ -178,24 +200,25 @@ spec is the contract; the v6 concept is the visual reference.
   rows. Those coincide only when today is Monday or Tuesday. Horizon shows all 90 days and keeps
   weekday columns true; the grid is 13 rows on Monday/Tuesday and 14 otherwise. Today (Wednesday
   4 Nov 2026) is 14. No day is dropped. See `ARCHITECTURE.md`.
-- **Persistence is a plain-Markdown folder on desktop and Android**, with `state.md` for the
+- **Persistence is a plain-Markdown folder**, with `state.md` for the
   persisted UI slice. Sync is git against one HTTPS remote; there is no server of Horizon's own, no
   account and no conflict dialog.
-- **The web target was removed.** Horizon is desktop + Android only; there is no browser build, no
+- **The web target was removed.** Horizon is a desktop app; there is no browser build, no
   wasm dependency and no `localStorage` store. It existed for visual verification with in-page DOM
   measurement, and it is gone because the app is not deployed anywhere and the measurement crutch
-  cost a `cfg` split through storage, timers, menus and `main`. Everything conditional in the code
-  is now desktop-versus-Android.
-- **The Markdown copy is the store itself.** Desktop writes a timestamped folder under Downloads;
-  Android writes to the app's external files directory, falling back to the app-private folder.
-  The bytes are the same, so a folder moves between devices without conversion. The live Android
-  store is still app-private Markdown.
+  cost a `cfg` split through storage, timers, menus and `main`.
+- **The Markdown copy is the store itself.** The copy is a timestamped folder under Downloads.
+  The bytes are the same, so a folder moves between devices without conversion.
 - **No notification system, no account, no settings screen, no charts, no tags/folders/projects/
   priorities/colours/streaks/reviews/overdue states.** The only secondary tab is the brief.
+- **The agent is a collaborator, not a second app.** It is the margin's second reading, not a
+  sidebar or a chat destination; the harness is a local process over the same Markdown, never a
+  hosted conversation. It talks over Pi's RPC so the transcript can show thinking and tool calls and
+  a message can steer a running turn. Writing is merged with the same three-way merge as sync and
+  never committed by the app; the transcript and the generated manual live in the config folder, so
+  the store stays exactly the quarter. The harness is inherited from the owner's Pi setup
+  (`agent.model` empty by default), not configured twice.
 - **The demo quarter is opt-in**, never seeded silently. A real first launch is empty and quiet.
-- **Android was cargo-checked, not built or device-verified** (no Android SDK/NDK). The `mobile`
-  feature, the shared crate, the `sysdirs` app-data path and the responsive shape are in place; the
-  command is in `README.md`.
 - **Past-tense footer** is implemented but effectively unreachable under the forward-only window;
   noted above rather than pretending otherwise.
 - **The date `today` is the machine's local date**, not a fixed demo date. The demo quarter is
@@ -206,7 +229,7 @@ spec is the contract; the v6 concept is the visual reference.
 | Item | Status |
 | --- | --- |
 | 13×7 Monday-first wall, weekday band, months only in gutter | Yes on Monday/Tuesday; 14 rows otherwise to keep all 90 days (documented). Current date = 14. |
-| Four today markers, greyscale-legible | Yes (stamp, frame, `today`, `now` gutter/encarnado month); mobile adds stamp + frame + word. |
+| Four today markers, greyscale-legible | Yes (stamp, frame, `today`, `now` gutter/encarnado month); narrow adds stamp + frame + word. |
 | Tiers 0/1/2/3, empty weeks compress, today's week never | Yes. Empty-week test: 13 quiet rows of 14, current week full. |
 | Fold opens in place with complete day page | Yes. |
 | Esc, arrows, focus restoration | Yes, verified. |
@@ -217,19 +240,20 @@ spec is the contract; the v6 concept is the visual reference.
 | Loose notes in margin; arm and click a day to clip | Yes, plus detach, per-subject grouping with a filter chip row, and a per-note markdown editor with a subject picker. |
 | `MD` / `N` badges correct, hidden under lens | Yes. |
 | Words mode full sentences, persists | Yes. |
-| Mobile agenda <700px, no horizontal scroll, 44px targets, today 3 ways | Yes; 390px and 800px checks. |
-| Persistence: reload, Markdown live store, JSON import/export, Markdown copy | Yes; one format on desktop and Android; saver loop; copy destinations per platform. |
+| Narrow agenda <700px, no horizontal scroll, 44px targets, today 3 ways | Yes; 390px and 800px checks. |
+| Persistence: reload, Markdown live store, JSON import/export, Markdown copy | Yes; one format; saver loop; copy to Downloads. |
 | Contrast, focus rings, hover | Contrast script all ≥4.5; focus rings in CSS; hover checked. |
+| The agent: margin reading, wide band, store context, merged writes | Yes; live RPC turn and screenshots; saver pauses until reconcile. |
 | No §7 features | Yes. |
 
 ## Files
 
 - `horizon-core/src/{inference,dates,model,composer,markdown,export,store,sync,seed}.rs`
-- `horizon-app/src/{app,state,storage,git,sync,android,desktop,menu}.rs`,
-  `horizon-app/build.rs` (the `desktop_shell` cfg)
+- `horizon-app/src/{app,state,storage,git,sync,desktop,menu}.rs`
+- `horizon-app/src/agent/{mod,pi}.rs`
 - The frozen Markdown format: `README.md` (summary + example), `ARCHITECTURE.md`, and
   `openwiki/systems/document-model-and-persistence.md` (rules, frontmatter table, naming, versioning)
-- `horizon-app/src/components/{chrome,index,wall,fold,margin,agenda,notes,markdown,marks,brief,sync,labels,menu}.rs`
+- `horizon-app/src/components/{chrome,index,wall,fold,margin,agent,agenda,notes,markdown,marks,brief,sync,labels,menu}.rs`
 - `horizon-app/assets/main.css`
 - `THIRD_PARTY_NOTICES.md` (Lucide / dioxus-icons)
 - `.zed/tasks.json`, `.zed/debug.json`
@@ -238,9 +262,10 @@ spec is the contract; the v6 concept is the visual reference.
 
 ## Next steps if continued
 
-1. Add an Android build/CI job and verify, on a device: the Markdown app-data folder, the
-   external-files copy, and the `mobile,sync-vendored` build (NDK + vendored OpenSSL).
-2. If the owner wants a past window, add a discrete "the last ninety" reading behind `LOOK_BACK`
+1. If the owner wants a past window, add a discrete "the last ninety" reading behind `LOOK_BACK`
    and make the past-tense page footer reachable; do not turn it into infinite scroll.
-3. If Android should write into a user-chosen folder (Documents, an Obsidian vault), add a
-   Storage Access Framework picker; the external-files copy is the fallback until it exists.
+2. A second harness adapter. `agent/pi.rs` is the only Pi-specific file; a Claude Code or Codex
+   adapter needs the same `Outcome`/event vocabulary, and `AgentConfig.harness` (currently `pi`)
+   selects it. Keep the merge and saver contract unchanged.
+3. Agent transcript polish: fenced code blocks in `horizon-core`'s markdown AST (the parser has
+   inline code but no fences), and a quieter way to show long tool output than one truncated line.

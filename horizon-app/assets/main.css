@@ -140,11 +140,18 @@ button{background:none;border:0;padding:0;cursor:pointer}
 .wall-wrap{display:flex;flex-direction:column;min-width:0;flex:1;min-height:0}
 
 /* wall */
-/* The wall fills the height it is given: auto rows plus align-content:stretch share
-   the spare space between every week, so a tall window gets taller days, never
-   blank paper under the last row. A row taller than its share (an open fold)
-   pushes the others down instead of being clipped. */
-.wall{position:relative;border-top:1px solid var(--fg);display:grid;grid-template-columns:var(--gut) minmax(0,1fr);align-content:stretch;grid-auto-rows:minmax(46px,auto);flex:1;min-height:0;overflow-y:auto}
+/* The wall fills the height it is given: rows are sized by their content, and the
+   spare space is shared out as gaps between the weeks (space-between), so a tall
+   window never ends in blank paper under the last row.
+
+   The rows are max-content, not auto, on purpose. WebKit — the desktop webview —
+   does not size an auto row from the content of an item that is itself a grid (the
+   fold is one), and with auto rows plus `align-content: stretch` it instead
+   squeezed the fold's row down to the leftover space. The day page was laid out at
+   full height inside a row a few dozen pixels tall, so the following weeks painted
+   straight over it: an open day that looked empty. A max-content row is always the
+   item's own height, so the wall scrolls and the day page stays visible. */
+.wall{position:relative;border-top:1px solid var(--fg);display:grid;grid-template-columns:var(--gut) minmax(0,1fr);align-content:space-between;grid-auto-rows:max-content;flex:1;min-height:0;overflow-y:auto}
 .wkhead{grid-column:1/-1;display:grid;grid-template-columns:var(--gut) minmax(0,1fr);background:var(--bg)}
 .wkhead-gut{border-right:1px solid var(--border)}
 .wkhead-row{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:5px 0 6px;border-bottom:1px solid var(--rule-soft)}
@@ -156,9 +163,9 @@ button{background:none;border:0;padding:0;cursor:pointer}
 .gut .gnow{font-family:var(--font-mono);font-size:8px;line-height:1.1;letter-spacing:0.13em;text-transform:uppercase;background:var(--accent-ink);color:var(--bg);padding:1px 5px;margin-bottom:2px}
 .gut.now .mon{color:var(--accent-ink)}
 .gut.quiet .mon{color:var(--muted)}
-.row{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-bottom:1px solid var(--rule-soft);min-height:0;container-type:size}
+.row{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-bottom:1px solid var(--rule-soft);min-height:0;container-type:inline-size}
 .row.quiet{background:oklch(97.2% 0.003 95)}
-.cell{position:relative;display:flex;flex-direction:column;gap:1px;text-align:left;background:transparent;border:0;border-right:1px solid var(--rule-soft);padding:5px 7px 5px;overflow:hidden;cursor:pointer;transition:background .12s ease;min-height:46px}
+.cell{position:relative;display:flex;flex-direction:column;gap:1px;min-width:0;box-sizing:border-box;text-align:left;background:transparent;border:0;border-right:1px solid var(--rule-soft);padding:5px 7px 5px;overflow:hidden;cursor:pointer;transition:background .12s ease;min-height:46px}
 .cell.has{min-height:62px}
 .cell.off{border-right:1px solid var(--rule-soft);cursor:default;background:oklch(97.5% 0.003 95)}
 .cell.off:hover{background:oklch(97.5% 0.003 95)}
@@ -193,7 +200,15 @@ button{background:none;border:0;padding:0;cursor:pointer}
 .cell.land .ev{color:var(--bg)}
 .cell.land .more{color:var(--accent-on-ink)}
 .cell.land:hover{background:oklch(28% 0.018 70)}
-.ghost{position:absolute;right:9px;bottom:4px;font-family:var(--font-display);font-weight:400;font-size:clamp(13px,5cqi,44px);line-height:0.8;letter-spacing:-0.02em;color:var(--ink-3);opacity:.2;pointer-events:none;transition:opacity .12s ease}
+/* Faint numeral in the bottom-right corner, sized to whatever room the
+   row has: chrome, never content. The row still gets taller when the
+   marks need it; the corner numeral only spends space that is left over.
+   line-height is 1, not tighter, and the box sits 2px off the bottom:
+   a taller-than-box glyph or a taller-than-cell box would let the webview's
+   cell clipping slice the numeral flat — days that look cut. Quiet rows are
+   30px tall, so their corner numeral scales down instead of overflowing. */
+.ghost{position:absolute;right:9px;bottom:2px;font-family:var(--font-display);font-weight:400;font-size:clamp(13px,5cqi,44px);line-height:1;letter-spacing:-0.02em;color:var(--ink-3);opacity:.2;pointer-events:none;transition:opacity .12s ease}
+.row.quiet .ghost{font-size:clamp(9px,1.8cqi,18px);bottom:1px}
 .cell.has .ghost{opacity:.26}
 .cell:hover .ghost{opacity:.34}
 .cell.we .ghost{opacity:.16}
@@ -234,7 +249,12 @@ button{background:none;border:0;padding:0;cursor:pointer}
 /* the fold */
 .fold{position:relative;grid-column:1/-1;border-top:1px solid var(--fg);border-bottom:1px solid var(--fg);background:var(--surface);display:grid;grid-template-columns:236px minmax(0,1fr)}
 .fold.anim{animation:foldin .18s ease both}
-@keyframes foldin{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+/* The flourish slides the fold in; it deliberately does not fade. A WebKit
+   webview can suspend CSS animations while the window is occluded or the
+   session is idle, and a fade frozen at its first keyframe — fill-mode: both —
+   would pin the whole day page at opacity 0: an open day that is invisible
+   until the app restarts. A slide frozen 4px high is harmless. */
+@keyframes foldin{from{transform:translateY(-4px)}to{transform:none}}
 .fold-aside{position:relative;padding:20px 20px 18px 26px;border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
 .fold-day{font-family:var(--font-display);font-weight:400;font-size:clamp(62px,6.6vw,92px);line-height:.82;letter-spacing:-0.04em;margin:6px 0 0}
 .fold-eyebrow{margin:0;font-family:var(--font-mono);font-size:9px;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted)}
@@ -412,7 +432,7 @@ button{background:none;border:0;padding:0;cursor:pointer}
 .noteband .evd-foot{padding:0 0 8px 9px}
 .note-open{border:1px solid var(--border);background:transparent;font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);padding:5px 8px;min-height:30px;cursor:pointer}
 .margins{position:absolute;top:0;right:0;bottom:0;width:272px;overflow:hidden;border-top:1px solid var(--fg);border-left:1px solid var(--border);display:flex;flex-direction:column;min-height:0;background:var(--paper-dim)}
-.margins-head{padding:9px 16px 8px;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:8px}
+.margins-head{padding:9px 16px 8px;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;row-gap:6px}
 .margins-head h2{font-family:var(--font-mono);font-size:9px;letter-spacing:0.13em;text-transform:uppercase;font-weight:400;color:var(--muted);margin:0}
 .margins-head .n{margin-left:auto;font-family:var(--font-mono);font-size:9px;color:var(--ink-3)}
 .margins-list{list-style:none;margin:0;padding:0;overflow:auto;flex:0 1 auto;min-height:0}
@@ -463,6 +483,130 @@ button{background:none;border:0;padding:0;cursor:pointer}
 .noteadd > button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .noteadd .subpick{flex:1 1 100%;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--border);padding:9px 12px 11px;background:var(--paper-dim);margin-top:0}
 
+/* the agent — a conversation in the margin, widened above the wall */
+.margin-modes{display:flex;border:1px solid var(--border);margin-left:auto;flex:none}
+.margin-mode{font-family:var(--font-mono);font-size:8px;letter-spacing:0.09em;text-transform:uppercase;padding:4px 7px;min-height:24px;color:var(--muted);background:transparent;cursor:pointer}
+.margin-mode+.margin-mode{border-left:1px solid var(--border)}
+.margin-mode:hover{color:var(--fg);background:var(--hover)}
+.margin-mode:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.margin-mode[aria-selected="true"]{background:var(--fg);color:var(--bg)}
+.margin-mode[aria-selected="true"]:hover{background:oklch(28% 0.018 70);color:var(--bg)}
+.margins-notes{display:flex;flex-direction:column;min-height:0;flex:1}
+.agent-col{display:flex;flex-direction:column;min-height:0;flex:1}
+.agent-parked{display:flex;flex-direction:column;gap:12px;align-items:flex-start;padding:18px 16px}
+.agent-parked-note{font-family:var(--font-display);font-style:italic;font-size:15px;line-height:1.45;color:var(--muted);margin:0}
+.agent-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:7px 10px 7px 16px;border-bottom:1px solid var(--border);flex:none}
+.a-who{font-family:var(--font-mono);font-size:8px;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted)}
+.a-state{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-mono);font-size:8px;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink-2)}
+.a-dot{width:5px;height:5px;background:var(--ink-3);flex:none}
+.a-state.is-busy .a-dot{background:var(--fg)}
+.a-state.is-stopped .a-dot{background:transparent;box-shadow:inset 0 0 0 1px var(--ink-3)}
+.a-state.is-error{color:var(--fg);font-weight:500}
+.a-state.is-error .a-dot{background:transparent;box-shadow:inset 0 0 0 1.5px var(--fg)}
+.a-label{display:inline-block}
+.a-label.is-working .a-letter{animation:horizon-wave 1.5s ease-in-out infinite}
+.a-label.is-working{font-weight:500}
+.a-state.is-busy .a-dot{animation:horizon-pulse 1.5s ease-in-out infinite}
+@keyframes horizon-wave{0%,62%,100%{opacity:.55}18%{opacity:1}}
+@keyframes horizon-pulse{0%,100%{opacity:1}50%{opacity:.22}}
+@media (prefers-reduced-motion: reduce){
+  .a-label.is-working .a-letter,.a-state.is-busy .a-dot{animation:none;opacity:1}
+}
+.a-model{margin-left:auto;font-family:var(--font-mono);font-size:7.5px;letter-spacing:0.04em;color:var(--ink-4);max-width:15ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.a-acts{display:flex;gap:4px;flex:none}
+.a-btn{font-family:var(--font-mono);font-size:7.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:4px 6px;min-height:24px;background:transparent;cursor:pointer}
+.a-btn:hover{color:var(--fg);border-color:var(--fg);background:var(--paper-dim)}
+.a-btn:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.a-btn:disabled{color:var(--ink-4);border-color:var(--border);cursor:default}
+.a-btn.danger{border-color:var(--fg);color:var(--fg);background:var(--wash-1)}
+.agent-log{overflow-y:auto;flex:1;min-height:0;padding:2px 0 10px;overscroll-behavior:contain}
+.amsg{border-bottom:1px solid var(--rule-soft);padding:10px 16px}
+.amsg.user{background:var(--surface)}
+.amsg .a-top{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+.a-ctx{font-family:var(--font-mono);font-size:7px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-4)}
+.amsg.user .a-body{font-family:var(--font-body);font-size:14px;line-height:1.5;margin:0;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--fg)}
+.amsg.pi .a-body .md{font-size:14px}
+.astream{white-space:pre-wrap;font-family:var(--font-body);font-size:14px;line-height:1.5;overflow-wrap:anywhere;color:var(--fg)}
+.amsg.streaming .a-body{opacity:.82}
+.athink{border-bottom:1px solid var(--rule-soft);padding:3px 16px;font-size:12.5px;color:var(--ink-3)}
+.athink-toggle{display:flex;align-items:baseline;gap:7px;width:100%;background:transparent;border:0;padding:3px 0;min-height:26px;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.athink-toggle:hover .a-who{color:var(--fg)}
+.athink-toggle:hover .a-chev{border-left-color:var(--fg)}
+.athink-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.a-chev{width:0;height:0;flex:none;border-left:4px solid var(--ink-3);border-top:3.5px solid transparent;border-bottom:3.5px solid transparent;transform:translateY(-1px);transition:transform .12s ease}
+.athink.open .a-chev{transform:rotate(90deg) translateX(1px)}
+.a-peek{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-style:italic;font-size:12px;color:var(--ink-4)}
+.a-count{margin-left:auto;flex:none;font-family:var(--font-mono);font-size:7px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-4)}
+.athink-body{margin:1px 0 7px 11px;line-height:1.45;max-height:220px;overflow:auto;overflow-wrap:anywhere}
+.athink-body .md{font-size:12.5px;color:var(--ink-3)}
+.athink-body .md p{margin:0 0 6px;font-style:italic}
+.athink-body .md p:last-child,.athink-body .md ul:last-child,.athink-body .md ol:last-child{margin-bottom:0}
+.athink-body .md ul,.athink-body .md ol{margin:3px 0 6px;padding-left:16px}
+.athink-body .md li{margin:0 0 2px}
+.athink-body .md strong{font-weight:600;color:var(--ink-2)}
+.athink-body .md code{font-size:11.5px}
+.athink.live .a-who{color:var(--ink-2)}
+.athink.live .a-chev{border-left-color:var(--ink-2)}
+.atool{display:flex;gap:7px;align-items:baseline;padding:5px 16px;border-bottom:1px solid var(--rule-soft);font-family:var(--font-mono);font-size:8.5px;color:var(--ink-3);min-height:24px}
+.a-tool-name{flex:none;font-size:7px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-2);min-width:34px}
+.a-tool-detail{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.a-tool-out{width:6px;height:6px;flex:none;border:1px solid var(--ink-3);margin-top:2px}
+.atool.done .a-tool-out{background:var(--ink-3)}
+.atool.failed .a-tool-name{color:var(--fg);text-decoration:line-through}
+.atool.failed .a-tool-out{border-color:var(--fg);background:transparent}
+.anotice{margin:0;padding:6px 16px;border-bottom:1px solid var(--rule-soft);font-family:var(--font-mono);font-size:7.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-3);line-height:1.5}
+.anotice.is-error{color:var(--fg)}
+.agent-empty{padding:16px;display:flex;flex-direction:column;gap:14px}
+.empty-lede{font-family:var(--font-display);font-size:15px;line-height:1.45;color:var(--ink-2);margin:0}
+.empty-note{font-family:var(--font-mono);font-size:7.5px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-3);margin:0;line-height:1.6}
+.asugg{display:flex;flex-direction:column;gap:5px}
+.asugg-btn{text-align:left;border:1px solid var(--border);background:var(--surface);padding:8px 10px;min-height:34px;font-family:var(--font-body);font-size:13.5px;line-height:1.35;color:var(--ink-2);cursor:pointer}
+.asugg-btn:hover{color:var(--fg);border-color:var(--fg);background:var(--hover)}
+.asugg-btn:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.agent-add{border-top:1px solid var(--fg);background:var(--surface);flex:none;display:flex;flex-direction:column}
+.ain{width:100%;resize:none;border:0;border-bottom:1px solid var(--border);background:transparent;padding:9px 12px;font-family:var(--font-body);font-size:14px;line-height:1.45;min-height:60px;max-height:180px}
+.ain::placeholder{color:var(--ink-3);font-style:italic}
+.ain:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.agent-add-bar{display:flex;align-items:center;gap:8px;padding:5px 8px 6px 12px}
+.a-hint{font-family:var(--font-mono);font-size:7px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink-4);line-height:1.4}
+.agent-add-bar .grow{flex:1}
+.a-stop{font-family:var(--font-mono);font-size:8px;letter-spacing:0.09em;text-transform:uppercase;color:var(--fg);border:1px solid var(--fg);padding:5px 8px;min-height:28px;cursor:pointer}
+.a-stop:hover{background:var(--fg);color:var(--bg)}
+.a-stop:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.a-send{font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.09em;text-transform:uppercase;background:var(--fg);color:var(--bg);padding:6px 12px;min-height:30px;border:1px solid var(--fg);cursor:pointer}
+.a-send:hover{background:oklch(28% 0.018 70);border-color:oklch(28% 0.018 70)}
+.a-send:disabled{background:transparent;color:var(--ink-4);border-color:var(--border);cursor:default}
+.a-send:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+
+/* the wide conversation band: the same move as a loose note's Write wide */
+.agentband{margin-top:16px;border:1px solid var(--border);border-top:1px solid var(--fg);background:var(--surface);flex:none;display:flex;flex-direction:column;min-height:0}
+.agentband-head{display:flex;align-items:baseline;gap:9px;border-bottom:1px solid var(--fg);padding:6px 9px;flex-wrap:wrap}
+.agentband-head .t{font-family:var(--font-display);font-size:15px;letter-spacing:-0.01em}
+.agentband-head .k{font-family:var(--font-mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3)}
+.agentband-head .grow{flex:1}
+.agentband-head .a-btn{font-size:8px;min-height:28px;padding:4px 8px}
+.agentband-body{width:100%;max-width:760px;margin:0 auto;display:flex;flex-direction:column;min-height:0}
+.agentband-meta{display:flex;justify-content:center;flex-wrap:wrap;gap:0;padding:6px 12px 0;font-family:var(--font-mono);font-size:7.5px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-4)}
+.agentband .agent-log{max-height:min(46vh,470px);min-height:220px;border-top:1px solid var(--rule-soft);margin-top:6px}
+.agentband .amsg{padding:12px 20px}
+.agentband .atool{padding:6px 20px}
+.agentband .athink{padding:4px 20px}
+.agentband .agent-empty{padding:20px}
+.agentband .ain{min-height:72px}
+.agentband .amsg .a-body .md,.agentband .astream{font-size:15px}
+
+/* the brief's Agent block */
+.agent-settings{margin-top:8px}
+.agent-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:10px 0}
+.agent-check{display:inline-flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2);cursor:pointer;min-height:34px}
+.agent-check input{width:14px;height:14px;accent-color:var(--fg);margin:0;cursor:pointer}
+.agent-check input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.agent-harness{font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink-3)}
+.agent-label{display:block;margin:14px 0 5px;font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.agent-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.agent-levels{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px}
+.agent-levels .mchip[aria-pressed="true"]{border-color:var(--fg);color:var(--fg);background:var(--wash-1)}
+
 /* menu — inside the window, because the native menubar draws no items on GTK */
 .menubar{position:relative;display:flex;align-items:stretch;height:26px;padding:0 14px;border-bottom:1px solid var(--border);background:var(--paper-dim)}
 .menu-trigger{align-self:center;border:0;border-bottom:2px solid transparent;background:transparent;padding:0 9px;height:20px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-2);cursor:default;min-width:0}
@@ -511,7 +655,7 @@ button{background:none;border:0;padding:0;cursor:pointer}
 .subindex .o{font-family:var(--font-mono);font-size:9px;letter-spacing:0.04em;color:var(--ink-3);flex:none;min-width:18px}
 .subindex .h{font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);flex:none;margin-left:auto}
 
-/* mobile agenda */
+/* narrow-window agenda */
 .agenda{display:none;padding:0 20px 10px}
 .ag-week{display:flex;align-items:baseline;gap:10px;padding:16px 0 6px;border-bottom:1px solid var(--fg)}
 .ag-week .m{font-family:var(--font-display);font-size:17px;letter-spacing:-0.01em}
@@ -621,6 +765,16 @@ button{background:none;border:0;padding:0;cursor:pointer}
   .note-sub,.mchip,.note-open{min-height:44px;padding:8px 10px;font-size:9px}
   .noteband{margin:12px 0 0}
   .noteband-acts .chip{min-height:44px}
+  .agentband{margin:12px 0 0}
+  .agentband-head .a-btn{min-height:44px}
+  .margin-mode{min-height:36px;padding:6px 9px;font-size:8.5px}
+  .a-btn{min-height:36px}
+  .a-send,.a-stop{min-height:40px}
+  .asugg-btn{min-height:44px}
+  .ain{font-size:15px}
+  .agent-col{min-height:420px}
+  .agentband .agent-log{max-height:none;min-height:260px}
+  .agent-pair{grid-template-columns:1fr}
   .note-sum{min-height:44px}
   .evd-note .mode button{min-height:34px}
   .mdbar button{min-height:40px;min-width:38px}
@@ -660,7 +814,7 @@ button{background:none;border:0;padding:0;cursor:pointer}
   .brief h2{font-size:32px}
 }
 @media (pointer: coarse){
-  .boot-vault .chip,.viewtab,.modebtn,.composer button,.chip,.weightbtn,.note-clip,.note-sub,.note-open,.mchip,.note-rm,.noteadd > button,.mdbar button,.fold-head .x,.sheet-open,.markpick button,.subpick button,.index-clear,.index-more,.evd-note .mode button,.clip-detach,.nowline{min-height:44px}
+  .boot-vault .chip,.viewtab,.modebtn,.composer button,.chip,.weightbtn,.note-clip,.note-sub,.note-open,.mchip,.note-rm,.noteadd > button,.mdbar button,.fold-head .x,.sheet-open,.markpick button,.subpick button,.index-clear,.index-more,.evd-note .mode button,.clip-detach,.nowline,.margin-mode,.a-btn,.a-send,.a-stop,.asugg-btn{min-height:44px}
   .cell{min-height:52px}
   .ag-day{min-height:56px}
   .evrow{grid-template-columns:44px 44px minmax(0,1fr) 48px 44px}
@@ -698,3 +852,63 @@ button{background:none;border:0;padding:0;cursor:pointer}
 .sync-version-head{display:flex;gap:10px;align-items:center;padding:8px 10px;border-bottom:1px solid var(--border)}
 .sync-version-path{flex:1;font-family:var(--font-mono);font-size:10.5px;line-height:1.4;color:var(--fg);overflow-wrap:anywhere}
 .sync-version-body{margin:0;padding:12px;max-height:320px;overflow:auto;font-family:var(--font-mono);font-size:11px;line-height:1.55;white-space:pre-wrap;color:var(--ink-2)}
+
+/* reminders — one quiet strip, one line each. Nothing on the wall, no badges,
+   no overdue red beyond a single muted numeral. The strip only exists when
+   there is something to remind, so the default page is unchanged. */
+.rstrip{display:flex;flex-direction:column;min-width:0;padding:2px 14px 6px}
+.rstrip-head{display:flex;align-items:baseline;gap:10px;width:100%;text-align:left;padding:4px 0;min-height:26px;border-bottom:1px solid var(--rule-soft)}
+.rstrip-head .t{font-family:var(--font-mono);font-size:9px;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
+.rstrip-head .k{font-size:13.5px;font-style:italic;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.rstrip-head .chev{margin-left:auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-3);padding-left:10px}
+.rstrip-head:hover .t{color:var(--fg)}
+.rstrip-head:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.rlist{list-style:none;margin:0;padding:0}
+.rrow{display:flex;align-items:baseline;gap:10px;padding:6px 0;border-bottom:1px solid var(--rule-soft);min-height:32px}
+.rwhen{flex:0 0 96px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.04em;color:var(--muted);white-space:nowrap;text-transform:uppercase}
+.rrow.due .rwhen{color:var(--accent-ink)}
+.rtext{flex:1 1 auto;min-width:0;font-size:14.5px;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rrep,.rsrc{flex:none;font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-4);white-space:nowrap}
+.racts{flex:none;display:flex;gap:2px;align-items:center;margin-left:auto}
+.rbtn{font-family:var(--font-mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-4);padding:3px 6px;border:1px solid transparent;white-space:nowrap;min-height:24px}
+.rbtn:hover{color:var(--fg);border-color:var(--border);background:var(--hover)}
+.rbtn:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.rbtn.primary{color:var(--accent-ink);border-color:var(--accent);padding:5px 12px}
+.rbtn.primary:hover{background:var(--accent);color:var(--surface)}
+.rbtn.done{color:var(--ink-3)}
+.rbtn.danger{font-size:12px;padding:2px 6px}
+.rfoot{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:8px 0 2px}
+.rnew{font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);padding:4px 0;border-bottom:1px solid var(--border)}
+.rnew:hover{color:var(--fg);border-color:var(--fg)}
+.rclosed,.rnote{font-family:var(--font-mono);font-size:9px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-4);margin-left:auto;text-align:right}
+.rclosed:hover{color:var(--fg)}
+
+/* the panel — the same inline shape the subject and mark pickers use */
+.remind-panel{display:flex;flex-direction:column;gap:8px;padding:12px 14px;margin:8px 0 4px;border:1px solid var(--border);background:var(--surface);flex-basis:100%}
+.remind-quick{display:flex;gap:4px;flex-wrap:wrap}
+.remind-when,.remind-text{width:100%;border:1px solid var(--border);background:var(--bg);padding:8px 10px;font-size:14px;min-height:38px}
+.remind-when:focus,.remind-text:focus{outline:none;border-color:var(--fg)}
+.remind-when::placeholder,.remind-text::placeholder{color:var(--ink-4)}
+.remind-preview{font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.05em;color:var(--ink-3);text-transform:uppercase}
+.remind-preview.bad{color:var(--accent-ink);text-transform:none;font-family:var(--font-body);font-size:13px;letter-spacing:0}
+.remind-err{color:var(--accent-ink);font-size:13px;margin:0}
+.remind-acts{display:flex;gap:8px;align-items:center}
+
+/* the toast — one line under the masthead, never focus-stealing */
+.rtoast{display:flex;align-items:center;gap:12px;padding:7px 28px;border-bottom:1px solid var(--rule-soft);background:var(--paper-dim);animation:rtoast-in .18s ease-out}
+.rtoast .rt-text{font-size:14.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rtoast .rt-acts{display:flex;gap:4px;align-items:center;margin-left:auto}
+@keyframes rtoast-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.rtoast{animation:none}}
+
+@media (max-width:700px){
+  .rrow{flex-wrap:wrap;row-gap:2px}
+  .rwhen{flex-basis:auto}
+  .rtext{flex-basis:100%;white-space:normal}
+  .racts{margin-left:0}
+  .rtoast{padding:7px 20px}
+}
+@media (pointer: coarse){
+  .rbtn{min-height:34px;padding:6px 8px}
+  .rstrip-head{min-height:38px}
+}

@@ -135,11 +135,13 @@ affordance.
 | `← / →` | Previous / next day (works on a focused cell *and* inside an open fold) |
 | `↑ / ↓` | Previous / next week |
 | `⌘/Ctrl + Enter` | Finish writing a note, return to reading |
+| `Alt+N` / `Alt+A` | The margin's two readings: loose notes, the agent |
+| `Esc` (agent column, then band) | Widen the conversation above the wall, then return it to the column |
 | `draw: marks / words` | Redraw the quarter as marks, or as full sentences (globally persisted) |
 
 Arrow-key movement must focus the target cell; focus must never be lost to `body`.
 
-### 1.8 Mobile is a different shape, not a squeezed one
+### 1.8 Narrow windows are a different shape, not a squeezed one
 
 Below ~700px the wall is replaced by a **vertical week-by-week agenda**: week header, then day rows
 with weekday, numeral, and their marks or words. Landmark days render as ink-filled rows. No
@@ -149,6 +151,33 @@ horizontal scrolling anywhere, ever. Current week always rendered, even if empty
 
 Open day, subject lens, draw mode, entries with notes, loose notes, day pages, per-entry and per-day
 note editor mode. Persistence is silent — no "saved" toast, no autosave indicator.
+
+### 1.10 The agent — a collaborator in the margin, not a chat app
+
+The same Markdown folder can be handed to an agentic harness (Pi is the first adapter) and talked to
+from the margin. This is the one place a second voice is allowed, because the quarter is the context:
+the agent reads the files the wall reads, so a question about the quarter is answered without a
+second app, a copy-paste or an index to rebuild.
+
+- **Same address as loose notes.** The margin head has two readings, `Notes | Agent` (`Alt+N` /
+  `Alt+A`). Nothing is added to the navigation tree; the column that already holds undated details
+  gets a second use. It is not a sidebar.
+- **The same widening move.** `Wide ↗` (or `Esc` on the column) lifts the conversation into a centred
+  band above the wall, exactly as `Write wide` does for a note; `Esc` returns it to the column. The
+  quarter stays visible beneath it: a reading surface, not a modal.
+- **Reads the store, not a copy.** The harness starts in the vault with the same files; a short
+  manual describes the layout, frontmatter and vocabulary, and each message carries the current
+  reading (today, window, lens, open day, loose notes). There is no sync step between the wall and
+  the conversation.
+- **Writing is visible and merged.** With writing on, the agent may add or edit entries, notes and
+  pages. After each run the app merges the folder with the same three-way merge sync uses, so an
+  edit made while the agent worked survives and a genuine conflict is kept aside instead of chosen
+  silently. The app never commits for the agent; sync owns that. With writing off the harness is
+  read-only.
+- **No inbox, no badges, no daily prompt.** A conversation has no unread state and no "process me"
+  affordance. It is a thing you open, like a loose note, and leave.
+- **Nothing durable in the vault.** The transcript and the manual live in the app's config folder,
+  never in the store, and the conversation is not part of the document model.
 
 ---
 
@@ -357,11 +386,24 @@ type LooseNote = {
 
 type DayPage = { [day: string]: string };   // markdown, '' when unwritten
 
+type Reminder = {
+  id: string;
+  text: string;
+  nextAt: string;           // ISO, UTC
+  repeat: "once" | "daily" | "weekly" | "monthly";
+  anchorDay?: number | null; // monthly: the day it keeps
+  source: "bare" | `note:${string}` | `entry:${string}`;
+  done: boolean;
+  createdAt: string;
+  lastFired?: string | null;
+};
+
 type Doc = {
   version: 1;
   entries: Entry[];
   notes: LooseNote[];
   pages: DayPage;
+  reminders: Reminder[];    // the §7 exception: a separate record, never a field
   ui: { drawMode: "marks" | "words"; lens: string | null; openDay: string | null };
 };
 ```
@@ -369,8 +411,10 @@ type Doc = {
 Derived, never stored: weight per day, counts per subject, "days carrying something", "days still
 open", `MD` / `N` badges, week tier.
 
-**Do not add** fields for: tags, folders, projects, priorities, colours, streaks, reminders, recurrences
-(see §7). Adding one of these is a design regression, not a feature.
+**Do not add** fields for: tags, folders, projects, priorities, colours, streaks, recurrences
+(see §7). Reminders are the one sanctioned exception, recorded in §7, and live only in the
+`reminders` list below — never on entries, notes or days. Adding any other field here is a design
+regression, not a feature.
 
 ---
 
@@ -404,9 +448,21 @@ These are the failure modes of the tools this app replaces. Each would reintrodu
   one-click correction is the entire taxonomy UX.
 - **No generic productivity chrome.** No sidebar, no cards grid, no kanban, no charts — the user
   rejected charts outright: *a chart is an abstraction you decode before you can read it.* If a view
-  needs a legend, it is the wrong view.
+  needs a legend, it is the wrong view. The agent (§1.10) is not an exception to this: it is the
+  margin's second reading, with no conversation list, no channels and no unread state.
 - **No rich-text editor.** Markdown only (§3.3).
 - **No notification system in v1.** If ever added, it is one quiet daily line, not a stream.
+  **Sanctioned exception — reminders.** The owner asked for them, so they exist under the same
+  restraint: a reminder is a separate `reminders/` record (never a field on an entry or note), it is
+  drawn in one quiet strip above the wall, one line each, soonest first, and nothing else. No stream,
+  no badge, no count on the masthead, no overdue red, no snooze history. A fired reminder shows one
+  toast line and advances itself; a one-off is then spent and its record is dropped, a repeat moves
+  to its next occurrence. A reminder that passed while the window was closed is caught up as
+  a single sentence, never a burst. Recurrence is limited to once / daily / weekly / monthly, spoken
+  in the same one-line grammar as everything else ("every month on the 30th"), and monthly keeps its
+  anchor day. Delivery is hybrid: an in-app timer while Horizon is open, and an opt-in systemd user
+  timer (`horizon-app --fire-due`, once a minute) while it is closed. A heartbeat file says a window
+  is open, so the timer stands down and each reminder fires once.
 - **No account requirement.** Local-first. Sync, if built, is a background detail that never produces
   a conflict dialog.
 
@@ -422,8 +478,8 @@ reference, **not** as the architecture to extend.
   Pure functions, no DOM, unit-tested — these carry every product opinion.
 - **Weekly drag** (the range rolls forward each day). The window must roll without losing the open
   day, and a day that leaves the window must not lose its data.
-- **Persistence**: a folder of plain Markdown files as the live store on desktop and Android, the
-  same format on both, **plus export/import as JSON** — writing must always be readable by
+- **Persistence**: a folder of plain Markdown files as the live store, the
+  same format for every copy, **plus export/import as JSON** — writing must always be readable by
   anything, including a plain text editor in ten years.
 - **Accessibility**: real buttons, `aria-pressed` on lens and mode toggles, a live region for status
   messages, focus preservation across fold open/close and arrow navigation, full keyboard operation,
@@ -458,7 +514,7 @@ reference, **not** as the architecture to extend.
 - [ ] Loose notes live in the margin and clip to a day in one click.
 - [ ] `MD` / `N` badges correct and hidden under a lens.
 - [ ] Words mode renders full sentences; mode survives reload.
-- [ ] Mobile agenda below 700px, no horizontal scroll, 44px targets, today marked in all three ways.
+- [ ] Narrow agenda below 700px, no horizontal scroll, 44px targets, today marked in all three ways.
 - [ ] Persistence: reload restores everything; export/import JSON; export markdown folder.
 - [ ] Contrast, focus rings and hover states verified against §4; no reduced-contrast hover.
 - [ ] No feature from §7 has crept in.

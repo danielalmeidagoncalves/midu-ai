@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
-# Build the two things Horizon ships: a desktop package and an Android APK.
+# Build what Horizon ships: a Linux desktop package.
 #
 #   tools/release.sh desktop   -> dist/horizon-app_<version>_amd64.deb
 #   tools/release.sh appimage  -> dist/Horizon-<version>-x86_64.AppImage (needs a system libxdo)
-#   tools/release.sh android   -> dist/Horizon-<version>.apk          (needs the Android SDK + NDK)
-#   tools/release.sh all       -> desktop and android
 #
 # Nothing here is clever: each recipe is the `dx bundle` invocation that works,
 # with the two environment variables this machine needs folded in.
@@ -36,23 +34,12 @@ appimage() {
   echo "appimage: see $OUT"
 }
 
-android() {
-  : "${ANDROID_HOME:=${ANDROID_SDK_ROOT:-}}"
-  : "${ANDROID_NDK_HOME:=${ANDROID_NDK_ROOT:-$ANDROID_HOME/ndk}}"
-  export ANDROID_HOME ANDROID_SDK_ROOT="$ANDROID_HOME" ANDROID_NDK_HOME ANDROID_NDK_ROOT="$ANDROID_NDK_HOME"
-  # Android has no system OpenSSL, so the git client compiles its own.
-  dx bundle --package horizon-app --release --platform android \
-    --package-types apk --features mobile,sync-vendored --out-dir "$OUT"
-  ls -1 "$OUT"/*.apk
-}
-
 case "${1:-}" in
   desktop) desktop ;;
   appimage) appimage ;;
-  android) android ;;
-  all) desktop; android ;;
+  all) desktop; appimage ;;
   *)
-    echo "usage: $0 {desktop|appimage|android|all}" >&2
+    echo "usage: $0 {desktop|appimage|all}" >&2
     exit 2
     ;;
 esac

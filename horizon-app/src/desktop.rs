@@ -60,8 +60,11 @@ mod native {
             .map(|path| path.display().to_string())
     }
 
-    /// Close the window and, with it, the process.
+    /// Close the window and, with it, the process. The agent child is asked to
+    /// shut down first: an orphaned harness would keep a session open behind a
+    /// window that no longer exists.
     pub fn quit() {
+        crate::agent::shutdown();
         std::process::exit(0);
     }
 }

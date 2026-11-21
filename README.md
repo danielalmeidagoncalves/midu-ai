@@ -20,7 +20,7 @@ Dioxus CLI 0.7.10 (`curl -fsSL https://dioxuslabs.com/install.sh | bash` or
 `cargo install dioxus-cli@0.7.10`).
 
 ```sh
-# Desktop (the default feature)
+# Desktop
 cargo run -p horizon-app
 
 # Desktop through the Dioxus CLI
@@ -30,15 +30,11 @@ dx serve --package horizon-app --desktop
 cargo test -p horizon-core
 # Markdown-store filesystem tests (linker and loader both need the libxdo prefix here)
 LIBRARY_PATH=$HOME/.local/lib LD_LIBRARY_PATH=$HOME/.local/lib cargo test -p horizon-app
-# Android: compile-check only, no device needed
-cargo check -p horizon-app --no-default-features --features mobile --target aarch64-linux-android
 ```
 
 Linux desktop needs the WebKitGTK development libraries and `libxdo` (on Arch:
 `sudo pacman -S webkit2gtk-4.1 gtk3 xdotool`). If `libxdo` is installed in a non-standard prefix,
-set `LIBRARY_PATH` when linking. The desktop build sets one `desktop_shell` cfg from
-`horizon-app/build.rs`, so the source can say `#[cfg(desktop_shell)]` instead of repeating a
-two-target list; it is the only platform switch in the code.
+set `LIBRARY_PATH` when linking.
 
 The first launch is an empty quarter. To see the concept's sample quarter (for screenshots or a
 walkthrough), set `HORIZON_DEMO=1` on an empty store:
@@ -54,9 +50,10 @@ in the footer if none answers), and Quit. `Ctrl+Q` (`Cmd+Q` on macOS) quits from
 saves first.
 
 Persistence is silent and local-first. The live store is a folder of plain Markdown files: one per
-entry, one per loose note, one per day page, plus `state.md`. There is no account, no server and no
-save indicator: the folder is the store, and any editor can read it. The optional git sync in the
-next section is the only thing that leaves the device, and only when you point it at a remote.
+entry, one per loose note, one per day page, one per reminder, plus `state.md`. There is no account,
+no server and no save indicator: the folder is the store, and any editor can read it. The optional
+git sync in the next section is the only thing that leaves the device, and only when you point it at
+a remote.
 
 **The vault is yours to place.** On first launch - when no folder has been chosen yet - Horizon
 shows one page instead of the wall and asks where the Markdown should live. It suggests
@@ -69,8 +66,8 @@ happens; an existing Horizon folder opens as it is, and an empty or new one star
 
 ## The Markdown format
 
-There is one format, and desktop and Android write exactly the same one. A folder copied from a
-phone opens on a desktop without conversion.
+There is one format, and every copy writes exactly the same one. A folder copied to another
+machine opens without conversion.
 
 ```text
 <store>/
@@ -78,7 +75,8 @@ phone opens on a desktop without conversion.
 ├── state.md
 ├── entries/<day>-<slug>-<shortid>.md
 ├── notes/<slug>-<shortid>.md
-└── days/<day>.md
+├── days/<day>.md
+└── reminders/<slug>-<shortid>.md
 ```
 
 - **One file per object.** An entry, a note and a day page each get one file. Nothing is aggregated:
@@ -125,8 +123,8 @@ content, so a blank day stays blank.
 
 ## Sync
 
-The store is a git repository, and Horizon is its only client. One HTTPS remote keeps the desktop
-and the phone on the same folder; the version history is the writing itself.
+The store is a git repository, and Horizon is its only client. One HTTPS remote keeps two machines
+on the same folder; the version history is the writing itself.
 
 - **Automatic.** Twenty seconds after you stop writing, the burst becomes one commit
   (`Wrote 2 entries, 1 note`) and leaves the device. A launch pulls, and so does a quiet
@@ -144,21 +142,42 @@ and the phone on the same folder; the version history is the writing itself.
 Set the remote once in the brief with a personal access token. The token is kept beside the store
 (`horizon-sync/token`, mode 0600), never inside it and never in a commit.
 
-Desktop builds include sync by default. Android has no system OpenSSL, so a device build turns on
-the vendored one and needs the NDK:
-
-```sh
-cargo build -p horizon-app --no-default-features --features mobile,sync-vendored \
-  --target aarch64-linux-android
-```
-
-libgit2 is the engine because gitoxide cannot push: `gix` 0.90 and `gix-protocol` 0.68 have no
-receive-pack client. The NDK is needed to link any Android build, not because of git; what sync adds
-there is the bundled C sources and vendored OpenSSL.
+Sync is on by default. libgit2 is the engine because gitoxide cannot push: `gix`
+0.90 and `gix-protocol` 0.68 have no receive-pack client.
 
 The merge rules are pure and tested in `horizon-core/src/sync.rs`; the libgit2 calls live in
 `horizon-app/src/git.rs`; the background thread that commits and syncs is
 `horizon-app/src/sync.rs`.
+
+## The agent
+
+The right margin has a second reading: `Notes | Agent` in the column head (`Alt+N` / `Alt+A`).
+It talks to an agentic harness — Pi is the first — that runs in the store folder and reads the same
+Markdown the wall does, so a question about the quarter needs no export and no second app.
+
+- **Same shape as a loose note.** `Wide ↗` (or `Esc` on the column) lifts the conversation into a
+  centred band above the wall; `Esc` returns it. The quarter stays visible beneath it.
+- **The store is the context.** Pi starts with a generated manual describing the folder, the
+  frontmatter, the marks and the subjects, plus a short preamble naming today, the window, the lens
+  and the open day. Nothing is indexed or copied.
+- **Writing is visible.** With writing on, Pi may add or edit entries, notes and pages. Horizon
+  merges the folder after each run with the same three-way merge as sync, so a change made while it
+  worked survives; a real conflict is kept aside under `conflicts/`. The app never commits for it.
+- **Nothing durable in the vault.** The transcript and the manual live in
+  `~/.config/horizon/agent/`, never in the store.
+
+Pi must be on `PATH` (`pi --version`). Settings live in the brief under **The agent** and in
+`~/.config/horizon/config.toml`:
+
+| Key | Default | Meaning |
+| --- | --- | --- |
+| `agent` | `on` | `off` hides the agent reading |
+| `agent.command` | `pi` | the harness binary |
+| `agent.provider` | (empty) | passed as `--provider` when set |
+| `agent.model` | (empty) | passed as `--model` when set; empty inherits Pi's default |
+| `agent.thinking` | (empty) | `off` … `max` |
+| `agent.context` | `on` | send the on-screen preamble with each message |
+| `agent.write` | `off` | allow `write`, `edit` and `bash`; off is read-only |
 
 ## Documentation
 
@@ -222,50 +241,15 @@ missing on the build machine. Horizon links `libxdo.so.4` through `muda` (Dioxus
 ships that library inside `xdotool`, so build the AppImage on a machine where `xdotool` is installed
 system-wide, or point `LD_LIBRARY_PATH` at a copy of `libxdo.so.4` while bundling.
 
-**Android.** `dx bundle --package horizon-app --release --platform android --package-types apk
---features mobile,sync-vendored` produces the APK. It needs, once:
-
-```sh
-sudo pacman -S android-sdk android-ndk          # or the SDK manager of your choice
-export ANDROID_HOME=$HOME/Android/Sdk ANDROID_NDK_HOME=$ANDROID_HOME/ndk/<version>
-rustup target add aarch64-linux-android
-```
-
-`--features mobile,sync-vendored` matters: the default feature set is the desktop one, and Android
-has no system OpenSSL, so git sync compiles its own (needs `perl` and a few minutes). Without the
-`sync` features the APK builds faster but has no Sync block. `sync-vendored` on Android is not yet
-verified on a device - see the open items in [`HANDOFF.md`](HANDOFF.md).
-
-The first APK is signed with a locally generated debug key. That is fine for sideloading onto your
-own phone; the key cannot update an install signed by a different key, so before you rely on
-updating in place, generate a keystore, point the Dioxus Android bundle settings in `Dioxus.toml` at
-it, and keep it somewhere safe. To install: `adb install -r dist/*.apk`.
-
-**Version.** Both artifacts take their version from `version.workspace = true` in the workspace
+**Version.** Both desktop artifacts take their version from `version.workspace = true` in the workspace
 `Cargo.toml`; bump it there. The desktop package uses the crate name (`horizon-app`) in its
 filename and installed path; the product name in menus and the window title is `Horizon` from
 `Dioxus.toml`.
 
-## Android notes
-
-The UI is one crate and switches to the vertical week-by-week agenda below 700px. To compile-check
-Android without an APK, no NDK is needed because nothing is linked:
-
-```sh
-rustup target add aarch64-linux-android
-cargo check -p horizon-app --no-default-features --features mobile --target aarch64-linux-android
-```
-
-Android has no folder picker in the shared webview API, so the vault is the app files folder, and
-the Markdown copy is written to the app's external files directory
-(`Android/data/app.horizon/files/`), reachable over USB and from a file manager, falling back to the
-app-private folder. JSON export/import remains available.
-
 ## Scope
 
-Two targets only: desktop and Android. Horizon has no server component, is not deployed anywhere,
-and has no browser build — the app owns a local folder and nothing else. The only `cfg` split in the
-code is desktop-versus-Android.
+Desktop only. Horizon has no server component, is not deployed anywhere, and has no browser build —
+the app owns a local folder and nothing else.
 
 ## Layout
 

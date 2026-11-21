@@ -3,7 +3,7 @@
 # build and stage the release binary, then install dist/horizon-*.pkg.tar.zst.
 pkgname=horizon
 pkgver=0.1.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Ninety days as a wall of marks, with a markdown page underneath every day"
 arch=(x86_64)
 url="https://github.com/danielagoncalves/horizon"

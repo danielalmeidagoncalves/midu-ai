@@ -3,8 +3,8 @@
 //! Horizon keeps a folder of plain Markdown files: one per entry, note and day,
 //! plus `state.md`. The folder is the live store — there is no server and no
 //! database. The owner picks it once, on first launch, and the choice is kept in
-//! `vault.txt` beside the app's own data. Desktop suggests `~/Documents/Horizon`,
-//! Android the app files directory; `HORIZON_STORE` overrides both.
+//! `vault.txt` beside the app's own data. Horizon suggests `~/Documents/Horizon`;
+//! `HORIZON_STORE` overrides that.
 
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
@@ -15,43 +15,28 @@ use horizon_core::store;
 use horizon_core::Doc;
 
 const README: &str = "# Horizon markdown store\n\n\
-This folder is the live Horizon store. Every entry, note and day page is a Markdown\n\
-file with YAML-style frontmatter; `state.md` holds the open day, lens and draw mode.\n\
+This folder is the live Horizon store. Every entry, note, day page and reminder is\n\
+a Markdown file with YAML-style frontmatter; `state.md` holds the open day, lens\n\
+and draw mode. `reminders/` holds one file per reminder.\n\
 Keep the frontmatter fields and write freely in the body.\n";
 
 fn js_string(value: &str) -> String {
     serde_json::to_string(value).unwrap_or_else(|_| "\"\"".into())
 }
 
-#[cfg(desktop_shell)]
 fn data_dir() -> Option<PathBuf> {
     dirs::data_dir()
 }
 
-#[cfg(not(desktop_shell))]
-fn data_dir() -> Option<PathBuf> {
-    sysdirs::data_dir()
-        .or_else(|| std::env::var_os("HOME").map(PathBuf::from))
-        .or_else(|| Some(std::env::temp_dir()))
-}
-
 /// The folder Horizon suggests when there is no vault yet: visible in a file
-/// manager, so it is easy to back up or point a sync tool at. On Android the app
-/// files directory is the only place that needs no permission.
+/// manager, so it is easy to back up or point a sync tool at.
 pub fn default_vault() -> Option<PathBuf> {
-    #[cfg(desktop_shell)]
-    {
-        let home = dirs::home_dir()?;
-        let documents = home.join("Documents");
-        if documents.is_dir() {
-            Some(documents.join("Horizon"))
-        } else {
-            Some(home.join("Horizon"))
-        }
-    }
-    #[cfg(not(desktop_shell))]
-    {
-        data_dir().map(|dir| dir.join("horizon"))
+    let home = dirs::home_dir()?;
+    let documents = home.join("Documents");
+    if documents.is_dir() {
+        Some(documents.join("Horizon"))
+    } else {
+        Some(home.join("Horizon"))
     }
 }
 
@@ -72,16 +57,7 @@ pub fn expand_home(path: &str) -> PathBuf {
 /// the vault must not be inside it. `$XDG_CONFIG_HOME/horizon` on Linux
 /// (`~/.config/horizon` by default).
 fn config_dir() -> Option<PathBuf> {
-    #[cfg(desktop_shell)]
-    {
-        dirs::config_dir().map(|dir| dir.join("horizon"))
-    }
-    #[cfg(not(desktop_shell))]
-    {
-        sysdirs::config_dir()
-            .or_else(data_dir)
-            .map(|dir| dir.join("horizon"))
-    }
+    dirs::config_dir().map(|dir| dir.join("horizon"))
 }
 
 fn config_file() -> Option<PathBuf> {
@@ -94,16 +70,27 @@ const CONFIG_HEADER: &str = "\
 # folder keeps the pointer valid and the pointer never enters a commit.
 ";
 
-/// One key, one line. Written with JSON quoting because that is also a valid
-/// TOML basic string, so a path with spaces, quotes or backslashes survives.
+/// One key, one line, JSON-quoted (which is also valid TOML basic-string syntax,
+/// so a path with spaces, quotes or backslashes survives).
 fn render_config(vault: &Path) -> String {
     let quoted = serde_json::to_string(&vault.display().to_string()).unwrap_or_default();
     format!("{CONFIG_HEADER}vault = {quoted}\n")
 }
 
-/// Read the one key this file carries. Comments and unknown keys are ignored,
-/// so the file can gain a second setting without a TOML dependency.
-fn parse_config(text: &str) -> Option<PathBuf> {
+/// Every `key = value` line in the settings file. Comments, blank lines and
+/// unknown keys are ignored, so the file can grow without a TOML dependency.
+pub fn settings() -> BTreeMap<String, String> {
+    let Some(file) = config_file() else {
+        return BTreeMap::new();
+    };
+    match std::fs::read_to_string(file) {
+        Ok(text) => parse_settings(&text),
+        Err(_) => BTreeMap::new(),
+    }
+}
+
+fn parse_settings(text: &str) -> BTreeMap<String, String> {
+    let mut settings = BTreeMap::new();
     for line in text.lines() {
         let line = line.trim();
         if line.is_empty() || line.starts_with('#') {
@@ -112,20 +99,94 @@ fn parse_config(text: &str) -> Option<PathBuf> {
         let Some((key, value)) = line.split_once('=') else {
             continue;
         };
-        if key.trim() != "vault" {
+        let key = key.trim();
+        if key.is_empty() {
             continue;
         }
         let value = value.trim();
-        let path = serde_json::from_str::<String>(value)
+        let value = serde_json::from_str::<String>(value)
             .unwrap_or_else(|_| value.trim_matches('"').to_string());
-        if !path.trim().is_empty() {
-            return Some(PathBuf::from(path));
-        }
+        settings.insert(key.to_string(), value);
     }
-    None
+    settings
+}
+
+/// Read the one key the vault pointer needs. Kept separate from `settings` so a
+/// missing or malformed agent key can never hide the vault.
+fn parse_config(text: &str) -> Option<PathBuf> {
+    parse_settings(text)
+        .remove("vault")
+        .filter(|path| !path.trim().is_empty())
+        .map(PathBuf::from)
+}
+
+/// Change settings in place, keeping comments, unknown keys and the order of the
+/// lines that are not being changed. The brief's Agent block is the only caller;
+/// the vault pointer uses the same path so re-choosing a folder never drops the
+/// agent's configuration.
+fn update_config(pairs: &[(&str, String)]) -> Result<(), String> {
+    let file = config_file().ok_or("Could not find Horizon's config directory.")?;
+    let text = std::fs::read_to_string(&file).unwrap_or_default();
+    let text = set_config_lines(&text, pairs);
+    if let Some(parent) = file.parent() {
+        std::fs::create_dir_all(parent).map_err(|e| e.to_string())?;
+    }
+    std::fs::write(&file, text).map_err(|e| e.to_string())
+}
+
+/// Replace or append `key = value` lines, keeping comments, unknown keys and the
+/// order of everything else. Pure, so the file's survival is testable without
+/// touching the real settings.
+fn set_config_lines(text: &str, pairs: &[(&str, String)]) -> String {
+    let mut text = if text.trim().is_empty() {
+        CONFIG_HEADER.to_string()
+    } else {
+        text.to_string()
+    };
+    for (key, value) in pairs {
+        let quoted = serde_json::to_string(value).unwrap_or_default();
+        let line = format!("{key} = {quoted}");
+        let mut replaced = false;
+        let mut next = String::new();
+        for existing in text.lines() {
+            let matches = existing
+                .split_once('=')
+                .is_some_and(|(candidate, _)| candidate.trim() == *key);
+            if matches && !replaced {
+                replaced = true;
+                next.push_str(&line);
+            } else {
+                next.push_str(existing);
+            }
+            next.push('\n');
+        }
+        if !replaced {
+            next.push_str(&line);
+            next.push('\n');
+        }
+        text = next;
+    }
+    text
+}
+
+/// Persist the Agent block. Comments and unrelated keys survive.
+pub fn save_agent_config(config: &crate::agent::AgentConfig) -> Result<(), String> {
+    let pairs: Vec<(&str, String)> = config.settings();
+    update_config(&pairs)
+}
+
+/// The agent's configuration, read fresh so a hand edit of `config.toml` is
+/// picked up on the next restart without a cache to invalidate.
+pub fn agent_config() -> crate::agent::AgentConfig {
+    crate::agent::AgentConfig::from_settings(&settings())
 }
 
 fn write_config(vault: &Path) -> Result<(), String> {
+    // Keep an existing file's comments and agent settings; only the pointer moves.
+    let path = vault.display().to_string();
+    if config_file().is_some_and(|file| file.is_file()) {
+        return update_config(&[("vault", path)]);
+    }
     let file = config_file().ok_or("Could not find Horizon's config directory.")?;
     if let Some(parent) = file.parent() {
         std::fs::create_dir_all(parent).map_err(|e| e.to_string())?;
@@ -225,7 +286,7 @@ fn read_store(dir: &Path) -> Result<BTreeMap<String, String>, String> {
             std::fs::read_to_string(&state).map_err(|e| e.to_string())?,
         );
     }
-    for sub in ["entries", "notes", "days"] {
+    for sub in ["entries", "notes", "days", "reminders"] {
         let subdir = dir.join(sub);
         if !subdir.is_dir() {
             continue;
@@ -254,14 +315,34 @@ fn managed_file(path: &Path) -> bool {
         return false;
     };
     text.starts_with("---\n")
-        && ["kind: \"entry\"", "kind: \"note\"", "kind: \"day\""]
-            .iter()
-            .any(|marker| text.contains(marker))
+        && [
+            "kind: \"entry\"",
+            "kind: \"note\"",
+            "kind: \"day\"",
+            "kind: \"reminder\"",
+        ]
+        .iter()
+        .any(|marker| text.contains(marker))
+}
+
+/// What Horizon last read or wrote, file path by file path. It is the base of
+/// the three-way merge used after an external writer (the agent, an editor, a
+/// pull) touches the folder while the app is open.
+static LAST_FILES: std::sync::Mutex<Option<BTreeMap<String, String>>> = std::sync::Mutex::new(None);
+
+fn remember(files: &BTreeMap<String, String>) {
+    if let Ok(mut last) = LAST_FILES.lock() {
+        *last = Some(files.clone());
+    }
+}
+
+fn last_files() -> Option<BTreeMap<String, String>> {
+    LAST_FILES.lock().ok().and_then(|last| last.clone())
 }
 
 fn write_store(dir: &Path, files: &BTreeMap<String, String>) -> Result<(), String> {
     std::fs::create_dir_all(dir).map_err(|e| e.to_string())?;
-    for sub in ["entries", "notes", "days"] {
+    for sub in ["entries", "notes", "days", "reminders"] {
         std::fs::create_dir_all(dir.join(sub)).map_err(|e| e.to_string())?;
     }
 
@@ -284,7 +365,7 @@ fn write_store(dir: &Path, files: &BTreeMap<String, String>) -> Result<(), Strin
     }
 
     let expected: BTreeSet<&str> = files.keys().map(String::as_str).collect();
-    for sub in ["entries", "notes", "days"] {
+    for sub in ["entries", "notes", "days", "reminders"] {
         let subdir = dir.join(sub);
         let Ok(read_dir) = std::fs::read_dir(&subdir) else {
             continue;
@@ -303,7 +384,102 @@ fn write_store(dir: &Path, files: &BTreeMap<String, String>) -> Result<(), Strin
             }
         }
     }
+    remember(files);
     Ok(())
+}
+
+/// Merge three file maps, path by path. `base` is what Horizon last read or
+/// wrote, `local` is the document in memory, `remote` is the folder now.
+///
+/// A path changed on one side takes that side; a write beats a delete; two
+/// different writes keep the local text and return the remote text so the
+/// caller can file it under `conflicts/`. `state.md` is device state and is
+/// always taken from `local` — the folder must never move another device's open
+/// day.
+pub fn merge_files(
+    base: &BTreeMap<String, String>,
+    local: &BTreeMap<String, String>,
+    remote: &BTreeMap<String, String>,
+) -> (BTreeMap<String, String>, Vec<(String, String)>) {
+    let mut keys: BTreeSet<&String> = BTreeSet::new();
+    keys.extend(base.keys());
+    keys.extend(local.keys());
+    keys.extend(remote.keys());
+
+    let mut merged = BTreeMap::new();
+    let mut conflicts = Vec::new();
+    for key in keys {
+        if key == "state.md" {
+            if let Some(text) = local.get(key) {
+                merged.insert(key.clone(), text.clone());
+            }
+            continue;
+        }
+        let before = base.get(key);
+        let mine = local.get(key);
+        let theirs = remote.get(key);
+        if mine == theirs {
+            if let Some(text) = mine {
+                merged.insert(key.clone(), text.clone());
+            }
+            continue;
+        }
+        if mine == before {
+            if let Some(text) = theirs {
+                merged.insert(key.clone(), text.clone());
+            }
+            continue;
+        }
+        if theirs == before {
+            if let Some(text) = mine {
+                merged.insert(key.clone(), text.clone());
+            }
+            continue;
+        }
+        // Both sides changed the same path.
+        match (mine, theirs) {
+            (Some(mine), Some(theirs)) => {
+                merged.insert(key.clone(), mine.clone());
+                conflicts.push((key.clone(), theirs.clone()));
+            }
+            // Writing beats deleting, from either side.
+            (Some(text), None) | (None, Some(text)) => {
+                merged.insert(key.clone(), text.clone());
+            }
+            (None, None) => {}
+        }
+    }
+    (merged, conflicts)
+}
+
+/// Bring the folder and memory back together after something outside the app
+/// wrote. The agent's runs end here: it writes files, settles, and Horizon reads
+/// the folder, merges it with anything the owner typed meanwhile, and writes the
+/// result once. `Ok(None)` means the folder matched what we already had.
+pub async fn reconcile(doc: &Doc, today: NaiveDate) -> Result<Option<Doc>, String> {
+    let Some(dir) = store_dir() else {
+        return Ok(None);
+    };
+    let remote = read_store(&dir)?;
+    let base = last_files().unwrap_or_default();
+    if base == remote {
+        return Ok(None);
+    }
+    let local = store::to_files(doc);
+    let (merged, conflicts) = merge_files(&base, &local, &remote);
+    if !conflicts.is_empty() {
+        let stamp = chrono::Local::now().format("%Y%m%dT%H%M%S");
+        for (path, text) in &conflicts {
+            let target = dir.join("conflicts").join(format!("{path}.{stamp}.md"));
+            if let Some(parent) = target.parent() {
+                let _ = std::fs::create_dir_all(parent);
+            }
+            let _ = std::fs::write(&target, text);
+        }
+    }
+    let next = store::from_files(&merged, today).map_err(|e| e.to_string())?;
+    write_store(&dir, &merged)?;
+    Ok(Some(next))
 }
 
 /// Read the live store from its Markdown folder. `Ok(None)` means the folder is
@@ -315,7 +491,10 @@ pub async fn load(today: NaiveDate) -> Result<Option<Doc>, String> {
         return Ok(None);
     }
     store::from_files(&files, today)
-        .map(Some)
+        .map(|doc| {
+            remember(&files);
+            Some(doc)
+        })
         .map_err(|e| e.to_string())
 }
 
@@ -328,6 +507,57 @@ pub async fn save_now(doc: &Doc) {
     if let Err(err) = write_store(&dir, &store::to_files(doc)) {
         eprintln!("Horizon: could not write the Markdown store: {err}");
     }
+}
+
+/// The store folder and its files, as read from disk.
+pub type StoreSnapshot = (PathBuf, BTreeMap<String, String>);
+
+/// The store folder, read synchronously. The closed-app reminder pass runs
+/// before any async runtime exists, so it cannot use `load`.
+pub fn read_store_sync() -> Result<Option<StoreSnapshot>, String> {
+    let Some(dir) = store_dir() else {
+        return Ok(None);
+    };
+    let files = read_store(&dir)?;
+    Ok(Some((dir, files)))
+}
+
+/// Write only the reminder files of a document, atomically, and delete reminder
+/// files that no longer exist. The closed-app pass must never rewrite an entry,
+/// a note, a day page or `state.md`.
+pub fn write_reminders_only(dir: &Path, doc: &Doc) -> Result<(), String> {
+    let wanted: BTreeMap<String, String> = store::to_files(doc)
+        .into_iter()
+        .filter(|(path, _)| path.starts_with("reminders/"))
+        .collect();
+    let folder = dir.join("reminders");
+    std::fs::create_dir_all(&folder).map_err(|e| e.to_string())?;
+    for (relative, content) in &wanted {
+        let target = dir.join(relative);
+        let temp = target.with_extension("md.tmp");
+        std::fs::write(&temp, content).map_err(|e| e.to_string())?;
+        if target.exists() {
+            std::fs::remove_file(&target).map_err(|e| e.to_string())?;
+        }
+        std::fs::rename(&temp, &target).map_err(|e| e.to_string())?;
+    }
+    for item in std::fs::read_dir(&folder)
+        .map_err(|e| e.to_string())?
+        .flatten()
+    {
+        let path = item.path();
+        if path.extension().and_then(|ext| ext.to_str()) != Some("md") {
+            continue;
+        }
+        let Some(name) = path.file_name().and_then(|name| name.to_str()) else {
+            continue;
+        };
+        let relative = format!("reminders/{name}");
+        if !wanted.contains_key(&relative) && managed_file(&path) {
+            let _ = std::fs::remove_file(&path);
+        }
+    }
+    Ok(())
 }
 
 /// Reload the page against the vault that was just chosen. The store, the saver
@@ -352,8 +582,9 @@ pub fn focus_id(id: &str) {
     });
 }
 
-/// Focus a day in whichever shape is currently on screen: the wall on desktop,
-/// the agenda on mobile. Both elements can exist in the DOM; the hidden one is ignored.
+/// Focus a day in whichever shape is currently on screen: the wall in a wide
+/// window, the agenda in a narrow one. Both elements can exist in the DOM; the
+/// hidden one is ignored.
 pub fn focus_day(key: &str) {
     let script = format!(
         "setTimeout(() => {{ const wall = document.getElementById({}); const agenda = document.getElementById({}); const el = (wall && wall.offsetParent !== null) ? wall : agenda; if (el) el.focus({{ preventScroll: true }}); }}, 120);",
@@ -375,6 +606,16 @@ pub fn scroll_id(id: &str) {
     });
 }
 
+pub fn scroll_end(id: &str) {
+    let script = format!(
+        "requestAnimationFrame(() => {{ const el = document.getElementById({id}); if (!el) return; const near = el.scrollHeight - el.scrollTop - el.clientHeight < 160; if (near) el.scrollTop = el.scrollHeight; }});",
+        id = js_string(id)
+    );
+    spawn(async move {
+        let _ = document::eval(&script).await;
+    });
+}
+
 pub fn download(filename: &str, mime: &str, content: &str) {
     let script = format!(
         "const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([{content}], {{ type: {mime} }})); a.download = {filename}; document.body.appendChild(a); a.click(); a.remove();",
@@ -387,21 +628,11 @@ pub fn download(filename: &str, mime: &str, content: &str) {
     });
 }
 
-/// Where a copy of the store goes: Downloads on desktop, the app's external
-/// files directory on Android (reachable over USB), falling back to app-private.
+/// Where a copy of the store goes: the Downloads folder.
 fn copy_root() -> PathBuf {
-    #[cfg(desktop_shell)]
-    {
-        dirs::download_dir()
-            .or_else(dirs::data_dir)
-            .unwrap_or_else(|| PathBuf::from("."))
-    }
-    #[cfg(not(desktop_shell))]
-    {
-        crate::android::external_files_dir()
-            .or_else(data_dir)
-            .unwrap_or_else(|| PathBuf::from("."))
-    }
+    dirs::download_dir()
+        .or_else(dirs::data_dir)
+        .unwrap_or_else(|| PathBuf::from("."))
 }
 
 /// Write a copy of the Markdown store. Not a second format: the same tree, the
@@ -581,6 +812,117 @@ mod tests {
         );
         assert_eq!(parse_config("# nothing here\n"), None);
         assert_eq!(parse_config("vault = \"\"\n"), None);
+    }
+
+    #[test]
+    fn agent_keys_do_not_hide_the_vault_pointer() {
+        let text = "# mine\nagent = \"pi\"\nvault = \"/tmp/vault\"\nagent.write = \"false\"\n";
+        let settings = parse_settings(text);
+        assert_eq!(settings.get("vault"), Some(&"/tmp/vault".to_string()));
+        assert_eq!(settings.get("agent"), Some(&"pi".to_string()));
+        assert_eq!(parse_config(text), Some(PathBuf::from("/tmp/vault")));
+    }
+
+    #[test]
+    fn writing_settings_keeps_comments_and_unknown_lines() {
+        let before = "# a header\nvault = \"/tmp/vault\"\n# my note\nexperimental = \"yes\"\n";
+        let after = set_config_lines(
+            before,
+            &[
+                ("agent", "pi".to_string()),
+                ("agent.context", "false".to_string()),
+            ],
+        );
+        assert!(after.starts_with("# a header\nvault = \"/tmp/vault\"\n# my note\n"));
+        assert!(after.contains("experimental = \"yes\""));
+        assert!(after.contains("agent = \"pi\""));
+        assert!(after.contains("agent.context = \"false\""));
+        let settings = parse_settings(&after);
+        assert_eq!(settings.get("agent.context"), Some(&"false".to_string()));
+        assert_eq!(settings.get("vault"), Some(&"/tmp/vault".to_string()));
+    }
+
+    #[test]
+    fn writing_the_same_key_twice_replaces_it_once() {
+        let after = set_config_lines(
+            "vault = \"/old\"\n",
+            &[
+                ("vault", "/new".to_string()),
+                ("vault", "/newer".to_string()),
+            ],
+        );
+        assert_eq!(parse_config(&after), Some(PathBuf::from("/newer")));
+        assert_eq!(after.matches("vault =").count(), 1);
+    }
+
+    fn files(pairs: &[(&str, &str)]) -> BTreeMap<String, String> {
+        pairs
+            .iter()
+            .map(|(k, v)| (k.to_string(), v.to_string()))
+            .collect()
+    }
+
+    #[test]
+    fn a_merge_takes_a_change_from_either_side() {
+        let base = files(&[("entries/a.md", "a"), ("entries/b.md", "b")]);
+        let local = files(&[("entries/a.md", "a"), ("entries/b.md", "B from the app")]);
+        let remote = files(&[
+            ("entries/a.md", "a from the agent"),
+            ("entries/b.md", "b"),
+            ("notes/new.md", "new"),
+        ]);
+        let (merged, conflicts) = merge_files(&base, &local, &remote);
+        assert_eq!(
+            merged.get("entries/a.md").map(String::as_str),
+            Some("a from the agent")
+        );
+        assert_eq!(
+            merged.get("entries/b.md").map(String::as_str),
+            Some("B from the app")
+        );
+        assert_eq!(merged.get("notes/new.md").map(String::as_str), Some("new"));
+        assert!(conflicts.is_empty());
+    }
+
+    #[test]
+    fn a_merge_keeps_both_writes_when_both_sides_changed_a_file() {
+        let base = files(&[("entries/a.md", "a")]);
+        let local = files(&[("entries/a.md", "mine")]);
+        let remote = files(&[("entries/a.md", "theirs")]);
+        let (merged, conflicts) = merge_files(&base, &local, &remote);
+        assert_eq!(merged.get("entries/a.md").map(String::as_str), Some("mine"));
+        assert_eq!(
+            conflicts,
+            vec![("entries/a.md".to_string(), "theirs".to_string())]
+        );
+    }
+
+    #[test]
+    fn a_merge_lets_writing_beat_deleting() {
+        let base = files(&[("entries/a.md", "a"), ("entries/b.md", "b")]);
+        // The app deleted a; the agent deleted b while writing nothing else.
+        let local = files(&[("entries/b.md", "b")]);
+        let remote = files(&[("entries/a.md", "a"), ("entries/b.md", "b2")]);
+        let (merged, _) = merge_files(&base, &local, &remote);
+        assert!(!merged.contains_key("entries/a.md"), "a delete is honoured");
+        assert_eq!(merged.get("entries/b.md").map(String::as_str), Some("b2"));
+
+        // A path deleted on one side and written on the other keeps the writing.
+        let base = files(&[("entries/c.md", "c")]);
+        let local = files(&[("entries/c.md", "c")]);
+        let remote = files(&[]);
+        let (merged, _) = merge_files(&base, &local, &remote);
+        assert!(!merged.contains_key("entries/c.md"));
+    }
+
+    #[test]
+    fn a_merge_never_lets_the_folder_move_device_state() {
+        let base = files(&[("state.md", "open 1")]);
+        let local = files(&[("state.md", "open 2")]);
+        let remote = files(&[("state.md", "open 3")]);
+        let (merged, conflicts) = merge_files(&base, &local, &remote);
+        assert_eq!(merged.get("state.md").map(String::as_str), Some("open 2"));
+        assert!(conflicts.is_empty());
     }
 
     #[test]

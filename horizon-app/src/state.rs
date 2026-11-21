@@ -1,10 +1,11 @@
 //! Shared UI state. Durable state lives in `Doc`; this is the ephemeral layer.
 
-use chrono::NaiveDate;
+use chrono::{Duration, Local, NaiveDate, Utc};
 use dioxus::prelude::*;
 use horizon_core::{
     dates::{self, Quarter},
-    export, model, Doc, DrawMode, NoteTarget, Subject,
+    export, model, reminders as core_reminders, Doc, DrawMode, NoteTarget, Reminder,
+    ReminderSource, Subject,
 };
 
 use crate::storage;
@@ -16,6 +17,16 @@ pub enum View {
     Brief,
 }
 
+/// What the right-hand column is showing. Notes and the agent share the same
+/// address: the margin is where details wait, and the agent is another kind of
+/// detail — a conversation that reads the whole quarter.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum MarginMode {
+    #[default]
+    Notes,
+    Agent,
+}
+
 #[derive(Clone, Debug)]
 pub struct Tip {
     pub name: String,
@@ -23,6 +34,40 @@ pub struct Tip {
     pub text: String,
     pub x: f64,
     pub y: f64,
+}
+
+/// The one-line notice a fired reminder shows under the masthead. It carries
+/// the reminder's id so its own buttons can act on it.
+#[derive(Clone, Debug, PartialEq)]
+pub struct Toast {
+    pub text: String,
+    pub reminder: Option<String>,
+}
+
+/// What a reminder is being made from. The panel and the strip share it.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum ReminderTarget {
+    Bare,
+    Note(String),
+    Entry(String),
+}
+
+impl ReminderTarget {
+    pub fn key(&self) -> String {
+        match self {
+            ReminderTarget::Bare => "bare".to_string(),
+            ReminderTarget::Note(id) => format!("note:{id}"),
+            ReminderTarget::Entry(id) => format!("entry:{id}"),
+        }
+    }
+
+    pub fn source(&self) -> ReminderSource {
+        match self {
+            ReminderTarget::Bare => ReminderSource::Bare,
+            ReminderTarget::Note(id) => ReminderSource::Note(id.clone()),
+            ReminderTarget::Entry(id) => ReminderSource::Entry(id.clone()),
+        }
+    }
 }
 
 #[derive(Clone, Debug, Default)]
@@ -38,6 +83,16 @@ pub struct Ui {
     pub margin_open: Option<String>,
     /// The loose note opened wide as a full-width band above the wall.
     pub wide_note: Option<String>,
+    /// Which reading the margin column carries: loose notes or the agent.
+    pub margin_mode: MarginMode,
+    /// The agent opened as the full-width, centred conversation band.
+    pub agent_wide: bool,
+    /// Whether the reminder strip is showing its rows.
+    pub reminder_open: bool,
+    /// The note, entry or bare row whose reminder panel is open, by `target.key()`.
+    pub reminder_panel: Option<String>,
+    /// A reminder that just fired, until it is dismissed or times out.
+    pub toast: Option<Toast>,
     pub show_quiet: bool,
     pub tip: Option<Tip>,
     pub status: String,
@@ -495,6 +550,220 @@ impl AppCtx {
         ui.write().margin_filter = subject;
     }
 
+    /// Open or close the reminder strip's rows.
+    pub fn toggle_reminders(&self) {
+        let mut ui = self.ui;
+        let open = ui.read().reminder_open;
+        ui.write().reminder_open = !open;
+        if open {
+            ui.write().reminder_panel = None;
+        }
+    }
+
+    /// Open or close the reminder panel for one note, entry or bare row.
+    pub fn toggle_reminder_panel(&self, key: &str) {
+        let mut ui = self.ui;
+        let current = ui.read().reminder_panel.clone();
+        let next = if current.as_deref() == Some(key) {
+            None
+        } else {
+            Some(key.to_string())
+        };
+        ui.write().reminder_panel = next;
+    }
+
+    /// The text a reminder inherits when the panel opens: the note's first line
+    /// or the entry's words. A bare reminder starts empty.
+    pub fn reminder_hint(&self, target: &ReminderTarget) -> String {
+        let doc = self.doc.read();
+        match target {
+            ReminderTarget::Bare => String::new(),
+            ReminderTarget::Note(id) => doc
+                .note(id)
+                .map(|note| note.text.lines().next().unwrap_or("").trim().to_string())
+                .unwrap_or_default(),
+            ReminderTarget::Entry(id) => doc
+                .entry(id)
+                .map(|entry| entry.text.clone())
+                .unwrap_or_default(),
+        }
+    }
+
+    /// Make a reminder. `when` is the one-line grammar; `text` is the words to
+    /// show, falling back to the note or entry it came from.
+    pub fn set_reminder(
+        &self,
+        target: ReminderTarget,
+        text: &str,
+        when: &str,
+    ) -> Result<(), String> {
+        let now = Local::now();
+        let parsed = core_reminders::parse_when(when, now).map_err(|e| e.message())?;
+        let text = if text.trim().is_empty() {
+            self.reminder_hint(&target)
+        } else {
+            text.trim().to_string()
+        };
+        if text.is_empty() {
+            return Err("Add a word or two for the reminder.".into());
+        }
+        let reminder = Reminder {
+            text,
+            next_at: parsed.at.to_rfc3339_opts(chrono::SecondsFormat::Secs, true),
+            repeat: parsed.repeat,
+            anchor_day: parsed.anchor_day,
+            source: target.source(),
+            created_at: Utc::now().to_rfc3339_opts(chrono::SecondsFormat::Secs, true),
+            ..Reminder::default()
+        };
+        {
+            let mut doc = self.doc;
+            doc.write().reminders.push(reminder);
+        }
+        {
+            let mut ui = self.ui;
+            ui.write().reminder_panel = None;
+        }
+        self.save();
+        self.flash(format!(
+            "Reminder set — {}.",
+            core_reminders::humanize(Some(parsed.at), now)
+        ));
+        Ok(())
+    }
+
+    /// Move a reminder by a fixed amount. The repeat is untouched.
+    pub fn snooze_reminder(&self, id: &str, by: Duration) {
+        let now = Utc::now();
+        {
+            let mut doc = self.doc;
+            let mut d = doc.write();
+            if let Some(reminder) = d.reminder_mut(id) {
+                core_reminders::snooze(reminder, now, by);
+            }
+        }
+        self.save();
+        self.dismiss_toast();
+        self.flash("Snoozed.");
+    }
+
+    /// The reminder's own `Done`: a one-off closes, a repeat moves on.
+    pub fn finish_reminder(&self, id: &str) {
+        let now = Utc::now();
+        let mut finished = false;
+        {
+            let mut doc = self.doc;
+            let mut d = doc.write();
+            if let Some(reminder) = d.reminder_mut(id) {
+                if reminder.repeat.is_once() {
+                    reminder.done = true;
+                    finished = true;
+                } else {
+                    core_reminders::advance(reminder, now);
+                }
+            }
+        }
+        self.save();
+        self.dismiss_toast();
+        if finished {
+            self.flash("Reminder done.");
+        }
+    }
+
+    pub fn remove_reminder(&self, id: &str) {
+        {
+            let mut doc = self.doc;
+            doc.write().remove_reminder(id);
+        }
+        self.save();
+        self.flash("Reminder removed.");
+    }
+
+    /// A reminder came due while the window was open: notify once, advance it,
+    /// and leave the toast. Catch-up is handled by the caller, never here.
+    pub fn fire_reminder(&self, id: &str) {
+        let now = Utc::now();
+        let mut fired = None;
+        {
+            let mut doc = self.doc;
+            let mut d = doc.write();
+            if let Some(reminder) = d.reminder_mut(id) {
+                if reminder.is_due(now) {
+                    fired = Some((
+                        reminder.text.clone(),
+                        core_reminders::notification_body(reminder),
+                    ));
+                    core_reminders::advance(reminder, now);
+                }
+            }
+        }
+        let Some((text, body)) = fired else {
+            return;
+        };
+        self.save();
+        crate::reminders::notify(&body);
+        {
+            let mut ui = self.ui;
+            ui.write().toast = Some(Toast {
+                text,
+                reminder: Some(id.to_string()),
+            });
+        }
+        let mut ui = self.ui;
+        let id = id.to_string();
+        spawn(async move {
+            sleep_ms(20_000).await;
+            if ui.peek().toast.as_ref().and_then(|t| t.reminder.as_deref()) == Some(id.as_str()) {
+                ui.write().toast = None;
+            }
+        });
+    }
+
+    pub fn dismiss_toast(&self) {
+        let mut ui = self.ui;
+        ui.write().toast = None;
+    }
+
+    /// Switch the right-hand column. The agent's input exists only after the
+    /// column renders, so focus waits a frame rather than asking the DOM now.
+    pub fn set_margin_mode(&self, mode: MarginMode) {
+        {
+            let mut ui = self.ui;
+            if ui.read().margin_mode != mode {
+                ui.write().margin_mode = mode;
+                ui.write().subject_picker = None;
+                // The band belongs to the agent reading; leaving the reading
+                // closes it rather than leaving a conversation with no column.
+                if mode != MarginMode::Agent {
+                    ui.write().agent_wide = false;
+                }
+            }
+        }
+        if mode == MarginMode::Agent {
+            crate::storage::focus_id("agent-input");
+        }
+    }
+
+    /// Open the agent wide: the same move as a loose note's `Write wide`, and the
+    /// same shape (a band above the wall), but the band is a centred column of
+    /// conversation rather than a note editor.
+    pub fn open_agent_wide(&self) {
+        {
+            let mut ui = self.ui;
+            ui.write().margin_mode = MarginMode::Agent;
+            ui.write().agent_wide = true;
+        }
+        crate::storage::focus_id("agent-input-wide");
+    }
+
+    /// Close the band and return focus to the column's Agent tab, so the
+    /// keyboard path never lands on the body.
+    pub fn close_agent_wide(&self) {
+        let mut ui = self.ui;
+        ui.write().agent_wide = false;
+        crate::storage::focus_id("margin-mode-agent");
+    }
+
     pub fn add_entry(&self, day: &str, title: &str, subject: Option<Subject>, explicit: bool) {
         let mut entry = horizon_core::Entry::new_with(day, title, subject, None);
         entry.subject_auto = !explicit;
@@ -611,7 +880,7 @@ impl AppCtx {
     }
 }
 
-/// A sleep that works in the desktop and Android runtimes alike.
+/// A sleep for the app's async loops.
 pub async fn sleep_ms(ms: u64) {
     tokio::time::sleep(std::time::Duration::from_millis(ms)).await;
 }

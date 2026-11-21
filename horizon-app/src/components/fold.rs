@@ -316,6 +316,8 @@ fn EntryRow(entry: Entry) -> Element {
     let expanded = ctx.ui.read().expanded.as_deref() == Some(id.as_str());
     let mark_open = ctx.ui.read().mark_picker.as_deref() == Some(id.as_str());
     let subject_open = ctx.ui.read().subject_picker.as_deref() == Some(id.as_str());
+    let reminder_key = format!("entry:{id}");
+    let reminder_open = ctx.ui.read().reminder_panel.as_deref() == Some(reminder_key.as_str());
     let mut draft = use_signal(|| entry.text.clone());
     let done = entry.done;
     let mark = entry.mark;
@@ -471,6 +473,23 @@ fn EntryRow(entry: Entry) -> Element {
                                     move |_| ctx.set_entry_repeat(&id, !repeat)
                                 },
                                 if repeat { "Repeats weekly ✓" } else { "Repeats weekly" }
+                            }
+                        }
+                        button {
+                            id: "entry-{id}-remind",
+                            class: "chip",
+                            r#type: "button",
+                            aria_expanded: if reminder_open { "true" } else { "false" },
+                            onclick: {
+                                let reminder_key = reminder_key.clone();
+                                move |_| ctx.toggle_reminder_panel(&reminder_key)
+                            },
+                            if reminder_open { "Reminding…" } else { "Remind" }
+                        }
+                        if reminder_open {
+                            crate::components::reminders::RemindPanel {
+                                target: crate::state::ReminderTarget::Entry(id.clone()),
+                                hint: entry_text.clone(),
                             }
                         }
                         button {

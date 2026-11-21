@@ -2,7 +2,7 @@
 
 use std::collections::{BTreeMap, BTreeSet};
 
-use chrono::{Datelike, NaiveDate, Utc};
+use chrono::{DateTime, Datelike, NaiveDate, Utc};
 use serde::{Deserialize, Serialize};
 
 use crate::dates::{self, Quarter, SPAN_DAYS};
@@ -232,6 +232,110 @@ impl LooseNote {
     }
 }
 
+/// How a reminder repeats. There is no rule engine and no end date: a repeat
+/// runs until the owner switches it off.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum Repeat {
+    #[default]
+    Once,
+    Daily,
+    Weekly,
+    /// The Nth of each month, clamped to the month's last day.
+    MonthlyOnDay(u32),
+}
+
+impl Repeat {
+    pub fn is_once(self) -> bool {
+        matches!(self, Repeat::Once)
+    }
+}
+
+/// What a reminder was made from. The text is copied at creation, so the link
+/// is provenance, not a live join.
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum ReminderSource {
+    #[default]
+    Bare,
+    Note(String),
+    Entry(String),
+}
+
+impl ReminderSource {
+    pub fn chip(&self) -> &'static str {
+        match self {
+            ReminderSource::Bare => "reminder",
+            ReminderSource::Note(_) => "note",
+            ReminderSource::Entry(_) => "entry",
+        }
+    }
+
+    /// The source id, if this reminder came from a note or an entry.
+    pub fn target_id(&self) -> Option<&str> {
+        match self {
+            ReminderSource::Bare => None,
+            ReminderSource::Note(id) | ReminderSource::Entry(id) => Some(id),
+        }
+    }
+}
+
+/// One reminder. It is its own Markdown file in `reminders/`, never a field on
+/// an entry or a note, so a synced folder never rewrites a note to add a date.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub struct Reminder {
+    #[serde(default)]
+    pub id: String,
+    #[serde(default)]
+    pub text: String,
+    /// RFC 3339 in UTC. Display is local; the monthly anchor is a local day.
+    #[serde(default)]
+    pub next_at: String,
+    #[serde(default)]
+    pub repeat: Repeat,
+    /// The local day-of-month a monthly reminder keeps across short months.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub anchor_day: Option<u32>,
+    #[serde(default)]
+    pub source: ReminderSource,
+    #[serde(default)]
+    pub done: bool,
+    #[serde(default)]
+    pub created_at: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub last_fired: Option<String>,
+}
+
+impl Default for Reminder {
+    fn default() -> Self {
+        Self {
+            id: new_id("r"),
+            text: String::new(),
+            next_at: String::new(),
+            repeat: Repeat::Once,
+            anchor_day: None,
+            source: ReminderSource::Bare,
+            done: false,
+            created_at: String::new(),
+            last_fired: None,
+        }
+    }
+}
+
+impl Reminder {
+    /// The next instant, parsed. An unreadable stamp reads as `None` rather
+    /// than pretending to be due.
+    pub fn at_utc(&self) -> Option<DateTime<Utc>> {
+        DateTime::parse_from_rfc3339(&self.next_at)
+            .ok()
+            .map(|dt| dt.with_timezone(&Utc))
+    }
+
+    pub fn is_due(&self, now: DateTime<Utc>) -> bool {
+        !self.done && self.at_utc().is_some_and(|at| at <= now)
+    }
+}
+
 #[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
 pub struct PageMeta {
     #[serde(default)]
@@ -274,6 +378,8 @@ pub struct Doc {
     pub pages: BTreeMap<String, String>,
     #[serde(default)]
     pub page_meta: BTreeMap<String, PageMeta>,
+    #[serde(default)]
+    pub reminders: Vec<Reminder>,
     #[serde(default)]
     pub ui: UiState,
 }
@@ -322,8 +428,40 @@ impl Doc {
             notes: Vec::new(),
             pages: BTreeMap::new(),
             page_meta: BTreeMap::new(),
+            reminders: Vec::new(),
             ui: UiState::default(),
         }
+    }
+
+    pub fn reminder(&self, id: &str) -> Option<&Reminder> {
+        self.reminders.iter().find(|r| r.id == id)
+    }
+
+    pub fn reminder_mut(&mut self, id: &str) -> Option<&mut Reminder> {
+        self.reminders.iter_mut().find(|r| r.id == id)
+    }
+
+    pub fn remove_reminder(&mut self, id: &str) {
+        self.reminders.retain(|r| r.id != id);
+    }
+
+    /// Reminders made from a note or an entry. Used when that thing is removed.
+    pub fn remove_reminders_for(&mut self, source: &ReminderSource) {
+        self.reminders.retain(|r| &r.source != source);
+    }
+
+    /// Reminders whose next instant has arrived, soonest first.
+    pub fn due_reminders(&self, now: DateTime<Utc>) -> Vec<&Reminder> {
+        let mut due: Vec<&Reminder> = self.reminders.iter().filter(|r| r.is_due(now)).collect();
+        due.sort_by(|a, b| a.next_at.cmp(&b.next_at));
+        due
+    }
+
+    /// Every reminder still to come, soonest first. Done one-offs drop out.
+    pub fn upcoming_reminders(&self) -> Vec<&Reminder> {
+        let mut live: Vec<&Reminder> = self.reminders.iter().filter(|r| !r.done).collect();
+        live.sort_by(|a, b| a.next_at.cmp(&b.next_at));
+        live
     }
 
     pub fn entry(&self, id: &str) -> Option<&Entry> {
@@ -345,11 +483,16 @@ impl Doc {
     pub fn remove_entry(&mut self, id: &str) {
         self.entries.retain(|e| e.id != id);
         self.ui.note_edit.remove(&note_key_entry(id));
+        // A reminder made from this entry has nothing left to point at.
+        self.reminders
+            .retain(|r| r.source != ReminderSource::Entry(id.to_string()));
     }
 
     pub fn remove_note(&mut self, id: &str) {
         self.notes.retain(|n| n.id != id);
         self.ui.note_edit.remove(&note_key_loose(id));
+        self.reminders
+            .retain(|r| r.source != ReminderSource::Note(id.to_string()));
     }
 
     /// Replaces an undated or clipped note's whole body. The text is stored as

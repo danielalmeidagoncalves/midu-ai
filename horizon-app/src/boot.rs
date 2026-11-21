@@ -32,7 +32,7 @@ pub fn VaultChoice(mut typed: Signal<String>, mut error: Signal<Option<String>>)
                 p { class: "lede",
                     "Every entry, note and day page is a Markdown file in one folder. Choose the "
                     "folder once; it also becomes the git repository that syncs between this "
-                    "machine and your phone."
+                    "machine and another one."
                 }
                 label { r#for: "vault-path", class: "import-label", "Folder" }
                 input {
@@ -88,22 +88,11 @@ pub fn VaultChoice(mut typed: Signal<String>, mut error: Signal<Option<String>>)
     }
 }
 
-/// Open the platform's folder picker when there is one. Android has no such
-/// dialog, so its app-owned folder is the only path and pressing the button says so.
+/// Open the system folder picker.
 fn ask(shown: &str, typed: &mut Signal<String>, error: &mut Signal<Option<String>>) {
-    #[cfg(desktop_shell)]
-    {
-        if let Some(dir) = crate::desktop::ask_folder(shown) {
-            typed.set(dir);
-            error.set(None);
-        }
-    }
-    #[cfg(not(desktop_shell))]
-    {
-        let _ = (shown,);
-        error.set(Some(
-            "This platform has no folder picker. Use the suggested app folder.".into(),
-        ));
+    if let Some(dir) = crate::desktop::ask_folder(shown) {
+        typed.set(dir);
+        error.set(None);
     }
 }
 

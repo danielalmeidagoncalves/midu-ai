@@ -99,24 +99,6 @@
     "save": "all"
   },
   {
-    "label": "Horizon: check android",
-    "command": "$ZED_WORKTREE_ROOT/tools/with-libxdo.sh",
-    "args": [
-      "cargo",
-      "check",
-      "-p",
-      "horizon-app",
-      "--no-default-features",
-      "--features",
-      "mobile",
-      "--target",
-      "aarch64-linux-android"
-    ],
-    "cwd": "$ZED_WORKTREE_ROOT",
-    "use_new_terminal": false,
-    "allow_concurrent_runs": true
-  },
-  {
     "label": "Horizon: clippy",
     "command": "cargo",
     "args": [

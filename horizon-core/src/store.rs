@@ -11,7 +11,10 @@ use chrono::NaiveDate;
 
 use crate::dates;
 use crate::inference::{infer_mark, infer_subject, Mark, Subject};
-use crate::model::{new_id, Doc, DrawMode, Entry, LooseNote, PageMeta, UiState, DOC_VERSION};
+use crate::model::{
+    new_id, Doc, DrawMode, Entry, LooseNote, PageMeta, Reminder, ReminderSource, Repeat, UiState,
+    DOC_VERSION,
+};
 
 pub const STORE_VERSION: u32 = 2;
 
@@ -232,6 +235,76 @@ fn note_path(note: &LooseNote, id_len: usize) -> String {
     format!("notes/{}-{}.md", slug(title), short_id(&note.id, id_len))
 }
 
+fn reminder_path(reminder: &Reminder, id_len: usize) -> String {
+    format!(
+        "reminders/{}-{}.md",
+        slug(&reminder.text),
+        short_id(&reminder.id, id_len)
+    )
+}
+
+/// `once` · `daily` · `weekly` · `monthly`. The monthly day lives in its own
+/// field so the anchor survives a short month.
+fn repeat_id(repeat: Repeat) -> &'static str {
+    match repeat {
+        Repeat::Once => "once",
+        Repeat::Daily => "daily",
+        Repeat::Weekly => "weekly",
+        Repeat::MonthlyOnDay(_) => "monthly",
+    }
+}
+
+fn source_id(source: &ReminderSource) -> String {
+    match source {
+        ReminderSource::Bare => "bare".to_string(),
+        ReminderSource::Note(id) => format!("note:{id}"),
+        ReminderSource::Entry(id) => format!("entry:{id}"),
+    }
+}
+
+fn parse_source(value: Option<&String>) -> ReminderSource {
+    match value.map(String::as_str) {
+        Some(rest) if rest.starts_with("note:") => {
+            ReminderSource::Note(rest.trim_start_matches("note:").to_string())
+        }
+        Some(rest) if rest.starts_with("entry:") => {
+            ReminderSource::Entry(rest.trim_start_matches("entry:").to_string())
+        }
+        _ => ReminderSource::Bare,
+    }
+}
+
+fn reminder_file(reminder: &Reminder) -> String {
+    let mut md = frontmatter(&[
+        ("kind", quote("reminder")),
+        ("version", STORE_VERSION.to_string()),
+        ("id", quote(&reminder.id)),
+        ("text", quote(&reminder.text)),
+        ("next_at", quote(&reminder.next_at)),
+        ("repeat", quote(repeat_id(reminder.repeat))),
+        (
+            "anchor_day",
+            reminder
+                .anchor_day
+                .map(|d| d.to_string())
+                .unwrap_or_else(|| "null".into()),
+        ),
+        ("source", quote(&source_id(&reminder.source))),
+        ("done", reminder.done.to_string()),
+        ("created_at", quote(&reminder.created_at)),
+        (
+            "last_fired",
+            reminder
+                .last_fired
+                .as_deref()
+                .map(quote)
+                .unwrap_or_else(|| "null".into()),
+        ),
+    ]);
+    md.push('\n');
+    md
+}
+
 /// Widen the short id until the path is free. Two objects can only collide when
 /// their ids share a tail; the full id is always unique.
 fn unique_path(make: impl Fn(usize) -> String, id: &str, taken: &mut BTreeSet<String>) -> String {
@@ -270,6 +343,15 @@ pub fn to_files(doc: &Doc) -> BTreeMap<String, String> {
     for note in &doc.notes {
         let path = unique_path(|len| note_path(note, len), &note.id, &mut taken);
         files.insert(path, note_file(note));
+    }
+    for reminder in &doc.reminders {
+        // A spent one-off is not kept: it already spoke once. Repeats always stay,
+        // because their next occurrence is the reason the record exists.
+        if reminder.done && reminder.repeat.is_once() {
+            continue;
+        }
+        let path = unique_path(|len| reminder_path(reminder, len), &reminder.id, &mut taken);
+        files.insert(path, reminder_file(reminder));
     }
     for (day, page) in &doc.pages {
         if page.trim().is_empty() || dates::parse_key(day).is_none() {
@@ -475,6 +557,44 @@ fn parse_day(
     Ok((day, page, PageMeta { first_written }))
 }
 
+fn parse_reminder(fields: &BTreeMap<String, String>, file: &str) -> Result<Reminder, StoreError> {
+    check_version(fields, file)?;
+    let text = string(fields, "text").unwrap_or_default();
+    if text.trim().is_empty() {
+        return Err(StoreError::BadValue(file.into()));
+    }
+    let next_at = string(fields, "next_at").unwrap_or_default();
+    if chrono::DateTime::parse_from_rfc3339(&next_at).is_err() {
+        return Err(StoreError::BadValue(file.into()));
+    }
+    let repeat = match fields.get("repeat").map(String::as_str) {
+        Some("daily") => Repeat::Daily,
+        Some("weekly") => Repeat::Weekly,
+        Some("monthly") => {
+            let day = number(fields, "anchor_day", 1).clamp(1, 31) as u32;
+            Repeat::MonthlyOnDay(day)
+        }
+        _ => Repeat::Once,
+    };
+    let anchor_day = match repeat {
+        Repeat::MonthlyOnDay(day) => {
+            Some(number(fields, "anchor_day", day as u8).clamp(1, 31) as u32)
+        }
+        _ => None,
+    };
+    Ok(Reminder {
+        id: string(fields, "id").unwrap_or_else(|| new_id("r")),
+        text,
+        next_at,
+        repeat,
+        anchor_day,
+        source: parse_source(fields.get("source")),
+        done: boolean(fields, "done", false),
+        created_at: string(fields, "created_at").unwrap_or_default(),
+        last_fired: string(fields, "last_fired"),
+    })
+}
+
 /// Rebuild a document from the file map. Files without frontmatter are ignored
 /// so a README or an unrelated note can live beside the store.
 pub fn from_files(files: &BTreeMap<String, String>, today: NaiveDate) -> Result<Doc, StoreError> {
@@ -513,6 +633,10 @@ pub fn from_files(files: &BTreeMap<String, String>, today: NaiveDate) -> Result<
                 let (day, page, meta) = parse_day(&fields, &body, path, fallback)?;
                 doc.pages.insert(day.clone(), page);
                 doc.page_meta.insert(day, meta);
+            }
+            "reminder" if path.starts_with("reminders/") => {
+                let reminder = parse_reminder(&fields, path)?;
+                doc.reminders.push(reminder);
             }
             _ => {}
         }
@@ -556,6 +680,21 @@ mod tests {
         doc.ui.lens = Some(Subject::Family);
         doc.ui.open_day = Some("2026-11-04".into());
         doc.ui.note_edit.insert(note_key_entry(&entry_id), true);
+        doc.reminders.push(Reminder {
+            text: "Pay the MEO bill".into(),
+            next_at: "2026-11-30T08:30:00Z".into(),
+            repeat: Repeat::MonthlyOnDay(30),
+            anchor_day: Some(30),
+            source: ReminderSource::Bare,
+            created_at: "2026-11-02T08:00:00Z".into(),
+            ..Reminder::default()
+        });
+        doc.reminders.push(Reminder {
+            text: "Pick up the laundry".into(),
+            next_at: "2026-11-02T10:30:00Z".into(),
+            source: ReminderSource::Note("n-laundry".into()),
+            ..Reminder::default()
+        });
         doc
     }
 
@@ -576,6 +715,79 @@ mod tests {
         assert_eq!(back.ui.lens, Some(Subject::Family));
         assert_eq!(back.ui.open_day.as_deref(), Some("2026-11-04"));
         assert_eq!(back.ui.note_edit.len(), 1);
+        assert_eq!(back.reminders.len(), 2);
+        let bill = back
+            .reminders
+            .iter()
+            .find(|r| r.text == "Pay the MEO bill")
+            .expect("the monthly reminder round-trips");
+        assert_eq!(bill.repeat, Repeat::MonthlyOnDay(30));
+        assert_eq!(bill.anchor_day, Some(30));
+        assert_eq!(bill.next_at, "2026-11-30T08:30:00Z");
+        assert!(!bill.done);
+        let laundry = back
+            .reminders
+            .iter()
+            .find(|r| r.text == "Pick up the laundry")
+            .expect("the note reminder round-trips");
+        assert_eq!(laundry.source, ReminderSource::Note("n-laundry".into()));
+        assert!(files.keys().any(|k| k.starts_with("reminders/")));
+    }
+
+    #[test]
+    fn a_spent_one_off_is_not_written_but_a_repeat_is() {
+        let mut doc = Doc::empty();
+        doc.reminders.push(Reminder {
+            text: "Bread".into(),
+            next_at: "2026-11-04T10:00:00Z".into(),
+            done: true,
+            ..Reminder::default()
+        });
+        doc.reminders.push(Reminder {
+            text: "Rent".into(),
+            next_at: "2026-11-30T09:00:00Z".into(),
+            repeat: Repeat::MonthlyOnDay(30),
+            anchor_day: Some(30),
+            done: true,
+            ..Reminder::default()
+        });
+        let files = to_files(&doc);
+        let reminders: Vec<&String> = files
+            .keys()
+            .filter(|k| k.starts_with("reminders/"))
+            .collect();
+        assert_eq!(reminders.len(), 1, "only the repeat survives");
+        let back = from_files(&files, d(2026, 11, 4)).unwrap();
+        assert_eq!(back.reminders.len(), 1);
+        assert_eq!(back.reminders[0].text, "Rent");
+    }
+
+    #[test]
+    fn removing_a_source_removes_its_reminders() {
+        let mut doc = Doc::empty();
+        let mut note = LooseNote::new("Laundry", None);
+        note.id = "n-1".into();
+        let mut entry = Entry::new("2026-11-04", "Dentist");
+        entry.id = "e-1".into();
+        doc.notes.push(note);
+        doc.entries.push(entry);
+        doc.reminders.push(Reminder {
+            text: "Laundry".into(),
+            next_at: "2026-11-04T10:00:00Z".into(),
+            source: ReminderSource::Note("n-1".into()),
+            ..Reminder::default()
+        });
+        doc.reminders.push(Reminder {
+            text: "Dentist".into(),
+            next_at: "2026-11-04T10:00:00Z".into(),
+            source: ReminderSource::Entry("e-1".into()),
+            ..Reminder::default()
+        });
+        doc.remove_note("n-1");
+        assert_eq!(doc.reminders.len(), 1);
+        assert_eq!(doc.reminders[0].text, "Dentist");
+        doc.remove_entry("e-1");
+        assert!(doc.reminders.is_empty());
     }
 
     #[test]

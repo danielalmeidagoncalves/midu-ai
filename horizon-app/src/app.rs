@@ -1,11 +1,11 @@
-use chrono::Local;
+use chrono::{Local, Utc};
 use dioxus::prelude::*;
 use horizon_core::{dates::Quarter, Doc};
 
-#[cfg(desktop_shell)]
+use crate::agent::{self, AgentView};
 use crate::components::MenuStrip;
 use crate::components::{agenda, brief, chrome, index, margin, wall};
-use crate::state::{AppCtx, Ui, View};
+use crate::state::{AppCtx, MarginMode, Ui, View};
 use crate::storage;
 #[cfg(feature = "sync")]
 use crate::sync::SyncState;
@@ -13,8 +13,7 @@ use crate::sync::SyncState;
 const CSS: &str = include_str!("../assets/main.css");
 
 /// Ctrl+Q on Linux, Cmd+Q on macOS: the shortcut the platform taught people
-/// for "leave". Returns what to do *after* the store is flushed. The phone has
-/// no process to close and no keyboard shortcut surface, so it saves and stops.
+/// for "leave". Returns what to do *after* the store is flushed.
 fn quit_shortcut(evt: &KeyboardEvent) -> Option<impl Fn() + 'static + use<>> {
     let command = if cfg!(target_os = "macos") {
         evt.modifiers().meta()
@@ -26,25 +25,13 @@ fn quit_shortcut(evt: &KeyboardEvent) -> Option<impl Fn() + 'static + use<>> {
     pressed.then(leave)
 }
 
-#[cfg(desktop_shell)]
 fn leave() -> impl Fn() + 'static + use<> {
     crate::desktop::quit
 }
 
-#[cfg(not(desktop_shell))]
-fn leave() -> impl Fn() + 'static + use<> {
-    || {}
-}
-
-/// The in-window menu. Only the desktop shell renders it; the phone does not.
-#[cfg(desktop_shell)]
+/// The in-window menu.
 fn menubar() -> Element {
     rsx! { MenuStrip {} }
-}
-
-#[cfg(not(desktop_shell))]
-fn menubar() -> Element {
-    rsx! {}
 }
 
 /// Whether the very first Tab press should land on the brief rather than the
@@ -58,16 +45,10 @@ fn shift_tab_first() -> bool {
 
 /// The one-line shortcut reminder under the page, where a system menubar would
 /// otherwise teach it.
-#[cfg(desktop_shell)]
 fn menu_hint() -> Element {
     rsx! {
         span { class: "menuhint", "{crate::menu::QUIT_HINT}" }
     }
-}
-
-#[cfg(not(desktop_shell))]
-fn menu_hint() -> Element {
-    rsx! {}
 }
 
 #[component]
@@ -87,6 +68,12 @@ pub fn App() -> Element {
         dirty,
     };
     use_context_provider(|| ctx);
+
+    // The agent's transcript is loaded once, before the first paint, so the
+    // column never flashes empty on a restart.
+    use_hook(agent::init);
+    let mut agent_view = use_signal(AgentView::default);
+    use_context_provider(|| agent_view);
 
     // Sync runs on its own thread; the UI only reads its snapshot.
     #[cfg(feature = "sync")]
@@ -129,8 +116,8 @@ pub fn App() -> Element {
     }
 
     // The stylesheet is injected into the document head rather than rendered as a child of
-    // the app root: the desktop webview and the mobile webview both treat a head stylesheet
-    // as the page's own, and it survives the app's root diffing.
+    // the app root: the webview treats a head stylesheet as the page's own, and it survives
+    // the app's root diffing.
     use_future(move || async move {
         let css = serde_json::to_string(CSS).unwrap_or_else(|_| "\"\"".into());
         let script = format!(
@@ -145,6 +132,13 @@ pub fn App() -> Element {
         let mut seen = 0u64;
         loop {
             crate::state::sleep_ms(20).await;
+            // While the agent runs, its writes are not in memory yet. A save now
+            // would treat them as stale files and delete them; the reconcile at
+            // `agent_settled` is the one writer for that window. The service is
+            // asked live: the polled snapshot lags by up to a frame.
+            if agent::busy() {
+                continue;
+            }
             let tick = *dirty.peek();
             if tick != seen {
                 seen = tick;
@@ -242,6 +236,114 @@ pub fn App() -> Element {
         }
     });
 
+    // The agent's snapshot is polled like sync's: the UI never touches the child
+    // process, and a transcript item only reaches the DOM when it changed.
+    use_future(move || async move {
+        loop {
+            crate::state::sleep_ms(120).await;
+            if let Some(next) = agent::snapshot() {
+                if *agent_view.peek() != next {
+                    agent_view.set(next);
+                }
+            }
+        }
+    });
+
+    // Reminders. The window says it is here, so the systemd timer stands down and
+    // nothing is delivered twice. Anything already due when the window opened is
+    // catch-up: it stays in the strip with one quiet line, never a burst.
+    let mut caught_up = use_signal(|| false);
+    let mut catch_up_ids = use_signal(Vec::<String>::new);
+    use_future(move || async move {
+        let mut ticks: u32 = 0;
+        loop {
+            crate::state::sleep_ms(1_000).await;
+            if !loaded() {
+                continue;
+            }
+            if ticks.is_multiple_of(10) {
+                crate::reminders::touch_heartbeat();
+            }
+            ticks = ticks.wrapping_add(1);
+            let now = Utc::now();
+            if !caught_up() {
+                let stale: Vec<String> = doc
+                    .peek()
+                    .reminders
+                    .iter()
+                    .filter(|reminder| reminder.is_due(now))
+                    .map(|reminder| reminder.id.clone())
+                    .collect();
+                if !stale.is_empty() {
+                    let count = stale.len();
+                    catch_up_ids.set(stale);
+                    ctx.flash(if count == 1 {
+                        "1 reminder passed while you were away.".to_string()
+                    } else {
+                        format!("{count} reminders passed while you were away.")
+                    });
+                }
+                caught_up.set(true);
+                continue;
+            }
+            let due: Vec<String> = doc
+                .peek()
+                .reminders
+                .iter()
+                .filter(|reminder| {
+                    reminder.is_due(now) && !catch_up_ids.peek().contains(&reminder.id)
+                })
+                .map(|reminder| reminder.id.clone())
+                .collect();
+            for id in due {
+                ctx.fire_reminder(&id);
+            }
+        }
+    });
+
+    // A settled agent run is the moment to bring the folder and memory back
+    // together: it wrote files we have never read, and the owner may have typed
+    // while it worked. `reconcile` merges both sides path by path. One reconcile
+    // at a time; a run that settles meanwhile is picked up when this one ends.
+    let mut seen_finished = use_signal(|| 0u64);
+    let mut reconciling = use_signal(|| false);
+    use_effect(move || {
+        let finished = agent_view.read().finished;
+        if finished == seen_finished() || reconciling() {
+            return;
+        }
+        if !loaded() {
+            seen_finished.set(finished);
+            agent::reconciled();
+            return;
+        }
+        reconciling.set(true);
+        let today = *today.peek();
+        let current = doc.peek().clone();
+        spawn(async move {
+            let outcome = storage::reconcile(&current, today).await;
+            match outcome {
+                Ok(Some(fresh)) => {
+                    // Memory first, then the folder, and only then hand the
+                    // folder back to the saver: a save that ran between the two
+                    // would write the pre-merge document over the agent's work.
+                    doc.set(fresh.clone());
+                    storage::save_now(&fresh).await;
+                    ctx.flash("The agent's writing is in.");
+                }
+                Ok(None) => {}
+                Err(err) => ctx.flash(format!(
+                    "The agent wrote something Horizon could not read: {err}"
+                )),
+            }
+            // The folder is merged into memory (or there was nothing to merge),
+            // so the saver may write again.
+            agent::reconciled();
+            seen_finished.set(finished);
+            reconciling.set(false);
+        });
+    });
+
     // The window title is set once; the webview's default is the crate name.
     use_future(move || async move {
         let _ = document::eval("document.title = 'Horizon';").await;
@@ -276,8 +378,12 @@ pub fn App() -> Element {
                     });
                     evt.prevent_default();
                 } else if evt.key() == Key::Escape {
+                    let agent_wide = ui.read().agent_wide;
                     let armed = ui.read().arm_note.is_some();
-                    if armed {
+                    if agent_wide {
+                        ctx.close_agent_wide();
+                        evt.prevent_default();
+                    } else if armed {
                         ui.write().arm_note = None;
                         ctx.flash("Clipped nothing.");
                         evt.prevent_default();
@@ -288,6 +394,20 @@ pub fn App() -> Element {
                         ctx.close_fold(None);
                         evt.prevent_default();
                     }
+                } else if evt.modifiers().alt() {
+                    // The margin's two readings get the app's one shortcut shape:
+                    // Alt+A for the agent, Alt+N for the notes.
+                    match evt.key() {
+                        Key::Character(ref c) if c.eq_ignore_ascii_case("a") => {
+                            ctx.set_margin_mode(MarginMode::Agent);
+                            evt.prevent_default();
+                        }
+                        Key::Character(ref c) if c.eq_ignore_ascii_case("n") => {
+                            ctx.set_margin_mode(MarginMode::Notes);
+                            evt.prevent_default();
+                        }
+                        _ => {}
+                    }
                 }
             },
             if !loaded() {
@@ -296,18 +416,23 @@ pub fn App() -> Element {
                 {menubar()}
                 chrome::Masthead {}
                 chrome::Subhead {}
+                crate::components::reminders::ReminderToast {}
                 if view == View::Brief {
                     brief::Brief {}
                 } else {
                     index::IndexBand {}
                     if narrow() {
+                        crate::components::reminders::ReminderStrip {}
                         margin::WideNoteBand {}
+                        crate::components::agent::AgentBand {}
                         agenda::Agenda {}
                         div { class: "body", margin::Margins {} }
                     } else {
                         div { class: "body",
                             div { class: "wall-wrap",
+                                crate::components::reminders::ReminderStrip {}
                                 margin::WideNoteBand {}
+                                crate::components::agent::AgentBand {}
                                 wall::Wall {}
                             }
                             margin::Margins {}

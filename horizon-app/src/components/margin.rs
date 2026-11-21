@@ -3,7 +3,7 @@ use horizon_core::{dates, LooseNote, NoteTarget, Subject};
 
 use crate::components::marks::MarkGlyph;
 use crate::components::notes::NoteEditor;
-use crate::state::AppCtx;
+use crate::state::{AppCtx, MarginMode, ReminderTarget};
 
 /// Loose notes: the details with no day yet, grouped by the subject they
 /// belong to. A chip narrows the column to one subject; each note opens in
@@ -45,6 +45,7 @@ pub fn Margins() -> Element {
 
     let count = notes.len();
     let armed = ctx.ui.read().arm_note.clone();
+    let mode = ctx.ui.read().margin_mode;
     let empty_text = if filter.is_some() {
         "Nothing waiting under this subject."
     } else {
@@ -53,11 +54,70 @@ pub fn Margins() -> Element {
 
     rsx! {
         aside { class: "margins", aria_labelledby: "marginsHead",
-            div { class: "margins-head",
-                h2 { id: "marginsHead", "Loose notes" }
+            MarginHead { count, mode }
+            if mode == MarginMode::Agent {
+                crate::components::agent::AgentColumn {}
+            } else {
+                NotesColumn { count, chips, groups, filter, armed, empty_text }
+            }
+        }
+    }
+}
+
+/// The column's head is the switch. One column, two readings: loose notes and
+/// the agent, with the count or the status as the quiet instrument the rest of
+/// the app uses.
+#[component]
+fn MarginHead(count: usize, mode: MarginMode) -> Element {
+    let ctx = use_context::<AppCtx>();
+    rsx! {
+        div { class: "margins-head",
+            h2 { id: "marginsHead",
+                if mode == MarginMode::Agent { "Agent" } else { "Loose notes" }
+            }
+            if mode == MarginMode::Notes {
                 span { class: "n", "{count}" }
             }
-            if chips.len() > 1 {
+            div { class: "margin-modes", role: "tablist", aria_label: "The right-hand column",
+                button {
+                    id: "margin-mode-notes",
+                    class: "margin-mode",
+                    r#type: "button",
+                    role: "tab",
+                    aria_selected: if mode == MarginMode::Notes { "true" } else { "false" },
+                    onclick: move |_| ctx.set_margin_mode(MarginMode::Notes),
+                    "Notes"
+                }
+                button {
+                    id: "margin-mode-agent",
+                    class: "margin-mode",
+                    r#type: "button",
+                    role: "tab",
+                    aria_selected: if mode == MarginMode::Agent { "true" } else { "false" },
+                    onclick: move |_| ctx.set_margin_mode(MarginMode::Agent),
+                    "Agent"
+                }
+            }
+        }
+    }
+}
+
+/// The loose-notes reading: filter chips, the groups, the motto and the composer.
+#[component]
+fn NotesColumn(
+    count: usize,
+    chips: Vec<(Subject, usize)>,
+    groups: Vec<(Subject, Vec<LooseNote>)>,
+    filter: Option<Subject>,
+    armed: Option<String>,
+    empty_text: String,
+) -> Element {
+    let ctx = use_context::<AppCtx>();
+    let chips_len = chips.len();
+
+    rsx! {
+        div { class: "margins-notes",
+            if chips_len > 1 {
                 div { class: "margin-chips", role: "group", aria_label: "Filter loose notes by subject",
                     button {
                         class: "mchip",
@@ -129,6 +189,9 @@ fn NoteItem(note: LooseNote, armed: Option<String>) -> Element {
     let pick_key = format!("note:{id}");
     let subject_open = ctx.ui.read().subject_picker.as_deref() == Some(pick_key.as_str());
     let is_armed = armed.as_deref() == Some(id.as_str());
+    let reminder_key = format!("note:{id}");
+    let reminder_open = ctx.ui.read().reminder_panel.as_deref() == Some(reminder_key.as_str());
+    let reminder_hint = summary.clone();
 
     rsx! {
         li {
@@ -160,6 +223,16 @@ fn NoteItem(note: LooseNote, armed: Option<String>) -> Element {
             if !open {
                 div { class: "note-acts",
                     ClipButton { id: id.clone(), is_armed }
+                    button {
+                        class: "note-open",
+                        r#type: "button",
+                        aria_expanded: if reminder_open { "true" } else { "false" },
+                        onclick: {
+                            let reminder_key = reminder_key.clone();
+                            move |_| ctx.toggle_reminder_panel(&reminder_key)
+                        },
+                        if reminder_open { "Reminding…" } else { "Remind" }
+                    }
                     button {
                         class: "note-open",
                         r#type: "button",
@@ -205,6 +278,16 @@ fn NoteItem(note: LooseNote, armed: Option<String>) -> Element {
                         button {
                             class: "note-open",
                             r#type: "button",
+                            aria_expanded: if reminder_open { "true" } else { "false" },
+                            onclick: {
+                                let reminder_key = reminder_key.clone();
+                                move |_| ctx.toggle_reminder_panel(&reminder_key)
+                            },
+                            if reminder_open { "Reminding…" } else { "Remind" }
+                        }
+                        button {
+                            class: "note-open",
+                            r#type: "button",
                             aria_label: "Write this note wide",
                             onclick: {
                                 let id = id.clone();
@@ -225,6 +308,12 @@ fn NoteItem(note: LooseNote, armed: Option<String>) -> Element {
                     if subject_open {
                         NoteSubjectPicker { id: id.clone(), current: subject }
                     }
+                }
+            }
+            if reminder_open {
+                crate::components::reminders::RemindPanel {
+                    target: ReminderTarget::Note(id.clone()),
+                    hint: reminder_hint.clone(),
                 }
             }
         }
